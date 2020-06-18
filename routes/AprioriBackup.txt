@@ -1,0 +1,48 @@
+@extends('mainlayout')
+
+@section('content')
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item" style="color:black"><b>Apriori Settings</b></li>
+      <li class="breadcrumb-item active" aria-current="page" style="color:blue; font-weight:bold">Set Support and Confidence</li>
+    </ol>
+</nav>
+<div class="row">
+  <div class="col-12">
+      <div class="card">
+          <div class="card-body">
+                <div class="box">
+
+                        <!-- /.box-header -->
+                      <div class="box-body">
+                        <form method="post" action="{{ url('/apriori/save')}}">
+
+                            <!-- text input -->
+                          <div class="form-group">
+                            <label>Support</label>
+                            <input type="text" name="support" class="form-control" placeholder="Enter Support" value="{{ old('menuName')}}">
+                          </div>
+                          <div class="form-group">
+                            <label>Confidence</label>
+                            <input type="text" name="confidence" class="form-control" placeholder="Enter Confidence" value="{{ old('menuName')}}">
+                          </div>
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                <i class="fa fa-dot-circle-o"></i> Submit
+                            </button>
+                            <button type="reset" class="btn btn-danger btn-sm">
+                                <i class="fa fa-ban"></i> Cancel
+                            </button>
+                        </div>
+                          {{ csrf_field()}}
+                        </form>
+                      </div>
+                        <!-- /.box-body -->
+                    </div>
+          </div>
+      </div>
+
+      <!-- /.box -->
+  </div>  <!--/.col (right) -->
+</div>
+@endsection

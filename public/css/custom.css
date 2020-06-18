@@ -1,0 +1,399 @@
+
+   .sidebar-footer .link{
+        padding: 30px;
+    }
+    .sidebar-footer{
+       height: 50px;
+    }
+    .dots-separator{
+      padding: 1px;
+    }
+    .box2{
+        padding: 0px 30px 0px 30px;
+    }
+    #content{
+        background-color: #eee!important;
+    }
+    .header-area{
+      color: 212529;
+      font: 14px;
+      font-family: sans-serif;
+      padding: 15px 30px;
+      background: white;
+    }
+    .nav-btn.pull-left{
+      color: 212559;
+      margin: 10px 30px 0px 0px;
+    }
+    .fa .fa-bars{
+      width: 20px !important;
+    }
+    #sidebar.active {
+      min-width: 80px;
+      max-width: 80px;
+      text-align: center;
+    }
+
+    /* Toggling the sidebar header content, hide the big heading [h3] and showing the small heading [strong] and vice versa*/
+    #sidebar .sidebar-header strong {
+      display: none;
+    }
+    #sidebar.active .sidebar-header h3 {
+      display: none;
+    }
+    #sidebar.active .sidebar-header strong {
+      display: block;
+    }
+
+    #sidebar ul li a {
+      text-align: left;
+    }
+
+    #sidebar.active ul li a {
+      padding: 20px 10px;
+      text-align: center;
+      font-size: 0.85em;
+    }
+
+    #sidebar.active ul li a i {
+      margin-right:  0;
+      display: block;
+      font-size: 1.8em;
+      margin-bottom: 5px;
+    }
+
+    /* Same dropdown links padding*/
+    #sidebar.active ul ul a {
+      padding: 10px !important;
+    }
+
+    /* Changing the arrow position to bottom center position,
+    translateX(50%) works with right: 50%
+    to accurately  center the arrow */
+    #sidebar.active .dropdown-toggle::after {
+      top: auto;
+      bottom: 10px;
+      right: 50%;
+      -webkit-transform: translateX(50%);
+      -ms-transform: translateX(50%);
+      transform: translateX(50%);
+    }
+    @media (max-width: 768px) {
+      /* 80px and its content aligned to centre. Pushing it off the screen with the
+        negative left margin
+      */
+      #sidebar.active {
+          min-width: 80px;
+          max-width: 80px;
+          text-align: center;
+          margin-left: 80px !important;
+      }
+
+
+      /* Reappearing the sidebar on toggle button click */
+      #sidebar {
+          margin-left: 0;
+      }
+
+
+      /* Toggling the sidebar header content,
+        hide the big heading [h3] and showing the small heading [strong] and vice versa
+      */
+      #sidebar .sidebar-header strong {
+          display: none;
+      }
+      #sidebar.active .sidebar-header h3 {
+          display: none;
+      }
+      #sidebar.active .sidebar-header strong {
+          display: block;
+      }
+
+      /* Downsize the navigation links font size */
+      #sidebar.active ul li a {
+          padding: 20px 10px;
+          font-size: 0.85em;
+
+      }
+      #sidebar ul li a {
+        color: #fff ;
+
+    }
+
+      #sidebar.active ul li a i {
+          margin-right:  0;
+          display: block;
+          font-size: 1.8em;
+          margin-bottom: 5px;
+      }
+
+      /* Adjust the dropdown links padding*/
+      #sidebar.active ul ul a {
+          padding: 10px !important;
+      }
+
+      /* Changing the arrow position to bottom center position,
+        translateX(50%) works with right: 50%
+        to accurately  center the arrow */
+      .dropdown-toggle::after {
+          top: auto;
+          bottom: 10px;
+          right: 50%;
+          -webkit-transform: translateX(50%);
+          -ms-transform: translateX(50%);
+          transform: translateX(50%);
+      }
+    }
+    .wrapper {
+      display: flex;
+      width: 100%;
+      align-items: stretch;
+    }
+    .wrapper {
+      display: flex;
+      align-items: stretch;
+    }
+
+    #sidebar {
+      min-width: 250px;
+      max-width: 250px;
+    }
+
+
+    #sidebar.active {
+      margin-left: -100px;
+    }
+    #sidebar {
+      min-width: 250px;
+      max-width: 250px;
+      min-height: 100vh;
+    }
+    a[data-toggle="collapse"] {
+      position: relative;
+    }
+
+    .dropdown-toggle::after {
+      display: block;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+    }
+    @media (max-width: 768px) {
+      #sidebar {
+          margin-left: -250px;
+      }
+      #sidebar.active {
+          margin-left: 0;
+      }
+    }
+
+    p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1em;
+      font-weight: 300;
+      line-height: 1.7em;
+      color: #999;
+    }
+
+    a, a:hover, a:focus {
+      color: blue ;
+      text-decoration: none !important;
+      transition: all 0.3s;
+    }
+
+    a.dropdown-toggle{
+      color: white;
+    }
+    #sidebar {
+      /* don't forget to add all the previously mentioned styles here too */
+      background-image: linear-gradient(#7f1a1f,#3f0f11);
+      color: #fff !important;
+      transition: all 0.3s;
+    }
+
+
+    #sidebar .sidebar-header {
+      padding: 20px;
+      background:linear-gradient(#7f1a1f,#3f0f11)
+    }
+
+    #sidebar ul.components {
+      padding: 20px 0;
+      border-bottom: 1px solid orange;
+    }
+
+    #sidebar ul p {
+      color: #fff;
+      padding: 10px;
+    }
+
+    #sidebar ul li a {
+      padding: 10px;
+      font-size: 1.1em;
+      display: block;
+    }
+    #sidebar ul li a:hover {
+      color: darkblue;
+      background: #EF3B3A; /*CHANGE*/
+    }
+
+    #sidebar ul li.active > a, a[aria-expanded="true"] {
+      color: #fff;
+      background: rgb(236, 117, 5);
+    }
+    ul ul a {
+      font-size: 0.9em !important;
+      padding-left: 30px !important;
+
+    }
+    #content{
+      width:100%;
+      min-height:100vh;
+      transition:all 0.3s
+    }
+    #order-search{
+      float:right;
+      border-radius: 5px;
+      width: 250px;  height: 40px;
+      border: 1px solid grey;
+      text-align: left;
+      color: #999;
+      padding: 5px;
+    }
+    .search-box input{
+      width: 350px;
+      border: 1px solid grey;
+      border-radius: 5px;
+      height: 40px;
+      float: center;
+      padding-left: 20px;
+      padding-right: 40px;
+      letter-spacing: 0;
+      background: white;
+    }
+    #okBtn{
+      background-color: darkblue;
+      color: white;
+      width: 80px;
+      height: 40px;
+      border: none;
+    }
+    input[type='date']{
+      border: 1px solid grey;
+      height: 40px;
+    }
+    .nav-btn span{
+      display: block;
+        width: 22px;
+        height: 2px;
+        background: #b3aaaa;
+        margin: 4px 0;
+        border-radius: 15px;
+        -webkit-transition: all 0.3s ease 0s;
+        transition: all 0.3s ease 0s;
+        box-shadow: 0 0 0 4px rgba(99, 96, 96, 0.03);
+    }
+    .pull-left{
+        float:left;
+    }
+    .card{
+        position: relative !important;
+        float: center !important;
+        box-shadow: 1px 1px 1px 1px rgba(99, 96, 96, 0.03)!important;
+    }
+    .card-body{
+        border-block-end-color: #43A047 !important;
+    }
+    .login-page {
+      width: 360px;
+      padding: 8% 0 0;
+      margin: auto;
+    }
+    .form {
+      position: relative;
+      z-index: 1;
+      background: #FFFFFF;
+      max-width: 360px;
+      margin: 0 auto 100px;
+      padding: 45px;
+      text-align: center;
+      box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+    }
+    .form input {
+      font-family: "Roboto", sans-serif;
+      outline: 0;
+      background: #f2f2f2;
+      width: 100%;
+      border: 0;
+      margin: 0 0 15px;
+      padding: 15px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    .form button {
+      font-family: "Roboto", sans-serif;
+      text-transform: uppercase;
+      outline: 0;
+      background: #4CAF50;
+      width: 100%;
+      border: 0;
+      padding: 15px;
+      color: #FFFFFF;
+      font-size: 14px;
+      -webkit-transition: all 0.3 ease;
+      transition: all 0.3 ease;
+      cursor: pointer;
+    }
+    .form button:hover,.form button:active,.form button:focus {
+      background: #43A047;
+    }
+    .form .message {
+      margin: 15px 0 0;
+      color: #b3b3b3;
+      font-size: 12px;
+    }
+    .form .message a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+    .form .register-form {
+      display: none;
+    }
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    .container:before, .container:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+    .container .info {
+      margin: 50px auto;
+      text-align: center;
+    }
+    .container .info h1 {
+      margin: 0 0 15px;
+      padding: 0;
+      font-size: 36px;
+      font-weight: 300;
+      color: #1a1a1a;
+    }
+    .container .info span {
+      color: #4d4d4d;
+      font-size: 12px;
+    }
+    .container .info span a {
+      color: #000000;
+      text-decoration: none;
+    }
+    .container .info span .fa {
+      color: #EF3B3A;
+    }
+
+
+
+

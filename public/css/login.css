@@ -1,0 +1,88 @@
+.login-container{
+    border-radius: 10px;
+    margin: 50px;
+    float: left;
+    padding: 20px;
+    position: absolute;;
+    width:400px;
+    height:500px;
+    background-image: linear-gradient(#7f1a1f,#3f0f11) !important;
+}
+.register-container{
+    border-radius: 10px;
+    margin: 30px 50px;
+    float: left;
+    padding: 20px;
+    position: absolute;;
+    width:400px;
+    height:600px;
+    background-image: linear-gradient(#7f1a1f,#3f0f11);
+}
+.right-login{
+   margin-top: 20px;
+    float: left;
+    padding: 20px;
+    position:relative;
+    width:initial;
+}
+.right-register{
+    margin-top: 20px;
+     padding: 20px;
+     position:relative;
+     width:initial;
+ }
+input[type=text]{
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+input[type=password]{
+    width: 100%;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    margin: 8px 0;
+    outline: none;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+
+input[type=text]:focus{
+    border-color:dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+input[type=password]:focus{
+    border-color:dodgerblue;
+    box-shadow: 0 0 8px 0 dodgerblue;
+}
+.inputWithImg Input[type=text] {
+    padding-left:40px
+}
+.inputWithImg Input[type=password] {
+    padding-left:40px
+}
+.inputWithImg{
+    position: relative;
+}
+.inputWithImg img{
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    padding: 9px 8px;
+    color: #aaa;
+    transition: .3s;
+    width: 30px;
+    padding: 5px 5px 5px 5px;
+}
+.inputWithImg input[type=text] + img{
+    color: dodgerblue;
+}
+.inputWithImg input[type=password] + img{
+    color: dodgerblue;
+}
