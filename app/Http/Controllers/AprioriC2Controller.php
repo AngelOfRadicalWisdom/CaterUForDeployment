@@ -198,7 +198,7 @@ class AprioriC2Controller extends Controller
       
     }
     private function getSupportandConfidence(){
-        $sc=DB::table('apriorisettings')->get();
+        $sc=DB::table('aprioriSettings')->get();
         return $sc;
      }
 
