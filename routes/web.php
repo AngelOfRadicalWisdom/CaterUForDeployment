@@ -14,9 +14,7 @@
 //use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
 //landingpage
-Route::get('/',function(){
-    return view('create');
-});
+Route::get('','LoginController@langdingpage');
 Auth::routes(['register'=> false]);
 Auth::routes(['login'=>false]);
 // Route::post('/trial','AdminController@ui');

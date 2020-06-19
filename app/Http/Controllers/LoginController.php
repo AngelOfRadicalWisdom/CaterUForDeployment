@@ -18,7 +18,9 @@ class LoginController extends Controller
     public function __construct(Session $session){
         $this->session = $session;
     }
-
+    public function landingpage(){
+    return view('create');
+    }
     public function username(){
         return 'username';
     }
