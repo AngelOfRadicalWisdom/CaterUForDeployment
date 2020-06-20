@@ -89,9 +89,7 @@ class AprioriC2Controller extends Controller
             $confidence=75/100;
             $apriori = new AprioriHelper($samples, $support, $confidence );
             $pairs = $apriori->all_pairs();
-            $this->addPairs($pairs);
-            return redirect('/generateapr');
-                      
+            $this->addPairs($pairs);                    
             
     }
         else{
@@ -125,8 +123,8 @@ class AprioriC2Controller extends Controller
         // }
         //$t=$apriori->predict($tests);
     // dd($pairs);
-    return redirect('/generateapr');
         }
+        return redirect('/generateapr');
         
     }
 
