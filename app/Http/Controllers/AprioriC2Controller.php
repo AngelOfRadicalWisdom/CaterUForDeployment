@@ -117,7 +117,7 @@ class AprioriC2Controller extends Controller
        // echo($pairs);
        // print_r($pairs);
   //    $this->parr($pairs);
-         $this->addPairs($pairs);
+        // $this->addPairs($pairs);
       //  print_r($this->sendApriori());
 
         // foreach($pairs as $pair) {
@@ -126,11 +126,12 @@ class AprioriC2Controller extends Controller
         //$t=$apriori->predict($tests);
    //  dd($this->pairs);
         }
-        return redirect('/generateapr');
-        
+      //  return redirect('/generateapr');
+        return $pairs;
     }
 
-    private function addPairs($pairs) {
+    public function addPairs() {
+        $pairs=$this->GenerateRecommendations();
         $checkDB=DB::table('apriori')->get();
         if($checkDB==NULL){
         $groupNumber = 0;
@@ -158,6 +159,7 @@ class AprioriC2Controller extends Controller
         }
 
     }
+    return redirect('/generateapr');
    
 }
 

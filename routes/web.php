@@ -71,7 +71,7 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/orders/allservedmenus','OrderDetailCOntroller@getAllServedMenusWeb');
     Route::get('/orders/successfulTransaction','OrderController@successfulTransaction');
     Route::get('/generateapr','AprioriC2Controller@GenerateAprioriPage');
-    Route::get('/genapr','AprioriC2Controller@GenerateRecommendations');
+    Route::get('/genapr','AprioriC2Controller@addPairs');
 
     //EMPLOYEES
     Route::get('/employeedashboard','EmployeeController@employeeDashboard');
