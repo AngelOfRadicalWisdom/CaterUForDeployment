@@ -16,13 +16,11 @@ use Illuminate\Http\Request;
 
 class AprioriC2Controller extends Controller 
 {
-    private $pairs;
     public function generateAprioriPage(){
         $user = Auth::user();
         $userFname=$user->empfirstname;
         $userLname=$user->emplastname;
         $userImage=$user->image;
-        $this->addPairs();
         $samples=$this->getTransactions();
         $sc=$this->getSupportandConfidence();
         if(count($sc)==0){
@@ -74,7 +72,6 @@ class AprioriC2Controller extends Controller
         }
               
           }
-      //  dd($this->paris);
       
           return view('admin.generateApriori',compact('frequentCount','userImage','userFname','userLname','allMenus','sMenus','ItemSets'));
 
@@ -114,29 +111,31 @@ class AprioriC2Controller extends Controller
       //  $samples=$this->getTransactions();
         //$apriori = new Apriori($samples, 0.50, 0.50 );
         //$this->parr($apriori->get_rules());
-        $this->pairs = $apriori->all_pairs();
+        $pairs = $apriori->all_pairs();
+      //  $this->generateAprioriPage($pairs);
+
        // echo($pairs);
        // print_r($pairs);
   //    $this->parr($pairs);
-      //  $this->addPairs($pairs);
+         $this->addPairs($pairs);
       //  print_r($this->sendApriori());
 
         // foreach($pairs as $pair) {
         //     $this->parr($pair);
         // }
         //$t=$apriori->predict($tests);
-    // dd($pairs);
+   //  dd($this->pairs);
         }
         return redirect('/generateapr');
         
     }
 
-    private function addPairs() {
+    private function addPairs($pairs) {
         $checkDB=DB::table('apriori')->get();
         if($checkDB==NULL){
         $groupNumber = 0;
-        for($i=2;$i<=count($this->pairs);$i++) {
-            foreach($this->pairs[$i] as $group_number) {
+        for($i=2;$i<=count($pairs);$i++) {
+            foreach($pairs[$i] as $group_number) {
                 ++$groupNumber;
                 foreach($group_number as $menu_id) {
                     $row = array('menuID'=>$menu_id,'groupNumber'=>$groupNumber);
@@ -148,7 +147,7 @@ class AprioriC2Controller extends Controller
     else{
         DB::table('apriori')->truncate();
         $groupNumber = 0;
-        for($i=2;$i<=count($this->pairs);$i++) {
+        for($i=2;$i<=count($pairs);$i++) {
             foreach($pairs[$i] as $group_number) {
                 ++$groupNumber;
                 foreach($group_number as $menu_id) {
@@ -159,6 +158,7 @@ class AprioriC2Controller extends Controller
         }
 
     }
+   
 }
 
     private function addBundleRow($row) {
