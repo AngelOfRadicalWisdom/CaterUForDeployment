@@ -113,9 +113,9 @@ class AprioriC2Controller extends Controller
         //$apriori = new Apriori($samples, 0.50, 0.50 );
         //$this->parr($apriori->get_rules());
         $pairs = $apriori->all_pairs();
-        echo($pairs);
+       // echo($pairs);
        // print_r($pairs);
-    //   $this->parr($pairs);
+      $this->parr($pairs);
       //  $this->addPairs($pairs);
       //  print_r($this->sendApriori());
 
