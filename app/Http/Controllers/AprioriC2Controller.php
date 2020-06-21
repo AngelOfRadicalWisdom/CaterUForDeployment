@@ -16,11 +16,13 @@ use Illuminate\Http\Request;
 
 class AprioriC2Controller extends Controller 
 {
+    private $pairs;
     public function generateAprioriPage(){
         $user = Auth::user();
         $userFname=$user->empfirstname;
         $userLname=$user->emplastname;
         $userImage=$user->image;
+        $this->addPairs($pairs);
         $samples=$this->getTransactions();
         $sc=$this->getSupportandConfidence();
         if(count($sc)==0){
@@ -115,7 +117,7 @@ class AprioriC2Controller extends Controller
         $pairs = $apriori->all_pairs();
        // echo($pairs);
        // print_r($pairs);
-      $this->parr($pairs);
+  //    $this->parr($pairs);
       //  $this->addPairs($pairs);
       //  print_r($this->sendApriori());
 
