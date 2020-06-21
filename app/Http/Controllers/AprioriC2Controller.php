@@ -22,7 +22,7 @@ class AprioriC2Controller extends Controller
         $userFname=$user->empfirstname;
         $userLname=$user->emplastname;
         $userImage=$user->image;
-        $this->addPairs($pairs);
+        $this->addPairs($this->pairs);
         $samples=$this->getTransactions();
         $sc=$this->getSupportandConfidence();
         if(count($sc)==0){
@@ -114,7 +114,7 @@ class AprioriC2Controller extends Controller
       //  $samples=$this->getTransactions();
         //$apriori = new Apriori($samples, 0.50, 0.50 );
         //$this->parr($apriori->get_rules());
-        $pairs = $apriori->all_pairs();
+        $this->pairs = $apriori->all_pairs();
        // echo($pairs);
        // print_r($pairs);
   //    $this->parr($pairs);
