@@ -22,7 +22,7 @@ class AprioriC2Controller extends Controller
         $userFname=$user->empfirstname;
         $userLname=$user->emplastname;
         $userImage=$user->image;
-        $this->addPairs($this->pairs);
+        $this->addPairs();
         $samples=$this->getTransactions();
         $sc=$this->getSupportandConfidence();
         if(count($sc)==0){
@@ -131,12 +131,12 @@ class AprioriC2Controller extends Controller
         
     }
 
-    private function addPairs($pairs) {
+    private function addPairs() {
         $checkDB=DB::table('apriori')->get();
         if($checkDB==NULL){
         $groupNumber = 0;
-        for($i=2;$i<=count($pairs);$i++) {
-            foreach($pairs[$i] as $group_number) {
+        for($i=2;$i<=count($this->pairs);$i++) {
+            foreach($this->pairs[$i] as $group_number) {
                 ++$groupNumber;
                 foreach($group_number as $menu_id) {
                     $row = array('menuID'=>$menu_id,'groupNumber'=>$groupNumber);
@@ -148,7 +148,7 @@ class AprioriC2Controller extends Controller
     else{
         DB::table('apriori')->truncate();
         $groupNumber = 0;
-        for($i=2;$i<=count($pairs);$i++) {
+        for($i=2;$i<=count($this->pairs);$i++) {
             foreach($pairs[$i] as $group_number) {
                 ++$groupNumber;
                 foreach($group_number as $menu_id) {
