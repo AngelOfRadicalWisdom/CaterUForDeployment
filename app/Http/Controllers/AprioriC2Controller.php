@@ -22,7 +22,7 @@ class AprioriC2Controller extends Controller
         $userFname=$user->empfirstname;
         $userLname=$user->emplastname;
         $userImage=$user->image;
-        $this->addPairs($pairs);
+        $this->addPairs($this->pairs);
         $samples=$this->getTransactions();
         $sc=$this->getSupportandConfidence();
         if(count($sc)==0){
@@ -74,7 +74,7 @@ class AprioriC2Controller extends Controller
         }
               
           }
-        
+      //  dd($this->paris);
       
           return view('admin.generateApriori',compact('frequentCount','userImage','userFname','userLname','allMenus','sMenus','ItemSets'));
 
