@@ -22,7 +22,7 @@ class AprioriC2Controller extends Controller
         $userFname=$user->empfirstname;
         $userLname=$user->emplastname;
         $userImage=$user->image;
-        $this->addPairs($this->pairs);
+        $this->addPairs($pairs);
         $samples=$this->getTransactions();
         $sc=$this->getSupportandConfidence();
         if(count($sc)==0){
