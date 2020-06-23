@@ -51,7 +51,7 @@
                         @endforeach
                             </select>
                         </div>
-                        <a href="{{url('/genapr')}}"class="btn btn-success">Generate Recommendation</a>
+                        <button onclick="generateApriori()"class="btn btn-success">Generate Recommendation</button>
                       </div>
                     <table id="apriori" class="table table-striped table-bordered" style="width:100%">
                       <thead>
@@ -146,6 +146,22 @@ $( document ).ready(function() {
   
       });
 });
+function generateApriori(){
+        $.ajax({
+         type: "GET",
+         url: '/genapr',
+        processData: false,
+        contentType: false,
+        //   cache: false,
+        //  headers: {
+        //  'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        //  },
+      success: function() {
+    location.href="/generateapr";
+        }
+  });
+
+    }
     </script>
 @endsection
 
