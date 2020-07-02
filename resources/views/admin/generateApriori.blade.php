@@ -51,7 +51,7 @@
                         @endforeach
                             </select>
                         </div>
-                        <button onclick="generateApriori()"class="btn btn-success">Generate Recommendation</button>
+                        <a href="{{url('/genapr')}}"class="btn btn-success">Generate Recommendation</a>
                       </div>
                     <table id="apriori" class="table table-striped table-bordered" style="width:100%">
                       <thead>
