@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 // use Phpml\Helper\Predictable;
 // use Phpml\Helper\Trainable;
 use App\Helper\AprioriHelper;
+use App\Helper\AprioriNew;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Response;
@@ -37,7 +38,8 @@ class AprioriC2Controller extends Controller
             $confidence=$row->confidence/100;
             }
         }
-        $apriori = new AprioriHelper($samples, $support, $confidence);
+        // $apriori = new AprioriHelper($samples, $support, $confidence);
+        $apriori = new AprioriNew($samples, $support, $confidence);
         $allMenus = Menu::all();
         $ItemSets=DB::table('apriori')
         ->selectRaw('COUNT(menuID) as count')
@@ -86,8 +88,9 @@ class AprioriC2Controller extends Controller
             $confidence='';
             $support=75/100;
             $confidence=75/100;
-            $apriori = new AprioriHelper($samples, $support, $confidence );
-            $pairs = $apriori->all_pairs();
+            //$apriori = new AprioriHelper($samples, $support, $confidence );
+            $apriori = new AprioriNew($samples, $support, $confidence );
+            $pairs = $apriori->apriori();
             $this->addPairs($pairs);                    
             
     }
@@ -98,7 +101,8 @@ class AprioriC2Controller extends Controller
         $support=$row->support/100;
         $confidence=$row->confidence/100;
         }
-        $apriori = new AprioriHelper($samples, $support, $confidence );
+      //  $apriori = new AprioriHelper($samples, $support, $confidence );
+      $apriori = new AprioriNew($samples, $support, $confidence );
     
         // $samples = [
         //     ['Onion', 'Potato','Burger'],
@@ -111,7 +115,7 @@ class AprioriC2Controller extends Controller
       //  $samples=$this->getTransactions();
         //$apriori = new Apriori($samples, 0.50, 0.50 );
         //$this->parr($apriori->get_rules());
-        $pairs = $apriori->all_pairs();
+        $pairs = $apriori->apriori();
       //  $this->generateAprioriPage($pairs);
 
        // echo($pairs);
