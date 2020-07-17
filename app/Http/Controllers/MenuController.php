@@ -213,7 +213,7 @@ class MenuController extends BaseController
         //     $path = public_path().'/menu/menu_images/'.$menu->image;
 
             array_push($result, array(
-                'image' => $ImgfileEncode,
+                'image' =>asset('/menu/menu_images'.$menu->image),
                 'menuID'    => $menu->menuID,
                 'name'  => $menu->name,
                 'details' => $menu->details,
@@ -223,12 +223,12 @@ class MenuController extends BaseController
 
             ));
         }
-        if($request->mode == 'list'){
+        //if($request->mode == 'list'){
            return  response()->json([
               // 'allMenus' => $allMenus,
                'result' => $result
                ]);
-        }
+        //}
 
     }
     // public function ionRemoveMenu($menuID) // remove marked employee from the table
