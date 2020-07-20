@@ -31,7 +31,7 @@
 					<div class="wrap-input100 validate-input m-t-85 m-b-35" style="text-align:center;">
 						<label><h2>{{$userFname}} {{$userLname}}</h2></label>
 					</div>
-					<a href="{{url('/login')}}">Back to Login</a>
+					<a href="{{url('/logout')}}">Logout</a>
 			</div>
 		</div>
 	</div>
