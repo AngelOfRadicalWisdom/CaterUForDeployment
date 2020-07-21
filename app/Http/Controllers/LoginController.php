@@ -29,11 +29,10 @@ class LoginController extends Controller
         if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
-
-            if(Auth::user()->position == 'waiter'){
-               //print_r($request->session()->get('id',$user->username));
-              // print_r($request->session()->get(Auth::user()->id));
-            }
+            $success['id'] = $user->empid;
+            $success['name']=$user->empfirstname;
+            $success['username']=$user->username;
+            $success['position']=$user->position;
            return response()->json(['success' => $success], $this->successStatus);
         }
         else{
