@@ -3,16 +3,7 @@
 namespace App\Helper;
 
 class AprioriNew {
-    private $samples;
-
-    private $support;
-
-    private $confidence;
-
-    private $rules;
-    //$large set contains frequent k-length item sets.
-    private $large=[];
-    
+  
     public function __construct($samples, float $support=0.0, float $confidence=0.0) {
         $this->samples = $samples;
         $this->support = $support;
