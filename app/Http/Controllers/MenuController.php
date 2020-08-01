@@ -200,13 +200,8 @@ class MenuController extends BaseController
 
         
         foreach($allMenus as $menu){
-        
-        $localFileName  = public_path().'/menu/menu_images/'.$menu->image;
-        $fileData = file_get_contents($localFileName);
-        $ImgfileEncode = base64_encode($fileData);
-
             array_push($result, array(
-                'image' =>asset('/menu/menu_images'.$menu->image),
+                'image' =>asset('/menu/menu_images/'.$menu->image),
                 'menuID'    => $menu->menuID,
                 'name'  => $menu->name,
                 'details' => $menu->details,
@@ -230,7 +225,7 @@ class MenuController extends BaseController
         if($menuDetail != NULL){
             foreach($menuDetail as $m){
                 array_push($menus,array(
-                    'image'=> asset('/menu/menu_images'.$m->image),
+                    'image'=> asset('/menu/menu_images/'.$m->image),
                     'menuID'=> $m->menuID,
                     'name' => $m->name,
                     'detail'=> $m->details,
@@ -259,7 +254,7 @@ class MenuController extends BaseController
 
             if($menu->subcatid == $sub->subcatid){
             array_push($result, array(
-            'image' => asset('/menu/menu_images'.$menu->image),
+            'image' => asset('/menu/menu_images/'.$menu->image),
             'menuID'    => $menu->menuID,
             'name'  => $menu->name,
             'details' => $menu->details,

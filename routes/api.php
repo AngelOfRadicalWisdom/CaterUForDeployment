@@ -153,7 +153,7 @@ Route::middleware('cors:api')->get('/employee/getposition/{username}','EmployeeC
 Route::middleware('cors:api')->get('/menu/categorylist','CategoryController@apiCategoryList');
 Route::middleware('cors:api')->get('/menu/subcategorylist','CategoryController@apiSubCategoryList');
 Route::middleware('cors:api')->get('/menu/getmenubycategory/{categoryid}','MenuController@getMenuByCategory');
-
+Route::middleware('cors:api')->get('/menu/getBundleMenus','PromotionController@getAllBundleMenus');
 //APRIORI
 Route::middleware('cors:api')->get('/apriori/getpairs','AprioriC2Controller@sendApriori');
 
