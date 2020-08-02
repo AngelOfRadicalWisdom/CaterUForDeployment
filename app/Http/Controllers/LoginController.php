@@ -38,12 +38,14 @@ class LoginController extends Controller
         else{
             return response()->json(['error'=>'Unauthorized'], 401);
         }
+       
     }
     public function loginWeb(Request $request){
        // return back()->withError('error','Error Login')->withInput();
         if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
+         
 
             if(Auth::user()->position == 'admin'){
              return redirect('/dashboard')->with('success','Login Success');
@@ -63,11 +65,7 @@ class LoginController extends Controller
         $request->session()->flush();
             return redirect()->to(url('/login'));
      }
-    public function loginQR(){
-
-
-    }
-   
+     
 
 
 
