@@ -83,6 +83,9 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/employee/resetpass_employee/{empid}','EmployeeController@ResetEmpPass');
     Route::post('/employee/resetpass_employee/{empid}','EmployeeController@saveResetEmpPass');
     Route::get('/employee/delete_employee/{empid}','EmployeeController@removeEmployee');
+    Route::get('/employee/timein','EmployeeController@timein');
+    Route::get('/employee/timeout','EmployeeController@timeout');
+    
     //PROMOS
     Route::get('/promo/addpromo','PromotionController@createPromo');
     Route::post('/promo/addpromo','PromotionController@savePromo');

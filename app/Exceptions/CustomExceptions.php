@@ -11,6 +11,8 @@ use App\BundleDetails;
 use App\Category;
 use App\SubCategory;
 use App\RestaurantTable;
+use App\EmployeeTime;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 class CustomExceptions{
     // public function ResetPassException($employee){
@@ -359,6 +361,25 @@ public function AprioriException($apriori){
         if(count($checkEmployee)==0){
             throw new \PDOException('Cannot Find Employee');
         }
+
+    }
+    public function DuplicateTimeInException($user_id){
+        $record=EmployeeTime::whereDate('timein', '=', Carbon::today()->toDateString())->where('user_id',$user_id)->get();
+        if(count($record)!=0){
+            throw new \PDOException('You have already timed in');
+        }
+
+    }
+    public function NoTimeinRecordException($user_id){
+        $record=EmployeeTime::whereDate('timein', '=', Carbon::today()->toDateString())->where('user_id',$user_id)->get();
+        $timeout=EmployeeTime::whereDate('timeout', '=', Carbon::today()->toDateString())->where('user_id',$user_id)->get();
+        if(count($record)==0){
+            throw new \PDOException('It Seems that you did not time in for the day');
+        }
+        if(count($timeout)!=0){
+            throw new \PDOException('You have already timed out');
+        }
+        
 
     }
    

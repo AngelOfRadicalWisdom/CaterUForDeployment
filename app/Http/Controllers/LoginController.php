@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-
+use Carbon\Carbon;
 use App\AppSettings;
 use App\Employee;
 use App\Session;
@@ -19,6 +19,15 @@ class LoginController extends Controller
         $this->session = $session;
     }
     public function landingpage(){
+        if (Auth::check()) {
+            if(Auth::user()->position == 'admin'){
+                return redirect('/dashboard');
+               }
+               else{
+                   return redirect('/employeedashboard');
+               }
+            
+        }
     return view('create');
     }
     public function username(){
@@ -29,22 +38,23 @@ class LoginController extends Controller
         if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
-
-            if(Auth::user()->position == 'waiter'){
-               //print_r($request->session()->get('id',$user->username));
-              // print_r($request->session()->get(Auth::user()->id));
-            }
+            $success['id'] = $user->empid;
+            $success['name']=$user->empfirstname;
+            $success['username']=$user->username;
+            $success['position']=$user->position;
            return response()->json(['success' => $success], $this->successStatus);
         }
         else{
             return response()->json(['error'=>'Unauthorized'], 401);
         }
+       
     }
     public function loginWeb(Request $request){
        // return back()->withError('error','Error Login')->withInput();
         if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
+         
 
             if(Auth::user()->position == 'admin'){
              return redirect('/dashboard')->with('success','Login Success');
@@ -64,14 +74,6 @@ class LoginController extends Controller
         $request->session()->flush();
             return redirect()->to(url('/login'));
      }
-    public function loginQR(){
-
+     
 
     }
-   
-
-
-
-
-
-}

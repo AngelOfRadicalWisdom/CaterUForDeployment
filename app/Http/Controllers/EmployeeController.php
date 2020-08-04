@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Employee;
+use App\EmployeeTime;
 use Illuminate\Support\Facades\Auth;
 use DB;
+use Carbon\Carbon;
 use App\Exceptions\CustomExceptions;
 use Illuminate\Contracts\Validation\Validator;
 class EmployeeController extends Controller
@@ -191,6 +193,50 @@ $position = DB::table('employees')
 return response()->json([
     'position' => $position
 ]);
+}
+public function timein(){
+    $user = Auth::user();
+    $userFname=$user->empfirstname;
+    $userLname=$user->emplastname;
+    $userImage=$user->image;
+    $timein=new EmployeeTime();
+    try{
+        $employeeTime=$this->customExceptions->DuplicateTimeInException($user->empid);
+       
+            }
+            catch(\PDOException $e){
+                return back()->withError($e->getMessage())->withInput();
+            }
+            catch(\Exception $e){
+                return back()->withError('Something Went Wrong')->withInput();
+            }
+    $timein->timein=Carbon::now();
+    $timein->user_id=$user->empid;
+    $timein->timeout=NULL;
+    $timein->save();
+    //dd(Carbon::now());
+  // return view('admin.employeewelcome',compact('userFname','userLname','userImage'))->with('success','Timein Success');
+    return redirect('/employeedashboard')->with('success','Timein Success');
+
+}
+public function timeout(){
+    $user = Auth::user();
+    $userFname=$user->empfirstname;
+    $userLname=$user->emplastname;
+    $userImage=$user->image;
+    try{
+        $employeeTime=$this->customExceptions->NoTimeinRecordException($user->empid);
+       
+            }
+            catch(\PDOException $e){
+                return back()->withError($e->getMessage())->withInput();
+            }
+            catch(\Exception $e){
+                return back()->withError('Something Went Wrong')->withInput();
+            }
+            $timeout=EmployeeTime::whereDate('timein', '=', Carbon::today()->toDateString())->where('user_id',$user->empid)->update(['timeout' => Carbon::now()]);
+            return redirect('/employeedashboard')->with('success','Timeout Success');
+    
 }
 
 
