@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 // use Phpml\Helper\Trainable;
 use App\Helper\AprioriHelper;
 use App\Helper\AprioriNew;
+use App\Helper\analyze;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Response;
@@ -17,6 +18,21 @@ use Illuminate\Http\Request;
 
 class AprioriC2Controller extends Controller 
 {
+    public function analyze(){
+        $samples=$this->getTransactions();
+        $support='';
+        $confidence='';
+        $support=75/100;
+        $confidence=75/100;
+        //$apriori = new AprioriHelper($samples, $support, $confidence );
+       $apriori = new analyze($samples, $support, $confidence );
+        $pairs = $apriori->apriori();
+         $this->parr($pairs);
+      //dd($pairs);
+     // dd($apriori->frequency([8,14,21,22]));
+  //   $this->parr($apriori->getRules());
+
+    }
     public function generateAprioriPage(){
         $user = Auth::user();
         $userFname=$user->empfirstname;
@@ -91,7 +107,7 @@ class AprioriC2Controller extends Controller
             //$apriori = new AprioriHelper($samples, $support, $confidence );
             $apriori = new AprioriNew($samples, $support, $confidence );
             $pairs = $apriori->apriori();
-            $this->addPairs($pairs);                    
+           // $this->addPairs($pairs);                    
             
     }
         else{
@@ -161,9 +177,8 @@ class AprioriC2Controller extends Controller
                 }
             }
         }
-
-    }
-    return redirect('/generateapr');
+   }
+   return redirect('/generateapr');
    
 }
 

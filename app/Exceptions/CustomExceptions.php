@@ -364,15 +364,15 @@ public function AprioriException($apriori){
 
     }
     public function DuplicateTimeInException($user_id){
-        $record=EmployeeTime::whereDate('timein', '=', Carbon::today()->toDateString())->where('user_id',$user_id)->get();
+        $record=EmployeeTime::whereDate('timein', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id',$user_id)->get();
         if(count($record)!=0){
             throw new \PDOException('You have already timed in');
         }
 
     }
     public function NoTimeinRecordException($user_id){
-        $record=EmployeeTime::whereDate('timein', '=', Carbon::today()->toDateString())->where('user_id',$user_id)->get();
-        $timeout=EmployeeTime::whereDate('timeout', '=', Carbon::today()->toDateString())->where('user_id',$user_id)->get();
+        $record=EmployeeTime::whereDate('timein', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id',$user_id)->get();
+        $timeout=EmployeeTime::whereDate('timeout', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id',$user_id)->get();
         if(count($record)==0){
             throw new \PDOException('It Seems that you did not time in for the day');
         }

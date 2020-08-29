@@ -210,7 +210,7 @@ public function timein(){
             catch(\Exception $e){
                 return back()->withError('Something Went Wrong')->withInput();
             }
-    $timein->timein=Carbon::now();
+    $timein->timein=Carbon::now('Asia/Singapore');
     $timein->user_id=$user->empid;
     $timein->timeout=NULL;
     $timein->save();
@@ -221,6 +221,7 @@ public function timein(){
 }
 public function timeout(){
     $user = Auth::user();
+    $date=Carbon::today('Asia/Singapore')->toDateString();
     $userFname=$user->empfirstname;
     $userLname=$user->emplastname;
     $userImage=$user->image;
@@ -234,7 +235,7 @@ public function timeout(){
             catch(\Exception $e){
                 return back()->withError('Something Went Wrong')->withInput();
             }
-            $timeout=EmployeeTime::whereDate('timein', '=', Carbon::today()->toDateString())->where('user_id',$user->empid)->update(['timeout' => Carbon::now()]);
+            $timeout=EmployeeTime::whereDate('timein', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id',$user->empid)->update(['timeout' => Carbon::now('Asia/Singapore')]);
             return redirect('/employeedashboard')->with('success','Timeout Success');
     
 }
