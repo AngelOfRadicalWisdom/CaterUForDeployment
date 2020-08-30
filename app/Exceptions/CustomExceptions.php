@@ -133,13 +133,13 @@ class CustomExceptions{
             throw new \PDOException('Please Enter a numeric value for serving size');
         }
     }
-    public function addPromoMenuException($promo,$allMenus,$suggestedmenus){
+    public function addPromoMenuException($promo,$allMenus,$suggestedmenus,$additionalmenus){
 //         $promo->suggestedmenus
 //  $promo->squantity
 //  $promo->promoid
 //  $promo->additionalmenus
 for($i=0;$i<count($allMenus);$i++) {
-    $menuRecord = DB::table('bundle_details')->where('bundleid','=',$promo->promoid)->where('menuID','=',$allMenus[$i])->where('deleted_at','=',NULL)->withTrashed()->get();
+    $menuRecord = DB::table('bundle_details')->where('bundleid','=',$promo->promoid)->where('menuID','=',$allMenus[$i])->where('deleted_at','=',NULL)->get();
    if(count($menuRecord)!=0){
     throw new \PDOException('Menu Already Exists');
    }
@@ -159,10 +159,10 @@ for($i=0;$i<count($allMenus);$i++) {
     }
     public function EditPromoMenuException($promo,$allMenus){
         for($i=0;$i<count($allMenus);$i++) {
-            $menuRecord = DB::table('bundle_details')->where('menuID','=',$allMenus[$i])->where('deleted_at','=',NULL)->withTrashed()->get();
-           if(count($menuRecord)!=0){
-            throw new \PDOException('Menu Already Exists');
-           }
+            $menuRecord = DB::table('bundle_details')->where('menuID','=',$allMenus[$i])->where('deleted_at','=',NULL)->get();
+        //    if(count($menuRecord)!=0){
+        //     throw new \PDOException('Menu Already Exists');
+        //    }
            if(count($allMenus)!=count(array_unique($allMenus))){
             throw new \PDOException('Menu Already Exists');
            }

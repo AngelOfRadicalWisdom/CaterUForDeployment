@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use DB;
-class Menu extends Model
+class Kitchen extends Model
 {
     use SoftDeletes;
     protected $table = 'kitchen';
