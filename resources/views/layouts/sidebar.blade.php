@@ -53,7 +53,7 @@
                       <li><a href="{{url('/promo/addpromo')}}">Add New Promo</a></li>
                     </ul>
                   </li>
-                  <li><a href="{{url('/ratings')}}"><i class="fa fa-home"></i> Ratings</a>
+                  <li><a href="{{url('/ratings')}}"><i class="fa fa-star"></i> Ratings</a>
                   </li>
                 </ul>
               </div>

@@ -279,7 +279,7 @@ else{
 
  }
  try{
-  $promo=$this->customExceptions->addPromoMenuException($request,$allMenus,$suggestedMenus);
+  $promo=$this->customExceptions->addPromoMenuException($request,$allMenus,$suggestedMenus,$additionalMenus);
  
       }
       catch(\PDOException $e){

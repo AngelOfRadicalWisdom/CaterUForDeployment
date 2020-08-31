@@ -83,6 +83,9 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/employee/resetpass_employee/{empid}','EmployeeController@ResetEmpPass');
     Route::post('/employee/resetpass_employee/{empid}','EmployeeController@saveResetEmpPass');
     Route::get('/employee/delete_employee/{empid}','EmployeeController@removeEmployee');
+    Route::get('/employee/timein','EmployeeController@timein');
+    Route::get('/employee/timeout','EmployeeController@timeout');
+    
     //PROMOS
     Route::get('/promo/addpromo','PromotionController@createPromo');
     Route::post('/promo/addpromo','PromotionController@savePromo');
@@ -92,6 +95,8 @@ Route::middleware(['auth'])->group( function (){
     Route::post('/promo/edit_promo/{id}','PromotionController@saveEditPromo');
     Route::get('/promo/delete_promo/{bundleid}','PromotionController@deletePromo');
     Route::get('/promo/add_promodetails/{bundleid}','PromotionController@addPromoDetails');
+    Route::post('/promo/add_promodetails/{bundleid}','PromotionController@addPromoDetails');
+    Route::get('/newpromodetails','PromotionController@saveAddPromoDetails');
     Route::post('/newpromodetails','PromotionController@saveAddPromoDetails');
     Route::get('/promo/edit_promodetails/{bundleid}','PromotionController@editPromoDetails');
     Route::post('/savepromodetails','PromotionController@saveEditPromoDetails');
