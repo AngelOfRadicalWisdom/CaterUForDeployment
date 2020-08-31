@@ -207,7 +207,8 @@ else{
       $bundlemenu->price=$request->price;
       $bundlemenu->servingsize=$request->servingsize;
       $bundlemenu->details=$request->details;
-      $bundle->image=$request->image;
+      //previously bundle
+      $bundlemenu->image=$request->image;
       $bundlemenu->save();
 
     }
