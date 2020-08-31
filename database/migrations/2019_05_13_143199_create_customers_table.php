@@ -17,8 +17,13 @@ class CreateCustomersTable extends Migration
             $table->increments('custid');
             $table->string('name',100)->nullable();
             $table->string('phonenumber')->nullable();
+            $table->integer('partysize')->nullable();
+            $table->string('status')->nullable();
+            $table->integer('tableno')->nullable();
+            $table->timestamp('time_notified')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
             $table->softDeletes();
-        });
+
+    });
     }
 
     /**

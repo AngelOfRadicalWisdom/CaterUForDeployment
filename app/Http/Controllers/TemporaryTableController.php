@@ -15,29 +15,18 @@ class TemporaryTableController extends Controller
         $cartitems->order_id = $request->order_id;
         $cartitems->menuID = $request->menuID;
         $cartitems->qty = $request->qty;
-        //$cartitems->tableno = $request->tableno;
         $cartitems->save();
 
         return response()->json([
             'message' => "Added to cart",
-            //'tableno' => $request->order_id,
         ]);
     }
-
-    public function removeItemsbyOrderId(Request $request){
-       $orderid = DB::table('carts')->where('order_id',$request->order_id)->delete();
-     //   Cart::find($order_id)->delete();
-
-        return response()->json([
-            'message' => 'Successfully deleted!'
-           // 'message' => $request
-        ]);
-    }
-    public function removeItemsbyId($id){
+    public function removeItembyId($id){
         $items = DB::table('carts')->where('id',$id)->delete();
 
         return response()->json([
             'message' => 'Item successfully deleted!'
+            
         ]);
     }
     public function getCartItems($order_id){
@@ -61,22 +50,22 @@ class TemporaryTableController extends Controller
             'message' => 'Quantity updated!'
         ]);
     }
-    public function saveToTemporaryKitchenTable(Request $request){
-        for($i= 0; $i < $request->orderQty; $i++){
-        $kitchenorders = new Kitchen();
-        $kitchenorders->orderQty = 1;
-        $kitchenorders->menuID = $request->menuID;
-        $kitchenorders->order_id = $request->order_id;
-        $kitchenorders->status = $request->status;
+    // public function saveToTemporaryKitchenTable(Request $request){
+    //     for($i= 0; $i < $request->orderQty; $i++){
+    //     $kitchenorders = new Kitchen();
+    //     $kitchenorders->orderQty = 1;
+    //     $kitchenorders->menuID = $request->menuID;
+    //     $kitchenorders->order_id = $request->order_id;
+    //     $kitchenorders->status = $request->status;
     
-        $kitchenorders->save();
-        }
+    //     $kitchenorders->save();
+    //     }
 
-        return response()->json([
-        'message' => 'Saved to kitchen'
-           // $request->orderQty
-        ]);
-    }
+    //     return response()->json([
+    //     'message' => 'Saved to kitchen'
+    //        // $request->orderQty
+    //     ]);
+    // }
     public function getKitchenOrders(){
         $orders = DB::table('kitchenrecords')
         ->join('orders','orders.order_id','=','kitchenrecords.order_id')
@@ -128,7 +117,7 @@ class TemporaryTableController extends Controller
            ]);
     }
    
-    public function served($id){
+    public function isServed($id){
         $status = Kitchen::find($id);
         $status->status = 'served';
         $status->save();
@@ -137,9 +126,19 @@ class TemporaryTableController extends Controller
             'message' => 'status updated'
         ]);
     }
-   public function finish($id){
+   public function isForServing($id){
        $status =Kitchen::find($id);
        $status->status= 'for serving';
+       $status->save();
+
+       return response()->json([
+        'message' => 'Status updated to for serving'
+       ]);
+   }
+
+   public function isReady($id){
+       $status =Kitchen::find($id);
+       $status->status= 'ready';
        $status->save();
 
        return response()->json([
@@ -191,13 +190,33 @@ class TemporaryTableController extends Controller
         ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
         ->join('categories','sub_categories.categoryid','=','categories.categoryid')
         ->where('tableno',$tableno)
-        ->where('kitchenrecords.status','for serving')
-        ->orderBy('kitchenrecords.created_at','asc')->count();
+        ->orderBy('kitchenrecords.created_at','asc')->get();
  
          return response()->json([
-             'counter' => $orders
+             'orders' => $orders
          ]);
     
+    }
+
+    public function checkForReadyOrders(){
+
+        $data = array();
+        $result;
+        $orders = DB::table('kitchenrecords')
+        ->select('kitchenrecords.status','kitchenrecords.orderQty','kitchenrecords.id','orders.tableno','tables.status as tableStatus')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->join('tables', 'tables.tableno','=', 'orders.tableno')
+        ->where('tables.status','=','Occupied')
+        ->orderBy('kitchenrecords.created_at','asc')->get();
+
+        foreach($orders as $order){
+            $data[$order->tableno][] = $order;
+        }
+        
+        
+         return response()->json([
+            "readyorders" => $data
+         ]);
     }
     public function getAllCompleteList(){
         $orders = DB::table('kitchenrecords')
@@ -206,7 +225,7 @@ class TemporaryTableController extends Controller
         ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
         ->join('categories','sub_categories.categoryid','=','categories.categoryid')
         ->where('categories.categoryname','!=', 'Drinks')
-        ->where('kitchenrecords.status','=','for serving')
+        ->where('kitchenrecords.status','=','ready')
         ->orderBy('kitchenrecords.updated_at','desc')->get();
 
         return response()->json([
@@ -220,15 +239,14 @@ class TemporaryTableController extends Controller
         ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
         ->join('categories','sub_categories.categoryid','=','categories.categoryid')
         ->where('categories.categoryname','=', 'Drinks')
-        ->where('kitchenrecords.status','=','for serving')
+        ->where('kitchenrecords.status','=','ready')
         ->orderBy('kitchenrecords.updated_at','desc')->get();
 
         return response()->json([
             'orders' => $orders
         ]);
     }
-
-
+    
 }
 
 

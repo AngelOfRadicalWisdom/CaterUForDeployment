@@ -12,7 +12,7 @@ class Customer extends Model
     public $incrementing = true;
     public $timestamps = false;
 
-    protected $fillable = array('custid','name','phonenumber');
+    protected $fillable = array('custid','name','phonenumber','status',"tableno");
     
     public function order(){
         return $this->belongsTo('App\Order','custid');

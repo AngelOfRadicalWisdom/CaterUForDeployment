@@ -200,20 +200,8 @@ class MenuController extends BaseController
 
         
         foreach($allMenus as $menu){
-        
-        $localFileName  = public_path().'/menu/menu_images/'.$menu->image;
-        $fileData = file_get_contents($localFileName);
-        $ImgfileEncode = base64_encode($fileData);
-
-        // echo json_encode(array(
-        //     'message'=>'hello',
-        //     'image_name'=>'php.png',
-        //     'image'=>$ImgfileEncode,
-        // )); exit;
-        //     $path = public_path().'/menu/menu_images/'.$menu->image;
-
             array_push($result, array(
-                'image' => $ImgfileEncode,
+                'image' =>asset('/menu/menu_images/'.$menu->image),
                 'menuID'    => $menu->menuID,
                 'name'  => $menu->name,
                 'details' => $menu->details,
@@ -223,55 +211,21 @@ class MenuController extends BaseController
 
             ));
         }
-        if($request->mode == 'list'){
+        //if($request->mode == 'list'){
            return  response()->json([
               // 'allMenus' => $allMenus,
                'result' => $result
                ]);
-        }
 
     }
-    // public function ionRemoveMenu($menuID) // remove marked employee from the table
-    // {
-    //     $menuRecord = Menu::find($menuID);
-
-    //     if ($menuRecord) {
-    //         $menuRecord->delete();
-    //     }
-
-    //     return $this->sendResponse($menuRecord->toArray(),'Menu deleted successfully!');
-    // }
-
-
-    // public function ionSaveNewMenu(Request $request)
-    // {
-    //     // parse_str($request->getContent(), $data);
-    //     dd($request->getContent());
-
-    //     return response()->json([
-    //         'menuID' => 1
-    //     ]);
-    // }
-    // public function getTransactionByDate($from_date,$to_date){
-    //     DB::table('order_details')
-    //             ->where('status','served')
-    //             ->whereBetween('created_at',[$from_date,$to_date])->get();
-
-    //     return response()->json([
-    //         'message' => 'data returned'
-    //     ]);
-    // }
     public function getMenuDetail($id){
         $menus = array();
         $menuDetail = DB::table('menus')->where('menuID',$id)->get();
 
         if($menuDetail != NULL){
             foreach($menuDetail as $m){
-                $localFileName  = public_path().'/menu/menu_images/'.$m->image;
-                $fileData = file_get_contents($localFileName);
-                $ImgfileEncode = base64_encode($fileData);
                 array_push($menus,array(
-                    'image'=> $ImgfileEncode,
+                    'image'=> asset('/menu/menu_images/'.$m->image),
                     'menuID'=> $m->menuID,
                     'name' => $m->name,
                     'detail'=> $m->details,
@@ -299,13 +253,8 @@ class MenuController extends BaseController
         foreach($allsubcategories as $sub){
 
             if($menu->subcatid == $sub->subcatid){
-
-            $localFileName  = public_path().'/menu/menu_images/'.$menu->image;
-            $fileData = file_get_contents($localFileName);
-            $ImgfileEncode = base64_encode($fileData);
-
             array_push($result, array(
-            'image' => $ImgfileEncode,
+            'image' => asset('/menu/menu_images/'.$menu->image),
             'menuID'    => $menu->menuID,
             'name'  => $menu->name,
             'details' => $menu->details,

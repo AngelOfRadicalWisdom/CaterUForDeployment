@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use Carbon\Carbon;
+
 use App\AppSettings;
 use App\Employee;
 use App\Session;
@@ -19,15 +19,6 @@ class LoginController extends Controller
         $this->session = $session;
     }
     public function landingpage(){
-        if (Auth::check()) {
-            if(Auth::user()->position == 'admin'){
-                return redirect('/dashboard');
-               }
-               else{
-                   return redirect('/employeedashboard');
-               }
-            
-        }
     return view('create');
     }
     public function username(){
@@ -76,4 +67,8 @@ class LoginController extends Controller
      }
      
 
-    }
+
+
+
+
+}

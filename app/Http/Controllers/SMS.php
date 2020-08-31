@@ -10,18 +10,15 @@ use App\Customer;
 class SMS extends Controller
 {
    // use SMSMethod;
-    public function sendSMS($phonenumber){
-
-            // $phonenumber = DB::table('customers')
-            //                 ->select('phonenumber')
-            //                 ->where('custid',$request->custid)->get();
+    public function sendSMS(Request $request, $custid){
 
             $customer = Customer::find($custid);
             $customer->status='notified';
+            $customer->tableno = $request->tableno;
             $customer->save();
                            
             $query_string = 'api.aspx?apiusername='.'APIPEG60E2N2X'.'&apipassword='.'APIPEG60E2N2XPEG60';
-            $query_string .= '&senderid='.rawurlencode('TEST').'&mobileno='.rawurlencode($phonenumber);
+            $query_string .= '&senderid='.rawurlencode('TEST').'&mobileno='.rawurlencode($request->phonenumber);
             $query_string .= '&message='.rawurlencode(stripslashes('Your table is ready. Please be present before 5 minutes.')) . "&languagetype=1";        
             $url ='http://gateway.onewaysms.ph:10001/'.$query_string;
             
