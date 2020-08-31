@@ -209,29 +209,54 @@ class AprioriC2Controller extends Controller
         return $sc;
      }
 
-        public function sendApriori(Request $request){
-            $transactions = DB::table('apriori')
-                            ->join('menus','apriori.menuID','=','menus.menuID')
-                            ->selectRaw('group_concat(menus.name) as name')
-                           ->selectRaw('group_concat(menus.menuID) as menuID')
-                           //->select('group_concat(bundle_menus.menuID)','menus.name')
-                         //   ->select('bundle_menus.bundleGroup','menus.name','bundle_menus.bundleGroup')
-                           ->having('menuID',3)
-                            ->groupBy('apriori.groupNumber')
-                            ->get();
-                   foreach($transactions as $row){
-                        $menu[]=explode(",",$row->menuID);
-                       }
-                       for($i=0;$i<count($menu);$i++){
-                           foreach($menu[$i] as $Smenus){
-                               if($Smenus!=3){
-                                   $send[]=$Smenus;
-                               }
-                           }
-                       }
+         public function sendApriori($menuId){
+        $menu = [];
+        $groupedData = [];
+       
+        $transactions = DB::table('apriori')
+            ->join('menus','apriori.menuID','=','menus.menuID')
+            ->selectRaw('group_concat(menus.name) as name')
+            ->selectRaw('group_concat(menus.menuID) as menuID') 
+            ->selectRaw('group_concat(menus.image) as image')
+            ->groupBy('apriori.groupNumber')
+            ->havingRaw('menuID',[$menuId])
+            ->get();
+      
 
-                    return response()->json(['menu'=>$send]);
+        foreach($transactions as $row){
+            $menu[]=explode(",",$row->menuID);
+        }
+        for($index=0;$index<count($menu);$index++){
+            foreach($menu[$index] as $Smenus){
+                if($Smenus != $menuId){
+                  $groupedData[]=$Smenus;
+                }
+            }
+        }
+        $final = array_unique($groupedData);
+        $groupedData = [];
+        $data;
+        foreach($final as $row){
+            $data = DB::table('menus')->where('menuID',$row)->get();
+            array_push($groupedData,$row);
+        }
+        $data = [];
+        for($i = 0; $i < count($groupedData) ; $i++){
+            $t = DB::table('menus')->where('menuID',$groupedData[$i])->get();   
+          
+           foreach( $t as $a ){
+                array_push($data, array(
+                    'name' => $a->name,
+                    'menuID' => $a->menuID,
+                    'image' => asset('/menu/menu_images/'.$a->image),
+                ));
+           }
+           
+        }
+
+     return response()->json(['menu'=>$data]);
      }
+
      public function sendPredict(Request $request){
 
      }

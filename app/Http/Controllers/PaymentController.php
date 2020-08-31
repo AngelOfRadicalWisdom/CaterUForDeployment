@@ -10,20 +10,6 @@ use DB;
 class PaymentController extends Controller
 {
 
-    public function getSubTotal($order_id){
-        $orders = Order::find($order_id);
-        $subtotal = DB::table('order_details')
-                ->where('order_id', $orders->order_id)
-                ->where('status','served')
-                ->sum('subtotal');
-
-
-        return response()->json([
-            'subtotal'  => $subtotal
-        ]);
-    }
-
-
     public function discount($order_id,Request $request){
         $order = Order::find($order_id);
         $amount = $order->total;
@@ -69,12 +55,11 @@ class PaymentController extends Controller
          ]);
 
      }
-     public function printReceipt(Request $request){
-        $orders = Order::find($request->order_id);
+     public function printReceipt(Request $request, $order_id){
+        $orders = Order::find($order_id);
          $orders->cashTender = $request->cashTender;
          $orders->change = $request->change;
-        $orders->status = $request->status;
-        $orders->total = $request->total;
+        $orders->status = 'paid';
         $orders->save();
 
         return response()->json([

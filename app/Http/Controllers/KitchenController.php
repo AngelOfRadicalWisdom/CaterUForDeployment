@@ -72,15 +72,7 @@ class KitchenController extends BaseController
                  'orders' => $names
              ]);
     }
-    // public function prepareMenu($id){
-    //     $orders = OrderDetail::find($id);
-    //     $orders->status = 'Preparing';
-    //     $orders->save();
-
-    //     return response()->json([
-    //           'message' => 'Preparing....!'
-    //     ]);
-    // }
+  
     public function getMenuReadyList(){
         $list = DB::table('order_details')
                 ->join('orders','orders.order_id','=','order_details.order_id')

@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use App\RestaurantTable;
 use Illuminate\Support\Facades\Auth;
 use App\Order;
+use App\Customer;
 use App\Exceptions\CustomExceptions;
 use DB;
+
 class TableController extends BaseController
 {
     private $customExceptions;
@@ -118,9 +120,12 @@ public function removeTable($tableno){
         }
     }
 
-    public function setTableStatus(Request $request){
+    public function setTableStatusOccupied(Request $request){
         $table = RestaurantTable::find($request->tableno);
-        $table->status = $request->status;
+        if($table->status =='Available'){
+            $table->status = 'Occupied';
+        }
+        
         $table->save();
 
         return response()->json([
@@ -253,9 +258,39 @@ public function removeTable($tableno){
         return response()->json([
             'items' => $items
         ]);
+
+    }
+
+    public function beginTransaction(Request $request, $tableNo){
+
+        $status = RestaurantTable::whereTableno($tableNo)->pluck('status')->first();
         
-    
-            
+        if($status == 'Occupied'){
+            $order_id = Order::whereTableno($tableNo)
+        ->where('status','ordering')
+        ->pluck('order_id')->first();
+         return response()->json([
+             'order_id' => $order_id,
+             'status' => $status
+         ]);
+        }else{
+            $table = RestaurantTable::find($tableNo);
+            $table->status = 'Occupied';
+            $table->save();
+
+        $newCustomer = Customer::create(['name'=>'cash']);
+        $newOrder = new Order;
+        $newOrder->custid= $newCustomer->custid;
+        $newOrder->empid=$request->empid;
+        $newOrder->tableno = $tableNo;
+        $newOrder->status = 'ordering';
+        $newOrder->total = 0;
+        $newOrder->save();
+
+        return response()->json([
+            'order_id' =>  $newOrder->order_id
+        ]);
+        }
     }
 
 }

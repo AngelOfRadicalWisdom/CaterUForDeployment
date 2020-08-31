@@ -14,7 +14,7 @@ class orderSeeder2 extends Seeder
         $orders = [
          [
             'order_id'=>1,
-            'custid'=>1,
+            'custid'=>2,
             'empid'=>1,
             'tableno'=>2 ,
             'total'=>2509,
@@ -24,7 +24,7 @@ class orderSeeder2 extends Seeder
          ],
          [
              'order_id'=>2,
-             'custid'=>2,
+             'custid'=>1,
              'empid'=>2,
              'tableno'=>1 ,
              'total'=>3748,
@@ -34,7 +34,7 @@ class orderSeeder2 extends Seeder
           ],
           [
              'order_id'=>3,
-             'custid'=>3,
+             'custid'=>1,
              'empid'=>3,
              'tableno'=>4,
              'total'=>3679,

@@ -27,37 +27,6 @@ class OrderController extends BaseController
             'allCategories' => $allCategories
         ]);
     }
-
-    public function startOrder(Request $request){
-
-        // $table =RestaurantTable::where('tableno',$request->tableno)->get();
-        //         ->update(['status'=>'Occupied']);
-        $table = RestaurantTable::find(1);
-        if($table->status == 'Occupied'){
-            return response()->json([
-                'message' => 'Sorry, the table you selected is Occupied'
-            ]);
-        }else{
-
-       $table->status = 'Occupied';
-       $table->save();
-
-        $newCustomer = Customer::create(['name'=>'cash']);
-        $newOrder = new Order;
-        $newOrder->custid= $newCustomer->custid;
-        $newOrder->username=$request->username;
-        $newOrder->tableno = $table->tableno;
-        $newOrder->status = 'ordering';
-        $newOrder->total = 0;
-        $newOrder->save();
-
-        return response()->json([
-            'message' => 'Welcome, happy eating!',
-            'order_id' =>  $newOrder->order_id
-        ]);
-       }
-}
-
     public function paidOrder(){
         $menus = Menu::all();
         $details = OrderDetail::whereDate('date_ordered', '>=', Carbon::today()->toDateString());
@@ -85,21 +54,6 @@ class OrderController extends BaseController
         $paidOrders= Order::where('status','Paid')->get();
         return view('admin.report.sales', compact('paidOrders','details'));
 
-    }
-    public function getLatestOrderID($tableno){
-        $order;
-        $orderid = DB::table('orders')->select('order_id')
-                    ->where('tableno', $tableno)->get();
-
-        foreach($orderid as $od){
-            if($od->status != 'billout'){
-                $order = $od->order_id;
-            }
-        }
-
-        return response()->json([
-            'orderid' => $order
-        ]);
     }
 
 }
