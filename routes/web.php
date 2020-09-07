@@ -18,7 +18,7 @@ Route::get('','LoginController@landingpage');
 Auth::routes(['register'=> false]);
 Auth::routes(['login'=>false]);
 // Route::post('/trial','AdminController@ui');
- Route::get('/trial','RatingController@getStarCount');
+ Route::get('/trial','TemporaryTableController@getAllCompleteDrinks');
 // Route::get('/trial2','PromotionController@getFilter');
 Route::get('/login',function(){
     return view('create');

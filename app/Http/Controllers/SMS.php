@@ -9,46 +9,44 @@ use App\Customer;
 
 class SMS extends Controller
 {
-   // use SMSMethod;
-    public function sendSMS(Request $request, $custid){
+    // use SMSMethod;
+    public function sendSMS(Request $request, $custid)
+    {
 
-            $customer = Customer::find($custid);
-            $customer->status='notified';
-            $customer->tableno = $request->tableno;
-            $customer->save();
-                           
-            $query_string = 'api.aspx?apiusername='.'APIPEG60E2N2X'.'&apipassword='.'APIPEG60E2N2XPEG60';
-            $query_string .= '&senderid='.rawurlencode('TEST').'&mobileno='.rawurlencode($request->phonenumber);
-            $query_string .= '&message='.rawurlencode(stripslashes('Your table is ready. Please be present before 5 minutes.')) . "&languagetype=1";        
-            $url ='http://gateway.onewaysms.ph:10001/'.$query_string;
-            
-            $fd = implode('',file($url));      
-            if ($fd)  
-            {                       
+        $customer = Customer::find($custid);
+        $customer->status = 'notified';
+        $customer->tableno = $request->tableno;
+        $customer->save();
+
+        $query_string = 'api.aspx?apiusername=' . 'APIPEG60E2N2X' . '&apipassword=' . 'APIPEG60E2N2XPEG60';
+        $query_string .= '&senderid=' . rawurlencode('TEST') . '&mobileno=' . rawurlencode($request->phonenumber);
+        $query_string .= '&message=' . rawurlencode(stripslashes('Your table is ready. Please be present before 5 minutes.')) . "&languagetype=1";
+        $url = 'http://gateway.onewaysms.ph:10001/' . $query_string;
+
+        $fd = implode('', file($url));
+        if ($fd) {
             if ($fd > 0) {
-        //	Print("MT ID : " . $fd);
-            $ok = "success!";
-            }        
-            else {
-        //	print("Please refer to API on Error : " . $fd);
-            $ok = "fail";
+                //	Print("MT ID : " . $fd);
+                $ok = "success!";
+            } else {
+                //	print("Please refer to API on Error : " . $fd);
+                $ok = "fail";
             }
-                }           
-                else      
-                {                       
-                    // no contact with gateway                      
-                            $ok = "failed";       
-                }           
-                return $ok;  
+        } else {
+            // no contact with gateway                      
+            $ok = "failed";
+        }
+        return $ok;
 
         // return response()->json([
         //     'message' => $request->phonenumber
         // ]);
-    }  
-    public function test(Request $request){
+    }
+    public function test(Request $request)
+    {
         $table = DB::table('tables')
-        ->where('status','Available')
-        ->where('capacity','>=',$request->capacity)->get();
+            ->where('status', 'Available')
+            ->where('capacity', '>=', $request->capacity)->get();
 
         return response()->json([
             'table' => $table
@@ -58,17 +56,17 @@ class SMS extends Controller
     //  public function SMSsend(){
     //     // Account details
     //     $apiKey = urlencode('fvMDnRzaSAA-fosqlj14tGPg5MHd3lY0ENycaAbBRY');
-        
+
     //     // Message details
     //     $numbers = array(639222568271);
     //     $sender = urlencode('CATERU');
     //     $message = rawurlencode('Your table is ready');
-    
+
     //     $numbers = implode(',', $numbers);
-    
+
     //     // Prepare data for POST request
     //     $data = array('apikey' => $apiKey, 'numbers' => $numbers, "sender" => $sender, "message" => $message);
-    
+
     //     // Send the POST request with cURL
     //     $ch = curl_init('https://api.txtlocal.com/send/');
     //     curl_setopt($ch, CURLOPT_POST, true);
@@ -76,13 +74,13 @@ class SMS extends Controller
     //     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     //     $response = curl_exec($ch);
     //     curl_close($ch);
-        
+
     //     // Process your response here
     //     echo $response;
 
     // }
- 
-    
 
-        
+
+
+
 }

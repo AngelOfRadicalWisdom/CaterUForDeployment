@@ -96,7 +96,10 @@
                         <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Upload Menu Image
                         </label>
                         <div class="col-md-6 col-sm-6 ">
-                          <input type="file" id="image" name="image">
+                          <input type="file" id="image" name="image" accept="image/*">
+                          @if ($errors->has('image'))
+                    <span class="text-danger">{{ $errors->first('image') }}</span>
+                @endif
                         </div>
                       </div>
                       <div class="ln_solid"></div>

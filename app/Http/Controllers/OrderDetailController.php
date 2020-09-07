@@ -10,89 +10,90 @@ use App\SubCategory;
 use App\Menu;
 use App\Order;
 use DB;
+
 class OrderDetailController extends BaseController
 {
- 
-    public function orderList($order_id){ 
-       $orders = Order::find($order_id);
-       $orderDetails = OrderDetail::all();
-       $orderlist = array();
-       foreach($orderDetails as $detail){
-           foreach($detail->menu as $menu){
-               if($detail->order_id == $orders->order_id){
-                array_push($orderlist, array(
-                    'tableno' => $orders->tableno,
-                    'detail_id' => $detail->id,
-                    'order_id' => $detail->order_id,
-                    'orderQty' => $detail->orderQty,
-                    'menuID' =>  $detail->menuID,
-                    'status'    => $detail->status,
-                    'menuName'=> $menu->name,
-                    'subtotal' => $detail->subtotal,
-                    'qtyServed'=> $detail->qtyServed
-                ));
-           }
+
+    public function orderList($order_id)
+    {
+        $orders = Order::find($order_id);
+        $orderDetails = OrderDetail::all();
+        $orderlist = array();
+        foreach ($orderDetails as $detail) {
+            foreach ($detail->menu as $menu) {
+                if ($detail->order_id == $orders->order_id) {
+                    array_push($orderlist, array(
+                        'tableno' => $orders->tableno,
+                        'detail_id' => $detail->id,
+                        'order_id' => $detail->order_id,
+                        'orderQty' => $detail->orderQty,
+                        'menuID' =>  $detail->menuID,
+                        'status'    => $detail->status,
+                        'menuName' => $menu->name,
+                        'subtotal' => $detail->subtotal,
+                        'qtyServed' => $detail->qtyServed
+                    ));
+                }
+            }
         }
-       }
         return response()->json([
             'list' => $orderlist
         ]);
     }
-    public function getTotal($order_id){
-        $orderDetails = OrderDetail::where('order_id',$order_id)->get();
+    public function getTotal($order_id)
+    {
+        $orderDetails = OrderDetail::where('order_id', $order_id)->get();
         $total = 0;
-        foreach($orderDetails as $order){
-            $total += $order->subtotal; 
+        foreach ($orderDetails as $order) {
+            $total += $order->subtotal;
         }
         return response()->json([
-            'total'=>$total
+            'total' => $total
         ]);
-
-
     }
 
-    public function getAllServedMenus(){
+    public function getAllServedMenus()
+    {
 
         $allOrders = OrderDetail::all();
         $allCategories = Category::all();
-        $drinks=array();
+        $drinks = array();
         $result = array();
-       foreach($allOrders as $orders){
-           foreach($orders->order as $ords){
+        foreach ($allOrders as $orders) {
+            foreach ($orders->order as $ords) {
 
-            $order = Order::find($orders->order_id);
-            $menus = Menu::find($orders->menuID);
-            $menus->subCategory();
-            $sub = SubCategory::find($menus->subcatid);
-            $sub->category();
-            $catid = $menus->subcategory->categoryid;
+                $order = Order::find($orders->order_id);
+                $menus = Menu::find($orders->menuID);
+                $menus->subCategory();
+                $sub = SubCategory::find($menus->subcatid);
+                $sub->category();
+                $catid = $menus->subcategory->categoryid;
 
 
-            if($orders->status == 'served'){
-                array_push( $drinks,array(
-                    'order_id' => $order->order_id,
-                    'tableno'=> $order->tableno,
-                    'name' => $menus->name,
-                    'menu_id' => $menus->menuID,
-                    'detail_id' => $orders->id,
-                    'quantity' => $orders->orderQty,
-                  
-                ));
+                if ($orders->status == 'served') {
+                    array_push($drinks, array(
+                        'order_id' => $order->order_id,
+                        'tableno' => $order->tableno,
+                        'name' => $menus->name,
+                        'menu_id' => $menus->menuID,
+                        'detail_id' => $orders->id,
+                        'quantity' => $orders->orderQty,
 
+                    ));
+                }
             }
         }
-        }
 
-        foreach ($drinks as $element=> $value) {
+        foreach ($drinks as $element => $value) {
             $result[$value['order_id']][] = $value;
         }
         return response()->json([
 
             'result' => $result
         ]);
-
     }
-    public function cancelOrderMenu($id){
+    public function cancelOrderMenu($id)
+    {
         $orders = OrderDetail::find($id);
         $order = new OrderDetail;
         $order->status = "cancelled";
@@ -123,36 +124,34 @@ class OrderDetailController extends BaseController
     //      ]);
 
     // }
-   
-    public function setServeQty(Request $request){
+
+    public function setServeQty(Request $request)
+    {
         $records = OrderDetail::find($request->id);
         $records->qtyServed -= $request->noItemToServe;
         $records->save();
 
         return response()->json([
-            'message'=> $request->noItemToServe
+            'message' => $request->noItemToServe
         ]);
-      }
-   
-   
-    
-    public function isServed($id){
+    }
+
+
+
+    public function isServed($id)
+    {
         $status = '';
         $servedQty = OrderDetail::whereId($id)->pluck('qtyServed')->first();
-        if($servedQty === 0){
-            $detail= OrderDetail::find($id);
+        if ($servedQty === 0) {
+            $detail = OrderDetail::find($id);
             $detail->status = 'served';
             $detail->save();
             $status = 'Order is served.';
-            
-        }else{
+        } else {
             $status = 'Orders is being prepared.';
         }
         return response()->json([
             'status' => $status
         ]);
     }
-  
-
-
 }

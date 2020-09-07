@@ -74,13 +74,6 @@
 	
     <script type="text/javascript">
 $( document ).ready(function() {
-//   const swalWithBootstrapButtons = Swal.mixin({
-//   customClass: {
-//     confirmButton: 'btn btn-success',
-//     cancelButton: 'btn btn-danger'
-//   },
-//   buttonsStyling: false
-// })
     var ratings = document.getElementById("ratings");
 			  var RatingsChart= new Chart(ratings, {
 				type: 'horizontalBar',
@@ -95,7 +88,7 @@ $( document ).ready(function() {
 
 				options: {
 				  scales: {
-					yAxes: [{
+					yAxis: [{
 					  ticks: {
 						beginAtZero: true
 					  }
