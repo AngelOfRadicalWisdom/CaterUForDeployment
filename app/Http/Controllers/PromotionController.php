@@ -515,12 +515,12 @@ for($i=0;$i<count($allMenus);$i++) {
         ->selectRaw('group_concat(menus.menuID) as menuID')
         ->selectRaw('group_concat(menus.name) as name')
         ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
-        ->selectRaw('group_concat(bundle_menus.name )as bundlename')  
-        ->selectRaw('group_concat(bundle_menus.price) as price') 
-        ->selectRaw('group_concat(bundle_menus.servingsize) as servingsize') 
-        ->selectRaw('group_concat(bundle_menus.image) as image')
+        ->selectRaw('group_concat(bundles.name )as bundlename')  
+        ->selectRaw('group_concat(bundles.price) as price') 
+        ->selectRaw('group_concat(bundles.servingsize) as servingsize') 
+        ->selectRaw('group_concat(bundles.image) as image')
         ->join('menus','menus.menuID','=','bundle_details.menuID')
-        ->join('bundle_menus','bundle_details.bundleid','=','bundle_menus.bundleid')
+        ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
         ->groupBy('bundle_details.bundleid')
         ->get();
         foreach($promotionDetails as $row){

@@ -14,10 +14,10 @@ class DatabaseSeeder extends Seeder
     {
         //Eloquent::unguard();
 
-        $this->call(category::class);
-        $this->call(subcategory::class);
-        $this->call(menu::class);
-        $this->call(orderSeeder::class);
-        // $this->call(UsersTableSeeder::class);
+        $this->call(CategorySeeder::class);
+        $this->call(SubCategorySeeder::class);
+        $this->call(MenuSeeder::class);
+        // $this->call(orderSeeder::class);
+        $this->call(TableSeeder::class);
     }
 }

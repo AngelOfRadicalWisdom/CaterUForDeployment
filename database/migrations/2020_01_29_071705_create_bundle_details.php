@@ -18,10 +18,9 @@ class CreateBundleDetails extends Migration
             $table->integer('menuID')->unsigned();
             $table->integer('bundleid')->unsigned();
             $table->integer('qty')->unsigned();
-            //$table->timestamps();
             $table->softDeletes();
             $table->foreign('menuID')->references('menuID')->on('menus')->onUpdate('cascade');
-            $table->foreign('bundleid')->references('bundleid')->on('bundle_menus')->onDelete('restrict')->onUpdate('cascade');
+            $table->foreign('bundleid')->references('bundleid')->on('bundles')->onDelete('restrict')->onUpdate('cascade');
     
         });
     }

@@ -183,20 +183,7 @@ public function removeTable($tableno){
             ]);
         }
 
-    public function getDeviceTableNo($deviceuid){
-        $t;
-        $table = DB::table('tables')
-                ->where('deviceuid',$deviceuid)->get();
-
-        foreach($table as $tableno){
-            //array_push($t, array(
-                $t = $tableno->tableno;
-           // ));
-        }
-        return response()->json([
-            'tableno' => $t
-        ]);
-    }
+    
     public function getTableStatus($tableno){
         $status ='';
         $table = RestaurantTable::find($tableno);
@@ -218,6 +205,8 @@ public function removeTable($tableno){
             'tables' => $tables
         ]);
     }
+
+    
     // public function getOrderByTableNo($tableno){
         
     //     $orders = DB::table('order_details')

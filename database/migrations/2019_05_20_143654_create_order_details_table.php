@@ -16,16 +16,18 @@ class CreateOrderDetailsTable extends Migration
             $table->engine='InnoDb';
             $table->increments('id',6001);
             $table->integer('orderQty');
-            $table->integer('menuID')->unsigned();
+            $table->integer('menuID')->unsigned()->nullable();
             $table->string('status');
             $table->float('subtotal');
             $table->timestamp('date_ordered')->default(\DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->integer('order_id')->unsigned();
             $table->integer('qtyServed')->unsigned()->nullable();
+            $table->integer('bundleid')->unsigned()->nullable();
             $table->softDeletes();
             $table->foreign('order_id')->references('order_id')->on('orders')->onUpdate('cascade');
             $table->foreign('menuID')->references('menuID')->on('menus')->onUpdate('cascade');
+            $table->foreign('bundleid')->references('bundleid')->on('bundles')->onUpdate('cascade');
         });
 
     }
