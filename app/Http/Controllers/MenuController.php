@@ -14,45 +14,57 @@ use App\Category;
 use App\SubCategory;
 use App\Exceptions\CustomExceptions;
 use DB;
+
 class MenuController extends BaseController
 {
     private $customExceptions;
     public function __construct(CustomExceptions $customExceptions)
-  {
-      $this->customExceptions = $customExceptions;
-  }
+    {
+        //exception initialization
+        $this->customExceptions = $customExceptions;
+    }
 
-//WEB ROUTES
- 
-    public function newMenu(){
+    //WEB ROUTES
+    //adding a new menu page 
+    public function newMenu()
+    {
+        try{
         $user = Auth::user();
-        $userFname=$user->empfirstname;
-        $userLname=$user->emplastname;
-        $userImage=$user->image;
+        $userFname = $user->empfirstname;
+        $userLname = $user->emplastname;
+        $userImage = $user->image;
         $allMenus = Menu::all();
         $allSubCategories = SubCategory::all();
         $allCategories = Category::all();
+        
 
-        return view('pages.addmenu', compact('userFname','userLname','allMenus', 'allCategories', 'allSubCategories','userImage'));
+        return view('pages.addmenu', compact('userFname', 'userLname', 'allMenus', 'allCategories', 'allSubCategories', 'userImage'));
+        }
+        catch (\PDOException $e) {
+            return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
+        }
     }
-
-    public function fetch(Request $request){
+    //mobile get subcategories
+    public function fetch(Request $request)
+    {
         $categoryid = Input::get('categoryid');
         $subcategories = DB::table('sub_categories')
-            ->where('categoryid',$categoryid)->get();
+            ->where('categoryid', $categoryid)->get();
 
-            return response()->json(['subs' => $subcategories]);
+        return response()->json(['subs' => $subcategories]);
     }
-    public function saveNewMenu(Request $request){
-        try{
-            $promo=$this->customExceptions->addMenuException($request);
-          }
-          catch(\PDOException $e){
+    //save the added menu to database
+    public function saveNewMenu(Request $request)
+    {
+        try {
+            $promo = $this->customExceptions->addMenuException($request);
+        } catch (\PDOException $e) {
             return back()->withError($e->getMessage())->withInput();
-          }
-            $newMenu = new Menu();
-            $filename='CaterU.png';
-          if($request->file('image')==NULL){
+        }
+        try{
+        $newMenu = new Menu();
+        $filename = 'CaterU.png';
+        if ($request->file('image') == NULL) {
             $newMenu->menuID = $request->menuID;
             $newMenu->name = $request->name;
             $newMenu->details = $request->details;
@@ -60,90 +72,117 @@ class MenuController extends BaseController
             $newMenu->servingsize = $request->servingsize;
             $newMenu->image = $filename;
             $newMenu->subcatid  = $request->subcategory;
-    
+
             $newMenu->save();
-          }
-         else{
-        $filename = $request->file('image')->getClientOriginalName();
+        } else {
+            
+    $this->validate($request, 
 
-        $path = public_path().'/menu/menu_images';
-        $request->file('image')->move($path, $filename);
-        $newMenu->menuID = $request->menuID;
-        $newMenu->name = $request->name;
-        $newMenu->details = $request->details;
-        $newMenu->price = $request->price;
-        $newMenu->servingsize = $request->servingsize;
-        $newMenu->image = $filename;
-        $newMenu->subcatid  = $request->subcategory;
+        [   'image' => 'image|mimes:jpeg,png,jpg,gif,svg',],
+        ['image.image'=> 'Menu Image must be an image file type']
 
-        $newMenu->save();
-       
-        //else
-        //     return redirect()->back()->withInput()->withErrors($validation);
+    );
+            $filename = $request->file('image')->getClientOriginalName();
+
+            $path = public_path() . '/menu/menu_images';
+            $request->file('image')->move($path, $filename);
+            $newMenu->menuID = $request->menuID;
+            $newMenu->name = $request->name;
+            $newMenu->details = $request->details;
+            $newMenu->price = $request->price;
+            $newMenu->servingsize = $request->servingsize;
+            $newMenu->image = $filename;
+            $newMenu->subcatid  = $request->subcategory;
+
+            $newMenu->save();
+        }
     }
-    return redirect('/menu/list?mode=list')->with('success','Menu Successfully Added');
-
-}
-
-    public function updateMenu($menuID){
+    catch (\PDOException $e) {
+        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
+    }
+        return redirect('/menu/list?mode=list')->with('success', 'Menu Successfully Added');
+    }
+    //update menu details page
+    public function updateMenu($menuID)
+    {
+        try{
         $user = Auth::user();
-        $userFname=$user->empfirstname;
-        $userLname=$user->emplastname;
-        $userImage=$user->image;
+        $userFname = $user->empfirstname;
+        $userLname = $user->emplastname;
+        $userImage = $user->image;
         $allMenus = Menu::all();
         $allSubCategories = SubCategory::all();
         $allCategories = Category::all();
         $menuRecord = Menu::find($menuID);
-        $SubCategoryID=SubCategory::find($menuRecord->subcatid);
-        $category=Category::find($SubCategoryID->categoryid);
-      return view('pages.updatemenu', compact('SubCategoryID','userFname','userLname','menuRecord', 'allMenus', 'allSubCategories', 'allCategories','category','userImage'));
+        $SubCategoryID = SubCategory::find($menuRecord->subcatid);
+        $category = Category::find($SubCategoryID->categoryid);
+        return view('pages.updatemenu', compact('SubCategoryID', 'userFname', 'userLname', 'menuRecord', 'allMenus', 'allSubCategories', 'allCategories', 'category', 'userImage'));
+        }
+        catch (\PDOException $e) {
+            return back()->withError("Sorry Something Went Wrong ")->withInput();
+        }
+        
     }
-    public function saveMenuUpdate( $menuID,Request $request)
+    //update menu to database
+    public function saveMenuUpdate($menuID, Request $request)
     {
+        try {
+            $promo = $this->customExceptions->editMenuException($request,$menuID);
+        } catch (\PDOException $e) {
+            return back()->withError($e->getMessage())->withInput();
+        }
+        try{
         $menuRecord = Menu::find($menuID);
-        if($request->file('image')==NULL){
+        if ($request->file('image') == NULL) {
             $menuRecord->name = $request->name;
-            $menuRecord->details=$request->details;
+            $menuRecord->details = $request->details;
             $menuRecord->price = $request->price;
             $menuRecord->servingsize = $request->servingsize;
             $menuRecord->image = $menuRecord->image;
             $menuRecord->subcatid = $request->subcategory;
-    
-    
+
+
+            $menuRecord->save();
+        } else {
+            $this->validate($request, 
+
+        [   'image' => 'image|mimes:jpeg,png,jpg,gif,svg',],
+        ['image.image'=> 'Menu Image must be an image file type']
+
+    );
+            $filename = $request->file('image')->getClientOriginalName();
+
+            $path = public_path() . '/menu/menu_images';
+            $request->file('image')->move($path, $filename);
+
+            $menuRecord->name = $request->name;
+            $menuRecord->details = $request->details;
+            $menuRecord->price = $request->price;
+            $menuRecord->servingsize = $request->servingsize;
+            $menuRecord->image = $filename;
+            $menuRecord->subcatid = $request->subcategory;
             $menuRecord->save();
         }
-        else{
-        $filename = $request->file('image')->getClientOriginalName();
-
-        $path = public_path().'/menu/menu_images';
-        $request->file('image')->move($path, $filename);
-
-        $menuRecord->name = $request->name;
-        $menuRecord->details=$request->details;
-        $menuRecord->price = $request->price;
-        $menuRecord->servingsize = $request->servingsize;
-        $menuRecord->image = $filename;
-        $menuRecord->subcatid = $request->subcategory;
-        $menuRecord->save();
-        }
-        return redirect()->to(url('/menu/list?mode=list'));
-        // }
-        // else
-        //     return redirect()->back()->withInput()->withErrors($validation);
+        return redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Successfully Edited');
+    }
+    catch (\PDOException $e) {
+        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
     }
 
-    public function listMenus(Request $request) // show all menu list
+    }
+    // show all menu list
+    public function listMenus(Request $request)
     {
+        try{
         $allMenus = Menu::all();
         $user = Auth::user();
-        $userFname=$user->empfirstname;
-        $userLname=$user->emplastname;
-        $userImage=$user->image;
+        $userFname = $user->empfirstname;
+        $userLname = $user->emplastname;
+        $userImage = $user->image;
 
-        if($request->mode == 'list'){
-            return view('pages.menulist', compact('userImage','userFname','userLname','allMenus'));
-        }
-        else if ($request->mode == 'remove') {
+        if ($request->mode == 'list') {
+            return view('pages.menulist', compact('userImage', 'userFname', 'userLname', 'allMenus'));
+        } else if ($request->mode == 'remove') {
             $menuRecords = Menu::find($request->menuID);
 
             if ($menuRecords) {
@@ -151,69 +190,72 @@ class MenuController extends BaseController
                 $menuName =  $menuRecords->menuName;
                 $details = $menuRecords->details;
                 $price = $menuRecords->price;
-                $servingsize=$menuRecords->servingsize;
+                $servingsize = $menuRecords->servingsize;
                 $subcatid = $menuRecords->subcatid;
                 $image = $menuRecords->image;
-
-            }
-            else {
+            } else {
                 $menuID = null;
                 $menuNname =  null;
-                $details =null;
+                $details = null;
                 $price = null;
-                $servingsize=null;
+                $servingsize = null;
                 $subcatid =  null;
                 $image = null;
             }
 
-            return view('pages.markmenu',compact('userImage','userFname','userLname','menuID','menuName','details','price','servingsize','subcatid','image','allMenus'));
+            return view('pages.markmenu', compact('userImage', 'userFname', 'userLname', 'menuID', 'menuName', 'details', 'price', 'servingsize', 'subcatid', 'image', 'allMenus'));
         }
     }
-    public function markMenu($menuID)
-    {
-        return redirect()->to(url('/menu/list?mode=remove&menuID=').$menuID);
+    catch (\PDOException $e) {
+        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
     }
-
+    }
+    //delete menu to list page
+    public function markMenu($menuID)
+    {   
+        try{
+        return redirect()->to(url('/menu/list?mode=remove&menuID=') . $menuID);
+        }
+        catch (\PDOException $e) {
+            return back()->withError("Sorry Something Went Wrong")->withInput();
+        }
+    }
+    //remove menu from list
     public function removeMenu($menuID)
     {
+        try{
         $menuRecord = Menu::find($menuID);
 
         if ($menuRecord) {
             $menuRecord->delete();
         }
 
-        return \Response::json(['status' =>200,'error'=>""]);
+        return \Response::json(['status' => 200, 'error' => ""]);
+    }
+    catch (\PDOException $e) {
+        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
+    }
     }
 
-
-    public function ionNewMenu(){
+    //???
+    public function ionNewMenu()
+    {
         $allMenus = Menu::all();
         $allCategories = Category::all();
         $allSubCategories = SubCategory::all();
         return $this->sendResponse($allMenus->toArray(), 'Menu retrieved successfully.');
     }
+    //???
     public function ionListMenus(Request $request)
     {
         $allMenus = Menu::all();
         $menus = array();
         $result = array();
 
-        
-        foreach($allMenus as $menu){
-        
-        $localFileName  = public_path().'/menu/menu_images/'.$menu->image;
-        $fileData = file_get_contents($localFileName);
-        $ImgfileEncode = base64_encode($fileData);
 
-        // echo json_encode(array(
-        //     'message'=>'hello',
-        //     'image_name'=>'php.png',
-        //     'image'=>$ImgfileEncode,
-        // )); exit;
-        //     $path = public_path().'/menu/menu_images/'.$menu->image;
-
+        foreach ($allMenus as $menu) {
             array_push($result, array(
-                'image' => $ImgfileEncode,
+                'image' => asset('/menu/menu_images/' . $menu->image),
                 'menuID'    => $menu->menuID,
                 'name'  => $menu->name,
                 'details' => $menu->details,
@@ -223,61 +265,25 @@ class MenuController extends BaseController
 
             ));
         }
-        if($request->mode == 'list'){
-           return  response()->json([
-              // 'allMenus' => $allMenus,
-               'result' => $result
-               ]);
-        }
-
+        return  response()->json([
+            'result' => $result
+        ]);
     }
-    // public function ionRemoveMenu($menuID) // remove marked employee from the table
-    // {
-    //     $menuRecord = Menu::find($menuID);
-
-    //     if ($menuRecord) {
-    //         $menuRecord->delete();
-    //     }
-
-    //     return $this->sendResponse($menuRecord->toArray(),'Menu deleted successfully!');
-    // }
-
-
-    // public function ionSaveNewMenu(Request $request)
-    // {
-    //     // parse_str($request->getContent(), $data);
-    //     dd($request->getContent());
-
-    //     return response()->json([
-    //         'menuID' => 1
-    //     ]);
-    // }
-    // public function getTransactionByDate($from_date,$to_date){
-    //     DB::table('order_details')
-    //             ->where('status','served')
-    //             ->whereBetween('created_at',[$from_date,$to_date])->get();
-
-    //     return response()->json([
-    //         'message' => 'data returned'
-    //     ]);
-    // }
-    public function getMenuDetail($id){
+    public function getMenuDetail($id)
+    {
         $menus = array();
-        $menuDetail = DB::table('menus')->where('menuID',$id)->get();
+        $menuDetail = DB::table('menus')->where('menuID', $id)->get();
 
-        if($menuDetail != NULL){
-            foreach($menuDetail as $m){
-                $localFileName  = public_path().'/menu/menu_images/'.$m->image;
-                $fileData = file_get_contents($localFileName);
-                $ImgfileEncode = base64_encode($fileData);
-                array_push($menus,array(
-                    'image'=> $ImgfileEncode,
-                    'menuID'=> $m->menuID,
+        if ($menuDetail != NULL) {
+            foreach ($menuDetail as $m) {
+                array_push($menus, array(
+                    'image' => asset('/menu/menu_images/' . $m->image),
+                    'menuID' => $m->menuID,
                     'name' => $m->name,
-                    'detail'=> $m->details,
-                    'price'=> $m->price,
-                    'serving_size'=> $m->servingsize,
-                  //  'image'=> $m->images
+                    'detail' => $m->details,
+                    'price' => $m->price,
+                    'serving_size' => $m->servingsize,
+                    //  'image'=> $m->images
                 ));
             }
         }
@@ -286,46 +292,39 @@ class MenuController extends BaseController
             'menudetail' => $menus
         ]);
     }
-    public function getMenuByCategory($categoryid){
+    public function getMenuByCategory($categoryid)
+    {
         $menus = Menu::all();
         $menuarray = array();
         $result = array();
-    $categories = Category::where('categoryid',$categoryid)->first(); // categoryid
+        $categories = Category::where('categoryid', $categoryid)->first(); // categoryid
 
-    $allsubcategories = SubCategory::where('categoryid',$categories->categoryid)->get();
-    // ->pluck('subcatid');// subcategory.categoryid
+        $allsubcategories = SubCategory::where('categoryid', $categories->categoryid)->get();
+        // ->pluck('subcatid');// subcategory.categoryid
 
-    foreach($menus as $menu){
-        foreach($allsubcategories as $sub){
+        foreach ($menus as $menu) {
+            foreach ($allsubcategories as $sub) {
 
-            if($menu->subcatid == $sub->subcatid){
+                if ($menu->subcatid == $sub->subcatid) {
+                    array_push($result, array(
+                        'image' => asset('/menu/menu_images/' . $menu->image),
+                        'menuID'    => $menu->menuID,
+                        'name'  => $menu->name,
+                        'details' => $menu->details,
+                        'servingsize' => $menu->servingsize,
+                        'price' => $menu->price,
+                        'subcatid' => $menu->subcatid,
 
-            $localFileName  = public_path().'/menu/menu_images/'.$menu->image;
-            $fileData = file_get_contents($localFileName);
-            $ImgfileEncode = base64_encode($fileData);
-
-            array_push($result, array(
-            'image' => $ImgfileEncode,
-            'menuID'    => $menu->menuID,
-            'name'  => $menu->name,
-            'details' => $menu->details,
-            'servingsize' => $menu->servingsize,
-            'price' => $menu->price,
-            'subcatid' => $menu->subcatid,
-
-            ));
-
+                    ));
+                }
             }
         }
+
+
+
+        return response()->json([
+            'allitems' => $result,
+
+        ]);
     }
-
-
-
-      return response()->json([
-          'allitems' => $result,
-
-      ]);
-    }
-
-   
 }

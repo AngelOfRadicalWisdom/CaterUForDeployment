@@ -6,74 +6,67 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use Carbon\Carbon;
+
 use App\AppSettings;
 use App\Employee;
 use App\Session;
+
 class LoginController extends Controller
 {
     public $successStatus = 200;
-    protected $redirectTo= '/login';
-
-    public function __construct(Session $session){
+    protected $redirectTo = '/login';
+    //session initialization
+    public function __construct(Session $session)
+    {
         $this->session = $session;
     }
-    public function landingpage(){
-        if (Auth::check()) {
-            if(Auth::user()->position == 'admin'){
-                return redirect('/dashboard');
-               }
-               else{
-                   return redirect('/employeedashboard');
-               }
-            
-        }
-    return view('create');
+    //landing page
+    public function landingpage()
+    {
+        return view('create');
     }
-    public function username(){
+    //username
+    public function username()
+    {
         return 'username';
     }
-
-    public function login(Request $request){
-        if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
+    // mobile login
+    public function login(Request $request)
+    {
+        if (Auth::attempt(['username' => request('username'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             $success['id'] = $user->empid;
-            $success['name']=$user->empfirstname;
-            $success['username']=$user->username;
-            $success['position']=$user->position;
-           return response()->json(['success' => $success], $this->successStatus);
+            $success['name'] = $user->empfirstname;
+            $success['username'] = $user->username;
+            $success['position'] = $user->position;
+            return response()->json(['success' => $success], $this->successStatus);
+        } else {
+            return response()->json(['error' => 'Unauthorized'], 401);
         }
-        else{
-            return response()->json(['error'=>'Unauthorized'], 401);
-        }
-       
     }
-    public function loginWeb(Request $request){
-       // return back()->withError('error','Error Login')->withInput();
-        if(Auth::attempt(['username' => request('username'), 'password' => request('password')])){
+    //admin login
+    public function loginWeb(Request $request)
+    {
+        if (Auth::attempt(['username' => request('username'), 'password' => request('password')])) {
             $user = Auth::user();
             $success['token'] =  $user->createToken('MyApp')->accessToken;
-         
 
-            if(Auth::user()->position == 'admin'){
-             return redirect('/dashboard')->with('success','Login Success');
+
+            if (Auth::user()->position == 'admin') {
+                return redirect('/dashboard')->with('success', 'Login Success');
+            } else {
+                return redirect('/employeedashboard')->with('success', 'Login Success');
             }
-            else{
-                return redirect('/employeedashboard')->with('success','Login Success');
-            }
+        } else {
+            return redirect('/login')->with('error', 'Username or Password does not match');
         }
-        else{
-            return redirect('/login')->with('error','Username or Password does not match');
-        }
-      
     }
-
-    public function logout(Request $request){
+    //logout function
+    public function logout(Request $request)
+    {
         Auth::logout();
         $request->session()->flush();
-            return redirect()->to(url('/login'));
-     }
-     
-
+        return redirect()->to(url('/login'));
     }
+}

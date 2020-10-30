@@ -13,8 +13,7 @@ class Order extends Model
     public $incrementing= true;
     public $timestamps = false;
 
-   protected $fillable= ['order_id','custid','username','tableno','total','date_ordered'];
-//status/
+   protected $fillable= ['order_id','custid','empid','tableno','total','date_ordered'];
     public function orderDetail(){
         return $this->belongsTo('App\OrderDetail','order_id','order_id');
     }

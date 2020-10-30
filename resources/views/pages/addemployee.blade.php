@@ -4,18 +4,10 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header">
-            <strong>Add New Employee</strong> 
+            <strong>Add New Employee</strong>
         </div>
         <div class="card-body card-block">
             <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-                <!-- {{-- <div class="row form-group">
-                    <div class="col col-md-3">
-                        <label class=" form-control-label">Static</label>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <p class="form-control-static">Username</p>
-                    </div>
-                </div> --}} -->
                 <div class="row form-group">
                     <div class="col col-md-3">
                         <label for="text-input" class=" form-control-label">Menu Name</label>
@@ -92,7 +84,7 @@
                         </select>
                     </div>
                 </div>
-                 {{--<div class="row form-group">
+                {{--<div class="row form-group">
                     <div class="col col-md-3">
                         <label for="selectLg" class=" form-control-label">Subcategory</label>
                     </div>
@@ -324,5 +316,5 @@
                 <i class="fa fa-ban"></i> Reset
             </button>
         </div>
-    </div> --}} 
-@endsection
+    </div> --}}
+    @endsection

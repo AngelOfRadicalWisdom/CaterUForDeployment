@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -11,125 +12,148 @@ use App\Customer;
 use App\Order;
 use App\OrderDetail;
 use App\RestaurantTable;
+use App\Kitchen;
 use DB;
 
 class CustomerController extends Controller
 {
-
-    public function newCustomer(){
+    //mobile new customer
+    public function newCustomer()
+    {
         $allCustomers = Customer::All();
 
         return response()->json([
             'allCustomers' => $allCustomers
         ]);
     }
-    public function addCustomer(Request $request){
+    //mobile saving the added customer
+    public function addCustomer(Request $request)
+    {
 
         Customer::create($request->all());
         return response()->json([
             'message' => 'Customer added'
         ]);
     }
-    public function getReservedCustomer(){
-       $reservedCustomers = DB::table('customers')->where('status','reserved')->get();
+    //mobile reserved customer
+    public function reserveNewCustomer(Request $request)
+    {
+        $newCustomer = new Customer();
+        $newCustomer->phonenumber = $request->phoneNumber;
+        $newCustomer->partysize = $request->partySize;
+        $newCustomer->status = 'reserved';
+        $newCustomer->name = $request->name;
+        $newCustomer->save();
+
+        return response()->json([
+            'message' => 'Customer reserved successfully!'
+        ]);
+    }
+    //mobile retrieve Reserved Customer
+    public function getReservedCustomer()
+    {
+        $reservedCustomers = DB::table('customers')->where('status', 'reserved')->get();
 
         return response()->json([
             'reservedcustomers' => $reservedCustomers
         ]);
     }
-    public function setStatusPresent($custid){
+    //mobile set customer status to present
+    public function setStatusPresent($custid)
+    {
         $customerRecord = Customer::find($custid);
-        $customerRecord->status = "present";
+        $customerRecord->status = "reservationConfirmed";
         $customerRecord->save();
 
         return response()->json([
             'message' => 'Status updated to present'
         ]);
-     }
-     public function setStatusCancelled($custid){
+    }
+    //mobile set customer status to cancelled
+    public function setStatusCancelled($custid)
+    {
         $customerRecord = Customer::find($custid);
-        $customerRecord->status = "cancelled";
+        $customerRecord->status = "reservationCancelled";
         $customerRecord->save();
 
         return response()->json([
             'message' => 'Status updated to cancelled'
         ]);
-     }
-     public function setNotified($custid){
-         $customerRecord = Customer::find($custid);
-         $customerRecord->status = "notified";
-         $customerRecord->save();
-
-         return response()->json([
-            'message' => 'Status updated to notified'
-         ]);
-     }
-     public function getNotified(){
-         $notified = DB::table('customers')->where('status','notified')->get();
-
-         return response()->json([
-             'notified' => $notified
-         ]);
-     }
-    public function requestBillOut($order_id){
-
-        $orderid = Order::find($order_id);
-        return response()->json([
-            'orderid' => $orderid->order_id,
-            'tableno'  => $orderid->tableno
-            //'discount'  => $discount
-            ]);
     }
-    public function placeorder(Request $request){
+    //mobile notify customer
+    public function setNotified($custid)
+    {
+        $customerRecord = Customer::find($custid);
+        $customerRecord->status = "notified";
+        $customerRecord->save();
 
+        return response()->json([
+            'message' => 'Status updated to notified'
+        ]);
+    }
+    //mobile retrieve notifed customer
+    public function getNotified()
+    {
+        $notified = DB::table('customers')->where('status', 'notified')->get();
+
+        return response()->json([
+            'notified' => $notified
+        ]);
+    }
+    //mobile custmoer billout
+    public function requestBillOut(Request $request, $order_id)
+    {
+
+        $detail = Order::find($order_id);
+        $detail->total = $request->total;
+        $detail->status = 'billout';
+        $detail->save();
+        return response()->json([
+            'message' => 'Billout success'
+        ]);
+    }
+    //mobile place order
+    public function placeorder(Request $request, $order_id)
+    {
         $data = $request->all();
         $finalArray = array();
 
-        foreach($data as $key=>$value){
-           
-            array_push($finalArray,array(
-                'order_id'=> $value['order_id'],
-                'orderQty' => $value['orderQty'],
-                'qtyToServe' => $value['qtyToServe'],
-                'menuID' =>  $value['menuID'],
-                'status' => $value['status'],
-                'subtotal' => $value['subtotal'] 
-            ));
-        
+        foreach ($data as $value) {
+            foreach ($value as $key)
+                array_push($finalArray, array(
+                    'order_id' => $key['order_id'],
+                    'orderQty' => $key['orderQty'],
+                    'qtyServed' => $key['orderQty'],
+                    'menuID' =>  $key['menuID'],
+                    'status' => 'waiting',
+                    'subtotal' => $key['subtotal']
+                ));
+        }
+
+        for ($i = 0; $i < $request->orderQty; $i++) {
+            $kitchenorders = new Kitchen();
+            $kitchenorders->orderQty = 1;
+            $kitchenorders->menuID = $request->menuID;
+            $kitchenorders->order_id = $request->order_id;
+            $kitchenorders->status = 'waiting';
+
+            $kitchenorders->save();
         }
         OrderDetail::insert($finalArray);
 
+        DB::table('carts')->where('order_id', $order_id)->delete();
         return response()->json([
-            'message'=> 'Order successful!',
             'final' => $finalArray
         ]);
     }
 
-    public function editOrder($order_id){
-        $allMenus = Menu::all();
-        $allOrders = OrderDetail::find($order_id);
-
-        return response()->json([
-            'allMenus' => $allMenus,
-            'allOrders' => $allOrders
-        ]);
-    }
-
-    public function getPhonenumber($custid){
-        $c = DB::table('customers')->where('custid',$custid)->get();
+    //mobile retrieve customer phone number
+    public function getPhonenumber($custid)
+    {
+        $c = DB::table('customers')->where('custid', $custid)->get();
 
         return response()->json([
             'phonenum' =>  $c
         ]);
     }
-    public function callWaiter($tableno){
-        $table = RestaurantTable::find($tableno);
-        $table->concern = 1;
-        $table->save();
-
-        return response()->json([
-            'message' => 'Your concern has been sent!'
-        ]);
-    }
-
 }

@@ -212,31 +212,19 @@ var yearlySales = document.getElementById("yearlysales");
        $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-      //  'Content-type': 'text/html;charset=ISO-8859-1'
     }
 });
 $.ajax({
                 url: '/salesUserDefined',
-              //  enctype: 'multipart/form-data',
+              
                processData: false,
                 contentType: false,
                 dataType: 'JSON',
                 cache: false,
-        //         data:{
-        //          // "_token": "{{ csrf_token() }}",
-        //         'promoid': promoid,
-        //         'details': details,
-        //         'price': price,
-        //         'servingsize': servingsize,
-        //         'image': image,
-        //         'menus': allMenus,
-        // },
+     
                 data:formData,
                 type: 'POST',
                 success: function(Rdata) {
-                    // var yearMonth=Rdata["year"];
-                    // var sales=Rdata["sales"];
-                //   console.log(sales);
                 if(Rdata['status']==500){
                     swalWithBootstrapButtons.fire({
       title: 'OOPPSS!',
