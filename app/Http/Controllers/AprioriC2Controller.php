@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AprioriProcessEvent;
 use App\Helper\AprioriNew;
 use Illuminate\Support\Facades\Auth;
 use App\Menu;
@@ -71,76 +72,18 @@ class AprioriC2Controller extends Controller
         return back()->withError("Sorry Something Went Wrong")->withInput();
     }
     }
-    //generating recommendations function
-    public function GenerateRecommendations()
-    {
-        try{
-        $samples = $this->getTransactions();
-        $sc = $this->getSupportandConfidence();
-        if (count($sc) == 0) {
-            $support = '';
-            $confidence = '';
-            $support = 75 / 100;
-            $confidence = 75 / 100;
-            $apriori = new AprioriNew($samples, $support, $confidence);
-            $pairs = $apriori->apriori();
-        } else {
-            $support = '';
-            $confidence = '';
-            foreach ($sc as $row) {
-                $support = $row->support / 100;
-                $confidence = $row->confidence / 100;
-            }
-            $apriori = new AprioriNew($samples, $support, $confidence);
-            $pairs = $apriori->apriori();
-        }
-        return $pairs;
-    }
-    catch (\PDOException $e) {
-        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
-    }
-    }
     //adding the generated pairs to database
     public function addPairs()
     {
         try{
-        $pairs = $this->GenerateRecommendations();
-        $checkDB = DB::table('apriori')->get();
-        if ($checkDB == NULL) {
-            $groupNumber = 0;
-            for ($i = 2; $i <= count($pairs); $i++) {
-                foreach ($pairs[$i] as $group_number) {
-                    ++$groupNumber;
-                    foreach ($group_number as $menu_id) {
-                        $row = array('menuID' => $menu_id, 'groupNumber' => $groupNumber);
-                        $this->addBundleRow($row);
-                    }
-                }
-            }
-        } else {
-            DB::table('apriori')->truncate();
-            $groupNumber = 0;
-            for ($i = 2; $i <= count($pairs); $i++) {
-                foreach ($pairs[$i] as $group_number) {
-                    ++$groupNumber;
-                    foreach ($group_number as $menu_id) {
-                        $row = array('menuID' => $menu_id, 'groupNumber' => $groupNumber);
-                        $this->addBundleRow($row);
-                    }
-                }
-            }
-        }
-        return redirect('/generateapr');
+        event(new AprioriProcessEvent());
+        return redirect('/dashboard')->with('success', 'Your recommendations are being processed');;
     }
     catch (\PDOException $e) {
         return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
     }
     }
-    //insert function 
-    private function addBundleRow($row)
-    {
-        DB::table('apriori')->insert($row);
-    }
+   
     //getting all of the transactions
     private function getTransactions()
     {
