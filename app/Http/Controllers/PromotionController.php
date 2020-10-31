@@ -601,4 +601,17 @@ for($i=0;$i<count($allMenus);$i++) {
        // $data[0]->bundleid => $data[0]->price
       );
     }
+
+    public function getBundleDetails($bundleId){
+      $data = DB::table('bundle_details')
+      ->select('menus.name', 'bundle_details.qty')
+      ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
+      ->join('menus','bundle_details.menuID','=','menus.menuID')
+      ->where('bundle_details.bundleid',$bundleId)
+      ->get();
+
+      return response()->json([
+        'response' => $data
+      ]);
+    }
 }

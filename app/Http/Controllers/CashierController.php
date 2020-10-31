@@ -15,19 +15,19 @@ class CashierController extends Controller
        $orders = DB::table('order_details')
        ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
        ->join('orders','order_details.order_id','=','orders.order_id')
-       ->select('order_details.*','menus.name','menus.price')
-       ->where('orders.status','=','billout')
+       ->select('order_details.*','menus.name','menus.price','orders.total', 'orders.cashTender', 'orders.change')
+       ->where('order_details.bundleid','=',null)
        ->where('order_details.order_id',$order_id)
        ->get();
        
                $bundleItems = DB::table('order_details')
-            //    ->select('order_details.qtyServed','order_details.orderQty as orderQty','bundles.name as name',  'bundles.price','order_details.id')
+               ->select('order_details.qtyServed','order_details.orderQty as orderQty', 'menus.name as menuName',
+               'bundles.name as bundlename', 'bundle_details.qty','bundles.bundleid', 'bundles.price','order_details.id','order_details.subtotal as bundle_subtotal')
                ->join('bundles', 'order_details.bundleid', '=', 'bundles.bundleid')
-            //    ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
                ->join('orders','order_details.order_id','=','orders.order_id')
-            //    ->join('menus', 'menus.menuID','=','bundle_details.menuID')
+               ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
+               ->join('menus', 'menus.menuID','=','bundle_details.menuID')
                ->where('order_details.bundleid','!=',null)
-               ->where('orders.status','=','billout')
                ->where('order_details.order_id',$order_id)
                ->get();
    
@@ -40,7 +40,7 @@ class CashierController extends Controller
            return response()->json([
                'data' => $items
            ]);
-    }
+}
  
     public function updateTotal($order_id,Request $request){
 
