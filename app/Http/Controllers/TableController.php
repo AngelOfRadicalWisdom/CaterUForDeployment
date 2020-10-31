@@ -120,7 +120,7 @@ public function removeTable($tableno){
         }
     }
 
-    public function setTableStatusOccupied(Request $request){
+    public function setTableOccupied(Request $request){
         $table = RestaurantTable::find($request->tableno);
         if($table->status =='Available'){
             $table->status = 'Occupied';
@@ -142,15 +142,25 @@ public function removeTable($tableno){
             'message' => 'Table is set to available'
         ]);
     }
-    public function tableTransfer($order_id,Request $request){
-        $orders=Order::find($order_id);
+    public function tableTransfer($tableno,Request $request){
         $table=RestaurantTable::find($request->tableno);
+       
+        DB::table('orders')
+        ->where('tableno',$tableno)
+        ->where('status','ordering')
+        ->update(['tableno' => $request->tableno]);
+        $table->status = 'Occupied';
+        $table->save();
 
-        if($table->tableno == "Available"){
-            DB::table('orders')->where('order_id',$order_id)
-            ->update(['tableno' => $table]);
-            }
-        }
+
+        $transferTo=RestaurantTable::find($tableno);
+        $transferTo->status = "Available";
+        $transferTo->save();
+       
+        return response()->json([
+            'message' => 'updated'
+        ]);
+    }
 
     public function clearTable(Request $request){
         $table = RestaurantTable::find($request->tableno);

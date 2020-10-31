@@ -10,19 +10,6 @@ use DB;
 class CashierController extends Controller
 {
     public function getbilldetail($order_id){
-    //     $order_records = DB::table('order_details')
-    //                     ->select('order_details.status as odStatus','order_details.id',
-    //                     'menus.menuID','menus.name','orders.order_id','orders.tableno',
-    //                     'orders.custid','orders.tableno','order_details.orderQty',
-    //                     'order_details.subtotal','menus.price','orders.status as stats','orders.total')
-    //                     ->join('orders','order_details.order_id','=','orders.order_id')
-    //                     ->join('menus','menus.menuID','=','order_details.menuID')
-    //                     ->where('orders.tableno',$tableno)
-    //                     ->get();
-
-    //   return response()->json([
-    //       'records' => $order_records
-    //     ]);
     $bundles = array();
     $items = array();
        $orders = DB::table('order_details')
