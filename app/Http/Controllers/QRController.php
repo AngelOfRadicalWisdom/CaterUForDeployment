@@ -60,7 +60,7 @@ class QRController extends Controller
     public function readQR($id)
     {
         $employee_info = [];
-        $ids = DB::table('sessions')->where('user_id', $id)->count();
+        $ids = DB::table('employeetime')->where('user_id',$id)->count();
 
         if ($ids != 0) {
             $employee = Employee::find($id);

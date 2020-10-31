@@ -157,9 +157,8 @@ class TableController extends BaseController
             ]);
         }
     }
-    //mobile set table status to Occupied
-    public function setTableStatusOccupied(Request $request)
-    {
+
+    public function setTableOccupied(Request $request){
         $table = RestaurantTable::find($request->tableno);
         if ($table->status == 'Available') {
             $table->status = 'Occupied';
@@ -182,20 +181,27 @@ class TableController extends BaseController
             'message' => 'Table is set to available'
         ]);
     }
-    //mobile table transfer
-    public function tableTransfer($order_id, Request $request)
-    {
-        $orders = Order::find($order_id);
-        $table = RestaurantTable::find($request->tableno);
+    public function tableTransfer($tableno,Request $request){
+        $table=RestaurantTable::find($request->tableno);
+       
+        DB::table('orders')
+        ->where('tableno',$tableno)
+        ->where('status','ordering')
+        ->update(['tableno' => $request->tableno]);
+        $table->status = 'Occupied';
+        $table->save();
 
-        if ($table->tableno == "Available") {
-            DB::table('orders')->where('order_id', $order_id)
-                ->update(['tableno' => $table]);
-        }
+
+        $transferTo=RestaurantTable::find($tableno);
+        $transferTo->status = "Available";
+        $transferTo->save();
+       
+        return response()->json([
+            'message' => 'updated'
+        ]);
     }
-    //mobile clear table
-    public function clearTable(Request $request)
-    {
+
+    public function clearTable(Request $request){
         $table = RestaurantTable::find($request->tableno);
         $table->status = 'Available';
         $table->save();
@@ -222,30 +228,15 @@ class TableController extends BaseController
 
 
 
-        return response()->json([
-            'message' => $message
-        ]);
-    }
-    //mobile get device table no
-    public function getDeviceTableNo($deviceuid)
-    {
-        $t;
-        $table = DB::table('tables')
-            ->where('deviceuid', $deviceuid)->get();
 
-        foreach ($table as $tableno) {
-            //array_push($t, array(
-            $t = $tableno->tableno;
-            // ));
+            return response()->json([
+                'message' => $message
+            ]);
         }
-        return response()->json([
-            'tableno' => $t
-        ]);
-    }
-    //mobile get table status
-    public function getTableStatus($tableno)
-    {
-        $status = '';
+
+    
+    public function getTableStatus($tableno){
+        $status ='';
         $table = RestaurantTable::find($tableno);
         if ($table->status == 'Available') {
             $status = 'Available';
@@ -265,9 +256,25 @@ class TableController extends BaseController
             'tables' => $tables
         ]);
     }
-    public function getOrderByTableNo($tableno)
-    {
 
+    
+    // public function getOrderByTableNo($tableno){
+        
+    //     $orders = DB::table('order_details')
+    //         ->select('order_details.id','orders.order_id','name','orderQty','order_details.status','orders.tableno','order_details.date_ordered','order_details.status')
+    //         ->join('orders', 'orders.order_id', '=', 'order_details.order_id')
+    //         ->join('menus','order_details.menuID','=','menus.menuID')
+    //         ->where('orders.tableno', $tableno)
+    //         ->where('order_details.status','!=','served')
+    //         ->get(); 
+            
+    //         return response()->json([
+    //             'details' => $orders
+    //     ]);
+            
+    // }
+    public function getOrderByTableNo($tableno){
+        
         $orders = DB::table('kitchenrecords')
             ->select(
                 'menus.name',

@@ -120,6 +120,10 @@ class AprioriC2Controller extends Controller
             ->selectRaw('group_concat(menus.name) as name')
             ->selectRaw('group_concat(menus.menuID) as menuID')
             ->selectRaw('group_concat(menus.image) as image')
+            ->selectRaw('group_concat(menus.details) as details')
+            ->selectRaw('group_concat(menus.servingsize) as servingsize')
+            ->selectRaw('group_concat(menus.price) as price')
+            ->selectRaw('group_concat(menus.subcatid) as subcatid')
             ->groupBy('apriori.groupNumber')
             ->havingRaw('menuID', [$menuId])
             ->get();
@@ -150,7 +154,11 @@ class AprioriC2Controller extends Controller
                 array_push($data, array(
                     'name' => $a->name,
                     'menuID' => $a->menuID,
-                    'image' => asset('/menu/menu_images/' . $a->image),
+                    'image' => asset('/menu/menu_images/'.$a->image),
+                    'details' => $a->details,
+                    'price'=> $a->price,
+                    'servingsize' => $a->servingsize,
+                    'subcatid'=> $a->subcatid
                 ));
             }
         }

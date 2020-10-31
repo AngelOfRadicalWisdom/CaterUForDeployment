@@ -12,5 +12,5 @@ class BundleMenu extends Model
     protected $primaryKey = 'bundleid';
     public $incrementing= false;
     public $timestamps = false;
-    protected $fillable = array('bundleid','price','servingsize','description','image');
+    protected $fillable = array('bundleid','price','servingsize','name','details','image');
 }

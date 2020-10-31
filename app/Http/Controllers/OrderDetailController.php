@@ -13,36 +13,40 @@ use DB;
 
 class OrderDetailController extends BaseController
 {
+ 
+    public function orderList($order_id){ 
+        $bundles = array();
+ $items = array();
+    $orders = DB::table('order_details')
+    ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
+    ->select('order_details.*','menus.name','menus.price')
+    ->where('order_details.bundleid','=',null)
+    ->where('order_details.order_id',$order_id)
+    ->get();
+    
+            $bundleItems = DB::table('order_details')
+            ->select('order_details.qtyServed','order_details.orderQty as orderQty', 'menus.name as menuName','bundles.name as bundlename', 'bundle_details.qty','bundles.bundleid', 'bundles.price','order_details.id')
+            ->join('bundles', 'order_details.bundleid', '=', 'bundles.bundleid')
+            ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
+            ->join('menus', 'menus.menuID','=','bundle_details.menuID')
+            ->where('order_details.bundleid','!=',null)
+            ->where('order_details.order_id',$order_id)
+            ->get();
 
-    public function orderList($order_id)
-    {
-        $orders = Order::find($order_id);
-        $orderDetails = OrderDetail::all();
-        $orderlist = array();
-        foreach ($orderDetails as $detail) {
-            foreach ($detail->menu as $menu) {
-                if ($detail->order_id == $orders->order_id) {
-                    array_push($orderlist, array(
-                        'tableno' => $orders->tableno,
-                        'detail_id' => $detail->id,
-                        'order_id' => $detail->order_id,
-                        'orderQty' => $detail->orderQty,
-                        'menuID' =>  $detail->menuID,
-                        'status'    => $detail->status,
-                        'menuName' => $menu->name,
-                        'subtotal' => $detail->subtotal,
-                        'qtyServed' => $detail->qtyServed
-                    ));
-                }
-            }
+        foreach($orders as $item){
+            array_push($items, $item);
+        }
+        foreach($bundleItems as $item){
+            array_push($items, $item);
         }
         return response()->json([
-            'list' => $orderlist
+            'data' => $items
         ]);
     }
-    public function getTotal($order_id)
-    {
-        $orderDetails = OrderDetail::where('order_id', $order_id)->get();
+
+    
+    public function getTotal($order_id){
+        $orderDetails = OrderDetail::where('order_id',$order_id)->get();
         $total = 0;
         foreach ($orderDetails as $order) {
             $total += $order->subtotal;

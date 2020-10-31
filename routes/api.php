@@ -26,6 +26,7 @@ Route::middleware('cors:api')->post('/removeitemfromcart/{id}','TemporaryTableCo
 Route::middleware('cors:api')->post('/updatequantity/{id}','TemporaryTableController@updateQty');
 Route::middleware('cors:api')->get('/getItems/{orderId}','TemporaryTableController@getCartItems');
 Route::middleware('cors:api')->post('/settableavailable/{tableno}','TableController@setTableAvailable');
+Route::middleware('cors:api')->post('/settableoccupied/{tableno}','TableController@setTableOccupied');
 Route::middleware('cors:api')->get('/servingStatusByTableNo/{tableno}','TemporaryTableController@servingStatusByTableNo');
 
 
@@ -47,7 +48,7 @@ Route::middleware('cors:api')->get('/orders/getAllCompleteDrinks','TemporaryTabl
 Route::middleware('cors:api')->get('/table/tablelist','TableController@tableList');
 Route::middleware('cors:api')->get('/table/getAvailableTable','TableController@getAvailableTable');
 Route::middleware('cors:api')->post('/reserveNewCustomer','CustomerController@reserveNewCustomer');
-
+Route::middleware('cors:api')->post('/assignTable/{custid}','CustomerController@assignTable');
 //----------------- CUSTOMER O R D E R R O U T E S -------------------//
 Route::middleware('cors:api')->get('/menu/list', 'MenuController@ionListMenus');
 Route::middleware('cors:api')->post('/order/placeorder/{order_id}','CustomerController@placeorder');
@@ -60,7 +61,7 @@ Route::middleware('cors:api')->post('/order/billout/{order_id}','CustomerControl
 //---------------W A I T E R------------------//
 Route::middleware('cors:api')->get('/order/drinklist','TemporaryTableController@getDrinkWaitingOrders');
 Route::middleware('cors:api')->get('/table/occupied','TableController@getOccupiedTable');
-
+Route::middleware('cors:api')->post('/table/transfer/{tableno}','TableController@tableTransfer');
 Route::middleware('cors:api')->get('/order/begintransaction/{tableno}','TableController@beginTransaction');
 Route::middleware('cors:api')->get('/cashier/billOutList','CashierController@getBillOutList');// Show all billout
 Route::middleware('cors:api')->get('/cashier/getbillinfo/{tableNo}','CashierController@getbilldetail');//show details per table//
@@ -71,6 +72,7 @@ Route::middleware('cors:api')->get('/menu/categorylist','CategoryController@apiC
 Route::middleware('cors:api')->get('/menu/subcategorylist','CategoryController@apiSubCategoryList');
 Route::middleware('cors:api')->get('/menu/getmenubycategory/{categoryid}','MenuController@getMenuByCategory');
 Route::middleware('cors:api')->get('/menu/getBundleMenus','PromotionController@getAllBundleMenus');
+Route::middleware('cors:api')->get('/menu/bundle/getbundledetails/{bundleId}','PromotionController@getBundleDetails');
 //APRIORI
 Route::middleware('cors:api')->get('/apriori/getpairs/{menuId}','AprioriC2Controller@sendApriori');
 
@@ -84,6 +86,8 @@ Route::middleware('cors:api')->get('/getnotifiedcustomer','CustomerController@ge
 
 Route::middleware('cors:api')->get('/getphonenumber/{custid}','CustomerController@getPhonenumber');
 Route::middleware('cord:api')->post('/status/notified/{custid}','CustomerController@setNotified');
+
+
 
 //RATING
 

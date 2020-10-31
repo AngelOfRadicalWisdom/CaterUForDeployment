@@ -12,5 +12,5 @@ class Cart extends Model
     public $incrementing= true;
     public $timestamps = false;
 
-    protected $fillable = ['id','order_id','menuID','qty'];
+    protected $fillable = ['id','order_id','menuID','qty','bundleid'];
 }

@@ -618,7 +618,42 @@ try{
       $row->bundleid = explode(",", $row->bundleid)[0];
       $row->bundlename = explode(",", $row->bundlename)[0];
 
-      $row->price = explode(",", $row->price)[0];
+    public function getAllBundleMenus(){
+      $send = [];
+      $rows = [];
+      
+      $promotionDetails=DB::table('bundle_details')
+        ->selectRaw('group_concat(menus.menuID) as menuID')
+        ->selectRaw('group_concat(menus.name) as name')
+        ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
+        ->selectRaw('group_concat(bundles.name )as bundlename')  
+        ->selectRaw('group_concat(bundles.price) as price') 
+        ->selectRaw('group_concat(bundles.servingsize) as servingsize') 
+        ->selectRaw('group_concat(bundles.image) as image')
+        ->join('menus','menus.menuID','=','bundle_details.menuID')
+        ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
+        ->groupBy('bundle_details.bundleid')
+        ->get();
+        foreach($promotionDetails as $row){
+          $row->bundleid=explode(",",$row->bundleid)[0];
+          $row->bundlename=explode(",",$row->bundlename)[0];
+          $row->menuID = explode(",",$row->menuID);
+          $row->price=explode(",",$row->price)[0];
+          $row->servingsize=explode(",",$row->servingsize)[0];
+          $row->name=explode(",",$row->name);
+          array_push($send,array(
+            'bundleid' => $row->bundleid,
+            'name' => $row->name,
+            'bundlename' => $row->bundlename,
+            'menuID' => $row->menuID,
+            'price' => $row->price,
+            'servingsize' => $row->servingsize
+          ));
+        }
+         return response()->json([
+            'menus'=>$send
+         ]);
+         
 
       $row->servingsize = explode(",", $row->servingsize)[0];
       $row->name = explode(",", $row->name);
@@ -648,10 +683,17 @@ try{
         $d->price
       );
     }
-    return response()->json(
 
-      $details
+    public function getBundleDetails($bundleId){
+      $data = DB::table('bundle_details')
+      ->select('menus.name', 'bundle_details.qty')
+      ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
+      ->join('menus','bundle_details.menuID','=','menus.menuID')
+      ->where('bundle_details.bundleid',$bundleId)
+      ->get();
 
-    );
-  }
+      return response()->json([
+        'response' => $data
+      ]);
+    }
 }
