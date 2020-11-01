@@ -18,7 +18,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=> 2,
                 'name' => 'Bundle1',
                 'details'=>'bundle 1',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 1'
             ],
             [
                 'bundleid'  => 2,
@@ -26,7 +27,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>3,
                 'name' => 'Bundle2',
                 'details'=>'bundle 2',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 2'
             ],
             [
                 'bundleid'  => 3,
@@ -34,7 +36,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>4,
                 'name' => 'Bundle3',
                 'details'=>'bundle 3',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 3'
             ],
             [
                 'bundleid'  => 4,
@@ -42,7 +45,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>6,
                 'name' => 'Bundle4',
                 'details'=>'bundle 4',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 4'
             ],
             [
                 'bundleid'  => 5,
@@ -50,7 +54,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>5,
                 'name' => 'Bundle5',
                 'details'=>'bundle 5',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 5'
             ],
             [
                 'bundleid'  => 6,
@@ -58,7 +63,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>3,
                 'name' => 'Bundle6',
                 'details'=>'bundle 6',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 6'
             ],
             [
                 'bundleid'  => 7,
@@ -66,7 +72,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>4,
                 'name' => 'Bundle7',
                 'details'=>'bundle 7',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 7'
             ],
             [
                 'bundleid'  => 8,
@@ -74,7 +81,8 @@ class BundleMenuSeeder extends Seeder
                 'servingsize'=>5,
                 'name' => 'Bundle8',
                 'details'=>'bundle 8',
-                'image'=>'CaterU.png'
+                'image'=>'CaterU.png',
+                'name'=>'bundle 8'
             ],
         ];
         DB::table('bundles')->insert($bundleMenu);

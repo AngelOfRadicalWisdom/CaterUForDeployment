@@ -12,11 +12,9 @@ use App\Menu;
 use App\RestaurantTable;
 use App\Customer;
 use DB;
-
 class OrderController extends BaseController
 {
-    public function newOrder($id)
-    {
+    public function newOrder($id){
         $allOrders = OrderDetail::find($id);
         $allMenus = Menu::all();
         $allSubCategories = SubCategory::all();
@@ -29,21 +27,19 @@ class OrderController extends BaseController
             'allCategories' => $allCategories
         ]);
     }
-    public function paidOrder()
-    {
+    public function paidOrder(){
         $menus = Menu::all();
         $details = OrderDetail::whereDate('date_ordered', '>=', Carbon::today()->toDateString());
 
-        $paidOrders = Order::where('status', 'Paid')->get();
-        // return view('admin.report.orderlist', compact('paidOrders','menus','details'));
+        $paidOrders= Order::where('status','Paid')->get();
+       // return view('admin.report.orderlist', compact('paidOrders','menus','details'));
 
-        return response()->json([
-            'details' => $details
-        ]);
+       return response()->json([
+           'details' => $details
+       ]);
     }
 
-    public function confirmPayment(Request $request)
-    {
+    public function confirmPayment(Request $request){
         $orderItem = Order::find($request->order_id);
         $orderItem->status = 'billout';
         $orderItem->save();
@@ -52,11 +48,14 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function successfulTransaction()
-    {
+    public function successfulTransaction(){
         $details = OrderDetail::whereDate('date_ordered', '>=', Carbon::today()->toDateString());
 
-        $paidOrders = Order::where('status', 'Paid')->get();
-        return view('admin.report.sales', compact('paidOrders', 'details'));
+        $paidOrders= Order::where('status','Paid')->get();
+        return view('admin.report.sales', compact('paidOrders','details'));
+
     }
+
+    
+
 }

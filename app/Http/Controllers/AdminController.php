@@ -156,29 +156,24 @@ class AdminController extends Controller
     //setting the support and confidence 
     public function setApriori()
     {
-        try{
         $user = Auth::user();
         $userFname = $user->empfirstname;
         $userLname = $user->emplastname;
         $userImage = $user->image;
         return view('pages.apriorisettings', compact('userImage', 'userFname', 'userLname'));
-        }
-        catch (\PDOException $e) {
-            return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
-        }
+        
     }
     //saving the user defined support and confidence
     public function saveAprioriSettings(Request $request)
     {
         //exception part
         try {
-            $apriori = $this->customExceptions->AprioriException($request);
+             $this->customExceptions->AprioriException($request);
         } catch (\PDOException $e) {
             return back()->withError($e->getMessage())->withInput();
         }
-        try{
         $aprSettings = new AprioriSettings();
-        $checkdb = DB::table('bundle_menus')->get();
+        $checkdb = DB::table('aprioriSettings')->get();
         //if null save directly
         if ($checkdb == NULL) {
             $aprSettings->support = $request->support;
@@ -193,9 +188,5 @@ class AdminController extends Controller
         $aprSettings->save();
         return redirect('/dashboard')->with('success', ' Support and Confidence Successfully updated');
     }
-    catch (\PDOException $e) {
-        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
-    }
-}
 
 }

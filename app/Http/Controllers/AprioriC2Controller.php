@@ -109,11 +109,11 @@ class AprioriC2Controller extends Controller
         $sc = DB::table('aprioriSettings')->get();
         return $sc;
     }
-    //sending the recommendations to the mobile side
-    public function sendApriori($menuId)
-    {
-        $menu = [];
-        $groupedData = [];
+   //sending the recommendations to the mobile side
+   public function sendApriori($menuId)
+   {
+       $menu = [];
+       $groupedData = [];
 
         $transactions = DB::table('apriori')
             ->join('menus', 'apriori.menuID', '=', 'menus.menuID')
@@ -129,26 +129,26 @@ class AprioriC2Controller extends Controller
             ->get();
 
 
-        foreach ($transactions as $row) {
-            $menu[] = explode(",", $row->menuID);
-        }
-        for ($index = 0; $index < count($menu); $index++) {
-            foreach ($menu[$index] as $Smenus) {
-                if ($Smenus != $menuId) {
-                    $groupedData[] = $Smenus;
-                }
-            }
-        }
-        $final = array_unique($groupedData);
-        $groupedData = [];
-        $data;
-        foreach ($final as $row) {
-            $data = DB::table('menus')->where('menuID', $row)->get();
-            array_push($groupedData, $row);
-        }
-        $data = [];
-        for ($i = 0; $i < count($groupedData); $i++) {
-            $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+       foreach ($transactions as $row) {
+           $menu[] = explode(",", $row->menuID);
+       }
+       for ($index = 0; $index < count($menu); $index++) {
+           foreach ($menu[$index] as $Smenus) {
+               if ($Smenus != $menuId) {
+                   $groupedData[] = $Smenus;
+               }
+           }
+       }
+       $final = array_unique($groupedData);
+       $groupedData = [];
+       $data;
+       foreach ($final as $row) {
+           $data = DB::table('menus')->where('menuID', $row)->get();
+           array_push($groupedData, $row);
+       }
+       $data = [];
+       for ($i = 0; $i < count($groupedData); $i++) {
+           $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
 
             foreach ($t as $a) {
                 array_push($data, array(
@@ -163,6 +163,6 @@ class AprioriC2Controller extends Controller
             }
         }
 
-        return response()->json(['menu' => $data]);
-    }
+       return response()->json(['menu' => $data]);
+   }
 }
