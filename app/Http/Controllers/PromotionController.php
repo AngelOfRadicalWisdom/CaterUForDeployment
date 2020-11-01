@@ -153,15 +153,10 @@ class PromotionController extends Controller
   {
     DB::table('bundle_details')->insert($row);
   }
-  //Update function
-  // private function EditPromotionsRow($row, $id)
-  // {
-  //   DB::table('bundle_details')->where('bundleid', $id)->update($row);
-  // }
-
   //retrieve promo lists
-  public function promoList()
+  public function promotionsList()
   {
+    try{
     $user = Auth::user();
     $userFname = $user->empfirstname;
     $userLname = $user->emplastname;
@@ -170,6 +165,10 @@ class PromotionController extends Controller
     $promotionDetails = BundleDetails::all();
     $allMenus = Menu::all();
     return view('admin.promo.promotionslist', compact('userImage', 'userFname', 'userLname', 'promotion', 'allMenus', 'promotionDetails'));
+    }
+    catch (\PDOException $e) {
+      return back()->withError("Sorry Something Went Wrong")->withInput();
+  }
   }
   //edit promo
   public function editPromo(Request $request, $bundleid)
@@ -258,8 +257,7 @@ class PromotionController extends Controller
     $suggestedMenus = DB::table('apriori')
       ->join('menus', 'apriori.menuID', '=', 'menus.menuID')
       ->selectRaw('group_concat(menus.menuID) as menuID')
-      //->select('group_concat(bundle_menus.menuID)','menus.name')
-      //   ->select('bundle_menus.bundleGroup','menus.name','bundle_menus.bundleGroup')
+     
       ->groupBy('apriori.groupNumber')
       ->get();
     $result = [];
@@ -524,73 +522,42 @@ try{
     return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
 }
   }
-  //mobile get Promo??
-  public function getPromo()
-  {
-    $promotionDetails = DB::table('bundle_details')
-      ->selectRaw('group_concat(bundle_details.menuID) as menuID')
-      ->selectRaw('group_concat(bundle_details.name) as name')
-      ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
-      ->groupBy('bundle_details.bundleid')
-      ->get();
-    foreach ($promotionDetails as $row) {
-      $menu[] = explode(",", $row->menuID);
-      $name[] = explode(",", $row->name);
-      $bundleid[] = explode(",", $row->bundleid);
-    }
-    return response()->json([
-      'menu' => $menu,
-      'name' => $name,
-      'bundleid' => $bundleid
-
-    ]);
-  }
-  //moobille ???
-  public function getFilter()
-  {
-    $ItemSets = DB::table('apriori')
-      ->selectRaw('COUNT(menuID) as count')
-      ->groupBy('groupNumber')
-      ->distinct()
-      ->get();
-  }
-  //mobile get promotions
-  public function getAllBundleMenus()
-  {
+  public function getAllBundleMenus(){
     $send = [];
     $rows = [];
-
-    $promotionDetails = DB::table('bundle_details')
+    
+    $promotionDetails=DB::table('bundle_details')
       ->selectRaw('group_concat(menus.menuID) as menuID')
       ->selectRaw('group_concat(menus.name) as name')
       ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
-      ->selectRaw('group_concat(bundle_menus.name )as bundlename')
-      ->selectRaw('group_concat(bundle_menus.price) as price')
-      ->selectRaw('group_concat(bundle_menus.servingsize) as servingsize')
-      ->selectRaw('group_concat(bundle_menus.image) as image')
-      ->join('menus', 'menus.menuID', '=', 'bundle_details.menuID')
-      ->join('bundle_menus', 'bundle_details.bundleid', '=', 'bundle_menus.bundleid')
+      ->selectRaw('group_concat(bundles.name )as bundlename')  
+      ->selectRaw('group_concat(bundles.price) as price') 
+      ->selectRaw('group_concat(bundles.servingsize) as servingsize') 
+      ->selectRaw('group_concat(bundles.image) as image')
+      ->join('menus','menus.menuID','=','bundle_details.menuID')
+      ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
       ->groupBy('bundle_details.bundleid')
       ->get();
-    foreach ($promotionDetails as $row) {
-      $row->bundleid = explode(",", $row->bundleid)[0];
-      $row->bundlename = explode(",", $row->bundlename)[0];
-      $row->menuID = explode(",", $row->menuID);
-      $row->price = explode(",", $row->price)[0];
-      $row->servingsize = explode(",", $row->servingsize)[0];
-      $row->name = explode(",", $row->name);
-      array_push($send, array(
-        'bundleid' => $row->bundleid,
-        'name' => $row->name,
-        'bundlename' => $row->bundlename,
-        'menuID' => $row->menuID,
-        'price' => $row->price,
-        'servingsize' => $row->servingsize
-      ));
-    }
-    return response()->json([
-      'menus' => $send
-    ]);
+      foreach($promotionDetails as $row){
+        $row->bundleid=explode(",",$row->bundleid)[0];
+        $row->bundlename=explode(",",$row->bundlename)[0];
+        $row->menuID = explode(",",$row->menuID);
+        $row->price=explode(",",$row->price)[0];
+        $row->servingsize=explode(",",$row->servingsize)[0];
+        $row->name=explode(",",$row->name);
+        array_push($send,array(
+          'bundleid' => $row->bundleid,
+          'name' => $row->name,
+          'bundlename' => $row->bundlename,
+          'menuID' => $row->menuID,
+          'price' => $row->price,
+          'servingsize' => $row->servingsize
+        ));
+      }
+       return response()->json([
+          'menus'=>$send
+       ]);
+       
   }
   //mobile get promo by bundle id
   public function getPromoByBundleID($bundleid)
@@ -602,19 +569,17 @@ try{
       ->selectRaw('group_concat(bundle_details.menuID) as menuID')
       ->selectRaw('group_concat(bundle_details.name) as name')
       ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
-      ->selectRaw('group_concat(bundle_menus.details )as bundlename')
-      ->selectRaw('group_concat(bundle_menus.price) as price')
-      ->selectRaw('group_concat(bundle_menus.servingsize) as servingsize')
-      ->join('bundle_menus', 'bundle_details.bundleid', '=', 'bundle_menus.bundleid')
+      ->selectRaw('group_concat(bundles.details )as bundlename')
+      ->selectRaw('group_concat(bundles.price) as price')
+      ->selectRaw('group_concat(bundles.servingsize) as servingsize')
+      ->join('bundles', 'bundle_details.bundleid', '=', 'bundles.bundleid')
       ->having('bundleid', $bundleid)
       ->groupBy('bundle_details.bundleid')
       ->get();
-    foreach ($promotionDetails as $row) {
+      
+      foreach ($promotionDetails as $row) {
       $row->bundleid = explode(",", $row->bundleid)[0];
       $row->bundlename = explode(",", $row->bundlename)[0];
-
-      $row->price = explode(",", $row->price)[0];
-
       $row->servingsize = explode(",", $row->servingsize)[0];
       $row->name = explode(",", $row->name);
       array_push($send, array(
@@ -627,26 +592,20 @@ try{
       ));
     }
     return response()->json([
-      'menus' => $send
-    ]);
+          'menus' => $send
+        ]);
   }
-  //mobile get bundle price through bundle id
-  public function getBundlePriceById()
-  {
-    $details = [0];
-    $data = DB::table('bundle_menus')
-      ->select('bundleid', 'price')
+  
+    public function getBundleDetails($bundleId){
+      $data = DB::table('bundle_details')
+      ->select('menus.name', 'bundle_details.qty')
+      ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
+      ->join('menus','bundle_details.menuID','=','menus.menuID')
+      ->where('bundle_details.bundleid',$bundleId)
       ->get();
-    foreach ($data as $d) {
-      array_push(
-        $details,
-        $d->price
-      );
+
+      return response()->json([
+        'response' => $data
+      ]);
     }
-    return response()->json(
-
-      $details
-
-    );
-  }
 }
