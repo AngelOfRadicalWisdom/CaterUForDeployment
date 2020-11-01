@@ -173,7 +173,7 @@ class AdminController extends Controller
             return back()->withError($e->getMessage())->withInput();
         }
         $aprSettings = new AprioriSettings();
-        $checkdb = DB::table('bundle_menus')->get();
+        $checkdb = DB::table('AprioriSettings')->get();
         //if null save directly
         if ($checkdb == NULL) {
             $aprSettings->support = $request->support;
