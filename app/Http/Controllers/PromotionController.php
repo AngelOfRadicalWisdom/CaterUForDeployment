@@ -162,7 +162,6 @@ class PromotionController extends Controller
   //retrieve promo lists
   public function promotionsList()
   {
-    try{
     $user = Auth::user();
     $userFname = $user->empfirstname;
     $userLname = $user->emplastname;
@@ -171,10 +170,6 @@ class PromotionController extends Controller
     $promotionDetails = BundleDetails::all();
     $allMenus = Menu::all();
     return view('admin.promo.promotionslist', compact('userImage', 'userFname', 'userLname', 'promotion', 'allMenus', 'promotionDetails'));
-    }
-    catch (\PDOException $e) {
-      return back()->withError("Sorry Something Went Wrong")->withInput();
-  }
   }
   //edit promo
   public function editPromo(Request $request, $bundleid)
