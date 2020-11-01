@@ -7,40 +7,42 @@ use App\OrderDetail;
 use App\Order;
 use App\Menu;
 use DB;
-
 class CashierController extends Controller
 {
-    //mobile get billdetail
-    public function getbilldetail($tableno)
-    {
-        $order_records = DB::table('order_details')
-            ->select(
-                'order_details.status as odStatus',
-                'order_details.id',
-                'menus.menuID',
-                'menus.name',
-                'orders.order_id',
-                'orders.tableno',
-                'orders.custid',
-                'orders.tableno',
-                'order_details.orderQty',
-                'order_details.subtotal',
-                'menus.price',
-                'orders.status as stats',
-                'orders.total'
-            )
-            ->join('orders', 'order_details.order_id', '=', 'orders.order_id')
-            ->join('menus', 'menus.menuID', '=', 'order_details.menuID')
-            ->where('orders.tableno', $tableno)
-            ->get();
-
-        return response()->json([
-            'records' => $order_records
-        ]);
-    }
-    //mobile update the total
-    public function updateTotal($order_id, Request $request)
-    {
+    public function getbilldetail($order_id){
+    $bundles = array();
+    $items = array();
+       $orders = DB::table('order_details')
+       ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
+       ->join('orders','order_details.order_id','=','orders.order_id')
+       ->select('order_details.*','menus.name','menus.price','orders.total', 'orders.cashTender', 'orders.change')
+       ->where('order_details.bundleid','=',null)
+       ->where('order_details.order_id',$order_id)
+       ->get();
+       
+               $bundleItems = DB::table('order_details')
+               ->select('order_details.qtyServed','order_details.orderQty as orderQty', 'menus.name as menuName',
+               'bundles.name as bundlename', 'bundle_details.qty','bundles.bundleid', 'bundles.price','order_details.id','order_details.subtotal as bundle_subtotal')
+               ->join('bundles', 'order_details.bundleid', '=', 'bundles.bundleid')
+               ->join('orders','order_details.order_id','=','orders.order_id')
+               ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
+               ->join('menus', 'menus.menuID','=','bundle_details.menuID')
+               ->where('order_details.bundleid','!=',null)
+               ->where('order_details.order_id',$order_id)
+               ->get();
+   
+           foreach($orders as $item){
+               array_push($items, $item);
+           }
+           foreach($bundleItems as $item){
+               array_push($items, $item);
+           }
+           return response()->json([
+               'data' => $items
+           ]);
+}
+ 
+    public function updateTotal($order_id,Request $request){
 
         $orders = Order::find($order_id);
         $orders->total = $request->total;
@@ -49,26 +51,26 @@ class CashierController extends Controller
         return response()->json([
             'message' => 'Bill sent'
         ]);
-    }
-    //mobile billout list
-    public function getBillOutList()
-    {
-        $orders = DB::table('orders')->where('status', 'billout')
-            ->join('employees', 'orders.empid', '=', 'employees.empid')
-            ->get();
 
-        return response()->json([
-            'table' => $orders
-        ]);
     }
-    //mobile get total
-    public function getTotal($orderid)
-    {
+
+    public function getBillOutList(){
+         $orders = DB::table('orders')->where('status','billout')
+         ->join('employees','orders.empid','=','employees.empid')
+         ->get();
+
+          return response()->json([
+             'table' => $orders
+          ]);
+    }
+    
+    public function getTotal($orderid){
         $total = DB::table('order_details')
-            ->where('order_id', $orderid)
-            ->sum('subtotal');
+                ->where('order_id',$orderid)
+                ->sum('subtotal');
         return response()->json([
             "total" => $total
         ]);
     }
+
 }
