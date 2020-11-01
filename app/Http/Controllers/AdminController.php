@@ -171,11 +171,6 @@ class AdminController extends Controller
     public function saveAprioriSettings(Request $request)
     {
         //exception part
-        try {
-            $apriori = $this->customExceptions->AprioriException($request);
-        } catch (\PDOException $e) {
-            return back()->withError($e->getMessage())->withInput();
-        }
         try{
         $aprSettings = new AprioriSettings();
         $checkdb = DB::table('bundle_menus')->get();
