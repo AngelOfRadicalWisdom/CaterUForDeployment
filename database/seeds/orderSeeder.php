@@ -12,2758 +12,308 @@ class orderSeeder extends Seeder
     public function run()
     {
         $orders = [
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  2,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  390.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  2,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  116.00
-            ],
-            [
-                'order_id'    => 1,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  15,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 2,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  15,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  58.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 3,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  15,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'  => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 4,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 5,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  15,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  58.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 6,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 7,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  15,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  58.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    => 20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 8,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  58.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  268.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 9,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],  
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 10,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 11,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    => 12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    => 13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    => 16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    => 20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 12,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  => 47.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  => 265.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  => 193.00
-            ],
-            [
-                'order_id'    => 13,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  => 73.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 14,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 15,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 16,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 17,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 18,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  58.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],[
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 19,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 20,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 21,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 22,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 23,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 24,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
+         [
+            'order_id'=>1,
+            'custid'=>2,
+            'empid'=>1,
+            'tableno'=>2 ,
+            'total'=>2509,
+            'cashTender'=>2510,
+            'change'=>1,
+            'status'=>'paid'
+         ],
+         [
+             'order_id'=>2,
+             'custid'=>1,
+             'empid'=>2,
+             'tableno'=>1 ,
+             'total'=>3748,
+             'cashTender'=>4000,
+             'change'=>252,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>3,
+             'custid'=>1,
+             'empid'=>3,
+             'tableno'=>4,
+             'total'=>3679,
+             'cashTender'=>3700,
+             'change'=>21,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>4,
+             'custid'=>1,
+             'empid'=>1,
+             'tableno'=>5,
+             'total'=>410,
+             'cashTender'=>500,
+             'change'=>90,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>5,
+             'custid'=>2,
+             'empid'=>3,
+             'tableno'=>6,
+             'total'=>3352,
+             'cashTender'=>3400,
+             'change'=>48,
+             'status'=>'paid'
+          ],
              [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 25,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 26,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    => 12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 27,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  16,
-                'status'    =>  'ok',
-                'subtotal'  =>  37.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  19,
-                'status'    =>  'ok',
-                'subtotal'  =>  58.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 28,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  9,
-                'status'    =>  'ok',
-                'subtotal'  =>  297.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  13,
-                'status'    =>  'ok',
-                'subtotal'  =>  479.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 29,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  2,
-                'status'    =>  'ok',
-                'subtotal'  =>  215.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  3,
-                'status'    =>  'ok',
-                'subtotal'  =>  195.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  5,
-                'status'    =>  'ok',
-                'subtotal'  =>  180.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  8,
-                'status'    =>  'ok',
-                'subtotal'  =>  359.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  10,
-                'status'    =>  'ok',
-                'subtotal'  =>  323.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  11,
-                'status'    =>  'ok',
-                'subtotal'  =>  338.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  12,
-                'status'    =>  'ok',
-                'subtotal'  =>  474.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  14,
-                'status'    =>  'ok',
-                'subtotal'  =>  755.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  17,
-                'status'    =>  'ok',
-                'subtotal'  =>  219.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  18,
-                'status'    =>  'ok',
-                'subtotal'  =>  47.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  20,
-                'status'    =>  'ok',
-                'subtotal'  =>  265.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  21,
-                'status'    =>  'ok',
-                'subtotal'  =>  193.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  22,
-                'status'    =>  'ok',
-                'subtotal'  =>  73.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  23,
-                'status'    =>  'ok',
-                'subtotal'  =>  63.00
-            ],
-            [
-                'order_id'    => 30,
-                'orderQty'  =>  1,
-                'menuID'    =>  24,
-                'status'    =>  'ok',
-                'subtotal'  =>  99.00
-            ],
-  ];
-        DB::table('order_details')->insert($orders);
+            'order_id'=>6,
+            'custid'=>3,
+            'empid'=>2,
+            'tableno'=>6 ,
+            'total'=>3130,
+            'cashTender'=>3200,
+            'change'=>70,
+            'status'=>'paid'
+         ],
+         [
+             'order_id'=>7,
+             'custid'=>1,
+             'empid'=>6,
+             'tableno'=>5 ,
+             'total'=>3600,
+             'cashTender'=>3600,
+             'change'=>0,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>8,
+             'custid'=>2,
+             'empid'=>5,
+             'tableno'=>1,
+             'total'=>2638,
+             'cashTender'=>3000,
+             'change'=>362,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>9,
+             'custid'=>3,
+             'empid'=>2,
+             'tableno'=>3,
+             'total'=>525,
+             'cashTender'=>550,
+             'change'=>25,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>10,
+             'custid'=>1,
+             'empid'=>3,
+             'tableno'=>4,
+             'total'=>2513,
+             'cashTender'=>2520,
+             'change'=>7,
+             'status'=>'paid'
+          ],
+          [
+            'order_id'=>11,
+            'custid'=>2,
+            'empid'=>1,
+            'tableno'=>1,
+            'total'=>3438,
+            'cashTender'=>3500,
+            'change'=>62,
+            'status'=>'paid'
+         ],
+         [
+             'order_id'=>12,
+             'custid'=>3,
+             'empid'=>4,
+             'tableno'=>5,
+             'total'=>3238,
+             'cashTender'=>3240,
+             'change'=>2,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>13,
+             'custid'=>1,
+             'empid'=>6,
+             'tableno'=>6,
+             'total'=>3970,
+             'cashTender'=>4000,
+             'change'=>30,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>14,
+             'custid'=>2,
+             'empid'=>1,
+             'tableno'=>3,
+             'total'=>3455,
+             'cashTender'=>3460,
+             'change'=>5,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>15,
+             'custid'=>3,
+             'empid'=>3,
+             'tableno'=>4,
+             'total'=>3688,
+             'cashTender'=>3700,
+             'change'=>22,
+             'status'=>'paid'
+          ],
+            [
+            'order_id'=>16,
+            'custid'=>1,
+            'empid'=>2,
+            'tableno'=>6,
+            'total'=>3866,
+            'cashTender'=>3900,
+            'change'=>34,
+            'status'=>'paid'
+         ],
+         [
+             'order_id'=>17,
+             'custid'=>2,
+             'empid'=>3,
+             'tableno'=>1,
+             'total'=>3736,
+             'cashTender'=>3740,
+             'change'=>4,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>18,
+             'custid'=>3,
+             'empid'=>5,
+             'tableno'=>2,
+             'total'=>3751,
+             'cashTender'=>3800,
+             'change'=>49,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>19,
+             'custid'=>1,
+             'empid'=>2,
+             'tableno'=>3,
+             'total'=>3309,
+             'cashTender'=>3310,
+             'change'=>1,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>20,
+             'custid'=>2,
+             'empid'=>3,
+             'tableno'=>4,
+             'total'=>485,
+             'cashTender'=>490,
+             'change'=>5,
+             'status'=>'paid'
+          ],
+          [
+            'order_id'=>21,
+            'custid'=>1,
+            'empid'=>1,
+            'tableno'=>2 ,
+            'total'=>3632,
+            'cashTender'=>3640,
+            'change'=>8,
+            'status'=>'paid'
+         ],
+         [
+             'order_id'=>22,
+             'custid'=>2,
+             'empid'=>2,
+             'tableno'=>1 ,
+             'total'=>3991,
+             'cashTender'=>4000,
+             'change'=>9,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>23,
+             'custid'=>3,
+             'empid'=>3,
+             'tableno'=>4,
+             'total'=>2876,
+             'cashTender'=>2900,
+             'change'=>24,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>24,
+             'custid'=>1,
+             'empid'=>1,
+             'tableno'=>5,
+             'total'=>2845,
+             'cashTender'=>2850,
+             'change'=>5,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>25,
+             'custid'=>2,
+             'empid'=>3,
+             'tableno'=>6,
+             'total'=>3628,
+             'cashTender'=>3630,
+             'change'=>2,
+             'status'=>'paid'
+          ],
+             [
+            'order_id'=>26,
+            'custid'=>3,
+            'empid'=>2,
+            'tableno'=>6 ,
+            'total'=>3414,
+            'cashTender'=>3420,
+            'change'=>6,
+            'status'=>'paid'
+         ],
+         [
+             'order_id'=>27,
+             'custid'=>1,
+             'empid'=>6,
+             'tableno'=>5 ,
+             'total'=>2580,
+             'cashTender'=>2600,
+             'change'=>20,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>28,
+             'custid'=>2,
+             'empid'=>5,
+             'tableno'=>1,
+             'total'=>2427,
+             'cashTender'=>2430,
+             'change'=>3,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>29,
+             'custid'=>3,
+             'empid'=>2,
+             'tableno'=>3,
+             'total'=>3433,
+             'cashTender'=>3440,
+             'change'=>7,
+             'status'=>'paid'
+          ],
+          [
+             'order_id'=>30,
+             'custid'=>1,
+             'empid'=>3,
+             'tableno'=>4,
+             'total'=>3080,
+             'cashTender'=>3100,
+             'change'=>20,
+             'status'=>'paid'
+          ],
+        ];
+        DB::table('orders')->insert($orders);
     }
 }
+
