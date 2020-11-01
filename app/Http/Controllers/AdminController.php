@@ -172,7 +172,6 @@ class AdminController extends Controller
         } catch (\PDOException $e) {
             return back()->withError($e->getMessage())->withInput();
         }
-        try{
         $aprSettings = new AprioriSettings();
         $checkdb = DB::table('bundle_menus')->get();
         //if null save directly
@@ -189,9 +188,5 @@ class AdminController extends Controller
         $aprSettings->save();
         return redirect('/dashboard')->with('success', ' Support and Confidence Successfully updated');
     }
-    catch (\PDOException $e) {
-        return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
-    }
-}
 
 }
