@@ -16,7 +16,7 @@ class Kitchen extends Migration
         Schema::create('kitchenRecords', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
-            $table->integer('menuID')->unsigned();
+            $table->integer('menuID')->unsigned()->nullable();
             $table->integer('bundleid')->unsigned()->nullable();
             $table->integer('orderQty');
             $table->string('status');
@@ -24,7 +24,7 @@ class Kitchen extends Migration
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->foreign('order_id')->references('order_id')->on('orders');
             $table->foreign('menuID')->references('menuID')->on('menus');
-            $table->foreign('bundleid')->references('bundleid')->on('bundle_menus');
+            $table->foreign('bundleid')->references('bundleid')->on('bundles');
         });
     }
 

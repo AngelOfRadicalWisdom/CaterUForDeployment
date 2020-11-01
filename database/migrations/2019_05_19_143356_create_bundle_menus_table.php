@@ -13,7 +13,7 @@ class CreateBundleMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('bundle_menus', function (Blueprint $table) {
+        Schema::create('bundles', function (Blueprint $table) {
             $table->integer('bundleid')->unsigned()->primary();
             $table->float('price');
             $table->integer('servingsize');
@@ -31,6 +31,6 @@ class CreateBundleMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bundle_menus');
+        Schema::dropIfExists('bundles');
     }
 }
