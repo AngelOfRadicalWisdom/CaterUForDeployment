@@ -160,7 +160,7 @@ class PromotionController extends Controller
   // }
 
   //retrieve promo lists
-  public function promotionsList()
+  public function promoList()
   {
     $user = Auth::user();
     $userFname = $user->empfirstname;
