@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Kitchen;
@@ -16,6 +16,7 @@ class TemporaryTableController extends Controller
         $cartitems->order_id = $request->order_id;
         $cartitems->menuID = $request->menuID;
         $cartitems->qty = $request->qty;
+        $cartitems->bundleid = $request->bundleid;
         $cartitems->save();
 
         return response()->json([
@@ -31,16 +32,28 @@ class TemporaryTableController extends Controller
 
         ]);
     }
-    public function getCartItems($order_id)
-    {
-        $cart_items = DB::table('carts')
+    public function getCartItems($order_id){
+        $items = array();
+        $menuItems = DB::table('carts')
             ->join('menus', 'carts.menuID', '=', 'menus.menuID')
-            ->select('carts.*', 'menus.name', 'menus.price')
-            ->where('carts.order_id', $order_id)
+            ->select('carts.*','menus.name','menus.price')
+            ->where('carts.bundleid','=',null)
+            ->where('carts.order_id',$order_id)
             ->get();
 
+            $bundleItems = DB::table('carts')
+            ->join('bundles', 'carts.bundleid', '=', 'bundles.bundleid')
+            ->where('carts.order_id',$order_id)
+            ->get();
+        foreach($menuItems as $item){
+            array_push($items, $item);
+        }
+        foreach($bundleItems as $item){
+            array_push($items, $item);
+        }
+
         return response()->json([
-            'data' => $cart_items
+            'data' => $items
         ]);
     }
     public function updateQty($id, Request $request)
@@ -53,32 +66,20 @@ class TemporaryTableController extends Controller
             'message' => 'Quantity updated!'
         ]);
     }
-    // public function saveToTemporaryKitchenTable(Request $request){
-    //     for($i= 0; $i < $request->orderQty; $i++){
-    //     $kitchenorders = new Kitchen();
-    //     $kitchenorders->orderQty = 1;
-    //     $kitchenorders->menuID = $request->menuID;
-    //     $kitchenorders->order_id = $request->order_id;
-    //     $kitchenorders->status = $request->status;
-
-    //     $kitchenorders->save();
-    //     }
-
-    //     return response()->json([
-    //     'message' => 'Saved to kitchen'
-    //        // $request->orderQty
-    //     ]);
-    // }
-    public function getKitchenOrders()
-    {
+    
+    public function getKitchenOrders(){
         $orders = DB::table('kitchenrecords')
-            ->join('orders', 'orders.order_id', '=', 'kitchenrecords.order_id')
-            ->join('menus', 'menus.menuID', '=', 'kitchenrecords.menuID')
-            ->join('sub_categories', 'menus.subcatid', '=', 'sub_categories.subcatid')
-            ->join('categories', 'sub_categories.categoryid', '=', 'categories.categoryid')
-            ->where('categories.categoryname', '!=', 'Drinks')
-            ->where('kitchenrecords.status', '=', 'waiting')
-            ->orderBy('kitchenrecords.created_at', 'asc')->get();
+        ->select('order_details.date_ordered','menus.name','kitchenrecords.status','menus.menuID','kitchenrecords.bundleid')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->join('order_details', 'order_details.order_id','=','orders.order_id')
+        ->join('menus','menus.menuID','=','kitchenrecords.menuID')
+        ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+        ->join('categories','sub_categories.categoryid','=','categories.categoryid')
+        ->where('categories.categoryname','!=', 'Drinks')
+        ->where('kitchenrecords.status','=','waiting')
+        ->orderBy('kitchenrecords.created_at','asc')->get();
+
+     
 
         return response()->json([
             'orders' => $orders
@@ -179,19 +180,29 @@ class TemporaryTableController extends Controller
             'status' => $preparing
         ]);
     }
-    public function getAllPreparedItems()
-    {
-        $orders = DB::table('kitchenrecords')
-            ->join('orders', 'orders.order_id', '=', 'kitchenrecords.order_id')
-            ->join('menus', 'menus.menuID', '=', 'kitchenrecords.menuID')
-            ->join('sub_categories', 'menus.subcatid', '=', 'sub_categories.subcatid')
-            ->join('categories', 'sub_categories.categoryid', '=', 'categories.categoryid')
-            ->where('categories.categoryname', '!=', 'Drinks')
-            ->where('kitchenrecords.status', '=', 'preparing')
-            ->orderBy('kitchenrecords.updated_at', 'asc')->get();
+    public function getAllPreparedItems(){
 
+        $arr = array();
+        $orders = DB::table('kitchenrecords')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->join('menus','menus.menuID','=','kitchenrecords.menuID')
+        ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+        ->join('categories','sub_categories.categoryid','=','categories.categoryid')
+        ->join('bundles','bundles.bundleid','=','kitchenrecords.bundleid')
+        ->where('categories.categoryname','!=', 'Drinks')
+        ->where('kitchenrecords.status','=','preparing')
+        ->orderBy('kitchenrecords.updated_at','asc')->get();
+
+        $bundles = DB::table('kitchenrecords')
+        ->join('bundles','bundles.bundleid','=','kitchenrecords.bundleid')
+        ->where('kitchenrecords.bundleid','!=',null)
+        ->get();
+
+        array_push($arr, $orders);
+        array_push($arr,$bundles);
+    
         return response()->json([
-            'orders' => $orders
+            'orders' => $arr
         ]);
     }
     public function servingStatusByTableNo($tableno)
@@ -211,57 +222,61 @@ class TemporaryTableController extends Controller
         ]);
     }
 
-    public function checkForReadyOrders()
-    {
+    public function checkForReadyOrders(){
+        $arr = array();
+        $menus = DB::table('kitchenrecords')
+        ->select('kitchenrecords.*','orders.tableno','orders.order_id','menus.name')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->join('menus','kitchenrecords.menuID','=','menus.menuID')
+        ->where('kitchenrecords.bundleid',null)
+        ->get();
 
-        $data = array();
-        $result;
-        $orders = DB::table('kitchenrecords')
-            ->select('kitchenrecords.status', 'kitchenrecords.orderQty', 'kitchenrecords.id', 'orders.tableno', 'tables.status as tableStatus')
-            ->join('orders', 'orders.order_id', '=', 'kitchenrecords.order_id')
-            ->join('tables', 'tables.tableno', '=', 'orders.tableno')
-            ->where('tables.status', '=', 'Occupied')
-            ->orderBy('kitchenrecords.created_at', 'asc')->get();
+         $orders = DB::table('kitchenrecords')
+        ->select('kitchenrecords.*','menus.name as menuname','bundles.name as bundleName','orders.tableno')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->join('bundles','bundles.bundleid','=','kitchenrecords.bundleid')
+        ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+        ->join('menus','bundle_details.menuID','=','menus.menuID')
+        ->get();
 
-        foreach ($orders as $order) {
-            $data[$order->tableno][] = $order;
+        foreach($menus as $menu){
+            array_push($arr,$menu);
         }
-
-
-        return response()->json([
-            "readyorders" => $data
-        ]);
+        foreach($orders as $order ){
+            array_push($arr,$order);
+        }
+    
+        $collection = new Collection($arr);
+        $grouped = $collection->groupBy('tableno');
+         return response()->json([
+            'readyorders'=>$grouped
+         ]);
     }
-    public function getAllCompleteList()
-    {
+    public function getAllCompleteList(){
+        $list = array();
         $orders = DB::table('kitchenrecords')
-            ->join('orders', 'orders.order_id', '=', 'kitchenrecords.order_id')
-            ->join('menus', 'menus.menuID', '=', 'kitchenrecords.menuID')
-            ->join('sub_categories', 'menus.subcatid', '=', 'sub_categories.subcatid')
-            ->join('categories', 'sub_categories.categoryid', '=', 'categories.categoryid')
-            ->where('categories.categoryname', '!=', 'Drinks')
-            ->where('kitchenrecords.status', '=', 'ready')
-            ->orderBy('kitchenrecords.updated_at', 'desc')->get();
+        ->select('orders.date_ordered', 'menus.name','kitchenrecords.id')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->join('menus','menus.menuID','=','kitchenrecords.menuID')
+        ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+        ->join('categories','sub_categories.categoryid','=','categories.categoryid')
+        ->where('categories.categoryname','!=', 'Drinks')
+        ->where('kitchenrecords.status','=','ready')
+        ->orderBy('kitchenrecords.updated_at','desc')->get();
 
+        foreach($orders as $order){
+            array_push($list,array(
+                'date_ordered' => $order->date_ordered,
+                'name'=> $list->name,
+                'id'=> $list->id
+            ));
+        }
         return response()->json([
-            'orders' => $orders
+            'orders' => $list
         ]);
     }
-    public function getAllCompleteDrinks()
-    {
-        // $orders2 = DB::table('kitchenrecords')
-        //     ->join('orders', 'orders.order_id', '=', 'kitchenrecords.order_id')
-        //     ->join('menus', 'menus.menuID', '=', 'kitchenrecords.menuID')
-        //     ->join('sub_categories', 'menus.subcatid', '=', 'sub_categories.subcatid')
-        //     ->join('categories', 'sub_categories.categoryid', '=', 'categories.categoryid')
-        //   // ->selectRaw("TIME(kitchenrecords.updated_at) as time_updated,menus.menuID")
-        //     ->where('categories.categoryname', '=', 'Drinks')
-        //     ->where('kitchenrecords.status', '=', 'ready')
-        //     ->orderBy('kitchenrecords.updated_at', 'desc')->get();
-
-        // return response()->json([
-        //     'orders' => $orders2
-        // ]);
+    public function getAllCompleteDrinks(){
+       
         $orders = DB::table('kitchenrecords')
         ->join('orders', 'orders.order_id', '=', 'kitchenrecords.order_id')
         ->join('menus', 'menus.menuID', '=', 'kitchenrecords.menuID')
@@ -277,8 +292,15 @@ class TemporaryTableController extends Controller
         ->where('kitchenrecords.status', '=', 'ready')
         ->orderBy('kitchenrecords.updated_at', 'desc')->get();
 
-    return response()->json([
-        'orders' => $orders
-    ]);
+        // foreach($orders as $order){
+        //     array_push($list,array(
+        //         'date_ordered' => $order->date_ordered.toTimeString(),
+        //         'name'=> $list->name
+        //     ));
+        // }
+
+        return response()->json([
+            'orders' => $orders
+        ]);
     }
 }

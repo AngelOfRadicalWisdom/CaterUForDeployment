@@ -7,6 +7,7 @@ use App\OrderDetail;
 use App\Order;
 use App\Menu;
 use DB;
+
 class CashierController extends Controller
 {
     public function getbilldetail($order_id){
@@ -51,26 +52,26 @@ class CashierController extends Controller
         return response()->json([
             'message' => 'Bill sent'
         ]);
-
     }
+    //mobile billout list
+    public function getBillOutList()
+    {
+        $orders = DB::table('orders')->where('status', 'billout')
+            ->join('employees', 'orders.empid', '=', 'employees.empid')
+            ->get();
 
-    public function getBillOutList(){
-         $orders = DB::table('orders')->where('status','billout')
-         ->join('employees','orders.empid','=','employees.empid')
-         ->get();
-
-          return response()->json([
-             'table' => $orders
-          ]);
+        return response()->json([
+            'table' => $orders
+        ]);
     }
-    
-    public function getTotal($orderid){
+    //mobile get total
+    public function getTotal($orderid)
+    {
         $total = DB::table('order_details')
-                ->where('order_id',$orderid)
-                ->sum('subtotal');
+            ->where('order_id', $orderid)
+            ->sum('subtotal');
         return response()->json([
             "total" => $total
         ]);
     }
-
 }

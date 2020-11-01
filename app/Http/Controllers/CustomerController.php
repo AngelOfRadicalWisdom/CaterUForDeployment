@@ -118,32 +118,45 @@ class CustomerController extends Controller
         $data = $request->all();
         $finalArray = array();
 
-        foreach ($data as $value) {
-            foreach ($value as $key)
-                array_push($finalArray, array(
-                    'order_id' => $key['order_id'],
-                    'orderQty' => $key['orderQty'],
-                    'qtyServed' => $key['orderQty'],
-                    'menuID' =>  $key['menuID'],
-                    'status' => 'waiting',
-                    'subtotal' => $key['subtotal']
-                ));
+        foreach($data as $value){
+            foreach($value as $key){
+                // array_push($finalArray, $value);
+            // }
+            array_push($finalArray,array(
+                'order_id' =>$key['order_id'],
+                'orderQty' => $key['orderQty'],
+                'qtyServed' =>$key['orderQty'],
+                'menuID' =>  $key['menuID'],
+                'bundleid' => $key['bundleid'],
+                'status' => 'waiting',
+                'subtotal' => $key['subtotal'] 
+            ));
         }
+            }
 
-        for ($i = 0; $i < $request->orderQty; $i++) {
-            $kitchenorders = new Kitchen();
-            $kitchenorders->orderQty = 1;
-            $kitchenorders->menuID = $request->menuID;
-            $kitchenorders->order_id = $request->order_id;
-            $kitchenorders->status = 'waiting';
-
-            $kitchenorders->save();
+    //         $val = '';
+     foreach($data as $value){
+            foreach($value as $key){
+            //  for($i= 0; $i < $key["orderQty"]; $i++){
+        $kitchenorders = new Kitchen();
+        $kitchenorders->orderQty = $key['orderQty'];
+        $kitchenorders->menuID = $key["menuID"];
+        $kitchenorders->bundleid = $key["bundleid"];
+        $kitchenorders->order_id = $order_id;
+        $kitchenorders->status = 'waiting';
+    
+        $kitchenorders->save();
+        // }
+            }
         }
+       
+
         OrderDetail::insert($finalArray);
 
         DB::table('carts')->where('order_id', $order_id)->delete();
         return response()->json([
-            'final' => $finalArray
+            'finalArry' => $order_id,
+            'request' => $data
         ]);
     }
 
@@ -156,4 +169,20 @@ class CustomerController extends Controller
             'phonenum' =>  $c
         ]);
     }
+
+    public function assignTable(Request $request, $custid){
+        $newCustomer = Customer::find($custid);
+        $newCustomer->tableno = $request->tableno;
+        $newCustomer->status= 'notified';
+        $newCustomer->save();
+
+        $table = RestaurantTable::find($request->tableno);
+        $table->status = 'Reserved';
+        $table->save();
+
+        return response()->json([
+            'message' => $custid
+        ]);
+    }
+
 }
