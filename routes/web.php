@@ -141,6 +141,7 @@ Route::middleware(['auth'])->group( function (){
 Route::get('/createaccount', 'RegistrationController@create');
 Route::post('/createaccount', 'RegistrationController@store');//
 Route::get('/generateQRCode','QRController@generateQR');
+Route::post('/generateQRCode','QRController@generateQR');
 
 
 
