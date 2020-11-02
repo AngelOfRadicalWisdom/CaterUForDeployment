@@ -21,7 +21,7 @@ class QRController extends Controller
     }
     public function generateQR(Request $request)
     {
-
+        $qrID="";
         $user = Auth::user();
         $userFname = $user->empfirstname;
         $userLname = $user->emplastname;
@@ -33,7 +33,7 @@ class QRController extends Controller
             ->get();
         foreach($emp_info as $emp){
         $qrID=$emp->empid;
-        $qrID=(string)$qrID;
+        $qrID= (string) $qrID;
         }
 
 
