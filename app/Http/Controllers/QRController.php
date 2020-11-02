@@ -36,7 +36,7 @@ class QRController extends Controller
             // dd($employeename);
             \QrCode::size(500)
                 ->format('png')
-                ->generate('https://cateru.zenithdevgroup.me', public_path('images/qrcode.png'));
+                ->generate('https://cateru.zenithdevgroup.me', public_path('/images/qrcode.png'));
             return view('qrCode', compact('userImage', 'userFname', 'userLname', 'emp_info'));
         }
         return view('qrCode', compact('userImage', 'userFname', 'userLname', 'emp_info'));
