@@ -48,7 +48,7 @@
       </li>
       <li><a><i class="fa fa-list-alt"></i> Promotions <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="{{ url('/promo/promotionslists')}}">Promotions List</a></li>
+          <li><a href="{{ url('/promo/promolist')}}">Promotions List</a></li>
           <li><a href="{{ url('/promo/addpromo')}}">Add New Promotions</a></li>
         </ul>
       </li>

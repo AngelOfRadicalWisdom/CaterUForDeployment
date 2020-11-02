@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/promo/addpromo','PromotionController@createPromo');
     Route::post('/promo/addpromo','PromotionController@savePromo');
     Route::post('/savepromo', 'PromotionController@savePromo');
-    Route::get('/promo/promotionslists','PromotionController@promotionsList');
+    Route::get('/promo/promolist','PromotionController@promotionsList');
     Route::get('/promo/edit_promo/{id}','PromotionController@editPromo');
     Route::post('/promo/edit_promo/{id}','PromotionController@saveEditPromo');
     Route::get('/promo/delete_promo/{bundleid}','PromotionController@deletePromo');
