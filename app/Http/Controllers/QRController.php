@@ -31,8 +31,8 @@ class QRController extends Controller
             ->where('emplastname', $request->lastname)
             ->where('empfirstname', $request->firstname)
             ->get();
-        foreach($emp_info as $employee){
-        $qrID=$employee->empid;
+        foreach($emp_info as $emp){
+        $qrID=$emp->empid;
         $qrID=(string)$qrID;
         }
 
