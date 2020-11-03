@@ -121,6 +121,9 @@ class CustomExceptions
         if (!is_numeric($promo->servingsize)) {
             throw new \PDOException('Please Enter a numeric value for serving size');
         }
+        if (count($allMenus) != count(array_unique($allMenus))) {
+            throw new \PDOException('Menu Already Selected');
+        }
     }
     //for editing promotion inclusive menus quantity used in Promotion Controller (editQuantity function)
     public function editPromoQuantityException($promo)
