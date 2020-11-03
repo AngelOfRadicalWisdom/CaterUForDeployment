@@ -63,9 +63,17 @@
                     @if($tables->status=="Available")
                     <option value="{{ $tables->status}}">{{$tables->status}}</option>
                     <option value="Occupied">Occupied</option>
-                    @else
+                    <option value="Reserved">Reserved</option>
+                    @endif
+                    @if($tables->status=="Occupied")
                     <option value="{{ $tables->status}}">{{$tables->status}}</option>
                     <option value="Available">Available</option>
+                    <option value="Reserved">Reserved</option>
+                    @endif
+                    @if($tables->status=="Reserved")
+                    <option value="{{ $tables->status}}">{{$tables->status}}</option>
+                    <option value="Available">Available</option>
+                    <option value="Reserved">Occupied</option>
                     @endif
                   </select>
                 </div>

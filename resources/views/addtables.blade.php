@@ -46,7 +46,7 @@
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="tablenum">Table Number <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                  <input type="number" name="tablenum" required="required" class="form-control " value="{{old('tablenum')}}" min="1" required="required">
+                  <input type="number" name="tablenum" required="required" class="form-control " value="{{$ctableno+1}}" min="1" required="required">
                 </div>
               </div>
               <div class="item form-group">
@@ -63,6 +63,7 @@
                     <option value="">Select...</option>
                     <option value="Available">Available</option>
                     <option value="Occupied">Occupied</option>
+                    <option value="Reserved">Reserved</option>
                   </select>
                 </div>
               </div>
