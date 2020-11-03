@@ -79,8 +79,7 @@ class CustomerController extends Controller
             'message' => 'Status updated to notified'
          ]);
      }
-
-     public function setConfirm($custId, Request $request){
+     public function setConfirm($custid, Request $request){
         $customerRecord = Customer::find($custid);
         $customerRecord->status = "confirmed";
         $customerRecord->save();
@@ -90,7 +89,7 @@ class CustomerController extends Controller
         $table->save();
 
          return response()->json([
-           'message' => 'Customer confirmed!'
+           'message' => 'Updated successfully!'
         ]);
      }
      public function getNotified(){
