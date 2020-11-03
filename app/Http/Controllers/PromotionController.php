@@ -91,7 +91,7 @@ class PromotionController extends Controller
       }
     }
     try {
-      $promo = $this->customExceptions->addPromoException($request, $allMenus, $suggestedMenus);
+      $this->customExceptions->addPromoException($request, $allMenus, $suggestedMenus);
     } catch (\PDOException $e) {
       return \Response::json(['status' => 500, 'error' => $e->getMessage()]);
     }
