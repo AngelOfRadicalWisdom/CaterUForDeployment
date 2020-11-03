@@ -86,6 +86,13 @@ class CustomerController extends Controller
              'notified' => $notified
          ]);
      }
+
+     public function deleteNotifiedCustomer($custid){
+         $cust = DB::table('customer')->where('custid',$custid)->delete();
+         return response()->json([
+           'message' => 'Deleted successfully!'
+        ]);
+     }
     public function requestBillOut(Request $request, $order_id){
 
         $detail= Order::find($order_id);
