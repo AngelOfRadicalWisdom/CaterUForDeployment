@@ -79,6 +79,20 @@ class CustomerController extends Controller
             'message' => 'Status updated to notified'
          ]);
      }
+
+     public function setConfirm($custId){
+        $customerRecord = Customer::find($custid);
+        $customerRecord->status = "confirmed";
+        $customerRecord->save();
+
+        $table = RestaurantTable::find($request->tableNo);
+        $table->status = 'Occupied';
+        $table->save();
+
+        return response()->json([
+           'message' => 'Status updated to notified'
+        ]);
+     }
      public function getNotified(){
          $notified = DB::table('customers')->where('status','notified')->get();
 
@@ -87,8 +101,15 @@ class CustomerController extends Controller
          ]);
      }
 
-     public function deleteNotifiedCustomer($custid){
-         $cust = DB::table('customer')->where('custid',$custid)->delete();
+     public function deleteNotifiedCustomer($custid, Request $request){
+        $customerRecord = Customer::find($custid);
+        $customerRecord->status = "no show";
+        $customerRecord->save();
+
+        $table = RestaurantTable::find($request->tableNo);
+        $table->status = 'Available';
+        $table->save();
+
          return response()->json([
            'message' => 'Deleted successfully!'
         ]);
