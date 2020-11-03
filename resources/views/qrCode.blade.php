@@ -67,7 +67,7 @@
               @endforeach
               <div id="qrcode">
                 @foreach($emp_info as $emp)
-                {!! QrCode::size(250)->generate( $emp->empid);!!}
+                {!! QrCode::size(250)->generate($qrID);!!}
 
                 @endforeach
               </div>
