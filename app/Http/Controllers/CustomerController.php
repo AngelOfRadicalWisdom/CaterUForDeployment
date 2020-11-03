@@ -80,7 +80,7 @@ class CustomerController extends Controller
          ]);
      }
 
-     public function setConfirm($custId){
+     public function setConfirm($custId, Request $request){
         $customerRecord = Customer::find($custid);
         $customerRecord->status = "confirmed";
         $customerRecord->save();
