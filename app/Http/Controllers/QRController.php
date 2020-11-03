@@ -33,7 +33,7 @@ class QRController extends Controller
             ->get();
         foreach($emp_info as $emp){
         $qrID=$emp->empid;
-        $qrID= (string) $qrID;
+        $qrID=(string)$qrID;
         }
 
 
