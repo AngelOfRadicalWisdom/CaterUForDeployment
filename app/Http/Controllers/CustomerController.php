@@ -89,8 +89,8 @@ class CustomerController extends Controller
         $table->status = 'Occupied';
         $table->save();
 
-        return response()->json([
-           'message' => 'Status updated to notified'
+         return response()->json([
+           'message' => 'Customer confirmed!'
         ]);
      }
      public function getNotified(){
