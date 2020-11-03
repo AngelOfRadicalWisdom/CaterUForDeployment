@@ -47,6 +47,7 @@ class PromotionController extends Controller
     $sMenus = array_values($result);
     $additionalMenus = DB::table('menus')
       ->whereNotIn('menuID', $sMenus)
+      ->where('deleted_at','=',NULL)
       ->get();
 
     return view('admin.promo.addnewpromo', compact('userFname', 'userLname', 'sMenus', 'allMenus', 'additionalMenus', 'ItemSets', 'userImage'));
