@@ -149,7 +149,7 @@ class TemporaryTableController extends Controller
     public function isReady($id)
     {
         $status = Kitchen::find($id);
-        $status->status = 'ready';
+        $status->status = 'served';
         $status->save();
 
         return response()->json([
