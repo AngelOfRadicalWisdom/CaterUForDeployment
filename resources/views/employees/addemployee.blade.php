@@ -61,10 +61,11 @@
                 <div class="col-md-6 col-sm-6 ">
                   <select name="position" class="form-control">
                     <option value="admin">Admin</option>
+                    <option value="dispatcher">Dispatcher</option>
                     <option value="manager">Manager</option>
                     <option value="cashier">Cashier</option>
                     <option value="receptionist">Receptionist</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
                     <option value="waiter">Waiter</option>
                   </select>
                 </div>
