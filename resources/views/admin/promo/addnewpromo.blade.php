@@ -47,7 +47,7 @@
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="code">Promotion Code <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                  <input type="number" id="promoid" name="promoid" required="required" class="form-control " value="{{ old('promocode')}}" placeholder="Enter Promotion Code" min="1">
+                  <input type="number" id="promoid" name="promoid" required="required" class="form-control " value="{{$cpromo+1}}" placeholder="Enter Promotion Code" min="1">
                 </div>
               </div>
               <div class="item form-group">

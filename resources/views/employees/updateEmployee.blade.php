@@ -72,43 +72,57 @@
                     <option value="manager">Manager</option>
                     <option value="cashier">Cashier</option>
                     <option value="receptionist">Receptionist</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
                     <option value="waiter">Waiter</option>
+                    <option value="dispatcher">Dispatcher</option>
                     @endif
                     @if($employeeRecord->position=='manager')
                     <option value="admin">Admin</option>
                     <option value="cashier">Cashier</option>
                     <option value="receptionist">Receptionist</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
                     <option value="waiter">Waiter</option>
+                    <option value="dispatcher">Dispatcher</option>
                     @endif
                     @if($employeeRecord->position=='cashier')
                     <option value="admin">Admin</option>
                     <option value="manager">Manager</option>
                     <option value="receptionist">Receptionist</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
                     <option value="waiter">Waiter</option>
+                    <option value="dispatcher">Dispatcher</option>
                     @endif
                     @if($employeeRecord->position=='receptionist')
                     <option value="admin">Admin</option>
                     <option value="manager">Manager</option>
                     <option value="cashier">Cashier</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
                     <option value="waiter">Waiter</option>
+                    <option value="dispatcher">Dispatcher</option>
                     @endif
-                    @if($employeeRecord->position=='kitchen staff')
+                    @if($employeeRecord->position=='kitchenStaff')
                     <option value="admin">Admin</option>
                     <option value="manager">Manager</option>
                     <option value="cashier">Cashier</option>
                     <option value="receptionist">Receptionist</option>
                     <option value="waiter">Waiter</option>
+                    <option value="dispatcher">Dispatcher</option>
                     @endif
                     @if($employeeRecord->position=='waiter')
                     <option value="admin">Admin</option>
                     <option value="manager">Manager</option>
                     <option value="cashier">Cashier</option>
                     <option value="receptionist">Receptionist</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
+                    <option value="dispatcher">Dispatcher</option>
+                    @endif
+                    @if($employeeRecord->position=='Dispatcher')
+                    <option value="admin">Admin</option>
+                    <option value="manager">Manager</option>
+                    <option value="cashier">Cashier</option>
+                    <option value="receptionist">Receptionist</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
+                    <option value="waiter">Waiter</option>
                     @endif
                   </select>
                 </div>

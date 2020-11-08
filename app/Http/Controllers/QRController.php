@@ -21,7 +21,7 @@ class QRController extends Controller
     }
     public function generateQR(Request $request)
     {
-        $qrID="";
+        $qrID=" ";
         $user = Auth::user();
         $userFname = $user->empfirstname;
         $userLname = $user->emplastname;
@@ -33,7 +33,7 @@ class QRController extends Controller
             ->get();
         foreach($emp_info as $emp){
         $qrID=$emp->empid;
-        $qrID= (string) $qrID;
+        $qrID=(string)$qrID;
         }
 
 
@@ -42,7 +42,7 @@ class QRController extends Controller
             \QrCode::size(500)
                 ->format('png')
                 ->generate('https://cateru.zenithdevgroup.me', public_path('/images/qrcode.png'));
-            return view('qrCode', compact('userImage', 'userFname', 'userLname', 'emp_info'));
+            return view('qrCode', compact('userImage', 'userFname', 'userLname', 'emp_info','qrID'));
         }
         return view('qrCode', compact('userImage', 'userFname', 'userLname', 'emp_info','qrID'));
     }

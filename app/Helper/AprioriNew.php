@@ -14,6 +14,9 @@ class AprioriNew
         $this->confidence = $confidence;
         $this->rules = [];
     }
+      //$large set contains frequent k-length item sets.
+      private $large=[];
+    
     public function support($sample): float
     {
         return $this->frequency($sample) / count($this->samples);
@@ -68,7 +71,7 @@ class AprioriNew
             foreach ($samples as $y) {
                 //merge the pairings that are not the same
                 if (count(array_merge(array_diff($x, $y), array_diff($y, $x))) != 2) {
-                    //continue if !=2 becuase that means its hasn't been paired yet
+                    //continue if !=2 because it means that there are still parings left
                     continue;
                 }
                 $candidate = array_values(array_unique(array_merge($x, $y)));
@@ -127,6 +130,7 @@ class AprioriNew
     private function generateAllRules()
     {
         //k=2 to skip the original item sets
+        //large is the set containing frequent k-length item sets 
         for ($k = 2; isset($this->large[$k]); ++$k) {
             foreach ($this->large[$k] as $frequent) {
                 $this->generateRules($frequent);

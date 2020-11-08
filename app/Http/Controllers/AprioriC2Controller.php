@@ -10,6 +10,87 @@ use Illuminate\Support\Facades\DB;
 
 class AprioriC2Controller extends Controller
 {
+    // public function analyzation(){
+    //   //  $user = Auth::user();
+    //     // $userFname = $user->empfirstname;
+    //     // $userLname = $user->emplastname;
+    //     // $userImage = $user->image;
+    //     $samples = $this->getTransactions();
+    //     $sc = $this->getSupportandConfidence();
+    //     if (count($sc) == 0) {
+    //         $support = '';
+    //         $confidence = '';
+    //         $support = 75 / 100;
+    //         $confidence = 75 / 100;
+    //     } else {
+    //         $support = '';
+    //         $confidence = '';
+    //         foreach ($sc as $row) {
+    //             $support = $row->support / 100;
+    //             $confidence = $row->confidence / 100;
+    //         }
+    //     }
+    //     $apriori = new AprioriNew($samples, $support, $confidence);
+    //   //  $pairs=$apriori->apriori();
+    //     // $pairs=$apriori->getRules();
+    //      $pairs=$apriori->do_predict([12]);
+    //      $menu = [];
+    //    $groupedData = [];
+
+    //    $transactions = DB::table('apriori')
+    //        ->join('menus', 'apriori.menuID', '=', 'menus.menuID')
+    //        ->selectRaw('group_concat(menus.name) as name')
+    //        ->selectRaw('group_concat(menus.menuID) as menuID')
+    //        ->selectRaw('group_concat(menus.image) as image')
+    //        ->selectRaw('group_concat(menus.details) as details')
+    //        ->selectRaw('group_concat(menus.servingsize) as servingsize')
+    //        ->selectRaw('group_concat(menus.price) as price')
+    //        ->selectRaw('group_concat(menus.subcatid) as subcatid')
+    //        ->groupBy('apriori.groupNumber')
+    //        ->havingRaw('menuID', $pairs)
+    //        ->get();
+    //        foreach ($transactions as $row) {
+    //         $menu[] = explode(",", $row->menuID);
+    //     }
+    //     for ($index = 0; $index < count($menu); $index++) {
+    //         foreach ($menu[$index] as $Smenus) {
+    //             if ($Smenus != 12) {
+    //                 $groupedData[] = $Smenus;
+    //             }
+    //         }
+    //     }
+    //     $final = array_unique($groupedData);
+    //     $groupedData = [];
+    //     $data;
+    //     foreach ($final as $row) {
+    //         $data = DB::table('menus')->where('menuID', $row)->get();
+    //         array_push($groupedData, $row);
+    //     }
+    //     $data = [];
+    //     for ($i = 0; $i < count($groupedData); $i++) {
+    //         $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+ 
+    //         foreach ($t as $a) {
+    //             array_push($data, array(
+    //                 'name' => $a->name,
+    //                 'menuID' => $a->menuID,
+    //                 'image' => asset('/menu/menu_images/'.$a->image),
+    //                 'details' => $a->details,
+    //                 'price'=> $a->price,
+    //                 'servingsize' => $a->servingsize,
+    //                 'subcatid'=> $a->subcatid
+    //             ));
+    //         }
+    //     }
+    //        dd($groupedData);
+    //     //   $this->parr($pairs);
+    // }
+    // private function parr($arr) {
+    //     echo "<pre>";
+    //     print_r(json_encode($arr));
+    //     echo "</pre>";
+    // }
+
     //generating apriori page
     public function generateAprioriPage()
     {
@@ -112,57 +193,73 @@ class AprioriC2Controller extends Controller
    //sending the recommendations to the mobile side
    public function sendApriori($menuId)
    {
-       $menu = [];
-       $groupedData = [];
+    $samples = $this->getTransactions();
+    $sc = $this->getSupportandConfidence();
+    if (count($sc) == 0) {
+        $support = '';
+        $confidence = '';
+        $support = 75 / 100;
+        $confidence = 75 / 100;
+    } else {
+        $support = '';
+        $confidence = '';
+        foreach ($sc as $row) {
+            $support = $row->support / 100;
+            $confidence = $row->confidence / 100;
+        }
+    }
+    $apriori = new AprioriNew($samples, $support, $confidence);
+  //  $pairs=$apriori->apriori();
+    // $pairs=$apriori->getRules();
+     $pairs=$apriori->do_predict([$menuId]);
+     $menu = [];
+   $groupedData = [];
 
-        $transactions = DB::table('apriori')
-            ->join('menus', 'apriori.menuID', '=', 'menus.menuID')
-            ->selectRaw('group_concat(menus.name) as name')
-            ->selectRaw('group_concat(menus.menuID) as menuID')
-            ->selectRaw('group_concat(menus.image) as image')
-            ->selectRaw('group_concat(menus.details) as details')
-            ->selectRaw('group_concat(menus.servingsize) as servingsize')
-            ->selectRaw('group_concat(menus.price) as price')
-            ->selectRaw('group_concat(menus.subcatid) as subcatid')
-            ->groupBy('apriori.groupNumber')
-            ->havingRaw('menuID', [$menuId])
-            ->get();
-
-
+   $transactions = DB::table('apriori')
+       ->join('menus', 'apriori.menuID', '=', 'menus.menuID')
+       ->selectRaw('group_concat(menus.name) as name')
+       ->selectRaw('group_concat(menus.menuID) as menuID')
+       ->selectRaw('group_concat(menus.image) as image')
+       ->selectRaw('group_concat(menus.details) as details')
+       ->selectRaw('group_concat(menus.servingsize) as servingsize')
+       ->selectRaw('group_concat(menus.price) as price')
+       ->selectRaw('group_concat(menus.subcatid) as subcatid')
+       ->groupBy('apriori.groupNumber')
+       ->havingRaw('menuID', $pairs)
+       ->get();
        foreach ($transactions as $row) {
-           $menu[] = explode(",", $row->menuID);
-       }
-       for ($index = 0; $index < count($menu); $index++) {
-           foreach ($menu[$index] as $Smenus) {
-               if ($Smenus != $menuId) {
-                   $groupedData[] = $Smenus;
-               }
-           }
-       }
-       $final = array_unique($groupedData);
-       $groupedData = [];
-       $data;
-       foreach ($final as $row) {
-           $data = DB::table('menus')->where('menuID', $row)->get();
-           array_push($groupedData, $row);
-       }
-       $data = [];
-       for ($i = 0; $i < count($groupedData); $i++) {
-           $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
-
-            foreach ($t as $a) {
-                array_push($data, array(
-                    'name' => $a->name,
-                    'menuID' => $a->menuID,
-                    'image' => asset('/menu/menu_images/'.$a->image),
-                    'details' => $a->details,
-                    'price'=> $a->price,
-                    'servingsize' => $a->servingsize,
-                    'subcatid'=> $a->subcatid
-                ));
+        $menu[] = explode(",", $row->menuID);
+    }
+    for ($index = 0; $index < count($menu); $index++) {
+        foreach ($menu[$index] as $Smenus) {
+            if ($Smenus != $menuId) {
+                $groupedData[] = $Smenus;
             }
         }
+    }
+    $final = array_unique($groupedData);
+    $groupedData = [];
+    $data;
+    foreach ($final as $row) {
+        $data = DB::table('menus')->where('menuID', $row)->get();
+        array_push($groupedData, $row);
+    }
+    $data = [];
+    for ($i = 0; $i < count($groupedData); $i++) {
+        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
 
+        foreach ($t as $a) {
+            array_push($data, array(
+                'name' => $a->name,
+                'menuID' => $a->menuID,
+                'image' => asset('/menu/menu_images/'.$a->image),
+                'details' => $a->details,
+                'price'=> $a->price,
+                'servingsize' => $a->servingsize,
+                'subcatid'=> $a->subcatid
+            ));
+        }
+    }
        return response()->json(['menu' => $data]);
    }
 }

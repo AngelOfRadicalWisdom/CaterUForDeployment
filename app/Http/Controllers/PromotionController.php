@@ -40,16 +40,26 @@ class PromotionController extends Controller
       ->selectRaw('group_concat(menus.menuID) as menuID')
       ->groupBy('apriori.groupNumber')
       ->get();
+      $currentPromo= BundleMenu::orderBy('bundleid', 'DESC')->first();
+      $cpromo=$currentPromo->bundleid;
+    $bestsellers = DB::table('apriori')->select('menuID')->distinct()->get();
+    $bseller=[];
+    foreach ($bestsellers as $row){
+      $bseller[] = explode(',', $row->menuID);
+    
+    }
     $result = [];
     foreach ($suggestedMenus as $row) {
       $result[] = explode(',', $row->menuID);
     }
     $sMenus = array_values($result);
+    $bsellermenus= array_values($bseller);
     $additionalMenus = DB::table('menus')
-      ->whereNotIn('menuID', $sMenus)
+      ->whereNotIn('menuID', $bsellermenus)
+      ->where('deleted_at','=',NULL)
       ->get();
 
-    return view('admin.promo.addnewpromo', compact('userFname', 'userLname', 'sMenus', 'allMenus', 'additionalMenus', 'ItemSets', 'userImage'));
+    return view('admin.promo.addnewpromo', compact('cpromo','userFname', 'userLname', 'sMenus', 'allMenus', 'additionalMenus', 'ItemSets', 'userImage'));
     }
     catch (\PDOException $e) {
       return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
@@ -91,7 +101,7 @@ class PromotionController extends Controller
       }
     }
     try {
-      $promo = $this->customExceptions->addPromoException($request, $allMenus, $suggestedMenus);
+      $this->customExceptions->addPromoException($request, $allMenus, $suggestedMenus);
     } catch (\PDOException $e) {
       return \Response::json(['status' => 500, 'error' => $e->getMessage()]);
     }
@@ -609,4 +619,3 @@ try{
       ]);
     }
 }
-

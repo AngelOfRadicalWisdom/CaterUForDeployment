@@ -67,7 +67,9 @@ class TableController extends BaseController
         $userFname = $user->empfirstname;
         $userLname = $user->emplastname;
         $userImage = $user->image;
-        return view('addtables', compact('userImage', 'userFname', 'userLname'));
+        $currentTable= RestaurantTable::orderBy('tableno', 'DESC')->first();
+        $ctableno=$currentTable->tableno;
+        return view('addtables', compact('userImage', 'userFname', 'userLname','ctableno'));
         }
         catch (\PDOException $e) {
             return back()->withError("Sorry Something Went Wrong")->withInput();
