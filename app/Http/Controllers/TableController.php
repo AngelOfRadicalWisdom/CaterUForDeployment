@@ -184,7 +184,7 @@ class TableController extends BaseController
         ->delete();
 
         return response()->json([
-            'message' => 'Table is set to available'
+            'message' => 'available'
         ]);
     }
     public function tableTransfer($tableno,Request $request){
