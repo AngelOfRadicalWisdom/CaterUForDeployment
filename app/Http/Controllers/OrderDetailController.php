@@ -9,6 +9,7 @@ use App\Category;
 use App\SubCategory;
 use App\Menu;
 use App\Order;
+use App\Kitchen;
 use DB;
 
 class OrderDetailController extends BaseController
@@ -146,10 +147,15 @@ class OrderDetailController extends BaseController
     {
         $status = '';
         $servedQty = OrderDetail::whereId($id)->pluck('qtyServed')->first();
+        $orderDetails = OrderDetail::whereId(4)->first();
+        $kitchen=Kitchen::where('order_id',$orderDetails->order_id)->where('menuID',$orderDetails->menuID)->where('bundleid',$orderDetails->bundleid)->first();
         if ($servedQty === 0) {
             $detail = OrderDetail::find($id);
+            $kitchenRecord=Kitchen::find($kitchen->id);
+            $kitchenRecord->status="served";
             $detail->status = 'served';
             $detail->save();
+            $kitchenRecord->save();
             $status = 'Order is served.';
         } else {
             $status = 'Orders is being prepared.';
