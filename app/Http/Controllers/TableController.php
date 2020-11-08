@@ -171,11 +171,15 @@ class TableController extends BaseController
         ]);
     }
     //mobile set table status to available
-    public function setTableAvailable($tableno)
+    public function setTableAvailable($tableno,Request $request)
     {
         $table = RestaurantTable::find($tableno);
         $table->status = 'Available';
         $table->save();
+
+        $kitchen = DB::table('kitchenrecords')
+        ->where('order_id',$request->orderId)
+        ->delete();
 
         return response()->json([
             'message' => 'Table is set to available'
