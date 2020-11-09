@@ -31,22 +31,22 @@ class category extends Seeder
             [
                 'categoryid'=>4,
                 'categoryname'=> 'Pork',
-                'description' => 'Loriem Ipsum'
+                'description' => 'Pork Menus'
             ],
             [
                 'categoryid'=>5,
                 'categoryname'=> 'Rice',
-                'description' => 'Loriem Ipsum'
+                'description' => 'Rice Menus'
             ],
             [
                 'categoryid'=>6,
                 'categoryname'=> 'Dessert',
-                'description' => 'Loriem Ipsum'
+                'description' => 'Dessert Menus'
             ],
             [
                 'categoryid'=>7,
                 'categoryname'=> 'Drinks',
-                'description' => 'Loriem Ipsum'
+                'description' => 'Drinks Menus'
             ],
         ];
         DB::table('categories')->insert($categories);

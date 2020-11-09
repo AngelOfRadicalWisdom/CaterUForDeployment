@@ -13,7 +13,7 @@ class Kitchen extends Migration
      */
     public function up()
     {
-        Schema::create('kitchenRecords', function (Blueprint $table) {
+        Schema::create('kitchenrecords', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->unsigned();
             $table->integer('menuID')->unsigned()->nullable();

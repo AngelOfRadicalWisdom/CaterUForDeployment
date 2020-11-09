@@ -15,45 +15,60 @@ class employeeSeeder extends Seeder
             [
                 'empfirstname' =>  'Myra',
                 'emplastname'  =>  'Pelostratos',
-                'username'  =>  'adminmyra',
+                'username'  =>  'amyra',
                 'password'  =>  bcrypt('123456'),
                 'position'  => 'admin'
             ],
             [
                 'empfirstname' =>  'Jose',
                 'emplastname'  =>  'Dela Cruz',
-                'username'  =>  'cashierjose',
+                'username'  =>  'cjose',
                 'password'  =>  bcrypt('123456'),
                 'position'  => 'cashier'
             ],
             [
                 'empfirstname' =>  'Cardo',
                 'emplastname'  =>  'Dalisay',
-                'username'  =>  'waitercardo',
+                'username'  =>  'wcardo',
                 'password'  =>  bcrypt('123456'),
                 'position'  => 'waiter'
             ],
             [
                 'empfirstname' =>  'Elaine',
                 'emplastname'  =>  'Perez',
-                'username'  =>  'waiterelaine',
+                'username'  =>  'kelaine',
                 'password'  =>  bcrypt('123456'),
-                'position'  => 'waiter'
+                'position'  => 'kitchenStaff'
             ],
             [
                 'empfirstname' =>  'Richard',
                 'emplastname'  =>  'Gomez',
-                'username'  =>  'receptionistrichard',
+                'username'  =>  'rrichard',
                 'password'  =>  bcrypt('123456'),
                 'position'  => 'receptionist'
             ],
             [
                 'empfirstname' =>  'Mi Soo',
                 'emplastname'  =>  'Kim',
-                'username'  =>  'kim101',
-                'password'  =>  bcrypt('1234'),
+                'username'  =>  'akim',
+                'password'  =>  bcrypt('123456'),
                 'position'  => 'admin'
             ],
+            [
+                'empfirstname' =>  'Angelo',
+                'emplastname'  =>  'De la Cruz',
+                'username'  =>  'dangelo',
+                'password'  =>  bcrypt('123456'),
+                'position'  => 'dispatcher'
+            ],
+            [
+                'empfirstname' =>  'Tanya',
+                'emplastname'  =>  'Guerrero',
+                'username'  =>  'mtanya',
+                'password'  =>  bcrypt('123456'),
+                'position'  => 'manager'
+            ],
+
 
         ];
         DB::table('employees')->insert($employees);
