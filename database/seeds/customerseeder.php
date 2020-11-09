@@ -40,7 +40,7 @@ class CustomerSeeder extends Seeder
             [
                 'custid'=>6,
                 'name'  => 'Rex',
-                'phonenumber' => '094733578734'
+                'phonenumber' => '094733578738'
             ],
             [
                 'custid'=>7,
