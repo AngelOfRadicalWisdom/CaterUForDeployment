@@ -144,24 +144,21 @@ class CustomerController extends Controller
      foreach($data as $value){
             foreach($value as $key){
                if($key['bundleid'] != null){
-                   $bundle = DB::table('bundles')
-                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
-                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
-                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','!=','Drinks')
-                   ->whereOr('categories.categoryname','!=','Dessert')
-                   ->where('bundles.bundleid',$key['bundleid'])
-                   ->get();
-               }else{
-                $kitchenorders = new Kitchen();
-                $kitchenorders->orderQty = $key['orderQty'];
-                $kitchenorders->menuID = $key["menuID"];
-                $kitchenorders->bundleid = $key["bundleid"];
-                $kitchenorders->order_id = $order_id;
-                $kitchenorders->status = 'waiting';
-                $kitchenorders->save();
+                $bundles = $this->getMealBundles(
+                    $key['bundleid'], 
+                    $order_id,
+                    $key['orderQty']
+                );
                }
+            //    }else{
+            //     $kitchenorders = new Kitchen();
+            //     $kitchenorders->orderQty = $key['orderQty'];
+            //     $kitchenorders->menuID = $key["menuID"];
+            //     $kitchenorders->bundleid = $key["bundleid"];
+            //     $kitchenorders->order_id = $order_id;
+            //     $kitchenorders->status = 'waiting';
+            //     $kitchenorders->save();
+            //    }
             }
         }
        
@@ -176,6 +173,29 @@ class CustomerController extends Controller
         ]);
     }
 
+    function getMealBundles($bundleid, $order_id,$qty){
+        $bundle = DB::table('bundles')
+                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('categories.categoryname','!=','Drinks')
+                   ->whereOr('categories.categoryname','!=','Dessert')
+                   ->where('bundles.bundleid',$key['bundleid'])
+                   ->get();
+
+        foreach($bundle as $key){
+            $kitchenorders = new Kitchen();
+                $kitchenorders->orderQty = $qty;
+                $kitchenorders->menuID = $key["menuID"];
+                $kitchenorders->bundleid = $key["bundleid"];
+                $kitchenorders->order_id = $order_id;
+                $kitchenorders->status = 'waiting';
+                $kitchenorders->save();
+        }
+
+        return $bundle;
+    }
 
     public function getPhonenumber($custid){
         $c = DB::table('customers')->where('custid',$custid)->get();
