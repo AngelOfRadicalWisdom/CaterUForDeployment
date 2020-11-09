@@ -312,12 +312,12 @@ class TemporaryTableController extends Controller
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
                 $bundles = $this->getMealBundles($order->bundleid);
-              
             }
         }
 
         return response()->json([
-            $bundles
+            'order' =>$order,
+            'bundles'=> $bundles
         ]);
     }
 
@@ -327,6 +327,8 @@ class TemporaryTableController extends Controller
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('categories.categoryname','!=','Drinks')
+                   ->where('categories.categoryname','!=','Dessert')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
         return $kitchen;
