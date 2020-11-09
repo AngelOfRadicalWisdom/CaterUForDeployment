@@ -306,10 +306,29 @@ class TemporaryTableController extends Controller
 
     public function getBarKitchenOrders(){
         $orders = DB::table('kitchenrecords')->get();
+        $kitchen = [];
+        $bar = [];
+
+        foreach($orders as $order){
+            if($order['bundleid']!= null  && $order['menuID']==null ){
+                $bundles = $this->getMealBundles($order['bundleid']);
+            }
+        }
 
         return response()->json([
-            $orders
+            $bundles
         ]);
+    }
+
+    function getMealBundles($bundleid){
+        $kitchen = DB::table('bundles')
+                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('bundles.bundleid',$bundleid)
+                   ->get();
+        return $kitchen;
     }
    
 }
