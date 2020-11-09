@@ -66,7 +66,7 @@ class employeeSeeder extends Seeder
                 'emplastname'  =>  'Guerrero',
                 'username'  =>  'mtanya',
                 'password'  =>  bcrypt('123456'),
-                'position'  => 'manage'
+                'position'  => 'manager'
             ],
 
 
