@@ -320,7 +320,14 @@ class TemporaryTableController extends Controller
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
                     'details'=>$this->getMealBundles($order->bundleid)));
-               
+            }else{
+                array_push($bundles,array(
+                    'kitchen_id'=> $order->id,
+                    'date_ordered' =>$order->created_at,
+                    'order_id'=> $order->order_id,
+                    'status'=> $order->status,
+                    'ordered'=> $order->orderQty,
+                    'details'=>$this->getMealSingle($order->menuID)));
             }
         }
 
@@ -342,5 +349,17 @@ class TemporaryTableController extends Controller
                    ->get();
         return $kitchen;
     }
+
+    function getMealSingle($menuid){
+        $kitchen = DB::table('menus')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('categories.categoryname','!=','Drinks')
+                   ->where('categories.categoryname','!=','Dessert')
+                   ->where('menus.menuID',$menuid)
+                   ->get();
+        return $kitchen;
+    }
+   
    
 }
