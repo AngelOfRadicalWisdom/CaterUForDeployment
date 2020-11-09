@@ -129,8 +129,6 @@ class CustomerController extends Controller
 
         foreach($data as $value){
             foreach($value as $key){
-                // array_push($finalArray, $value);
-            // }
             array_push($finalArray,array(
                 'order_id' =>$key['order_id'],
                 'orderQty' => $key['orderQty'],
@@ -143,19 +141,15 @@ class CustomerController extends Controller
         }
             }
 
-    //         $val = '';
      foreach($data as $value){
             foreach($value as $key){
-            //  for($i= 0; $i < $key["orderQty"]; $i++){
         $kitchenorders = new Kitchen();
         $kitchenorders->orderQty = $key['orderQty'];
         $kitchenorders->menuID = $key["menuID"];
         $kitchenorders->bundleid = $key["bundleid"];
         $kitchenorders->order_id = $order_id;
         $kitchenorders->status = 'waiting';
-    
         $kitchenorders->save();
-        // }
             }
         }
        
