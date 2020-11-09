@@ -314,19 +314,13 @@ class TemporaryTableController extends Controller
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
                 array_push($bundles,array(
+                    'kitchen_id'=> $order->id,
                     'date_ordered' =>$order->created_at,
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-
-                    $this->getMealBundles($order->bundleid)));
-                // foreach($bundles as $b){
-                //     array_push($details,array(
-                //         "itemName" => $b->name,
-                //         "menuID" =>$b->menuID,
-                //         "qty"=>$b->qty
-                //     ));
-                // }
+                    'details'=>$this->getMealBundles($order->bundleid)));
+               
             }
         }
 
@@ -337,7 +331,7 @@ class TemporaryTableController extends Controller
 
     function getMealBundles($bundleid){
         $kitchen = DB::table('bundles')
-        ->select('bundles.name AS bundleName','menus.name','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
+        ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
                    ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
