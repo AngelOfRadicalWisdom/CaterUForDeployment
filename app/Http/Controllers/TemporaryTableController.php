@@ -327,7 +327,7 @@ class TemporaryTableController extends Controller
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-                    'details'=> $this->getMealSingle($order->menuID)));
+                    $this->getMealSingle($order->menuID)));
             }
         }
 
@@ -352,10 +352,7 @@ class TemporaryTableController extends Controller
 
     function getMealSingle($menuid){
      return $kitchen = DB::table('menus')
-                //    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-                //    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                //    ->where('categories.categoryname','!=','Drinks')
-                //    ->where('categories.categoryname','!=','Dessert')
+                    ->select('menus.name AS itemName','menus.menuID')
                    ->where('menus.menuID',$menuid)
                    ->get();
         
