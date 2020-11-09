@@ -311,7 +311,8 @@ class TemporaryTableController extends Controller
 
         foreach($orders as $order){
             if($order['bundleid']!= null  && $order['menuID']==null ){
-                $bundles = $this->getMealBundles($order['bundleid']);
+                // $bundles = $this->getMealBundles($order['bundleid']);
+                $bundles = $order;
             }
         }
 
