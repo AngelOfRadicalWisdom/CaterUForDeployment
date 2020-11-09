@@ -184,15 +184,15 @@ class CustomerController extends Controller
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
 
-        foreach($bundle as $key){
-            $kitchenorders = new Kitchen();
-                $kitchenorders->orderQty = $qty;
-                $kitchenorders->menuID = $key["menuID"];
-                $kitchenorders->bundleid = $key["bundleid"];
-                $kitchenorders->order_id = $order_id;
-                $kitchenorders->status = 'waiting';
-                $kitchenorders->save();
-        }
+        // foreach($bundle as $key){
+        //     $kitchenorders = new Kitchen();
+        //         $kitchenorders->orderQty = $qty;
+        //         $kitchenorders->menuID = $key["menuID"];
+        //         $kitchenorders->bundleid = $key["bundleid"];
+        //         $kitchenorders->order_id = $order_id;
+        //         $kitchenorders->status = 'waiting';
+        //         $kitchenorders->save();
+        // }
 
         return $bundle;
     }
