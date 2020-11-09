@@ -253,7 +253,8 @@ try{
         } catch (\Exception $e) {
             return back()->withError('Something Went Wrong')->withInput();
         }
-        $timein->timein = Carbon::now('Asia/Singapore');
+    //    $timein->timein = Carbon::now('Asia/Singapore');
+        $timein->timein = Carbon::now();
         $timein->user_id = $user->empid;
         $timein->timeout = NULL;
         $timein->save();
@@ -279,7 +280,9 @@ try{
         } catch (\Exception $e) {
             return back()->withError('Something Went Wrong')->withInput();
         }
-        $timeout = EmployeeTime::whereDate('timein', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id', $user->empid)->update(['timeout' => Carbon::now('Asia/Singapore')]);
+        // $timeout = EmployeeTime::whereDate('timein', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id', $user->empid)->update(['timeout' => Carbon::now('Asia/Singapore')]);
+        // return redirect('/employeedashboard')->with('success', 'Timeout Success');
+        $timeout = EmployeeTime::whereDate('timein', '=', Carbon::today('Asia/Singapore')->toDateString())->where('user_id', $user->empid)->update(['timeout' => Carbon::now()]);
         return redirect('/employeedashboard')->with('success', 'Timeout Success');
     }
     catch (\PDOException $e) {
