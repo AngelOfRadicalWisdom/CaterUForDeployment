@@ -151,7 +151,7 @@ class CustomerController extends Controller
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                    ->where('categories.categoryname','!=','Drinks')
                    ->whereOr('categories.categoryname','!=','Dessert')
-                   ->where('bundleid',$key['bundleid'])
+                   ->where('bundles.bundleid',$key['bundleid'])
                    ->get();
                }else{
                 $kitchenorders = new Kitchen();
