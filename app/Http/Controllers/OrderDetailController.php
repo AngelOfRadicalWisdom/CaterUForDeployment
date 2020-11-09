@@ -147,7 +147,7 @@ class OrderDetailController extends BaseController
     {
         $status = '';
         $servedQty = OrderDetail::whereId($id)->pluck('qtyServed')->first();
-        $orderDetails = OrderDetail::whereId(4)->first();
+        $orderDetails = OrderDetail::whereId($id)->first();
         $kitchen=Kitchen::where('order_id',$orderDetails->order_id)->where('menuID',$orderDetails->menuID)->where('bundleid',$orderDetails->bundleid)->first();
         if ($servedQty === 0) {
             $detail = OrderDetail::find($id);
