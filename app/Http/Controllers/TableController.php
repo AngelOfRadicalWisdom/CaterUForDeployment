@@ -190,7 +190,7 @@ class TableController extends BaseController
         $table->save();
 
         $kitchen = DB::table('kitchenrecords')
-        ->where('orderId',$request->orderId)
+        ->where('order_id',$request->orderId)
         ->delete();
 
         return response()->json([
