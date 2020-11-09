@@ -144,21 +144,19 @@ class CustomerController extends Controller
      foreach($data as $value){
             foreach($value as $key){
                if($key['bundleid'] != null){
-                $bundles = $this->getMealBundles(
-                    $key['bundleid'], 
-                    $order_id,
-                    $key['orderQty']
-                );
+                $bundles = $this->getMealBundles($key['bundleid']);
+                foreach($bundles as $kitchen){
+                    foreach($bundle as $key){
+                        $kitchenorders = new Kitchen();
+                            $kitchenorders->orderQty =  $key['orderQty'];
+                            $kitchenorders->menuID = $key["menuID"];
+                            $kitchenorders->bundleid = $key["bundleid"];
+                            $kitchenorders->order_id = $order_id;
+                            $kitchenorders->status = 'waiting';
+                            $kitchenorders->save();
+                    }
+                }
                }
-            //    }else{
-            //     $kitchenorders = new Kitchen();
-            //     $kitchenorders->orderQty = $key['orderQty'];
-            //     $kitchenorders->menuID = $key["menuID"];
-            //     $kitchenorders->bundleid = $key["bundleid"];
-            //     $kitchenorders->order_id = $order_id;
-            //     $kitchenorders->status = 'waiting';
-            //     $kitchenorders->save();
-            //    }
             }
         }
        
@@ -179,8 +177,8 @@ class CustomerController extends Controller
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','!=','Drinks')
-                   ->whereOr('categories.categoryname','!=','Dessert')
+                   ->where('categories.categoryname','==','Drinks')
+                   ->whereOr('categories.categoryname','==','Dessert')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
 
