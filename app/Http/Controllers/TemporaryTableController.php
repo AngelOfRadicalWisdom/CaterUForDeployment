@@ -320,7 +320,7 @@ class TemporaryTableController extends Controller
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
                     'details'=>$this->getMealBundles($order->bundleid)));
-            }else{
+            }else if( $order->bundleid == null  && $order->menuID !=null ){
                 array_push($bundles,array(
                     'kitchen_id'=> $order->id,
                     'date_ordered' =>$order->created_at,
