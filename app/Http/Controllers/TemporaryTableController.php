@@ -310,10 +310,10 @@ class TemporaryTableController extends Controller
         $bar = [];
 
         foreach($orders as $order){
-            if($order['bundleid']!= null  && $order['menuID']==null ){
+            // if($order['bundleid']!= null  && $order['menuID']==null ){
                 // $bundles = $this->getMealBundles($order['bundleid']);
                 $bundles = $order;
-            }
+            // }
         }
 
         return response()->json([
