@@ -171,7 +171,7 @@ class CustomerController extends Controller
         ]);
     }
 
-    function getMealBundles($bundleid, $order_id,$qty){
+    function getMealBundles($bundleid){
         $bundle = DB::table('bundles')
                    ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
