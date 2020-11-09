@@ -177,7 +177,8 @@ class CustomerController extends Controller
         return response()->json([
             // 'finalArry' => $order_id,
             // 'request' => $data
-            $bundles
+            'bar' => $barOrders,
+            'kitchen'=> $kitchenOrders
         ]);
     }
 
