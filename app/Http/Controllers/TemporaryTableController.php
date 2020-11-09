@@ -313,20 +313,22 @@ class TemporaryTableController extends Controller
 
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
-                array_push($bundles,($this->getMealBundles($order->bundleid)));
-                // foreach($bundles as $b){
-                //     array_push($details,array(
-                //         "itemName" => $b->name,
-                //         "menuID" =>$b->menuID,
-                //         "qty"=>$b->qty
-                //     ));
-                // }
+                array_push($bundles,(
+                   
+                    $this->getMealBundles($order->bundleid)));
+                foreach($bundles as $b){
+                    array_push($details,array(
+                        "itemName" => $b->name,
+                        "menuID" =>$b->menuID,
+                        "qty"=>$b->qty
+                    ));
+                }
 
             }
         }
 
         return response()->json([
-            'details' =>$bundles
+            'details' =>$orders
         ]);
     }
 
