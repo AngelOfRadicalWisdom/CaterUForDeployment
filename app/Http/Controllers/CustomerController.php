@@ -130,7 +130,6 @@ class CustomerController extends Controller
         foreach($data as $value){
             foreach($value as $key){
             array_push($finalArray,array(
-            
                 'order_id' =>$key['order_id'],
                 'orderQty' => $key['orderQty'],
                 'qtyServed' =>$key['orderQty'],
@@ -144,23 +143,36 @@ class CustomerController extends Controller
 
      foreach($data as $value){
             foreach($value as $key){
-        $kitchenorders = new Kitchen();
-        $kitchenorders->orderQty = $key['orderQty'];
-        $kitchenorders->menuID = $key["menuID"];
-        $kitchenorders->bundleid = $key["bundleid"];
-        $kitchenorders->order_id = $order_id;
-        $kitchenorders->status = 'waiting';
-        $kitchenorders->save();
+               if($key['bundleid'] != null){
+                   $bundle = DB::table('bundles')
+                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('categories.categoryname','!=','Drinks')
+                   ->whereOr('categories.categoryname','!=','Dessert')
+                   ->where('bundleid',$key['bundleid'])
+                   ->get();
+               }else{
+                $kitchenorders = new Kitchen();
+                $kitchenorders->orderQty = $key['orderQty'];
+                $kitchenorders->menuID = $key["menuID"];
+                $kitchenorders->bundleid = $key["bundleid"];
+                $kitchenorders->order_id = $order_id;
+                $kitchenorders->status = 'waiting';
+                $kitchenorders->save();
+               }
             }
         }
        
 
-        OrderDetail::insert($finalArray);
+        // OrderDetail::insert($finalArray);
        
         DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
-            'finalArry' => $order_id,
-            'request' => $data
+            // 'finalArry' => $order_id,
+            // 'request' => $data
+            $bundle
         ]);
     }
 
