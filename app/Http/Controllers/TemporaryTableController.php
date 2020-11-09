@@ -307,17 +307,25 @@ class TemporaryTableController extends Controller
     public function getBarKitchenOrders(){
         $orders = DB::table('kitchenrecords')->get();
         $kitchen = [];
+        $details=[];
         $bar = [];
 
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
                 $bundles = $this->getMealBundles($order->bundleid);
+                foreach($bundles as $b){
+                    array_push($details,array(
+                        "itemName" => $b['name'],
+                        "menuID" =>$b['menuID'],
+                        "qty"=>$b['qty']
+                    ));
+                }
+
             }
         }
 
         return response()->json([
-            'order' =>$order,
-            'bundles'=> $bundles
+            'details' =>$details
         ]);
     }
 
