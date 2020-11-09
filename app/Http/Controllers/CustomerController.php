@@ -145,7 +145,7 @@ class CustomerController extends Controller
             foreach($value as $key){
                if($key['bundleid'] != null){
                 $barOrders = $this->getBarBundles($key['bundleid']);
-                $kitchenOrders =$this->getMealBundles($key['bundleid']);
+                // $kitchenOrders =$this->getMealBundles($key['bundleid']);
                 foreach($barOrders as $bar){
                         $kitchenorders = new Kitchen();
                             $kitchenorders->orderQty =  $key['orderQty'];
@@ -156,17 +156,14 @@ class CustomerController extends Controller
                             $kitchenorders->save();
                    
                 }
-                foreach($kitchenOrders as $kitchen){
-                    $kitchenorders = new Kitchen();
-                        $kitchenorders->orderQty =  $key['orderQty'];
-                        $kitchenorders->menuID = $key['menuID'];
-                        $kitchenorders->bundleid = $key['bundleid'];
-                        $kitchenorders->order_id = $order_id;
-                        $kitchenorders->status = 'waiting';
-                        $kitchenorders->save();
-               
-            }
                }
+               $kitchenorders = new Kitchen();
+                            $kitchenorders->orderQty =  $key['orderQty'];
+                            $kitchenorders->menuID =$key['menuID'];
+                            $kitchenorders->bundleid = $key['bundleid'];
+                            $kitchenorders->order_id = $order_id;
+                            $kitchenorders->status = 'waiting';
+                            $kitchenorders->save();
             }
         }
        
@@ -178,7 +175,7 @@ class CustomerController extends Controller
             // 'finalArry' => $order_id,
             // 'request' => $data
             'bar' => $barOrders,
-            'kitchen'=> $kitchenOrders
+           
         ]);
     }
 
