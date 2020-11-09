@@ -28,7 +28,7 @@ Route::middleware('cors:api')->get('/getItems/{orderId}','TemporaryTableControll
 Route::middleware('cors:api')->post('/settableavailable/{tableno}','TableController@setTableAvailable');
 Route::middleware('cors:api')->post('/settableoccupied/{tableno}','TableController@setTableOccupied');
 Route::middleware('cors:api')->get('/servingStatusByTableNo/{tableno}','TemporaryTableController@servingStatusByTableNo');
-
+Route::middleware('cors:api')->post('/table/clearTable/{tableNo}','TableController@clearTable');
 
 Route::middleware('cors:api')->get('/getKitchenOrders','TemporaryTableController@getKitchenOrders');
 Route::middleware('cors:api')->post('/prepare/{id}','TemporaryTableController@prepare');

@@ -179,14 +179,25 @@ class TableController extends BaseController
         $table->status = 'Available';
         $table->save();
 
+        return response()->json([
+            'message' => 'available'
+        ]);
+    }
+    public function clearTable($tableno,Request $request)
+    {
+        $table = RestaurantTable::find($tableno);
+        $table->status = 'Available';
+        $table->save();
+
         $kitchen = DB::table('kitchenrecords')
-        ->where('order_id',$request->orderId)
+        ->where('orderId',$request->orderId)
         ->delete();
 
         return response()->json([
             'message' => 'available'
         ]);
     }
+
     public function tableTransfer($tableno,Request $request){
         $table=RestaurantTable::find($request->tableno);
        
@@ -204,16 +215,6 @@ class TableController extends BaseController
        
         return response()->json([
             'message' => 'updated'
-        ]);
-    }
-
-    public function clearTable(Request $request){
-        $table = RestaurantTable::find($request->tableno);
-        $table->status = 'Available';
-        $table->save();
-
-        return response()->json([
-            'message' => 'Table Cleared'
         ]);
     }
 

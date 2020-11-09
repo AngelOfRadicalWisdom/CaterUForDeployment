@@ -130,6 +130,7 @@ class CustomerController extends Controller
         foreach($data as $value){
             foreach($value as $key){
             array_push($finalArray,array(
+                'created_at' => Carbon::today('Asia/Singapore')->toDateString(), 
                 'order_id' =>$key['order_id'],
                 'orderQty' => $key['orderQty'],
                 'qtyServed' =>$key['orderQty'],
