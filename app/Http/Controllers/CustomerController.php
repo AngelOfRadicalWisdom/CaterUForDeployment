@@ -146,7 +146,7 @@ class CustomerController extends Controller
                if($key['bundleid'] != null){
                 $bundles = $this->getMealBundles($key['bundleid']);
                 foreach($bundles as $kitchen){
-                    foreach($bundle as $key){
+                    foreach($bundles as $key){
                         $kitchenorders = new Kitchen();
                             $kitchenorders->orderQty =  $key['orderQty'];
                             $kitchenorders->menuID = $key["menuID"];
