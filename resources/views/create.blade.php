@@ -32,9 +32,9 @@
                         <div class="form-group form-button">
                             <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <a href="{{url('/createaccount')}}" class="signup-image-link">Create an account instead?</a>
-                        </div>
+                        </div> -->
                     </form>
                 </div>
             </div>
