@@ -192,19 +192,8 @@ class CustomerController extends Controller
 
         return $bar;
     }
-    function getMealBundles($bundleid){
-        $kitchen = DB::table('bundles')
-                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
-                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
-                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','!=','Drinks')
-                   ->whereOr('categories.categoryname','!=','Dessert')
-                   ->where('bundles.bundleid',$bundleid)
-                   ->get();
 
-        return $kitchen;
-    }
+    
 
     public function getPhonenumber($custid){
         $c = DB::table('customers')->where('custid',$custid)->get();

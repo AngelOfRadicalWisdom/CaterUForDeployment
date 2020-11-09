@@ -303,4 +303,13 @@ class TemporaryTableController extends Controller
             'orders' => $orders
         ]);
     }
+
+    public function getBarKitchenOrders(){
+        $orders = DB::table('kitchenrecords')->get();
+
+        return response()->json([
+            $orders
+        ]);
+    }
+   
 }
