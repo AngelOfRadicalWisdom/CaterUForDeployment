@@ -146,15 +146,15 @@ class CustomerController extends Controller
                if($key['bundleid'] != null){
                 $bundles = $this->getMealBundles($key['bundleid']);
                 foreach($bundles as $kitchen){
-                    foreach($bundles as $key){
+                    
                         $kitchenorders = new Kitchen();
-                            $kitchenorders->orderQty =  $key->orderQty;
-                            $kitchenorders->menuID = $key->menuID;
-                            $kitchenorders->bundleid = $key->bundleid;
+                            $kitchenorders->orderQty =  $key['orderQty'];
+                            $kitchenorders->menuID = $key['menuID'];
+                            $kitchenorders->bundleid = $key['bundleid'];
                             $kitchenorders->order_id = $order_id;
                             $kitchenorders->status = 'waiting';
                             $kitchenorders->save();
-                    }
+                   
                 }
                }
             }
