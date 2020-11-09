@@ -169,7 +169,7 @@ class CustomerController extends Controller
         return response()->json([
             // 'finalArry' => $order_id,
             // 'request' => $data
-            $bundle
+            $bundles
         ]);
     }
 
