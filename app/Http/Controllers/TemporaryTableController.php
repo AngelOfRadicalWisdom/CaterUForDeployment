@@ -419,8 +419,8 @@ class TemporaryTableController extends Controller
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->whereOr('categories.categoryname','=','Dessert')
                    ->where('categories.categoryname','=','Drinks')
+                    ->whereOr('categories.categoryname','=','Dessert')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
        
