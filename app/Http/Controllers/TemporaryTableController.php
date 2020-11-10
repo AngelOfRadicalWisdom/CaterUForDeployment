@@ -274,15 +274,6 @@ class TemporaryTableController extends Controller
         ->where('categories.categoryname', '=', 'Drinks')
         ->where('kitchenrecords.status', '=', 'ready')
         ->orderBy('kitchenrecords.updated_at', 'desc')->get();
-
-        // foreach($orders as $order){
-        //     array_push($list,array(
-        //         'date_ordered' => $order->date_ordered.toTimeString(),
-        //         'name'=> $list->name
-
-        //     ));
-        // }
-
         return response()->json([
             'orders' => $orders
         ]);
@@ -337,6 +328,62 @@ class TemporaryTableController extends Controller
     }
 
     function getMealSingle($menuid){
+     return $kitchen = DB::table('menus')
+                    ->select('menus.name AS itemName','menus.menuID')
+                   ->where('menus.menuID',$menuid)
+                   ->get();
+        
+    }
+
+    public function getBarOrders($status){
+        $orders = DB::table('kitchenrecords')
+        ->where('status',$status)
+        ->get();
+        $bundles = [];
+        $kitchen = [];
+        $details=[];
+        $bar = [];
+
+        foreach($orders as $order){
+            if( $order->bundleid != null  && $order->menuID !=null ){
+                array_push($bundles,array(
+                    'kitchen_id'=> $order->id,
+                    'date_ordered' =>$order->created_at,
+                    'order_id'=> $order->order_id,
+                    'status'=> $order->status,
+                    'ordered'=> $order->orderQty,
+                    'details'=>$this->getMealBundles($order->bundleid)));
+            }else if( $order->bundleid == null  && $order->menuID !=null ){
+                array_push($bundles,array(
+                    'kitchen_id'=> $order->id,
+                    'date_ordered' =>$order->created_at,
+                    'order_id'=> $order->order_id,
+                    'status'=> $order->status,
+                    'ordered'=> $order->orderQty,
+                    'details'=>$this->getMealSingle($order->menuID)));
+            }
+        }
+
+        return response()->json([
+            'details' =>$bundles
+        ]);
+    }
+
+    function getBarBundles($bundleid){
+        $kitchen = DB::table('bundles')
+        ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
+                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('categories.categoryname','!=','Drinks')
+                   ->where('categories.categoryname','!=','Dessert')
+                   ->where('bundles.bundleid',$bundleid)
+                   ->get();
+        return $kitchen;
+    }
+
+    function getBarSingle($menuid){
      return $kitchen = DB::table('menus')
                     ->select('menus.name AS itemName','menus.menuID')
                    ->where('menus.menuID',$menuid)
