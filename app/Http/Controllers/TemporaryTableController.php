@@ -356,8 +356,32 @@ class TemporaryTableController extends Controller
         $details=[];
         $bar = [];
 
+        // foreach($orders as $order){
+        //     if( $order->bundleid != null  && $order->menuID !=null ){
+        //         array_push($bundles,array(
+        //             'kitchen_id'=> $order->id,
+        //             'date_ordered' =>$order->created_at,
+        //             'order_id'=> $order->order_id,
+        //             'status'=> $order->status,
+        //             'ordered'=> $order->orderQty,
+        //             'details'=>$this->getBarBundles($order->bundleid)));
+        //     }else if( $order->bundleid == null  && $order->menuID != null ){
+        //         $singles = $this->getBarSingle($order->menuID);
+        //         foreach($singles as $single){
+        //             if($single != null ){
+        //             array_push($bundles,array(
+        //                 'kitchen_id'=> $order->id,
+        //                 'date_ordered' =>$order->created_at,
+        //                 'order_id'=> $order->order_id,
+        //                 'status'=> $order->status,
+        //                 'ordered'=> $order->orderQty,
+        //                 'details'=>$single)); 
+        //             }
+        //         }
+        //     }
+        // }
         foreach($orders as $order){
-            if( $order->bundleid != null  && $order->menuID !=null ){
+            if( $order->bundleid != null  && $order->menuID ==null ){
                 array_push($bundles,array(
                     'kitchen_id'=> $order->id,
                     'date_ordered' =>$order->created_at,
@@ -365,7 +389,7 @@ class TemporaryTableController extends Controller
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
                     'details'=>$this->getBarBundles($order->bundleid)));
-            }else if( $order->bundleid == null  && $order->menuID != null ){
+            }else if( $order->bundleid == null  && $order->menuID !=null ){
                 $singles = $this->getBarSingle($order->menuID);
                 foreach($singles as $single){
                     if($single != null ){
@@ -378,6 +402,8 @@ class TemporaryTableController extends Controller
                         'details'=>$single)); 
                     }
                 }
+             
+               
             }
         }
 
