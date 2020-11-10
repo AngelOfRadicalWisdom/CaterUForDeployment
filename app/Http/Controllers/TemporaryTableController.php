@@ -67,24 +67,7 @@ class TemporaryTableController extends Controller
         ]);
     }
     
-    public function getKitchenOrders(){
-        $orders = DB::table('kitchenrecords')
-        ->select('order_details.date_ordered','menus.name','kitchenrecords.status','menus.menuID','kitchenrecords.bundleid')
-        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
-        ->join('order_details', 'order_details.order_id','=','orders.order_id')
-        ->join('menus','menus.menuID','=','kitchenrecords.menuID')
-        ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-        ->join('categories','sub_categories.categoryid','=','categories.categoryid')
-        ->where('categories.categoryname','!=', 'Drinks')
-        ->where('kitchenrecords.status','=','waiting')
-        ->orderBy('kitchenrecords.created_at','asc')->get();
-
-     
-
-        return response()->json([
-            'orders' => $orders
-        ]);
-    }
+    
     public function getDrinkWaitingOrders()
     {
         $orders = DB::table('kitchenrecords')
@@ -296,6 +279,7 @@ class TemporaryTableController extends Controller
         //     array_push($list,array(
         //         'date_ordered' => $order->date_ordered.toTimeString(),
         //         'name'=> $list->name
+
         //     ));
         // }
 
@@ -304,8 +288,10 @@ class TemporaryTableController extends Controller
         ]);
     }
 
-    public function getBarKitchenOrders(){
-        $orders = DB::table('kitchenrecords')->get();
+    public function getKitchenOrders($status){
+        $orders = DB::table('kitchenrecords')
+        ->where('status',$status)
+        ->get();
         $bundles = [];
         $kitchen = [];
         $details=[];
