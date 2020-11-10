@@ -328,7 +328,6 @@ class TemporaryTableController extends Controller
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                    ->where('categories.categoryname','!=','Drinks')
-                   ->where('categories.categoryname','!=','Dessert')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
         return $kitchen;
@@ -341,7 +340,6 @@ class TemporaryTableController extends Controller
                     ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                     ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                     ->where('categories.categoryname','!=','Drinks')
-                    ->where('categories.categoryname','!=','Dessert')
                     ->where('menus.menuID',$menuid)
                     ->get();
         
@@ -356,30 +354,7 @@ class TemporaryTableController extends Controller
         $details=[];
         $bar = [];
 
-        // foreach($orders as $order){
-        //     if( $order->bundleid != null  && $order->menuID !=null ){
-        //         array_push($bundles,array(
-        //             'kitchen_id'=> $order->id,
-        //             'date_ordered' =>$order->created_at,
-        //             'order_id'=> $order->order_id,
-        //             'status'=> $order->status,
-        //             'ordered'=> $order->orderQty,
-        //             'details'=>$this->getBarBundles($order->bundleid)));
-        //     }else if( $order->bundleid == null  && $order->menuID != null ){
-        //         $singles = $this->getBarSingle($order->menuID);
-        //         foreach($singles as $single){
-        //             if($single != null ){
-        //             array_push($bundles,array(
-        //                 'kitchen_id'=> $order->id,
-        //                 'date_ordered' =>$order->created_at,
-        //                 'order_id'=> $order->order_id,
-        //                 'status'=> $order->status,
-        //                 'ordered'=> $order->orderQty,
-        //                 'details'=>$single)); 
-        //             }
-        //         }
-        //     }
-        // }
+        
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
                 array_push($bundles,array(
