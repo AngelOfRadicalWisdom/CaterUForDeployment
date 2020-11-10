@@ -299,6 +299,17 @@ class TemporaryTableController extends Controller
                     'details'=>$this->getMealBundles($order->bundleid)));
             }else if( $order->bundleid == null  && $order->menuID !=null ){
                 array_push($kitchen, $this->getMealSingle($order->menuID));
+                foreach($kitchen as $k){
+                    if($k->menuID == $order->menuID){
+                        array_push($bundles,array(
+                        'kitchen_id'=> $order->id,
+                        'date_ordered' =>$order->created_at,
+                        'order_id'=> $order->order_id,
+                        'status'=> $order->status,
+                        'ordered'=> $order->orderQty,
+                        'details'=>$this->getMealSingle($order->menuID)));
+                    }
+                }
                 // array_push($bundles,array(
                 //     'kitchen_id'=> $order->id,
                 //     'date_ordered' =>$order->created_at,
@@ -330,14 +341,14 @@ class TemporaryTableController extends Controller
 
     function getMealSingle($menuid){
         $orders = [];
-      $kitchen = DB::table('menus')
+        $kitchen = DB::table('menus')
                     ->select('menus.name AS itemName','menus.menuID')
                     ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','!=','Drinks')
-                   ->where('categories.categoryname','!=','Dessert')
-                   ->where('menus.menuID',$menuid)
-                   ->get();
+                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                    ->where('categories.categoryname','!=','Drinks')
+                    ->where('categories.categoryname','!=','Dessert')
+                    ->where('menus.menuID',$menuid)
+                    ->get();
 
                 foreach($kitchen as $k){
                     if($k!= []){
