@@ -353,15 +353,17 @@ class TemporaryTableController extends Controller
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
                     'details'=>$this->getBarBundles($order->bundleid)));
-            }else if( $order->bundleid == null  && $order->menuID !=null ){
+            }else if( $order->bundleid == null  && $order->menuID != null ){
                 array_push($bar, $this->getBarSingle($order->menuID));
-                // array_push($bundles,array(
-                //     'kitchen_id'=> $order->id,
-                //     'date_ordered' =>$order->created_at,
-                //     'order_id'=> $order->order_id,
-                //     'status'=> $order->status,
-                //     'ordered'=> $order->orderQty,
-                //     'details'=>$this->getBarSingle($order->menuID)));
+                if($bar != null){
+                array_push($bundles,array(
+                    'kitchen_id'=> $order->id,
+                    'date_ordered' =>$order->created_at,
+                    'order_id'=> $order->order_id,
+                    'status'=> $order->status,
+                    'ordered'=> $order->orderQty,
+                    'details'=>$bar));
+                }
             }
         }
 
