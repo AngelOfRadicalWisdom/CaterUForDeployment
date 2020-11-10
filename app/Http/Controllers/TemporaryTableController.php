@@ -424,8 +424,8 @@ class TemporaryTableController extends Controller
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
                 $items = $this->getBarBundles($order->bundleid);
-                foreach($items as $items){
-                    if($item!=null){
+                foreach($items as $item){
+                    if($item !=null){
                         array_push($bundles,array(
                             'kitchen_id'=> $order->id,
                             'date_ordered' =>$order->created_at,
