@@ -387,7 +387,7 @@ class TemporaryTableController extends Controller
     }
 
     function getBarBundles($bundleid){
-        $kitchen = DB::table('bundles')
+       return $kitchen = DB::table('bundles')
         // ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
                    ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
@@ -397,7 +397,7 @@ class TemporaryTableController extends Controller
                 // //    ->where('categories.categoryname','=','Drinks')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
-        return $kitchen;
+       
     }
 
     function getBarSingle($menuid){
