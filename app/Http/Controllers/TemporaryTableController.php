@@ -385,7 +385,7 @@ class TemporaryTableController extends Controller
         }
 
         return response()->json([
-            'details' =>$bundleItems
+            'details' =>$bundles
         ]);
     }
 
