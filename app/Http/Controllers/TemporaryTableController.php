@@ -388,13 +388,13 @@ class TemporaryTableController extends Controller
 
     function getBarBundles($bundleid){
         $kitchen = DB::table('bundles')
-        ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
+        // ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
                    ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','=','Dessert')
-                //    ->where('categories.categoryname','=','Drinks')
+                //    ->where('categories.categoryname','=','Dessert')
+                // //    ->where('categories.categoryname','=','Drinks')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
         return $kitchen;
