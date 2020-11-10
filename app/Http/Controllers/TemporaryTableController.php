@@ -301,8 +301,6 @@ class TemporaryTableController extends Controller
                 $singles = $this->getMealSingle($order->menuID);
                 foreach($singles as $single){
                     if($single != null ){
-                        // array_push($kitchen,$single);
-                   
                     array_push($bundles,array(
                         'kitchen_id'=> $order->id,
                         'date_ordered' =>$order->created_at,
@@ -368,15 +366,17 @@ class TemporaryTableController extends Controller
                     'ordered'=> $order->orderQty,
                     'details'=>$this->getBarBundles($order->bundleid)));
             }else if( $order->bundleid == null  && $order->menuID != null ){
-                array_push($bar, $this->getBarSingle($order->menuID));
-                if($bar != null){
-                array_push($bundles,array(
-                    'kitchen_id'=> $order->id,
-                    'date_ordered' =>$order->created_at,
-                    'order_id'=> $order->order_id,
-                    'status'=> $order->status,
-                    'ordered'=> $order->orderQty,
-                    'details'=>$bar));
+                $singles = $this->getBarSingle($order->menuID);
+                foreach($singles as $single){
+                    if($single != null ){
+                    array_push($bundles,array(
+                        'kitchen_id'=> $order->id,
+                        'date_ordered' =>$order->created_at,
+                        'order_id'=> $order->order_id,
+                        'status'=> $order->status,
+                        'ordered'=> $order->orderQty,
+                        'details'=>$single)); 
+                    }
                 }
             }
         }
@@ -394,18 +394,22 @@ class TemporaryTableController extends Controller
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                    ->where('categories.categoryname','=','Drinks')
-                   ->whereOr('categories.categoryname','=','Dessert')
+                   ->orWhere('categories.categoryname','=','Dessert')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
         return $kitchen;
     }
 
     function getBarSingle($menuid){
-     return $kitchen = DB::table('menus')
-                    ->select('menus.name AS itemName','menus.menuID')
-                   ->where('menus.menuID',$menuid)
-                   ->get();
-        
+    
+        return DB::table('menus')
+        ->select('menus.name AS itemName','menus.menuID')
+        ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+        ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+        ->where('categories.categoryname','=','Drinks')
+        ->orWhere('categories.categoryname','=','Dessert')
+        ->where('menus.menuID',$menuid)
+        ->get();
     }
    
    
