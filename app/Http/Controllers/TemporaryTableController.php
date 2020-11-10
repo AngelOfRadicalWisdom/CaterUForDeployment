@@ -352,7 +352,7 @@ class TemporaryTableController extends Controller
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-                    'details'=>$this->getMealBundles($order->bundleid)));
+                    'details'=>$this->getBarBundles($order->bundleid)));
             }else if( $order->bundleid == null  && $order->menuID !=null ){
                 array_push($bundles,array(
                     'kitchen_id'=> $order->id,
@@ -360,7 +360,7 @@ class TemporaryTableController extends Controller
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-                    'details'=>$this->getMealSingle($order->menuID)));
+                    'details'=>$this->getBarSingle($order->menuID)));
             }
         }
 
@@ -376,8 +376,8 @@ class TemporaryTableController extends Controller
                    ->join('menus',"menus.menuID",'=','bundle_details.menuID')
                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','!=','Drinks')
-                   ->where('categories.categoryname','!=','Dessert')
+                   ->where('categories.categoryname','=','Drinks')
+                   ->whereOr('categories.categoryname','=','Dessert')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
         return $kitchen;
@@ -386,6 +386,10 @@ class TemporaryTableController extends Controller
     function getBarSingle($menuid){
      return $kitchen = DB::table('menus')
                     ->select('menus.name AS itemName','menus.menuID')
+                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('categories.categoryname','=','Drinks')
+                   ->whereOr('categories.categoryname','=','Dessert')
                    ->where('menus.menuID',$menuid)
                    ->get();
         
