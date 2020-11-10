@@ -340,7 +340,7 @@ class TemporaryTableController extends Controller
                    ->get();
 
                 foreach($kitchen as $k){
-                    if($k == null ){
+                    if(!$k->isEmpty()){
                         array_push($orders,$k);
                     }
                 }
