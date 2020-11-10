@@ -298,7 +298,12 @@ class TemporaryTableController extends Controller
                     'ordered'=> $order->orderQty,
                     'details'=>$this->getMealBundles($order->bundleid)));
             }else if( $order->bundleid == null  && $order->menuID !=null ){
-                array_push($kitchen, $this->getMealSingle($order->menuID));
+                $singles = $this->getMealSingle($order->menuID);
+                foreach($singles as $single){
+                    if($single != null ){
+                        array_push($kitchen,$single);
+                    }
+                }
                 // foreach($kitchen as $k){
                 //     if($k['menuID'] == $order->menuID){
                 //         array_push($bundles,array(
