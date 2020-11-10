@@ -423,13 +423,25 @@ class TemporaryTableController extends Controller
 
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
-                array_push($bundles,array(
-                    'kitchen_id'=> $order->id,
-                    'date_ordered' =>$order->created_at,
-                    'order_id'=> $order->order_id,
-                    'status'=> $order->status,
-                    'ordered'=> $order->orderQty,
-                    'details'=>$this->getBarBundles($order->bundleid)));
+                $items = $this->getBarBundles($order->bundleid);
+                foreach($items as $items){
+                    if($item!=null){
+                        array_push($bundles,array(
+                            'kitchen_id'=> $order->id,
+                            'date_ordered' =>$order->created_at,
+                            'order_id'=> $order->order_id,
+                            'status'=> $order->status,
+                            'ordered'=> $order->orderQty,
+                            'details'=>$item));
+                    }
+                }
+                // array_push($bundles,array(
+                //     'kitchen_id'=> $order->id,
+                //     'date_ordered' =>$order->created_at,
+                //     'order_id'=> $order->order_id,
+                //     'status'=> $order->status,
+                //     'ordered'=> $order->orderQty,
+                //     'details'=>$this->getBarBundles($order->bundleid)));
             }else if( $order->bundleid == null  && $order->menuID !=null ){
                 $singles = $this->getBarSingle($order->menuID);
                 foreach($singles as $single){
