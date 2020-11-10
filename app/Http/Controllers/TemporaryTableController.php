@@ -302,31 +302,21 @@ class TemporaryTableController extends Controller
                 foreach($singles as $single){
                     if($single != null ){
                         array_push($kitchen,$single);
+                        array_push($bundles,array(
+                            'kitchen_id'=> $order->id,
+                            'date_ordered' =>$order->created_at,
+                            'order_id'=> $order->order_id,
+                            'status'=> $order->status,
+                            'ordered'=> $order->orderQty,
+                            'details'=>$kitchen));
                     }
                 }
-                // foreach($kitchen as $k){
-                //     if($k['menuID'] == $order->menuID){
-                //         array_push($bundles,array(
-                //         'kitchen_id'=> $order->id,
-                //         'date_ordered' =>$order->created_at,
-                //         'order_id'=> $order->order_id,
-                //         'status'=> $order->status,
-                //         'ordered'=> $order->orderQty,
-                //         'details'=>$k));
-                //     }
-                // }
-                // array_push($bundles,array(
-                //     'kitchen_id'=> $order->id,
-                //     'date_ordered' =>$order->created_at,
-                //     'order_id'=> $order->order_id,
-                //     'status'=> $order->status,
-                //     'ordered'=> $order->orderQty,
-                //     'details'=>$this->getMealSingle($order->menuID)));
+               
             }
         }
 
         return response()->json([
-            'details' =>$kitchen
+            'details' =>$bundles
         ]);
     }
 
