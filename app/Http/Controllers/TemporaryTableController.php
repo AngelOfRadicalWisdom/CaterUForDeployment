@@ -389,10 +389,6 @@ class TemporaryTableController extends Controller
     function getBarSingle($menuid){
      return $kitchen = DB::table('menus')
                     ->select('menus.name AS itemName','menus.menuID')
-                    ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                   ->where('categories.categoryname','=','Drinks')
-                   ->where('categories.categoryname','=','Dessert')
                    ->where('menus.menuID',$menuid)
                    ->get();
         
