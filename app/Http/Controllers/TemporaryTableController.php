@@ -329,7 +329,8 @@ class TemporaryTableController extends Controller
     }
 
     function getMealSingle($menuid){
-     return $kitchen = DB::table('menus')
+        $orders = [];
+      $kitchen = DB::table('menus')
                     ->select('menus.name AS itemName','menus.menuID')
                     ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
@@ -337,6 +338,16 @@ class TemporaryTableController extends Controller
                    ->where('categories.categoryname','!=','Dessert')
                    ->where('menus.menuID',$menuid)
                    ->get();
+
+                foreach($kitchen as $k){
+                    if($k == []){
+                        continue;
+                    }else{
+                        array_push($orders,$k);
+                    }
+                }
+
+                return $orders;
         
     }
 
