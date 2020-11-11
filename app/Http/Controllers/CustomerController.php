@@ -203,7 +203,6 @@ class CustomerController extends Controller
     public function assignTable(Request $request, $custid){
         $newCustomer = Customer::find($custid);
         $newCustomer->tableno = $request->tableno;
-        $newCustomer->time_notified = $request->time;
         $newCustomer->status= 'notified';
         $newCustomer->save();
 
