@@ -414,7 +414,6 @@ class TemporaryTableController extends Controller
 
     public function getBarKitchenOrders(){
         $orders = DB::table('kitchenrecords')
-        ->where('status',$status)
         ->get();
         $bundles = [];
 
