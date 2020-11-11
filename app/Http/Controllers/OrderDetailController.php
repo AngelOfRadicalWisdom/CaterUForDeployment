@@ -23,7 +23,7 @@ class OrderDetailController extends BaseController
     ->select('order_details.*','menus.name','menus.price','kitchenrecords.id as kId')
     ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
     ->join('orders', 'orders.order_id', '=', 'order_details.order_id')
-    ->join('kitchenrecords','kitchenrecords.order_id','=','orders_order_id')
+    ->join('kitchenrecords','kitchenrecords.order_id','=','orders.order_id')
     ->where('order_details.bundleid','=',null)
     ->where('order_details.order_id',$order_id)
     ->get();
@@ -34,7 +34,7 @@ class OrderDetailController extends BaseController
             ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
             ->join('menus', 'menus.menuID','=','bundle_details.menuID')
             ->join('orders', 'orders.order_id', '=', 'order_details.order_id')
-            ->join('kitchenrecords','kitchenrecords.order_id','=','orders_order_id')
+            ->join('kitchenrecords','kitchenrecords.order_id','=','orders.order_id')
             ->where('order_details.bundleid','!=',null)
             ->where('order_details.order_id',$order_id)
             ->get();
