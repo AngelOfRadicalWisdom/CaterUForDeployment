@@ -421,9 +421,8 @@ class TemporaryTableController extends Controller
         $bundles = [];
 
         foreach($orders as $order){
-            if( $order->bundleid != null  && $order->menuID ==null ){
+            if( $order->bundleid != null){
                 $items = $this->getBarKitchenBundles($order->bundleid);
-                
                     if($items !=null){
                         array_push($bundles,array(
                             'kitchen_id'=> $order->id,
@@ -433,8 +432,6 @@ class TemporaryTableController extends Controller
                             'ordered'=> $order->orderQty,
                             'details'=>$items));
                     }
-               
-               
             }else if( $order->bundleid == null  && $order->menuID !=null ){
                 $singles = $this->getBarKitchenSingle($order->menuID);
                 foreach($singles as $single){
