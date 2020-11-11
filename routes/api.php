@@ -60,6 +60,7 @@ Route::middleware('cors:api')->post('/order/placeorder/{order_id}','CustomerCont
 Route::middleware('cors:api')->get('/order/myorders/{order_id}','OrderDetailController@orderList');
 Route::middleware('cors:api')->post('/order/setServedQty','OrderDetailController@setServeQty');
 Route::middleware('cors:api')->post('/order/isServed/{id}','OrderDetailController@isServed');
+Route::middleware('cors:api')->post('/status/servedBundle/{id}','OrderDetailController@isServedBundle');
 Route::middleware('cors:api')->get('/getTotal/{order_id}','OrderDetailController@getTotal');
 
 Route::middleware('cors:api')->post('/order/billout/{order_id}','CustomerController@requestBillOut');

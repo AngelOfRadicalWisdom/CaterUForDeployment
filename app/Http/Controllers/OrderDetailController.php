@@ -151,13 +151,12 @@ class OrderDetailController extends BaseController
 
         $kitchen=Kitchen::where('order_id',$orderDetails->order_id)
         ->where('menuID',$orderDetails->menuID)
-        ->where('bundleid',$orderDetails->bundleid)->first();
+        ->first();
+        
         if ($servedQty === 0) {
             $detail = OrderDetail::find($id);
-            $kitchenBundle = Kitchen::find(($kitchen->id)-1);
-            $kitchenRecord=Kitchen::find($kitchen->id);
-            $kitchenBundle->status = "served";
-            $kitchenBundle->save();
+
+            $kitchenRecord= Kitchen::find($kitchen->id);
             $kitchenRecord->status="served";
             $detail->status = 'served';
             $detail->save();
@@ -170,4 +169,34 @@ class OrderDetailController extends BaseController
             'status' => $status
         ]);
     }
+
+    public function isServedBundle($id,Request $request){
+        $status = Kitchen::find($id);
+        $status->status = 'serving';
+        $status->save();
+        $bundle = Kitchen::find($request->id);
+        $bundle->status = 'serving';
+        $bundle->save();
+        
+
+        return response()->json([
+            'message' => 'Status updated to for serving'
+        ]);
+    }
+
+    public function isForServingBundles($id,Request $request)
+    {
+        $status = Kitchen::find($id);
+        $status->status = 'serving';
+        $status->save();
+        $bundle = Kitchen::find($request->id);
+        $bundle->status = 'serving';
+        $bundle->save();
+        
+
+        return response()->json([
+            'message' => 'Status updated to for serving'
+        ]);
+    }
+
 }
