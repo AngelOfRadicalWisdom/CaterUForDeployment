@@ -284,9 +284,7 @@ class TemporaryTableController extends Controller
         ->where('status',$status)
         ->get();
         $bundles = [];
-        $kitchen = [];
-        $details=[];
-        $bar = [];
+        
 
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
@@ -307,7 +305,7 @@ class TemporaryTableController extends Controller
                         'order_id'=> $order->order_id,
                         'status'=> $order->status,
                         'ordered'=> $order->orderQty,
-                        'details'=>$single)); 
+                        'details'=>[$single])); 
                     }
                 }
              
@@ -344,82 +342,12 @@ class TemporaryTableController extends Controller
                     ->get();
         
     }
-
-    // public function getBarOrders($status){
-    //     $orders = DB::table('kitchenrecords')
-    //     ->where('status',$status)
-    //     ->get();
-    //     $bundles = [];
-    //     $kitchen = [];
-    //     $details=[];
-    //     $bar = [];
-
-        
-    //     foreach($orders as $order){
-    //         if( $order->bundleid != null  && $order->menuID ==null ){
-               
-    //              array_push($bundles,array(
-    //                 'kitchen_id'=> $order->id,
-    //                 'date_ordered' =>$order->created_at,
-    //                 'order_id'=> $order->order_id,
-    //                 'status'=> $order->status,
-    //                 'ordered'=> $order->orderQty,
-    //                 'details'=>$this->getBarBundles($order->menuID)));
-               
-    //         }else if( $order->bundleid == null  && $order->menuID !=null ){
-    //             $singles = $this->getBarSingle($order->menuID);
-    //             foreach($singles as $single){
-    //                 if($single != null ){
-    //                 array_push($bundles,array(
-    //                     'kitchen_id'=> $order->id,
-    //                     'date_ordered' =>$order->created_at,
-    //                     'order_id'=> $order->order_id,
-    //                     'status'=> $order->status,
-    //                     'ordered'=> $order->orderQty,
-    //                     'details'=>$single)); 
-    //                 }
-    //             }
-             
-               
-    //         }
-    //     }
-
-    //     return response()->json([
-    //         'details' =>$bundles
-    //     ]);
-    // }
-
-    // function getBarBundles($bundleid){
-    //    return $kitchen = DB::table('bundles')
-    //     ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
-    //                ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
-    //                ->join('menus',"menus.menuID",'=','bundle_details.menuID')
-    //                ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-    //                ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-    //                ->where('categories.categoryname','=','Drinks')
-    //                ->where('bundles.bundleid',$bundleid)
-    //                ->get();
-       
-    // }
-
-    // function getBarSingle($menuid){
-    
-    //     return DB::table('menus')
-    //     ->select('menus.name AS itemName','menus.menuID')
-    //     ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
-    //     ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-    //     ->where('categories.categoryname','=','Drinks')
-    //     ->where('menus.menuID',$menuid)
-    //     ->get();
-    // }
     public function getBarOrders($status){
         $orders = DB::table('kitchenrecords')
         ->where('status',$status)
         ->get();
         $bundles = [];
-        $kitchen = [];
-        $details=[];
-        $bar = [];
+       
 
         foreach($orders as $order){
             if( $order->bundleid != null  && $order->menuID ==null ){
@@ -435,13 +363,7 @@ class TemporaryTableController extends Controller
                             'details'=>$item));
                     }
                 }
-                // array_push($bundles,array(
-                //     'kitchen_id'=> $order->id,
-                //     'date_ordered' =>$order->created_at,
-                //     'order_id'=> $order->order_id,
-                //     'status'=> $order->status,
-                //     'ordered'=> $order->orderQty,
-                //     'details'=>$this->getBarBundles($order->bundleid)));
+               
             }else if( $order->bundleid == null  && $order->menuID !=null ){
                 $singles = $this->getBarSingle($order->menuID);
                 foreach($singles as $single){
