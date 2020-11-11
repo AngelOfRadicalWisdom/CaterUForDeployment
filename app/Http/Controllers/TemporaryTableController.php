@@ -430,7 +430,6 @@ class TemporaryTableController extends Controller
                             'order_id'=> $order->order_id,
                             'status'=> $order->status,
                             'ordered'=> $order->orderQty,
-                            'tableno'=>$order->tableno,
                             'details'=>$items));
                     }
                
@@ -444,8 +443,7 @@ class TemporaryTableController extends Controller
                         'date_ordered' =>$order->created_at,
                         'order_id'=> $order->order_id,
                         'status'=> $order->status,
-                        'ordered'=> $order->orderQty, 
-                        'tableno'=>$order->tableno,
+                        'ordered'=> $order->orderQty,
                         'details'=>$single)); 
                       
                     }
