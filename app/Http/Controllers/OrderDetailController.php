@@ -17,19 +17,24 @@ class OrderDetailController extends BaseController
  
     public function orderList($order_id){ 
         $bundles = array();
- $items = array();
+        $items = array();
+
     $orders = DB::table('order_details')
+    ->select('order_details.*','menus.name','menus.price','kitchenrecords.id as kId')
     ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
-    ->select('order_details.*','menus.name','menus.price')
+    ->join('orders', 'orders.order_id', '=', 'order_details.order_id')
+    ->join('kitchenrecords','kitchenrecords.order_id','=','orders_order_id')
     ->where('order_details.bundleid','=',null)
     ->where('order_details.order_id',$order_id)
     ->get();
     
             $bundleItems = DB::table('order_details')
-            ->select('order_details.qtyServed','order_details.orderQty as orderQty', 'menus.name as menuName','bundles.name as bundlename', 'bundle_details.qty','bundles.bundleid', 'bundles.price','order_details.id')
+            ->select('kitchenrecords.id as kId','order_details.qtyServed','order_details.orderQty as orderQty', 'menus.name as menuName','bundles.name as bundlename', 'bundle_details.qty','bundles.bundleid', 'bundles.price','order_details.id')
             ->join('bundles', 'order_details.bundleid', '=', 'bundles.bundleid')
             ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
             ->join('menus', 'menus.menuID','=','bundle_details.menuID')
+            ->join('orders', 'orders.order_id', '=', 'order_details.order_id')
+            ->join('kitchenrecords','kitchenrecords.order_id','=','orders_order_id')
             ->where('order_details.bundleid','!=',null)
             ->where('order_details.order_id',$order_id)
             ->get();
@@ -161,7 +166,7 @@ class OrderDetailController extends BaseController
             $kitchenRecord= Kitchen::find($kitchen->id);
             $kitchenRecord->status="served";
             $kitchenRecord->save();
-            
+
             $status = 'Order is served.';
         } else {
             $status = 'Orders is being prepared.';
