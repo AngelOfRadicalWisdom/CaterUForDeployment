@@ -412,9 +412,10 @@ class TemporaryTableController extends Controller
         
     }
 
-    public function getBarKitchenOrders(){
+    public function getBarKitchenOrders($tableno){
         $orders = DB::table('kitchenrecords')
         ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        ->where('orders.tableno',$tableno)
         ->get();
         $bundles = [];
 
