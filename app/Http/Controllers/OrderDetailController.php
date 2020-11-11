@@ -152,15 +152,16 @@ class OrderDetailController extends BaseController
         $kitchen=Kitchen::where('order_id',$orderDetails->order_id)
         ->where('menuID',$orderDetails->menuID)
         ->first();
-        
+
         if ($servedQty === 0) {
             $detail = OrderDetail::find($id);
+            $detail->status = 'served';
+            $detail->save();
 
             $kitchenRecord= Kitchen::find($kitchen->id);
             $kitchenRecord->status="served";
-            $detail->status = 'served';
-            $detail->save();
             $kitchenRecord->save();
+            
             $status = 'Order is served.';
         } else {
             $status = 'Orders is being prepared.';
