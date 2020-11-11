@@ -428,7 +428,7 @@ class TemporaryTableController extends Controller
                             'order_id'=> $order->order_id,
                             'status'=> $order->status,
                             'ordered'=> $order->orderQty,
-                            'details'=>[$item]));
+                            'details'=>$item));
                     }
                 }
                
@@ -442,7 +442,7 @@ class TemporaryTableController extends Controller
                         'order_id'=> $order->order_id,
                         'status'=> $order->status,
                         'ordered'=> $order->orderQty,
-                        'details'=>[$single])); 
+                        'details'=>$single)); 
                     }
                 }
              
