@@ -35,6 +35,7 @@ Route::middleware('cors:api')->get('/getKitchenOrders/{status}','TemporaryTableC
 Route::middleware('cors:api')->get('/getBarOrders/{status}','TemporaryTableController@getBarOrders');
 Route::middleware('cors:api')->post('/prepare/{id}','TemporaryTableController@prepare');
 Route::middleware('cors:api')->post('/status/forserving/{id}','TemporaryTableController@isForServing');
+Route::middleware('cors:api')->post('/status/bundle/forserving/{id}','TemporaryTableController@isForServingBundles');
 Route::middleware('cors:api')->post('/status/isReady/{id}','TemporaryTableController@isReady');
 Route::middleware('cors:api')->post('/status/isServed/{id}','TemporaryTableController@isServed');
 Route::middleware('cors:api')->post('/servemenu','TemporaryTableController@changeOrderStatusToServed');

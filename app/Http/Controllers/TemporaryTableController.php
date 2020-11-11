@@ -128,6 +128,20 @@ class TemporaryTableController extends Controller
             'message' => 'Status updated to for serving'
         ]);
     }
+    public function isForServingBundles($id,Request $request)
+    {
+        $status = Kitchen::find($id);
+        $status->status = 'serving';
+        $status->save();
+        $bundle = Kitchen::find($request->id);
+        $bundle->status = 'serving';
+        $bundle->save();
+        
+
+        return response()->json([
+            'message' => 'Status updated to for serving'
+        ]);
+    }
 
     public function isReady($id)
     {
