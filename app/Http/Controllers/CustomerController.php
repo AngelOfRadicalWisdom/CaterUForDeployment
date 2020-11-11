@@ -145,7 +145,6 @@ class CustomerController extends Controller
             foreach($value as $key){
                if($key['bundleid'] != null){
                 $barOrders = $this->getBarBundles($key['bundleid']);
-                // $kitchenOrders =$this->getMealBundles($key['bundleid']);
                 foreach($barOrders as $bar){
                         $kitchenorders = new Kitchen();
                             $kitchenorders->orderQty =  $key['orderQty'];
@@ -168,14 +167,12 @@ class CustomerController extends Controller
         }
        
 
-        // OrderDetail::insert($finalArray);
+        OrderDetail::insert($finalArray);
        
         DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
-            // 'finalArry' => $order_id,
-            // 'request' => $data
-            'bar' => $barOrders,
-           
+            'finalArry' => $order_id,
+            'request' => $data
         ]);
     }
 
