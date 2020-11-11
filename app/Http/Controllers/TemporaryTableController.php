@@ -414,6 +414,7 @@ class TemporaryTableController extends Controller
 
     public function getBarKitchenOrders(){
         $orders = DB::table('kitchenrecords')
+        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
         ->get();
         $bundles = [];
 
@@ -428,6 +429,7 @@ class TemporaryTableController extends Controller
                             'order_id'=> $order->order_id,
                             'status'=> $order->status,
                             'ordered'=> $order->orderQty,
+                            'tableno'=>$order->tableno,
                             'details'=>$items));
                     }
                
@@ -441,8 +443,10 @@ class TemporaryTableController extends Controller
                         'date_ordered' =>$order->created_at,
                         'order_id'=> $order->order_id,
                         'status'=> $order->status,
-                        'ordered'=> $order->orderQty,
+                        'ordered'=> $order->orderQty, 
+                        'tableno'=>$order->tableno,
                         'details'=>$single)); 
+                      
                     }
                 }
              
