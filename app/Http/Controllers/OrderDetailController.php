@@ -110,27 +110,6 @@ class OrderDetailController extends BaseController
         ]);
     }
 
-    // public function getOrderByID($order_id){
-
-    //     $orders = DB::table('order_details')
-    //     ->select('menus.name','menus.price'
-    //     ,'orders.order_id','tableno','orders.total',
-    //     'order_details.orderQty AS orderNum',
-    //     'order_details.qtyToServe AS served',
-    //     'order_details.subtotal AS subtotal',
-    //     'order_details.status AS status',
-    //     'order_details.id AS id')
-    //     ->join('orders','orders.order_id','=','order_details.order_id') 
-    //     ->join('menus','menus.menuID','=','order_details.menuID')
-    //     ->where('orders.order_id',$order_id)
-    //     ->where('order_details.status','waiting')->get();
-
-    //      return response()->json([
-    //          'orders' => $orders
-    //      ]);
-
-    // }
-
     public function setServeQty(Request $request)
     {
         $records = OrderDetail::find($request->id);
@@ -148,20 +127,12 @@ class OrderDetailController extends BaseController
     {
         $status = '';
         $servedQty = OrderDetail::whereId($id)->pluck('qtyServed')->first();
-        $orderDetails = OrderDetail::whereId($id)->first();
-
-        $kitchen=Kitchen::where('order_id',$orderDetails->order_id)
-        ->where('menuID',$orderDetails->menuID)
-        ->first();
+      
 
         if ($servedQty === 0) {
             $detail = OrderDetail::find($id);
             $detail->status = 'served';
             $detail->save();
-
-            $kitchenRecord= Kitchen::find($kitchen->id);
-            $kitchenRecord->status="served";
-            $kitchenRecord->save();
 
             $status = 'Order is served.';
         } else {
