@@ -314,6 +314,15 @@ class TableController extends BaseController
 
     public function beginTransaction(Request $request, $tableNo)
     {
+        $customer = DB::table('customers')
+        ->select('customers.custid')
+        ->where('tableno',$tableNo)
+        ->where('status','confirmed')
+        ->get();
+
+        foreach($customer as $c){
+            $id = $c['custid'];
+        }
 
         $status = RestaurantTable::whereTableno($tableNo)->pluck('status')->first();
 
@@ -325,7 +334,25 @@ class TableController extends BaseController
                 'order_id' => $order_id,
                 'status' => $status
             ]);
-        } else {
+        } 
+        else if($status == 'Confirmed'){
+            $table = RestaurantTable::find($tableNo);
+            $table->status = 'Occupied';
+            $table->save();
+            
+            $newOrder = new Order;
+            $newOrder->custid = $id;
+            $newOrder->empid = $request->empid;
+            $newOrder->tableno = $tableNo;
+            $newOrder->status = 'ordering';
+            $newOrder->total = 0;
+            $newOrder->save();
+
+            return response()->json([
+                'order_id' =>  $newOrder->order_id
+            ]);
+        }
+        else {
             $table = RestaurantTable::find($tableNo);
             $table->status = 'Occupied';
             $table->save();
