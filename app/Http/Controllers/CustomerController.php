@@ -81,25 +81,13 @@ class CustomerController extends Controller
      }
      public function setConfirm($custid, Request $request){
         
-
-        // $table = RestaurantTable::find($request->tableNo);
-        // $table->status = 'Occupied';
-        // $table->save();
         $status = RestaurantTable::whereTableno($request->tableNo)->pluck('status')->first();
 
-        if ($status == 'Occupied') {
-            $order_id = Order::whereTableno($request->tableNo)
-                ->where('status', 'ordering')
-                ->pluck('order_id')->first();
-            return response()->json([
-                'order_id' => $order_id,
-                'status' => $status
-            ]);
-        } else {
+    
             $table = RestaurantTable::find($request->tableNo);
             $table->status = 'Occupied';
             $table->save();
-            
+
             $customerRecord = Customer::find($custid);
             $customerRecord->status = "confirmed";
             $customerRecord->save();
@@ -116,7 +104,7 @@ class CustomerController extends Controller
          return response()->json([
            'message' => 'Updated successfully!'
         ]);
-     }
+     
     }
      public function getNotified(){
          $notified = DB::table('customers')->where('status','notified')->get();
