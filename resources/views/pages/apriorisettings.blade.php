@@ -66,6 +66,10 @@
                 <label class="col-form-label col-md-9 col-sm-9 label-align" for="Notes ">      CONFIDENCE- can be interpreted as the likelihood or probability of purchasing both the Menus A and B
                 </label>
               </div>
+              <div class="item form-group">
+                <label class="col-form-label col-md-9 col-sm-9 label-align" for="Notes ">      IF THERE ARE NO RECOMMENDATIONS GENERATED PLEASE TRY TO LOWER THE SUPPORT AND CONFIDENCE
+                </label>
+              </div>
               <div class="ln_solid"></div>
               <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-4">
