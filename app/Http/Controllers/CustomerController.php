@@ -45,8 +45,6 @@ class CustomerController extends Controller
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
         if($res == []){
             $res = 'empty';
-        }else{
-            $res = 'not';
         }
         //    $newCustomer = new Customer();
         //     $newCustomer->phonenumber = $request->phoneNumber;
