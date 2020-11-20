@@ -43,7 +43,11 @@ class CustomerController extends Controller
         ->get();
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
-        // if($res == []){
+        if($res == []){
+            $res = 'empty';
+        }else{
+            $res = 'not';
+        }
         //    $newCustomer = new Customer();
         //     $newCustomer->phonenumber = $request->phoneNumber;
         //     $newCustomer->partysize= $request->partySize;
