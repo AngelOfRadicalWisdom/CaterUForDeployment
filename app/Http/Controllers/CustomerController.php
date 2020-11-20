@@ -44,26 +44,40 @@ class CustomerController extends Controller
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
         
 
-        if(count($res)!= 0)$data = $res->last();
-
-        if(DATE($data->time_notified) == $dt->toDateString()){
-            $newCustomer = new Customer();
-            $newCustomer->phonenumber = $request->phoneNumber;
-            $newCustomer->partysize= $request->partySize;
-            $newCustomer->status = 'reserved';
-            $newCustomer->name = $request->name;
-            $newCustomer->priorityNum = $data->priorityNum + 1;
-            $newCustomer->save();
+        if(count($res)!= 0){
+            $data = $res->last();
+            // if(DATE($data->time_notified) == $dt->toDateString()){
+            //     // $newCustomer = new Customer();
+            //     // $newCustomer->phonenumber = $request->phoneNumber;
+            //     // $newCustomer->partysize= $request->partySize;
+            //     // $newCustomer->status = 'reserved';
+            //     // $newCustomer->name = $request->name;
+            //     // $newCustomer->priorityNum = $data->priorityNum + 1;
+            //     // $newCustomer->save();
            
-        }else{
+            // }else{
+            //     // $newCustomer = new Customer();
+            //     // $newCustomer->phonenumber = $request->phoneNumber;
+            //     // $newCustomer->partysize= $request->partySize;
+            //     // $newCustomer->status = 'reserved';
+            //     // $newCustomer->name = $request->name;
+            //     // $newCustomer->priorityNum = 1;
+            //     // $newCustomer->save();  
+            // }
+            $res=DATE($data->time_notified);
+        } else{
             $newCustomer = new Customer();
-            $newCustomer->phonenumber = $request->phoneNumber;
-            $newCustomer->partysize= $request->partySize;
-            $newCustomer->status = 'reserved';
-            $newCustomer->name = $request->name;
-            $newCustomer->priorityNum = 1;
-            $newCustomer->save();  
+        $newCustomer->phonenumber = $request->phoneNumber;
+        $newCustomer->partysize= $request->partySize;
+        $newCustomer->status = 'reserved';
+        $newCustomer->name = $request->name;
+        $newCustomer->priorityNum = 1;
+        $newCustomer->save();  
         }
+        
+        
+
+        
        
        
         return response()->json(
