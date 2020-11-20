@@ -39,7 +39,7 @@ class CustomerController extends Controller
         $res = DB::table('customers')
         ->select('priorityNum',DB::raw('DATE(time_notified) AS dateReserved'))
         ->where('status','reserved')
-        ->where('dateReserved',$dt->toDateString())
+        ->where('time_notified',$dt->toDateString())
         ->get();
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
