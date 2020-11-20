@@ -35,6 +35,7 @@ class CustomerController extends Controller
 
     public function reserveNewCustomer(Request $request){
         $dt = Carbon::now();
+        $result ='';
         $res = DB::table('customers')->where('status','reserved')->get();
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
