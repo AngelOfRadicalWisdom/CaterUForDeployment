@@ -41,12 +41,12 @@ class CustomerController extends Controller
         if($res!=null){
             $data = last($res);
         }
-        $newCustomer = new Customer();
-        $newCustomer->phonenumber = $request->phoneNumber;
-        $newCustomer->partysize= $request->partySize;
-        $newCustomer->status = 'reserved';
-        $newCustomer->name = $request->name;
-        $newCustomer->save();
+        // $newCustomer = new Customer();
+        // $newCustomer->phonenumber = $request->phoneNumber;
+        // $newCustomer->partysize= $request->partySize;
+        // $newCustomer->status = 'reserved';
+        // $newCustomer->name = $request->name;
+        // $newCustomer->save();
 
         // return response()->json([
         //     'message' => 'Customer reserved successfully!',
