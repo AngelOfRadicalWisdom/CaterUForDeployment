@@ -20,7 +20,7 @@ class CreateCustomersTable extends Migration
             $table->integer('partysize')->nullable();
             $table->string('status')->nullable();
             $table->integer('tableno')->nullable();
-            $table->interger('priorityNum')->nullable();
+            $table->integer('priorityNum')->nullable();
             $table->timestamp('time_notified')->default(DB::raw('CURRENT_TIMESTAMP'))->nullable();
             $table->softDeletes();
     });
