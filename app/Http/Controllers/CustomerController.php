@@ -46,33 +46,34 @@ class CustomerController extends Controller
 
         if(count($res)!= 0){
             $data = $res->last();
-            // if(DATE($data->time_notified) == $dt->toDateString()){
-            //     // $newCustomer = new Customer();
-            //     // $newCustomer->phonenumber = $request->phoneNumber;
-            //     // $newCustomer->partysize= $request->partySize;
-            //     // $newCustomer->status = 'reserved';
-            //     // $newCustomer->name = $request->name;
-            //     // $newCustomer->priorityNum = $data->priorityNum + 1;
-            //     // $newCustomer->save();
+            $dateFromDB=Carbon::parse($data->time_notified)->toDateString();
+            if($dateFromDB == $dt->toDateString()){
+                $newCustomer = new Customer();
+                $newCustomer->phonenumber = $request->phoneNumber;
+                $newCustomer->partysize= $request->partySize;
+                $newCustomer->status = 'reserved';
+                $newCustomer->name = $request->name;
+                $newCustomer->priorityNum = $data->priorityNum + 1;
+                $newCustomer->save();
            
-            // }else{
-            //     // $newCustomer = new Customer();
-            //     // $newCustomer->phonenumber = $request->phoneNumber;
-            //     // $newCustomer->partysize= $request->partySize;
-            //     // $newCustomer->status = 'reserved';
-            //     // $newCustomer->name = $request->name;
-            //     // $newCustomer->priorityNum = 1;
-            //     // $newCustomer->save();  
-            // }
-            $res=Carbon::parse($data->time_notified)->toDateString();
+            }else{
+                $newCustomer = new Customer();
+                $newCustomer->phonenumber = $request->phoneNumber;
+                $newCustomer->partysize= $request->partySize;
+                $newCustomer->status = 'reserved';
+                $newCustomer->name = $request->name;
+                $newCustomer->priorityNum = 1;
+                $newCustomer->save();  
+            }
+            
         } else{
             $newCustomer = new Customer();
-        $newCustomer->phonenumber = $request->phoneNumber;
-        $newCustomer->partysize= $request->partySize;
-        $newCustomer->status = 'reserved';
-        $newCustomer->name = $request->name;
-        $newCustomer->priorityNum = 1;
-        $newCustomer->save();  
+            $newCustomer->phonenumber = $request->phoneNumber;
+            $newCustomer->partysize= $request->partySize;
+            $newCustomer->status = 'reserved';
+            $newCustomer->name = $request->name;
+            $newCustomer->priorityNum = 1;
+            $newCustomer->save();  
         }
         
         
