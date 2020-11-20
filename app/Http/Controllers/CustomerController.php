@@ -74,9 +74,9 @@ class CustomerController extends Controller
         }
         
 
-        return response()->json(
+        return response()->json([
             'message'=> 'Reservation successful!'
-        );
+        ]);
 
     }
     public function getReservedCustomer(){
