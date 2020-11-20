@@ -42,7 +42,7 @@ class CustomerController extends Controller
         if($res!=null){
             $data = $res->last();
             
-                $result = $data->time_notified->toDateString();
+                $result = $data->time_notified;
             
         }
         // $newCustomer = new Customer();
