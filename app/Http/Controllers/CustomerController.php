@@ -46,7 +46,7 @@ class CustomerController extends Controller
 
         if(count($res)!= 0)$data = $res->last();
 
-        if($data->time_notified == $dt->toDateString()){
+        if(DATE($data->time_notified) == $dt->toDateString()){
             $newCustomer = new Customer();
             $newCustomer->phonenumber = $request->phoneNumber;
             $newCustomer->partysize= $request->partySize;
