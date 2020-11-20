@@ -37,7 +37,7 @@ class CustomerController extends Controller
         $dt = Carbon::now();
         $result ='';
         $res = DB::table('customers')
-        ->select('priorityNum',DB::raw('DATE(time_notified) AS dateReserved'))
+        ->select('priorityNum','time_notified')
         ->where('status','reserved')
         ->where('time_notified',$dt->toDateString())
         ->get();
