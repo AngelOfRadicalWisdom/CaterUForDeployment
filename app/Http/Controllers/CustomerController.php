@@ -41,9 +41,9 @@ class CustomerController extends Controller
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
         if($res!=null){
             $data = $res->last();
-            if($data->time_notified == $dt->toDateString()){
-                $result = 'true';
-            }
+            
+                $result = $data['time_notified'].toDateString();
+            
         }
         // $newCustomer = new Customer();
         // $newCustomer->phonenumber = $request->phoneNumber;
