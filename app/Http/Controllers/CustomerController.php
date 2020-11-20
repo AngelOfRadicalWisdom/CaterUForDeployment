@@ -37,15 +37,30 @@ class CustomerController extends Controller
         $dt = Carbon::now();
         $result ='';
         $res = DB::table('customers')
-        ->select(DB::raw('DATE(time_notified) AS dateReserved'))
+        ->select('priorityNum',DB::raw('DATE(time_notified) AS dateReserved'))
         ->where('status','reserved')->get();
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
         if($res!=null){
             $data = $res->last();
+            if($data->dateReserved == $dt->toDateString()){
+                $newCustomer = new Customer();
+                $newCustomer->phonenumber = $request->phoneNumber;
+                $newCustomer->partysize= $request->partySize;
+                $newCustomer->status = 'reserved';
+                $newCustomer->name = $request->name;
+                $newCustomer->priorityNum = $data->priorityNum + 1;
+                $newCustomer->save();
+            }
             
-                $result = $data->dateReserved;
-            
+        }else{
+            $newCustomer = new Customer();
+            $newCustomer->phonenumber = $request->phoneNumber;
+            $newCustomer->partysize= $request->partySize;
+            $newCustomer->status = 'reserved';
+            $newCustomer->name = $request->name;
+            $newCustomer->priorityNum = 1;
+            $newCustomer->save(); 
         }
         // $newCustomer = new Customer();
         // $newCustomer->phonenumber = $request->phoneNumber;
