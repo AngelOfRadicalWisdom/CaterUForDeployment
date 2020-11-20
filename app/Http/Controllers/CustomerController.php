@@ -39,7 +39,7 @@ class CustomerController extends Controller
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
         if($res!=null){
-            $data = $res[$res.length-1];
+            $data = last($res);
         }
         // $newCustomer = new Customer();
         // $newCustomer->phonenumber = $request->phoneNumber;
