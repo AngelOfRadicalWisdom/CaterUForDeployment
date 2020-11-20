@@ -41,9 +41,6 @@ class CustomerController extends Controller
         ->where('status','reserved')
         ->get();
 
-        //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
-        
-
         if(count($res)!= 0){
             $data = $res->last();
             $dateFromDB=Carbon::parse($data->time_notified)->toDateString();
@@ -76,13 +73,9 @@ class CustomerController extends Controller
             $newCustomer->save();  
         }
         
-        
 
-        
-       
-       
         return response()->json(
-            $res
+            'message'=> 'Reservation successful!'
         );
 
     }
