@@ -52,7 +52,7 @@ class CustomerController extends Controller
         //     $newCustomer->priorityNum = 1;
         //     $newCustomer->save(); 
 
-        $res = ($res == []);
+        $res = $res->length();
         // }else{ 
         //     // $data = $res->last();
         //     // $newCustomer = new Customer();
