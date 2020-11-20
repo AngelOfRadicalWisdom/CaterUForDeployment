@@ -38,20 +38,22 @@ class CustomerController extends Controller
         $result ='';
         $res = DB::table('customers')
         ->select('priorityNum',DB::raw('DATE(time_notified) AS dateReserved'))
-        ->where('status','reserved')->get();
+        ->where('status','reserved')
+        ->where('dateReserved',$dt->toDateString())
+        ->get();
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
         if($res!=null){
             $data = $res->last();
-            if($data->dateReserved == $dt->toDateString()){
-                $newCustomer = new Customer();
-                $newCustomer->phonenumber = $request->phoneNumber;
-                $newCustomer->partysize= $request->partySize;
-                $newCustomer->status = 'reserved';
-                $newCustomer->name = $request->name;
-                $newCustomer->priorityNum = $data->priorityNum + 1;
-                $newCustomer->save();
-            }
+           
+            $newCustomer = new Customer();
+            $newCustomer->phonenumber = $request->phoneNumber;
+            $newCustomer->partysize= $request->partySize;
+            $newCustomer->status = 'reserved';
+            $newCustomer->name = $request->name;
+            $newCustomer->priorityNum = $data->priorityNum + 1;
+            $newCustomer->save();
+            
             
         }else{
             $newCustomer = new Customer();
