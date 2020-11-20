@@ -43,27 +43,24 @@ class CustomerController extends Controller
         ->get();
 
         //IF THERE IS ALREADY AND EXISTING DATA AND THE DATE
-        if($res!=null){
-            $data = $res->last();
-           
-            $newCustomer = new Customer();
-            $newCustomer->phonenumber = $request->phoneNumber;
-            $newCustomer->partysize= $request->partySize;
-            $newCustomer->status = 'reserved';
-            $newCustomer->name = $request->name;
-            $newCustomer->priorityNum = $data->priorityNum + 1;
-            $newCustomer->save();
-            
-            
-        }else{
-            $newCustomer = new Customer();
-            $newCustomer->phonenumber = $request->phoneNumber;
-            $newCustomer->partysize= $request->partySize;
-            $newCustomer->status = 'reserved';
-            $newCustomer->name = $request->name;
-            $newCustomer->priorityNum = 1;
-            $newCustomer->save(); 
-        }
+        // if($res!=null){
+        //     $data = $res->last();
+        //     $newCustomer = new Customer();
+        //     $newCustomer->phonenumber = $request->phoneNumber;
+        //     $newCustomer->partysize= $request->partySize;
+        //     $newCustomer->status = 'reserved';
+        //     $newCustomer->name = $request->name;
+        //     $newCustomer->priorityNum = $data->priorityNum + 1;
+        //     $newCustomer->save();
+        // }else{
+        //     $newCustomer = new Customer();
+        //     $newCustomer->phonenumber = $request->phoneNumber;
+        //     $newCustomer->partysize= $request->partySize;
+        //     $newCustomer->status = 'reserved';
+        //     $newCustomer->name = $request->name;
+        //     $newCustomer->priorityNum = 1;
+        //     $newCustomer->save(); 
+        // }
         // $newCustomer = new Customer();
         // $newCustomer->phonenumber = $request->phoneNumber;
         // $newCustomer->partysize= $request->partySize;
@@ -76,7 +73,7 @@ class CustomerController extends Controller
         //     // 'date'=> $dt->toDateString()
         // ]);
         return response()->json(
-            $result
+            $res
         );
 
     }
