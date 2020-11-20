@@ -64,7 +64,7 @@ class CustomerController extends Controller
             //     // $newCustomer->priorityNum = 1;
             //     // $newCustomer->save();  
             // }
-            $res=DATE($data->time_notified);
+            $res=Carbon::parse($data->time_notified)->toDateString();
         } else{
             $newCustomer = new Customer();
         $newCustomer->phonenumber = $request->phoneNumber;
