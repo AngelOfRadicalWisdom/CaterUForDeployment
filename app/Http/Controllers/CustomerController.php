@@ -33,16 +33,18 @@ class CustomerController extends Controller
     }
 
     public function reserveNewCustomer(Request $request){
+        $dt = Carbon::now();
+        
         $newCustomer = new Customer();
         $newCustomer->phonenumber = $request->phoneNumber;
         $newCustomer->partysize= $request->partySize;
         $newCustomer->status = 'reserved';
         $newCustomer->name = $request->name;
-        $newCustomer->priorityNumber = $request->priorityNum;
         $newCustomer->save();
 
         return response()->json([
-            'message' => 'Customer reserved successfully!'
+            'message' => 'Customer reserved successfully!',
+            'date'=> $dt->toDateString()
         ]);
 
     }
