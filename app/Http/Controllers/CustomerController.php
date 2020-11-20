@@ -38,6 +38,7 @@ class CustomerController extends Controller
         $newCustomer->partysize= $request->partySize;
         $newCustomer->status = 'reserved';
         $newCustomer->name = $request->name;
+        $newCustomer->priorityNumber = $request->priorityNum;
         $newCustomer->save();
 
         return response()->json([
