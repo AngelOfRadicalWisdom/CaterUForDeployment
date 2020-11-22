@@ -35,47 +35,47 @@ class CustomerController extends Controller
 
     public function reserveNewCustomer(Request $request){
         $dt = Carbon::now();
+        $today = $dt->toDateString();
         $result ='';
         $res = DB::table('customers')
         ->select('priorityNum','time_notified')
-        ->where('time_notified',Carbon::now())
         ->get();
 
-        // if(count($res)!= 0){
-        //     $data = $res->last();
-        //     $dateFromDB=Carbon::parse($data->time_notified)->toDateString();
-        //     if($dateFromDB == $dt->toDateString()){
-        //         $newCustomer = new Customer();
-        //         $newCustomer->phonenumber = $request->phoneNumber;
-        //         $newCustomer->partysize= $request->partySize;
-        //         $newCustomer->status = 'reserved';
-        //         $newCustomer->name = $request->name;
-        //         $newCustomer->priorityNum = $data->priorityNum + 1;
-        //         $newCustomer->save();
+        if(count($res)!= 0){
+            $data = $res->last();
+            $dateFromDB=Carbon::parse($data->time_notified)->toDateString();
+            if($dateFromDB == $dt->toDateString()){
+                $newCustomer = new Customer();
+                $newCustomer->phonenumber = $request->phoneNumber;
+                $newCustomer->partysize= $request->partySize;
+                $newCustomer->status = 'reserved';
+                $newCustomer->name = $request->name;
+                $newCustomer->priorityNum = $data->priorityNum + 1;
+                $newCustomer->save();
            
-        //     }else{
-        //         $newCustomer = new Customer();
-        //         $newCustomer->phonenumber = $request->phoneNumber;
-        //         $newCustomer->partysize= $request->partySize;
-        //         $newCustomer->status = 'reserved';
-        //         $newCustomer->name = $request->name;
-        //         $newCustomer->priorityNum = 1;
-        //         $newCustomer->save();  
-        //     }
+            }else{
+                $newCustomer = new Customer();
+                $newCustomer->phonenumber = $request->phoneNumber;
+                $newCustomer->partysize= $request->partySize;
+                $newCustomer->status = 'reserved';
+                $newCustomer->name = $request->name;
+                $newCustomer->priorityNum = 1;
+                $newCustomer->save();  
+            }
             
-        // } else{
-        //     $newCustomer = new Customer();
-        //     $newCustomer->phonenumber = $request->phoneNumber;
-        //     $newCustomer->partysize= $request->partySize;
-        //     $newCustomer->status = 'reserved';
-        //     $newCustomer->name = $request->name;
-        //     $newCustomer->priorityNum = 1;
-        //     $newCustomer->save();  
-        // }
+        } else{
+            $newCustomer = new Customer();
+            $newCustomer->phonenumber = $request->phoneNumber;
+            $newCustomer->partysize= $request->partySize;
+            $newCustomer->status = 'reserved';
+            $newCustomer->name = $request->name;
+            $newCustomer->priorityNum = 1;
+            $newCustomer->save();  
+        }
         
 
         return response()->json([
-            'message'=> $dt
+            'message'=> "Reservation successful"
         ]);
 
     }
