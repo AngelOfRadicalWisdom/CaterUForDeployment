@@ -38,7 +38,7 @@ class CustomerController extends Controller
         $result ='';
         $res = DB::table('customers')
         ->select('priorityNum','time_notified')
-        ->where('status','reserved')
+        ->where('time_notified',Carbon::now())
         ->get();
 
         if(count($res)!= 0){
