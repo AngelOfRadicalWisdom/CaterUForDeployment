@@ -429,7 +429,7 @@ class TemporaryTableController extends Controller
 
     public function getBarKitchenOrders($tableno){
         $orders = DB::table('kitchenrecords')
-        ->select('kitchenrecords.bundleid','kitchenrecords.menuID','orders.order_id','orders.tableno','kitchenrecords.id',
+        ->select('kitchenrecords.bundleid','kitchenrecords.menuID','orders.order_id','orders.tableNo','kitchenrecords.id',
         'kitchenrecords.created_at','kitchenrecords.orderQty','kitchenrecords.status' )
         ->join('orders','orders.order_id','=','kitchenrecords.order_id')
         ->where('orders.tableno',$tableno)
@@ -439,20 +439,20 @@ class TemporaryTableController extends Controller
         foreach($orders as $order){
             if($order->bundleid != null  && $order->menuID ==null ){
                 $items = $this->getBarKitchenBundles($order->bundleid);
-               
-                    if($items !=null){ 
+                    if($items !=null){
                         foreach($items as $item){
-                     array_push($bundles,array(
+                           array_push($bundles,array(
                             'kitchen_id'=> $order->id,
                             'date_ordered' =>$order->created_at,
                             'order_id'=> $order->order_id,
                             'status'=> $order->status,
                             'ordered'=> $order->orderQty,
-                            'details'=>$item));
+                            'details'=>$item)); 
                         }
-                       
+                        
                     }
-            // }else if( $order->bundleid == null  && $order->menuID !=null ){
+            }
+            // else if( $order->bundleid == null  && $order->menuID !=null ){
             //     $singles = $this->getBarKitchenSingle($order->menuID);
             //     foreach($singles as $single){
             //         if($single != null ){
@@ -475,6 +475,7 @@ class TemporaryTableController extends Controller
             'details' =>$bundles
         ]);
     }
+
     function getBarKitchenBundles($bundleid){
         $kitchen = DB::table('bundles')
         ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
