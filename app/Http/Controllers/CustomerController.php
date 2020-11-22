@@ -75,7 +75,7 @@ class CustomerController extends Controller
         
 
         return response()->json([
-            'message'=> $res
+            'message'=> $dt
         ]);
 
     }
