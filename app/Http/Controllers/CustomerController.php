@@ -168,7 +168,20 @@ class CustomerController extends Controller
             if($value['bundleid']!=null){
                 $items = $this->getBarKitchenBundles($value['bundleid']);
                foreach($items as $item){
-                   array_push($bundles,$item);
+                   array_push($bundles,array(
+                    'orderQty'=> $value['orderQty'],
+                    'menuID'=> $item['menuID'],
+                    'bundleid'=> $item['bundleid'],
+                    'order_id'=> $order_id,
+                    'status'=> 'waiting'
+                   ));
+                //    $kitchenorders = new Kitchen();
+                //    $kitchenorders->orderQty =  $['orderQty'];
+                //    $kitchenorders->menuID = $item->menuID;
+                //    $kitchenorders->bundleid = $key['bundleid'];
+                //    $kitchenorders->order_id = $order_id;
+                //    $kitchenorders->status = 'waiting';
+                //    $kitchenorders->save();
                }
             }
         }
@@ -201,13 +214,13 @@ class CustomerController extends Controller
 //                 //     //     'status'=> $order->status,
 //                 //     //     'ordered'=> $order->orderQty,
 //                 //     //     'details'=>[$single])); 
-//                 //         $kitchenorders = new Kitchen();
-//                 //             $kitchenorders->orderQty =  $key['orderQty'];
-//                 //             $kitchenorders->menuID = $bar->menuID;
-//                 //             $kitchenorders->bundleid = $key['bundleid'];
-//                 //             $kitchenorders->order_id = $order_id;
-//                 //             $kitchenorders->status = 'waiting';
-//                 //             $kitchenorders->save();
+                        // $kitchenorders = new Kitchen();
+                        //     $kitchenorders->orderQty =  $key['orderQty'];
+                        //     $kitchenorders->menuID = $bar->menuID;
+                        //     $kitchenorders->bundleid = $key['bundleid'];
+                        //     $kitchenorders->order_id = $order_id;
+                        //     $kitchenorders->status = 'waiting';
+                        //     $kitchenorders->save();
                    
 //                 // }
 //     //            }else{
