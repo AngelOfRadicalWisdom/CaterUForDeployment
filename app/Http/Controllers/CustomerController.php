@@ -229,8 +229,8 @@ class CustomerController extends Controller
             //                 $kitchenorders->status = 'waiting';
             //                 $kitchenorders->save();
             
-        }
-    }
+    //     }
+    // }
 
         // OrderDetail::insert($finalArray);
        
