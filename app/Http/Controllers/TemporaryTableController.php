@@ -310,9 +310,8 @@ class TemporaryTableController extends Controller
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-                    'details'=> array(
-                       $bundleItems
-                    )
+                    'details'=>  $bundleItems
+                    
                 )
             );
                          
@@ -347,6 +346,7 @@ class TemporaryTableController extends Controller
     }
 
     function getMealBundles($bundleid){
+        $bundles = array();
         $kitchen = DB::table('bundles')
         ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
                    ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
@@ -358,14 +358,15 @@ class TemporaryTableController extends Controller
                    ->get();
 
                 foreach($kitchen as $k){
-                    return  [
+                    array_push($bundles, array(
                         'bundleName'=> $k->bundleName,
                         'qty'=>  $k->qty,
                         'menuID'=>  $k->menuID,
                         'itemName'=>  $k->itemName
-                    ];
+                    ));
+                
                 }
-        return $kitchen;
+        return $bundles;
     }
 
     function getMealSingle($menuid){
