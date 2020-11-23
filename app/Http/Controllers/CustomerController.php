@@ -170,8 +170,8 @@ class CustomerController extends Controller
                foreach($items as $item){
                    array_push($bundles,array(
                     // 'orderQty'=> $item['orderQty'],
-                    'menuID'=> $item['menuID'],
-                    'bundleid'=> $item['bundleid'],
+                    // 'menuID'=> $item['menuID'],
+                    // 'bundleid'=> $item['bundleid'],
                     'order_id'=> $order_id,
                     'status'=> 'waiting'
                    ));
