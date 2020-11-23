@@ -363,15 +363,6 @@ class TemporaryTableController extends Controller
                    ->where('categories.categoryname','!=','Drinks')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
-
-                foreach($kitchen as $k){
-                    return  [
-                        'bundleName'=> $k->bundleName,
-                        'qty'=>  $k->qty,
-                        'menuID'=>  $k->menuID,
-                        'itemName'=>  $bundleItems[i]->itemName
-                        ]
-                }
         return $kitchen;
     }
 
