@@ -299,9 +299,10 @@ class TemporaryTableController extends Controller
         ->where('status',$status)
         ->get();
         $bundles = [];
-        
+       
 
         foreach($orders as $order){
+             $i = 0;
             if( $order->bundleid != null){
                 $bundleItems = $this->getMealBundles($order->bundleid);
               
@@ -313,10 +314,10 @@ class TemporaryTableController extends Controller
                     'ordered'=> $order->orderQty,
                     'details'=> array(
                         [
-                            'bundleName'=> $bundleItems[0]->bundleName,
-                            'qty'=>  $bundleItems[0]->qty,
-                            'menuID'=>  $bundleItems[0]->menuID,
-                            'itemName'=>  $bundleItems[0]->itemName
+                            'bundleName'=> $bundleItems[i]->bundleName,
+                            'qty'=>  $bundleItems[i]->qty,
+                            'menuID'=>  $bundleItems[i]->menuID,
+                            'itemName'=>  $bundleItems[i]->itemName
                             ]
                     )
                 )
@@ -344,6 +345,7 @@ class TemporaryTableController extends Controller
              
                
             }
+            $i++;
         }
 
         return response()->json([
