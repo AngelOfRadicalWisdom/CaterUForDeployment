@@ -304,16 +304,24 @@ class TemporaryTableController extends Controller
             if( $order->bundleid != null){
                 $bundleItems = $this->getMealBundles($order->bundleid);
               
-                    array_push($bundles,array(
-                    'kitchen_id'=> $order->id,
-                    'date_ordered' =>$order->created_at,
-                    'order_id'=> $order->order_id,
-                    'status'=> $order->status,
-                    'ordered'=> $order->orderQty,
-                    'details'=>  $bundleItems
-                    
-                )
-            );
+                    foreach($bundleItems as $item){
+                        rray_push($bundles,array(
+                            'kitchen_id'=> $order->id,
+                            'date_ordered' =>$order->created_at,
+                            'order_id'=> $order->order_id,
+                            'status'=> $order->status,
+                            'ordered'=> $order->orderQty,
+                            'details'=> array(
+                                [
+                                    'bundleName'=> $item->bundleName,
+                                    'qty'=>  $items->qty,
+                                    'menuID'=>  $item->menuID,
+                                    'itemName'=>  $item->itemName
+                                    ]
+                            )
+                        )
+                    );
+                    }
                          
                 
             }else {
@@ -346,7 +354,6 @@ class TemporaryTableController extends Controller
     }
 
     function getMealBundles($bundleid){
-        $bundles = array();
         $kitchen = DB::table('bundles')
         ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
                    ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
@@ -358,14 +365,14 @@ class TemporaryTableController extends Controller
                    ->get();
 
                 foreach($kitchen as $k){
-                    array_push($bundles, array(
+                    return  [
                         'bundleName'=> $k->bundleName,
                         'qty'=>  $k->qty,
                         'menuID'=>  $k->menuID,
-                        'itemName'=>  $k->itemName
-                    ));
-                return $bundles;
+                        'itemName'=>  $bundleItems[i]->itemName
+                        ]
                 }
+        return $kitchen;
     }
 
     function getMealSingle($menuid){
