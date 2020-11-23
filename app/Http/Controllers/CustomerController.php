@@ -190,7 +190,7 @@ class CustomerController extends Controller
        
         // DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
-            'request' => $bundles
+            'request' => $data
         ]);
     }
 
