@@ -299,8 +299,6 @@ class TemporaryTableController extends Controller
         ->where('status',$status)
         ->get();
         $bundles = [];
-       
-        $i = 0;
         foreach($orders as $order){
            
             if( $order->bundleid != null){
@@ -313,12 +311,7 @@ class TemporaryTableController extends Controller
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
                     'details'=> array(
-                        [
-                            'bundleName'=> $bundleItems[i]->bundleName,
-                            'qty'=>  $bundleItems[i]->qty,
-                            'menuID'=>  $bundleItems[i]->menuID,
-                            'itemName'=>  $bundleItems[i]->itemName
-                            ]
+                       $bundleItems
                     )
                 )
             );
@@ -345,7 +338,7 @@ class TemporaryTableController extends Controller
              
                
             }
-            $i++;
+            
         }
 
         return response()->json([
@@ -363,6 +356,15 @@ class TemporaryTableController extends Controller
                    ->where('categories.categoryname','!=','Drinks')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
+
+                foreach($kitchen as $k){
+                    return  [
+                        'bundleName'=> $k->bundleName,
+                        'qty'=>  $k->qty,
+                        'menuID'=>  $k->menuID,
+                        'itemName'=>  $k->itemName
+                    ];
+                }
         return $kitchen;
     }
 
