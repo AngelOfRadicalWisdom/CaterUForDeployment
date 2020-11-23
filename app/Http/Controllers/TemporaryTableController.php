@@ -296,6 +296,7 @@ class TemporaryTableController extends Controller
 
     public function getKitchenOrders($status){
         $orders = DB::table('kitchenrecords')
+        ->join('orders', 'order.order_id','=','kitchenrecords.order_id')
         ->where('status',$status)
         ->get();
         $bundles = [];
@@ -350,7 +351,7 @@ class TemporaryTableController extends Controller
         }
 
         return response()->json([
-            'details' =>$bundles
+            'details' =>$orders
         ]);
     }
 
