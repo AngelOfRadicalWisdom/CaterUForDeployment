@@ -313,10 +313,10 @@ class TemporaryTableController extends Controller
                     'ordered'=> $order->orderQty,
                     'details'=> array(
                         [
-                            'bundleName'=> $bundle['bundleName'],
-                            'qty'=> $bundle['qty'],
-                            'menuID'=> $bundle['menuID'],
-                            'itemName'=> $bundle['itemName']
+                            'bundleName'=> $bundleItems['bundleName'],
+                            'qty'=> $bundleItems['qty'],
+                            'menuID'=> $bundleItems['menuID'],
+                            'itemName'=> $bundleItems['itemName']
                             ]
                     )
                 )
