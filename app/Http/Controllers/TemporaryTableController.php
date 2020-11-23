@@ -308,6 +308,7 @@ class TemporaryTableController extends Controller
                         if($item->menuID == $order->menuID){
                         array_push($bundles,array(
                             'kitchen_id'=> $order->id,
+                            'tableno'=>$order->tableno,
                             'date_ordered' =>$order->created_at,
                             'order_id'=> $order->order_id,
                             'status'=> $order->status,
@@ -332,6 +333,7 @@ class TemporaryTableController extends Controller
                     if($single != null ){
                     array_push($bundles,array(
                         'kitchen_id'=> $order->id,
+                        'tableno'=>$order->tableno,
                         'date_ordered' =>$order->created_at,
                         'order_id'=> $order->order_id,
                         'status'=> $order->status,
