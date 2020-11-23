@@ -364,9 +364,8 @@ class TemporaryTableController extends Controller
                         'menuID'=>  $k->menuID,
                         'itemName'=>  $k->itemName
                     ));
-                
+                return $bundles;
                 }
-        return $bundles;
     }
 
     function getMealSingle($menuid){
