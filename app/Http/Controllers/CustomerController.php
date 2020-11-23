@@ -169,9 +169,9 @@ class CustomerController extends Controller
                 $items = $this->getBarKitchenBundles($value['bundleid']);
                foreach($items as $item){
                    array_push($bundles,array(
-                    'orderQty'=> $value->orderQty,
-                    'menuID'=> $item->menuID,
-                    'bundleid'=> $item->bundleid,
+                    'orderQty'=> $item['orderQty'],
+                    'menuID'=> $item['menuID'],
+                    'bundleid'=> $item['bundleid'],
                     'order_id'=> $order_id,
                     'status'=> 'waiting'
                    ));
