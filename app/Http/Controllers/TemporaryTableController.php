@@ -300,9 +300,9 @@ class TemporaryTableController extends Controller
         ->get();
         $bundles = [];
        
-
+        $i = 0;
         foreach($orders as $order){
-             $i = 0;
+           
             if( $order->bundleid != null){
                 $bundleItems = $this->getMealBundles($order->bundleid);
               
