@@ -164,6 +164,12 @@ class CustomerController extends Controller
         $bundles = array();
         $finalArray = array();
 
+        foreach($data as $value){
+            if($value['bundleid']!=null){
+                array_push($bundles, $value);
+            }
+        }
+
 
 
         // foreach($data as $value){
@@ -240,7 +246,7 @@ class CustomerController extends Controller
         DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
             
-            'request' => $data
+            'request' => $bundles
         ]);
     }
 
