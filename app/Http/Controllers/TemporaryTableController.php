@@ -318,7 +318,7 @@ class TemporaryTableController extends Controller
                         'itemName'=> $bundle->itemName]
                     )));
                 }
-                continue;
+            break;
                 
             }else if( $order->bundleid == null  && $order->menuID !=null ){
                 $singles = $this->getMealSingle($order->menuID);
