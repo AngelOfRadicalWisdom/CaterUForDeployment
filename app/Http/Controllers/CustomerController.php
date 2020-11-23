@@ -230,7 +230,7 @@ class CustomerController extends Controller
             //                 $kitchenorders->save();
             
         }
-       
+    }
 
         // OrderDetail::insert($finalArray);
        
