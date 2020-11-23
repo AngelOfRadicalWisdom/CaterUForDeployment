@@ -296,7 +296,7 @@ class TemporaryTableController extends Controller
 
     public function getKitchenOrders($status){
         $orders = DB::table('kitchenrecords')
-        ->join('orders', 'order.order_id','=','kitchenrecords.order_id')
+        ->join('orders', 'orders.order_id','=','kitchenrecords.order_id')
         ->where('kitchenrecords.status',$status)
         ->get();
         $bundles = [];
