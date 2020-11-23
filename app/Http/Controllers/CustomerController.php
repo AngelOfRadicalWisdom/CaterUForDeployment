@@ -169,7 +169,7 @@ class CustomerController extends Controller
                 $items = $this->getBarKitchenBundles($value['bundleid']);
                foreach($items as $item){
                    array_push($bundles,array(
-                    'orderQty'=> $item['orderQty'],
+                    // 'orderQty'=> $item['orderQty'],
                     'menuID'=> $item['menuID'],
                     'bundleid'=> $item['bundleid'],
                     'order_id'=> $order_id,
@@ -262,7 +262,7 @@ class CustomerController extends Controller
         DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
             
-            'request' => $bundles
+            'request' => $data
         ]);
     }
 
