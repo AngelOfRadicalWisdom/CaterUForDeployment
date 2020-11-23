@@ -166,7 +166,10 @@ class CustomerController extends Controller
 
         foreach($data as $value){
             if($value['bundleid']!=null){
-                array_push($bundles, $value);
+                $items = $this->getBarKitchenBundles($value['bundleid']);
+               foreach($items as $item){
+                   array_push($bundles,$item);
+               }
             }
         }
 
