@@ -171,7 +171,7 @@ class CustomerController extends Controller
                    array_push($bundles,array(
                     // 'orderQty'=> $item['orderQty'],
                     // 'menuID'=> $item['menuID'],
-                    // 'bundleid'=> $item['bundleid'],
+                    'bundleid'=> $item->bundleid,
                     'order_id'=> $order_id,
                     'status'=> 'waiting'
                    ));
@@ -262,7 +262,7 @@ class CustomerController extends Controller
         DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
             
-            'request' => $data
+            'request' => $bundles
         ]);
     }
 
