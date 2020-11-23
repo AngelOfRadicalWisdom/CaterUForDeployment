@@ -305,6 +305,7 @@ class TemporaryTableController extends Controller
             if( $order->bundleid != null  && $order->menuID !=null ){
                 $bundleItems = $this->getMealBundles($order->bundleid);
                 foreach($bundleItems as $bundle){
+                    if($bundle!=null){
                     array_push($bundles,array(
                     'kitchen_id'=> $order->id,
                     'date_ordered' =>$order->created_at,
@@ -312,11 +313,15 @@ class TemporaryTableController extends Controller
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
                     'details'=> array(
-                        ['bundleName'=> $bundle->bundleName,
-                        'qty'=> $bundle->qty,
-                        'menuID'=> $bundle->menuID,
-                        'itemName'=> $bundle->itemName]
-                    )));
+                        [
+                            'bundleName'=> $bundle->bundleName,
+                            'qty'=> $bundle->qty,
+                            'menuID'=> $bundle->menuID,
+                            'itemName'=> $bundle->itemName
+                            ]
+                    )
+                )}
+            );
                 }
             break;
                 
