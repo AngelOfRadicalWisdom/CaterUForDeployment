@@ -311,7 +311,7 @@ class TemporaryTableController extends Controller
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-                    'details'=>[$bundle]));
+                    'details'=>$bundle['bundleName']));
                 }
                 
             }else if( $order->bundleid == null  && $order->menuID !=null ){
@@ -351,7 +351,6 @@ class TemporaryTableController extends Controller
     }
 
     function getMealSingle($menuid){
-      
                    return DB::table('menus')
                     ->select('menus.name AS itemName','menus.menuID')
                     ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
