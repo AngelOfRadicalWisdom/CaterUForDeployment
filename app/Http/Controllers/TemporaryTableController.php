@@ -320,8 +320,8 @@ class TemporaryTableController extends Controller
                             'itemName'=> $bundle->itemName
                             ]
                     )
-                )}
-            );
+                )
+            );}
                 }
             break;
                 
