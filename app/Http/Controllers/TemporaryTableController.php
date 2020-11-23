@@ -321,7 +321,7 @@ class TemporaryTableController extends Controller
                     )
                 )
             );
-                }           
+                         
                 
             }else {
                 $singles = $this->getMealSingle($order->menuID);
