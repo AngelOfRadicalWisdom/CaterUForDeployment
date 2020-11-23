@@ -186,9 +186,9 @@ class CustomerController extends Controller
                 $kitchenorders->save();
             }
         }
-        // OrderDetail::insert($finalArray);
+        OrderDetail::insert($finalArray);
        
-        // DB::table('carts')->where('order_id',$order_id)->delete();
+        DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
             'request' => $data
         ]);
