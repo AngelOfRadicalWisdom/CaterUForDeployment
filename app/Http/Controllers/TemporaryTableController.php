@@ -303,8 +303,8 @@ class TemporaryTableController extends Controller
            
             if( $order->bundleid != null){
                 $bundleItems = $this->getMealBundles($order->bundleid);
-              
                     foreach($bundleItems as $item){
+                        if($item->menuID == $order->menuID){
                         array_push($bundles,array(
                             'kitchen_id'=> $order->id,
                             'date_ordered' =>$order->created_at,
@@ -322,6 +322,7 @@ class TemporaryTableController extends Controller
                         )
                     );
                     }
+                }
                          
                 
             }else {
