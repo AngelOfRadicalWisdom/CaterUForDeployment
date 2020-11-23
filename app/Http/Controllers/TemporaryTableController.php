@@ -315,7 +315,7 @@ class TemporaryTableController extends Controller
                         'bundleName'=> $bundle->bundleName,
                         'qty'=> $bundle->qty,
                         'menuID'=> $bundle->menuID,
-                        'itemName'=> $itemName
+                        'itemName'=> $bundle->itemName
                     )));
                 }
                 
