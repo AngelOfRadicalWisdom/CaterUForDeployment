@@ -311,7 +311,7 @@ class TemporaryTableController extends Controller
                     'order_id'=> $order->order_id,
                     'status'=> $order->status,
                     'ordered'=> $order->orderQty,
-                    'details'=>$bundle));
+                    'details'=>[$bundle]));
                 }
                 
             }else if( $order->bundleid == null  && $order->menuID !=null ){
