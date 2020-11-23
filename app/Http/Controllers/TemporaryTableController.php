@@ -302,7 +302,7 @@ class TemporaryTableController extends Controller
         
 
         foreach($orders as $order){
-            if( $order->bundleid != null  && $order->menuID ==null ){
+            if( $order->bundleid != null  && $order->menuID !=null ){
                 array_push($bundles,array(
                     'kitchen_id'=> $order->id,
                     'date_ordered' =>$order->created_at,
