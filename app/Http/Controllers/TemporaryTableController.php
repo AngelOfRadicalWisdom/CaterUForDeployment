@@ -314,7 +314,7 @@ class TemporaryTableController extends Controller
                             'details'=> array(
                                 [
                                     'bundleName'=> $item->bundleName,
-                                    'qty'=>  $items->qty,
+                                    'qty'=>  $item->qty,
                                     'menuID'=>  $item->menuID,
                                     'itemName'=>  $item->itemName
                                     ]
