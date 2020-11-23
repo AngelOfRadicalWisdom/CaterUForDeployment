@@ -305,7 +305,7 @@ class TemporaryTableController extends Controller
                 $bundleItems = $this->getMealBundles($order->bundleid);
               
                     foreach($bundleItems as $item){
-                        rray_push($bundles,array(
+                        array_push($bundles,array(
                             'kitchen_id'=> $order->id,
                             'date_ordered' =>$order->created_at,
                             'order_id'=> $order->order_id,
