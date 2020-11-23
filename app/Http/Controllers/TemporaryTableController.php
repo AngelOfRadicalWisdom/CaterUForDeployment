@@ -353,7 +353,7 @@ class TemporaryTableController extends Controller
         }
 
         return response()->json([
-            'details' =>$orders
+            'details' =>$bundles
         ]);
     }
 
