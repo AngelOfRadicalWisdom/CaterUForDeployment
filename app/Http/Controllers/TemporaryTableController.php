@@ -296,6 +296,14 @@ class TemporaryTableController extends Controller
 
     public function getKitchenOrders($status){
         $orders = DB::table('kitchenrecords')
+        ->select(
+            'kitchenrecords.status as kitchenStatus',
+            'kitchenrecords.id',
+            'orders.tableno',
+            'kitchenrecords.created_at',
+            'orders.order_id',
+            'kitchenrecords.orderQty'
+        )
         ->join('orders', 'orders.order_id','=','kitchenrecords.order_id')
         ->where('kitchenrecords.status',$status)
         ->get();
@@ -311,7 +319,7 @@ class TemporaryTableController extends Controller
                             'tableno'=>$order->tableno,
                             'date_ordered' =>$order->created_at,
                             'order_id'=> $order->order_id,
-                            'status'=> $order->status,
+                            'status'=> $order->kitchenStatus,
                             'ordered'=> $order->orderQty,
                             'details'=> array(
                                 [
@@ -336,7 +344,7 @@ class TemporaryTableController extends Controller
                         'tableno'=>$order->tableno,
                         'date_ordered' =>$order->created_at,
                         'order_id'=> $order->order_id,
-                        'status'=> $order->status,
+                        'status'=> $order->kitchenStatus,
                         'ordered'=> $order->orderQty,
                         'details'=>array(
                             ['bundleName'=> null,
