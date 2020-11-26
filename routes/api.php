@@ -72,7 +72,7 @@ Route::middleware('cors:api')->get('/order/begintransaction/{tableno}','TableCon
 Route::middleware('cors:api')->get('/cashier/billOutList','CashierController@getBillOutList');// Show all billout
 Route::middleware('cors:api')->get('/cashier/getbillinfo/{tableNo}','CashierController@getbilldetail');//show details per table//
 Route::middleware('cors:api')->post('/cashier/printReceipt/{order_id}','PaymentController@printReceipt');
-Route::middleware('cors:api')->get('/getBarKitchenOrders','TemporaryTableController@getBarKitchenOrders');
+// Route::middleware('cors:api')->get('/getBarKitchenOrders','TemporaryTableController@getBarKitchenOrders');
 //MENU
 Route::middleware('cors:api')->get('/menu/categorylist','CategoryController@apiCategoryList');
 Route::middleware('cors:api')->get('/menu/subcategorylist','CategoryController@apiSubCategoryList');
