@@ -166,7 +166,7 @@ class CustomerController extends Controller
         
             foreach($data as $key){
             array_push($finalArray,array(
-                'order_id' =>$key['order_id'],
+                'order_id' =>$order_id,
                 'orderQty' => $key['orderQty'],
                 'qtyServed' =>$key['orderQty'],
                 'menuID' =>  $key['menuID'],
