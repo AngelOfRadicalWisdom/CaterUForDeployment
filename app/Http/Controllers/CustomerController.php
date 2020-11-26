@@ -177,32 +177,34 @@ class CustomerController extends Controller
             ));
         }
             }
+            foreach($data as $val){
+        foreach($val as $value){
+            if($value['bundleid']!=null){
+                $items = $this->getBarKitchenBundles($value['bundleid']);
+               foreach($items as $item){
+                   $kitchenorders = new Kitchen();
+                   $kitchenorders->orderQty = $value['orderQty'];
+                   $kitchenorders->menuID = $item->menuID;
+                   $kitchenorders->bundleid = $item->bundleid;
+                   $kitchenorders->order_id = $order_id;
+                   $kitchenorders->status = 'waiting';
+                   $kitchenorders->save();
+               }
+            }else{
+                $kitchenorders = new Kitchen();
+                $kitchenorders->orderQty =  $value['orderQty'];
+                $kitchenorders->menuID =$value['menuID'];
+                $kitchenorders->bundleid = $value['bundleid'];
+                $kitchenorders->order_id = $order_id;
+                $kitchenorders->status = 'waiting';
+                $kitchenorders->save();
+            }
+        }
+            }
 
-        // foreach($data as $value){
-        //     if($value['bundleid']!=null){
-        //         $items = $this->getBarKitchenBundles($value['bundleid']);
-        //        foreach($items as $item){
-        //            $kitchenorders = new Kitchen();
-        //            $kitchenorders->orderQty = $value['orderQty'];
-        //            $kitchenorders->menuID = $item->menuID;
-        //            $kitchenorders->bundleid = $item->bundleid;
-        //            $kitchenorders->order_id = $order_id;
-        //            $kitchenorders->status = 'waiting';
-        //            $kitchenorders->save();
-        //        }
-        //     }else{
-        //         $kitchenorders = new Kitchen();
-        //         $kitchenorders->orderQty =  $value['orderQty'];
-        //         $kitchenorders->menuID =$value['menuID'];
-        //         $kitchenorders->bundleid = $value['bundleid'];
-        //         $kitchenorders->order_id = $order_id;
-        //         $kitchenorders->status = 'waiting';
-        //         $kitchenorders->save();
-        //     }
-        // }
         OrderDetail::insert($finalArray);
        
-        // DB::table('carts')->where('order_id',$order_id)->delete();
+        DB::table('carts')->where('order_id',$order_id)->delete();
         return response()->json([
             'request' => $data
         ]);
