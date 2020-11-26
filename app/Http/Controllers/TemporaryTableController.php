@@ -553,7 +553,8 @@ class TemporaryTableController extends Controller
             'orders.order_id',
             'kitchenrecords.orderQty',
             'kitchenrecords.bundleid',
-            'kitchenrecords.menuID'
+            'kitchenrecords.menuID',
+            'orders.status as orderStatus'
         )
         ->join('orders', 'orders.order_id','=','kitchenrecords.order_id')
         ->where('orders.tableno',$tableno)
@@ -572,6 +573,7 @@ class TemporaryTableController extends Controller
                             'order_id'=> $order->order_id,
                             'status'=> $order->kitchenStatus,
                             'ordered'=> $order->orderQty,
+                            'billStatus'=> $order->orderStatus,
                             'details'=> array(
                                 [
                                     'bundleName'=> $item->bundleName,
@@ -597,6 +599,7 @@ class TemporaryTableController extends Controller
                         'order_id'=> $order->order_id,
                         'status'=> $order->kitchenStatus,
                         'ordered'=> $order->orderQty,
+                        'billStatus'=> $order->orderStatus,
                         'details'=>array(
                             ['bundleName'=> null,
                             'qty'=> null,
