@@ -556,7 +556,7 @@ class TemporaryTableController extends Controller
             'kitchenrecords.menuID'
         )
         ->join('orders', 'orders.order_id','=','kitchenrecords.order_id')
-        ->where('kitchenrecords.status',$status)
+        
         ->get();
         $bundles = [];
         foreach($orders as $order){
