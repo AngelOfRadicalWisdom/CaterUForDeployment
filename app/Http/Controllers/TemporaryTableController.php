@@ -542,7 +542,7 @@ class TemporaryTableController extends Controller
                     ->select('menus.name AS itemName','menus.menuID')
                     ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
                     ->join('categories','categories.categoryid','=','sub_categories.categoryid')
-                    ->where('categories.categoryname','!=','Drinks')
+                    ->where('categories.categoryname','=','Drinks')
                     ->where('menus.menuID',$menuid)
                     ->get();
         
