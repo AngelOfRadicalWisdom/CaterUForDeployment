@@ -163,8 +163,8 @@ class CustomerController extends Controller
         $data = $request->all();
         $bundles = array();
         $finalArray = array();
-        foreach($data as $value){
-            foreach($value as $key){
+        
+            foreach($data as $key){
             array_push($finalArray,array(
                 'order_id' =>$key['order_id'],
                 'orderQty' => $key['orderQty'],
@@ -175,7 +175,7 @@ class CustomerController extends Controller
                 'subtotal' => $key['subtotal'] 
             ));
         }
-            }
+            
 
         foreach($data as $value){
             if($value['bundleid']!=null){
