@@ -303,7 +303,8 @@ class TemporaryTableController extends Controller
             'kitchenrecords.created_at',
             'orders.order_id',
             'kitchenrecords.orderQty',
-            'kitchenrecords.bundleid'
+            'kitchenrecords.bundleid',
+            'kitchenrecords.menuID'
         )
         ->join('orders', 'orders.order_id','=','kitchenrecords.order_id')
         ->where('kitchenrecords.status',$status)
