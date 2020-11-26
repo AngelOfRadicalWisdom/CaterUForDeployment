@@ -489,13 +489,13 @@ class TemporaryTableController extends Controller
     }
 
     public function getBarKitchenOrders($tableno){
-        $orders = DB::table('kitchenrecords')
-        ->select('kitchenrecords.bundleid','kitchenrecords.menuID','orders.order_id','orders.tableNo','kitchenrecords.id',
-        'kitchenrecords.created_at','kitchenrecords.orderQty','kitchenrecords.status' )
-        ->join('orders','orders.order_id','=','kitchenrecords.order_id')
-        ->where('orders.tableno',$tableno)
-        ->get();
-        $bundles = [];
+        // $orders = DB::table('kitchenrecords')
+        // ->select('kitchenrecords.bundleid','kitchenrecords.menuID','orders.order_id','orders.tableNo','kitchenrecords.id',
+        // 'kitchenrecords.created_at','kitchenrecords.orderQty','kitchenrecords.status' )
+        // ->join('orders','orders.order_id','=','kitchenrecords.order_id')
+        // ->where('orders.tableno',$tableno)
+        // ->get();
+        // $bundles = [];
 
         // foreach($orders as $order){
         //     if($order->bundleid != null  && $order->menuID !=null ){
@@ -541,8 +541,78 @@ class TemporaryTableController extends Controller
         //     }
         // }
 
+        // return response()->json([
+        //     'details' =>$orders
+        // ]);
+        $orders = DB::table('kitchenrecords')
+        ->select(
+            'kitchenrecords.status as kitchenStatus',
+            'kitchenrecords.id',
+            'orders.tableno',
+            'kitchenrecords.created_at',
+            'orders.order_id',
+            'kitchenrecords.orderQty',
+            'kitchenrecords.bundleid',
+            'kitchenrecords.menuID'
+        )
+        ->join('orders', 'orders.order_id','=','kitchenrecords.order_id')
+        ->where('kitchenrecords.status',$status)
+        ->get();
+        $bundles = [];
+        foreach($orders as $order){
+           
+            if( $order->bundleid != null){
+                $bundleItems = $this->getBarKitchenBundles($order->bundleid);
+                    foreach($bundleItems as $item){
+                        if($item->menuID == $order->menuID){
+                        array_push($bundles,array(
+                            'kitchen_id'=> $order->id,
+                            'tableno'=>$order->tableno,
+                            'date_ordered' =>$order->created_at,
+                            'order_id'=> $order->order_id,
+                            'status'=> $order->kitchenStatus,
+                            'ordered'=> $order->orderQty,
+                            'details'=> array(
+                                [
+                                    'bundleName'=> $item->bundleName,
+                                    'qty'=>  $item->qty,
+                                    'menuID'=>  $item->menuID,
+                                    'itemName'=>  $item->itemName
+                                    ]
+                            )
+                        )
+                    );
+                    }
+                }
+                         
+                
+            }else {
+                $singles = $this->getBarKitchenSingle($order->menuID);
+                foreach($singles as $single){
+                    if($single != null ){
+                    array_push($bundles,array(
+                        'kitchen_id'=> $order->id,
+                        'tableno'=>$order->tableno,
+                        'date_ordered' =>$order->created_at,
+                        'order_id'=> $order->order_id,
+                        'status'=> $order->kitchenStatus,
+                        'ordered'=> $order->orderQty,
+                        'details'=>array(
+                            ['bundleName'=> null,
+                            'qty'=> null,
+                            'menuID'=> $single->menuID,
+                            'itemName'=> $single->itemName]
+                        ))); 
+                    }
+                }
+             
+               
+            }
+            
+        }
+
         return response()->json([
-            'details' =>$orders
+            'details' =>$bundles
         ]);
     }
 
