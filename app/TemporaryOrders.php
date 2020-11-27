@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class TemporaryOrders extends Model
 {
-    protected $table = 'temporary-orders';
+    protected $table = 'temporary_orders';
     protected $primaryKey = 'id';
     public $incrementing= true;
     public $timestamps = true;
