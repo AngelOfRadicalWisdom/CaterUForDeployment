@@ -205,7 +205,7 @@ class CustomerController extends Controller
                 $kitchenorders = new Kitchen();
                 $kitchenorders->orderQty =  $value['orderQty'];
                 $kitchenorders->menuID =$value['menuID'];
-                $kitchenorders->bundleid = $value['bundleid'];
+                $kitchenorders->bundleid = null
                 $kitchenorders->order_id = $order_id;
                 $kitchenorders->status = 'waiting';
                 $kitchenorders->save();
@@ -214,7 +214,7 @@ class CustomerController extends Controller
                 $tempOrders->id = $kitchenorders->id;
                 $tempOrders->orderQty =  $value['orderQty'];
                 $tempOrders->menuID =$value['menuID'];
-                $tempOrders->bundleid = $value['bundleid'];
+                $tempOrders->bundleid = null;
                 $tempOrders->order_id = $order_id;
                 $tempOrders->status = 'waiting';
                 $tempOrders->save();
