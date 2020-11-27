@@ -23,7 +23,7 @@ class TemporaryOrders extends Migration
             $table->string('status');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
-            $table->foreign('id')->references('kId')->on('kitchenrecords');
+            $table->foreign('kId')->references('id')->on('kitchenrecords');
             $table->foreign('order_id')->references('order_id')->on('orders');
             $table->foreign('menuID')->references('menuID')->on('menus');
             $table->foreign('bundleid')->references('bundleid')->on('bundles');
