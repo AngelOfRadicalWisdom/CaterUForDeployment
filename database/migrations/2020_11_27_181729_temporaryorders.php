@@ -15,10 +15,10 @@ class TemporaryOrders extends Migration
     {
         Schema::create('temporary_orders', function (Blueprint $table) {
             $table->increments('tempId');
-            $table->integer('id');
-            $table->integer('order_id')->unsigned();
-            $table->integer('menuID')->unsigned()->nullable();
-            $table->integer('bundleid')->unsigned()->nullable();
+            $table->integer('id')->unsigned();
+            $table->integer('order_id');
+            $table->integer('menuID')->nullable();
+            $table->integer('bundleid')->nullable();
             $table->integer('orderQty');
             $table->string('status');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
