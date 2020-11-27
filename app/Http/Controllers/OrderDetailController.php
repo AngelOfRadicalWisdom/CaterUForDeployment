@@ -26,18 +26,38 @@ class OrderDetailController extends BaseController
         'temporary_orders.id as kitchenId',
         'temporary_orders.tempId',
         'temporary_orders.bundleid',
-        'temporary_orders.qtyServed'
+        'temporary_orders.qtyServed',
+        'temporary_orders.order_id'
         )
     ->join('menus','menus.menuID','=','temporary_orders.menuID')
     ->where('temporary_orders.order_id',$order_id)
     ->get();
- 
+
+    // foreach($orders as $o){
+    //     if($o->bundleid !=null){
+    //         array_push($items,array(
+    //            'name'=> $o->name,
+    //             'orderQty'=> $o->orderQty,
+    //             ''
+    //         ));
+
+    //     }else{
+    //         array_push($items, $o)
+    //     }
+    // }
     return response()->json([
         'data' => $orders
     ]);
     }
 
-    
+    function getBundles(){
+        return DB::table('bundles')
+        ->select('name as bundleName')
+        ->where('bundleid',$bundleid)
+        ->get();
+    }
+
+
     public function getTotal($order_id){
         $orderDetails = OrderDetail::where('order_id',$order_id)->get();
         $total = 0;
