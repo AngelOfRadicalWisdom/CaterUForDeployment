@@ -20,33 +20,12 @@ class OrderDetailController extends BaseController
         $items = array();
 
     $orders = DB::table('temporary_orders')
-    // ->join('order_details','orders.order_id','=','order_details.order_id')
-    // -join('kitchenrecords','kitchenrecords.order_id','=','orders.order_id')
-    // ->join('temporary_orders','temporary_orders.id','=','kitchenrecords.id')
-    // ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
-    
-    // ->where('order_details.bundleid','=',null)
     ->where('temporary_orders.order_id',$order_id)
     ->get();
-    
-        //     $bundleItems = DB::table('order_details')
-        //     ->select('order_details.qtyServed','order_details.orderQty as orderQty', 'menus.name as menuName','bundles.name as bundlename', 'bundle_details.qty','bundles.bundleid', 'bundles.price','order_details.id')
-        //     ->join('bundles', 'order_details.bundleid', '=', 'bundles.bundleid')
-        //     ->join('bundle_details','bundles.bundleid','=','bundle_details.bundleid')
-        //     ->join('menus', 'menus.menuID','=','bundle_details.menuID')
-        //     ->where('order_details.bundleid','!=',null)
-        //     ->where('order_details.order_id',$order_id)
-        //     ->get();
-
-        // foreach($orders as $item){
-        //     array_push($items, $item);
-        // }
-        // foreach($bundleItems as $item){
-        //     array_push($items, $item);
-        // }
-        return response()->json([
-            'data' => $orders
-        ]);
+ 
+    return response()->json([
+        'data' => $orders
+    ]);
     }
 
     
