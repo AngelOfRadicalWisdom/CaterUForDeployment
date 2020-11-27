@@ -265,6 +265,8 @@ class CustomerController extends Controller
         ]);
     }
 
+
+    
     public function assignTable(Request $request, $custid){
         $newCustomer = Customer::find($custid);
         $newCustomer->tableno = $request->tableno;
