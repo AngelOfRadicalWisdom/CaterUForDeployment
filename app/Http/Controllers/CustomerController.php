@@ -216,7 +216,19 @@ class CustomerController extends Controller
             }
         // OrderDetail::insert($finalArray);
        
-        DB::table('carts')->where('order_id',$order_id)->delete();
+        // DB::table('carts')->where('order_id',$order_id)->delete();
+
+        $records = DB::table('kitcherecords')->get();
+        foreach($records as $value){
+            $tempOrders = new TemporaryOrders();
+            $tempOrders->id = $value['id'];
+            $tempOrders->orderQty =  $value['orderQty'];
+            $tempOrders->menuID =$value['menuID'];
+            $tempOrders->bundleid = $value['bundleid'];
+            $tempOrders->order_id = $order_id;
+            $tempOrders->status = 'waiting';
+            $tempOrders->save();
+        }
         return response()->json([
             'request' => $kitchenorders
         ]);
