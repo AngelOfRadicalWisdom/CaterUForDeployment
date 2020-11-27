@@ -19,14 +19,14 @@ class OrderDetailController extends BaseController
         $bundles = array();
         $items = array();
 
-    $orders = DB::table('order_details')
-    ->select('order_details.*','menus.name','menus.price')
-    ->join('orders','orders.order_id','=','order_details.order_id')
+    $orders = DB::table('orders')
+    ->join('order_details','orders.order_id','=','order_details.order_id')
     -join('kitchenrecords','kitchenrecords.order_id','=','order.order_id')
     ->join('temporary_orders','temporary_orders.id','=','kitchenrecords.id')
     ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
+    
     // ->where('order_details.bundleid','=',null)
-    ->where('order_details.order_id',$order_id)
+    ->where('orders.order_id',$order_id)
     ->get();
     
         //     $bundleItems = DB::table('order_details')
