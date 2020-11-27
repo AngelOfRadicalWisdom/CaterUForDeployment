@@ -189,6 +189,14 @@ class CustomerController extends Controller
                    $kitchenorders->order_id = $order_id;
                    $kitchenorders->status = 'waiting';
                    $kitchenorders->save();
+
+                   $kitchenorders = new Kitchen();
+                   $kitchenorders->orderQty = $value['orderQty'];
+                   $kitchenorders->menuID = $item->menuID;
+                   $kitchenorders->bundleid = $item->bundleid;
+                   $kitchenorders->order_id = $order_id;
+                   $kitchenorders->status = 'waiting';
+                   $kitchenorders->save();
                }
             }else{
                 $kitchenorders = new Kitchen();
