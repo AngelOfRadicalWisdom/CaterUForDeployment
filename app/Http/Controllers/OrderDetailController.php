@@ -45,7 +45,7 @@ class OrderDetailController extends BaseController
         //     array_push($items, $item);
         // }
         return response()->json([
-            'data' => $items
+            'data' => $orders
         ]);
     }
 
