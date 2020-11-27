@@ -162,22 +162,21 @@ class CustomerController extends Controller
     }
     public function placeorder(Request $request,$order_id){
         $data = $request->all();
-        // $bundles = array();
         $finalArray = array();
 
-        //    foreach($data as $value){
-        //     foreach($value as $key){
-        //     array_push($finalArray,array(
-        //         'order_id' =>$key['order_id'],
-        //         'orderQty' => $key['orderQty'],
-        //         'qtyServed' =>$key['orderQty'],
-        //         'menuID' =>  $key['menuID'],
-        //         'bundleid' => $key['bundleid'],
-        //         'status' => 'waiting',
-        //         'subtotal' => $key['subtotal'] 
-        //     ));
-        // }
-        //     }
+           foreach($data as $value){
+            foreach($value as $key){
+            array_push($finalArray,array(
+                'order_id' =>$key['order_id'],
+                'orderQty' => $key['orderQty'],
+                'qtyServed' =>$key['orderQty'],
+                'menuID' =>  $key['menuID'],
+                'bundleid' => $key['bundleid'],
+                'status' => 'waiting',
+                'subtotal' => $key['subtotal'] 
+            ));
+        }
+            }
             foreach($data as $val){
         foreach($val as $value){
             if($value['bundleid']!=null){
@@ -224,9 +223,9 @@ class CustomerController extends Controller
             }
 
        
-        // OrderDetail::insert($finalArray);
+        OrderDetail::insert($finalArray);
        
-        // DB::table('carts')->where('order_id',$order_id)->delete();
+        DB::table('carts')->where('order_id',$order_id)->delete();
 
        response()->json([
             'request' => $data
