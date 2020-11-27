@@ -190,13 +190,7 @@ class CustomerController extends Controller
                    $kitchenorders->status = 'waiting';
                    $kitchenorders->save();
 
-                   $kitchenorders = new Kitchen();
-                   $kitchenorders->orderQty = $value['orderQty'];
-                   $kitchenorders->menuID = $item->menuID;
-                   $kitchenorders->bundleid = $item->bundleid;
-                   $kitchenorders->order_id = $order_id;
-                   $kitchenorders->status = 'waiting';
-                   $kitchenorders->save();
+                   
                }
             }else{
                 $kitchenorders = new Kitchen();
@@ -210,6 +204,16 @@ class CustomerController extends Controller
         }
             }
 
+            foreach($kitchenorders as $value){
+                $tempOrders = new TemporaryOrders();
+                $tempOrders->id = $value['id'];
+                $tempOrders->orderQty =  $value['orderQty'];
+                $tempOrders->menuID =$value['menuID'];
+                $tempOrders->bundleid = $value['bundleid'];
+                $tempOrders->order_id = $order_id;
+                $tempOrders->status = 'waiting';
+                $tempOrders->save();
+            }
         OrderDetail::insert($finalArray);
        
         DB::table('carts')->where('order_id',$order_id)->delete();
