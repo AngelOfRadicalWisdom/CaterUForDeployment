@@ -190,17 +190,16 @@ class CustomerController extends Controller
                    $kitchenorders->status = 'waiting';
                    $kitchenorders->save();
 
-                   
-                   
-               }
-               $tempOrders = new TemporaryOrders();
+                   $tempOrders = new TemporaryOrders();
                    $tempOrders->id = $kitchenorders->id;
                    $tempOrders->orderQty = $value['orderQty'];
-                   $tempOrders->menuID = null;
-                   $tempOrders->bundleid = $value['bundleid'];
+                   $tempOrders->menuID = $item->menuID;
+                   $tempOrders->bundleid = $item->bundleid;
                    $tempOrders->order_id = $order_id;
                    $tempOrders->status = 'waiting';
                    $tempOrders->save();
+                   
+               }
             }else{
                 $kitchenorders = new Kitchen();
                 $kitchenorders->orderQty =  $value['orderQty'];
