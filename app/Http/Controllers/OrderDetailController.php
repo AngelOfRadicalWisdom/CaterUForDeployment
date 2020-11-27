@@ -21,7 +21,7 @@ class OrderDetailController extends BaseController
 
     $orders = DB::table('orders')
     ->join('order_details','orders.order_id','=','order_details.order_id')
-    -join('kitchenrecords','kitchenrecords.order_id','=','order.order_id')
+    -join('kitchenrecords','kitchenrecords.order_id','=','orders.order_id')
     ->join('temporary_orders','temporary_orders.id','=','kitchenrecords.id')
     ->join('menus', 'order_details.menuID', '=', 'menus.menuID')
     
