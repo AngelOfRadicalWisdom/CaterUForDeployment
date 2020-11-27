@@ -11,5 +11,5 @@ class TemporaryOrders extends Model
     public $incrementing= true;
     public $timestamps = true;
 
-    protected $fillable = ['id,kId','order_id','menuID','status','orderQty','bundleid'];
+    protected $fillable = ['tempId,id','order_id','menuID','status','orderQty','bundleid'];
 }
