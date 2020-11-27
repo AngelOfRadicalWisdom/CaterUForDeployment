@@ -31,6 +31,7 @@ class OrderDetailController extends BaseController
         )
     ->join('menus','menus.menuID','=','temporary_orders.menuID')
     ->where('temporary_orders.order_id',$order_id)
+    ->orderBy('temporary_orders.bundleid','ASC')
     ->get();
 
     // foreach($orders as $o){
