@@ -205,7 +205,7 @@ class CustomerController extends Controller
                 $kitchenorders = new Kitchen();
                 $kitchenorders->orderQty =  $value['orderQty'];
                 $kitchenorders->menuID =$value['menuID'];
-                $kitchenorders->bundleid = null
+                $kitchenorders->bundleid = null;
                 $kitchenorders->order_id = $order_id;
                 $kitchenorders->status = 'waiting';
                 $kitchenorders->save();
