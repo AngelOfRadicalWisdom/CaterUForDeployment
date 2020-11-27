@@ -191,14 +191,14 @@ class CustomerController extends Controller
                    $kitchenorders->status = 'waiting';
                    $kitchenorders->save();
 
-                   $tempOrders = new TemporaryOrders();
-                   $tempOrders->id = $kitchenorders->id;
-                   $tempOrders->orderQty = $value['orderQty'];
-                   $tempOrders->menuID = $item->menuID;
-                   $tempOrders->bundleid = $item->bundleid;
-                   $tempOrders->order_id = $order_id;
-                   $tempOrders->status = 'waiting';
-                   $tempOrders->save();
+                //    $tempOrders = new TemporaryOrders();
+                //    $tempOrders->id = $kitchenorders->id;
+                //    $tempOrders->orderQty = $value['orderQty'];
+                //    $tempOrders->menuID = $item->menuID;
+                //    $tempOrders->bundleid = $item->bundleid;
+                //    $tempOrders->order_id = $order_id;
+                //    $tempOrders->status = 'waiting';
+                //    $tempOrders->save();
                    
                }
             }else{
@@ -210,14 +210,14 @@ class CustomerController extends Controller
                 $kitchenorders->status = 'waiting';
                 $kitchenorders->save();
 
-                // $tempOrders = new TemporaryOrders();
-                // $tempOrders->id = $kitchenorders->id;
-                // $tempOrders->orderQty =  $value['orderQty'];
-                // $tempOrders->menuID =$value['menuID'];
-                // $tempOrders->bundleid = null;
-                // $tempOrders->order_id = $order_id;
-                // $tempOrders->status = 'waiting';
-                // $tempOrders->save();
+                $tempOrders = new TemporaryOrders();
+                $tempOrders->id = $kitchenorders->id;
+                $tempOrders->orderQty =  $value['orderQty'];
+                $tempOrders->menuID =$value['menuID'];
+                $tempOrders->bundleid = null;
+                $tempOrders->order_id = $order_id;
+                $tempOrders->status = 'waiting';
+                $tempOrders->save();
              
             }
         }
