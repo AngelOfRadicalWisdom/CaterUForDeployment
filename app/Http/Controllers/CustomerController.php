@@ -13,6 +13,7 @@ use App\Order;
 use App\OrderDetail;
 use App\RestaurantTable;
 use App\Kitchen;
+use App\TemporaryOrders;
 use DB;
 
 class CustomerController extends Controller
