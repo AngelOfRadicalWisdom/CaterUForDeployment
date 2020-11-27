@@ -20,6 +20,7 @@ class OrderDetailController extends BaseController
         $items = array();
 
     $orders = DB::table('temporary_orders')
+    ->join('menus','menus.menuID','=','temporary_orders.menuID')
     ->where('temporary_orders.order_id',$order_id)
     ->get();
  
