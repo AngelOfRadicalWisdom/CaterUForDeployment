@@ -28,7 +28,6 @@ class OrderDetailController extends BaseController
         'temporary_orders.bundleid'
         )
     ->join('menus','menus.menuID','=','temporary_orders.menuID')
-    
     ->where('temporary_orders.order_id',$order_id)
     ->get();
  

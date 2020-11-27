@@ -192,6 +192,7 @@ class CustomerController extends Controller
 
                    $tempOrders = new TemporaryOrders();
                    $tempOrders->id = $kitchenorders->id;
+                   $tempOrders->qtyServed = $value['orderQty'];
                    $tempOrders->orderQty = $value['orderQty'];
                    $tempOrders->menuID = $item->menuID;
                    $tempOrders->bundleid = $item->bundleid;
@@ -211,6 +212,7 @@ class CustomerController extends Controller
 
                 $tempOrders = new TemporaryOrders();
                 $tempOrders->id = $kitchenorders->id;
+                $tempOrders->qtyServed = $value['orderQty'];
                 $tempOrders->orderQty =  $value['orderQty'];
                 $tempOrders->menuID =$value['menuID'];
                 $tempOrders->bundleid = null;
