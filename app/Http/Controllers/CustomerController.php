@@ -218,7 +218,7 @@ class CustomerController extends Controller
        
         // DB::table('carts')->where('order_id',$order_id)->delete();
 
-        $records = DB::table('kitcherecords')->get();
+        $records = DB::table('kitchenrecords')->get();
         foreach($records as $value){
             $tempOrders = new TemporaryOrders();
             $tempOrders->id = $value['id'];
