@@ -36,7 +36,7 @@ class OrderDetailController extends BaseController
 
     foreach($orders as $o){
         if($o->bundleid !=null){
-            $items = $this->getBarKitchenBundles($o->bundleid);
+            $bundleName = $this->getBarKitchenBundles($o->bundleid);
             
                     array_push($bundles,array(
                'name'=> $o->name,
@@ -44,7 +44,7 @@ class OrderDetailController extends BaseController
                 'kitchenId'=>$o->kitchenId,
                 'tempId'=> $o->tempId,
                 'bundleid'=> $o->bundleid,
-                'bundleName'=> $items->bundleName,
+                'bundleName'=> $bundleName,
                 'qtyServed'=> $o->qtyServed,
                 'order_id'=>$o->order_id
             )); 
