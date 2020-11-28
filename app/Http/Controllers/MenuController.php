@@ -286,7 +286,7 @@ class MenuController extends BaseController
         }
 
         return  $response->json([
-            'message'=> 'Status updated!';
+            'message'=> 'Status updated!'
         ]);
     }
     public function getMenuDetail($id)
