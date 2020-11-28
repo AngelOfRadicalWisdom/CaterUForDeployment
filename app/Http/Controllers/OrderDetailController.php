@@ -37,18 +37,18 @@ class OrderDetailController extends BaseController
     foreach($orders as $o){
         if($o->bundleid !=null){
             $items = $this->getBarKitchenBundles($o->bundleid);
-            foreach($items as $item){
+            
                     array_push($bundles,array(
                'name'=> $o->name,
                 'orderQty'=> $o->orderQty,
                 'kitchenId'=>$o->kitchenId,
                 'tempId'=> $o->tempId,
                 'bundleid'=> $o->bundleid,
-                'bundleName'=> $item->bundleName,
+                'bundleName'=> $items->bundleName,
                 'qtyServed'=> $o->qtyServed,
                 'order_id'=>$o->order_id
             )); 
-            }
+            
        
 
         }else{
@@ -77,7 +77,7 @@ class OrderDetailController extends BaseController
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
-        return $kitchen;
+        return $kitchen[0]['bundleName'];
     }
     function getBundles(){
         return DB::table('bundles')
