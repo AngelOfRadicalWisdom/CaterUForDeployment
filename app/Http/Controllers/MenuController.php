@@ -272,20 +272,17 @@ class MenuController extends BaseController
     }
 
     public function changeMenuStatus($menuID,Request $request){
-        // $menu = Menu::find($menuID);
-
-        $client = new \GuzzleHttp\Client();
-        $body['name'] = "Testing";
-        $url = "https://cateruws.zenithdevgroup.me/event/test";
-        $response = $client->request("POST", $url, ['form_params'=>$body]);
-        $response = $client->send($response);
+        $menu = Menu::find($menuID);
        
-
-        // if($menu){
-        //     $menu->status = $request->status;
-        //     $menu->save();
-
-        // }
+        if($menu){
+            $menu->status = $request->status;
+            $menu->save();
+            $client = new \GuzzleHttp\Client();
+            $body['name'] = "Testing";
+            $url = "https://cateruws.zenithdevgroup.me/event/test";
+            $response = $client->request("POST", $url, ['form_params'=>$body]);
+            $response = $client->send($response);
+        }
 
         return  response()->json([
             'message' => 'Updated!'
