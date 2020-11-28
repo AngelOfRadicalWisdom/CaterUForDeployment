@@ -34,23 +34,51 @@ class OrderDetailController extends BaseController
     ->orderBy('temporary_orders.bundleid','ASC')
     ->get();
 
-    // foreach($orders as $o){
-    //     if($o->bundleid !=null){
-    //         array_push($items,array(
-    //            'name'=> $o->name,
-    //             'orderQty'=> $o->orderQty,
-    //             ''
-    //         ));
+    foreach($orders as $o){
+        if($o->bundleid !=null){
+            $items = $this->getBarKitchenBundles($value['bundleid']);
+            foreach($items as $item){
+                    array_push($bundles,array(
+               'name'=> $o->name,
+                'orderQty'=> $o->orderQty,
+                'kitchenId'=>$o->kitchenId,
+                'tempId'=> $o->tempId,
+                'bundleid'=> $o->bundleid,
+                'bundleName'=> $item->bundleName,
+                'qtyServed'=> $o->qtyServed,
+                'order_id'=>$o->order_id
+            )); 
+            }
+       
 
-    //     }else{
-    //         array_push($items, $o)
-    //     }
-    // }
+        }else{
+            array_push($bundles,array(
+                'name'=> $o->name,
+                 'orderQty'=> $o->orderQty,
+                 'kitchenId'=>$o->kitchenId,
+                 'tempId'=> $o->tempId,
+                 'bundleid'=> null,
+                 'bundleName'=> null,
+                 'qtyServed'=> $o->qtyServed,
+                 'order_id'=>$o->order_id
+             )); 
+        }
+    }
     return response()->json([
-        'data' => $orders
+        'data' => $bundles
     ]);
     }
-
+    function getBarKitchenBundles($bundleid){
+        $kitchen = DB::table('bundles')
+        ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
+                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('bundles.bundleid',$bundleid)
+                   ->get();
+        return $kitchen;
+    }
     function getBundles(){
         return DB::table('bundles')
         ->select('name as bundleName')
