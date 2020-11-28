@@ -32,6 +32,7 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+          
           <div class="x_content">
             <br />
             <div class="col-md-12 col-sm-12 ">

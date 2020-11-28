@@ -270,6 +270,19 @@ class MenuController extends BaseController
             'result' => $result
         ]);
     }
+
+    public function changeMenuStatus($menuID,Request $request){
+        $menu = Menu::find($menuID);
+
+        if($menu){
+            $menu->status = $request->status;
+            $menu->save();
+        }
+
+        return  response()->json([
+            'message' => 'Updated!'
+        ]);
+    }
     public function getMenuDetail($id)
     {
         $menus = array();

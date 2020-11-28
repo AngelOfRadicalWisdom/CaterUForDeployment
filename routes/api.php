@@ -56,6 +56,7 @@ Route::middleware('cors:api')->post('/customer/notified/remove/{custId}', 'Custo
 Route::middleware('cors:api')->post('/customer/notified/confirm/{custId}', 'CustomerController@setConfirm');
 //----------------- CUSTOMER O R D E R R O U T E S -------------------//
 Route::middleware('cors:api')->get('/menu/list', 'MenuController@ionListMenus');
+Route::middleware('cors:api')->post('/menu/changestatus/{menudID}','MenuController@changeMenuStatus');
 Route::middleware('cors:api')->post('/order/placeorder/{order_id}','CustomerController@placeorder');
 Route::middleware('cors:api')->get('/order/myorders/{order_id}','OrderDetailController@orderList');
 Route::middleware('cors:api')->post('/order/setServedQty','OrderDetailController@setServeQty');
