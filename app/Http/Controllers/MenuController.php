@@ -285,9 +285,7 @@ class MenuController extends BaseController
             $response = $client->send($response);
         }
 
-        return  response()->json([
-            'message' => $response
-        ]);
+        return  $response;
     }
     public function getMenuDetail($id)
     {
