@@ -278,14 +278,15 @@ class MenuController extends BaseController
             $menu->status = $request->status;
             $menu->save();
             $client = new \GuzzleHttp\Client();
-            $body['name'] = "Testing";
+            $body['topic'] = "changeStatus";
+            $body['data']="Testing";
             $url = "https://cateruws.zenithdevgroup.me/event/test";
             $response = $client->request("POST", $url, ['form_params'=>$body]);
             $response = $client->send($response);
         }
 
         return  response()->json([
-            'message' => 'Updated!'
+            'message' => $response
         ]);
     }
     public function getMenuDetail($id)
