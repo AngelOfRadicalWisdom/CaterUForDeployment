@@ -77,7 +77,7 @@ class OrderDetailController extends BaseController
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
-        return $kitchen[0]['bundleName'];
+        return $kitchen[0]->bundleName;
     }
     function getBundles(){
         return DB::table('bundles')
