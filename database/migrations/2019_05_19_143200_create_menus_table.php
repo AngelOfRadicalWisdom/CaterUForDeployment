@@ -19,6 +19,7 @@ class CreateMenusTable extends Migration
             $table->text('details')->nullable();
             $table->float('price');
             $table->integer('servingsize');
+            $table->string('status',20);
             $table->mediumtext('image')->nullable();
             $table->integer('subcatid')->unsigned();
             $table->softDeletes();

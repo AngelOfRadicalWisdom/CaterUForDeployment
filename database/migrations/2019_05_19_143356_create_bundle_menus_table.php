@@ -19,6 +19,7 @@ class CreateBundleMenusTable extends Migration
             $table->integer('servingsize');
             $table->string('name', 100);
             $table->text('details')->nullable();
+            $table->string('status',20);
             $table->mediumtext('image')->nullable();
             $table->softDeletes();
         });

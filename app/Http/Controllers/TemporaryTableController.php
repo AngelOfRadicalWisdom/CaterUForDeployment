@@ -150,6 +150,10 @@ class TemporaryTableController extends Controller
         $status->status = 'ready';
         $status->save();
 
+        $tempStatus = DB::table('temporary_orders')
+        ->where('id',$id)
+        ->update(['status' => 'ready']);
+
         return response()->json([
             'message' => 'Status updated to for serving'
         ]);
