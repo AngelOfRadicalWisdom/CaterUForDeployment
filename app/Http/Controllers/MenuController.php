@@ -282,10 +282,10 @@ class MenuController extends BaseController
             $body['data']="Testing";
             $url = "https://cateruws.zenithdevgroup.me/event/test";
             $response = $client->request("POST", $url, ['form_params'=>$body]);
-            $response = $client->send($response->json());
+            $response = $client->send($response);
         }
 
-        return  $response;
+        return  $response->json();
     }
     public function getMenuDetail($id)
     {
