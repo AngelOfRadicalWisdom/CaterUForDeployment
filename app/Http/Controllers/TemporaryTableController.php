@@ -182,17 +182,17 @@ class TemporaryTableController extends Controller
             'message' => $message
         ]);
     }
-    public function setServedTempOrders($tempId){
-        $message = '';
-        $tempOrders = DB::table('temporary_orders')
-        ->join('orders','orders.order_id','=','temporary_orders.order_id')
-        ->join('order_details','order_details.order_id','=','orders.order_id')
-        ->where('tempId',$tempId)
+    // public function setServedTempOrders($tempId){
+    //     $message = '';
+    //     $tempOrders = DB::table('temporary_orders')
+    //     ->join('orders','orders.order_id','=','temporary_orders.order_id')
+    //     ->join('order_details','order_details.order_id','=','orders.order_id')
+    //     ->where('tempId',$tempId)
 
-        return response()->json([
-            'message'=> $tempOrders
-        ]);
-    }
+    //     return response()->json([
+    //         'message'=> $tempOrders
+    //     ]);
+    // }
     public function isPreparing($id)
     {
         $preparing = false;
