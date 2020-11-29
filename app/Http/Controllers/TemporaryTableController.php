@@ -194,7 +194,7 @@ class TemporaryTableController extends Controller
     //     ]);
     // }
 
-    public function cancelOrderItem($order_id,Request $request){
+    public function cancelOrderItem($order_id,Request $request){ 
         $orders = DB::table('temporary_orders')
         ->where('order_id',$order_id)
         ->where('tempId',$request->tempId)
@@ -205,6 +205,11 @@ class TemporaryTableController extends Controller
                 'message'=> 'Order item cancellation is being processed!'
             ]
         );
+    }
+    public function getItemForCancel(){
+        $orders = TemporaryOrders::get();
+
+        return response()->json($orders);
     }
     public function isPreparing($id)
     {
