@@ -42,7 +42,7 @@ Route::middleware('cors:api')->post('/servemenu','TemporaryTableController@chang
 Route::middleware('cors:api')->get('/checkForReadyOrders', 'TemporaryTableController@checkForReadyOrders');
 Route::middleware('cors:api')->get('/setServedTempOrders/{tempId}','TemporaryTableController@setServedTempOrders');
 Route::middleware('cors:api')->post('/cancelOrderItem/{orderId}','TemporaryTableController@cancelOrderItem');
-Routr::middleware('cors:api')->get('/orderstocancel','TemporaryTableController@getItemForCancel');
+Route::middleware('cors:api')->get('/orderstocancel','TemporaryTableController@getItemForCancel');
 
 Route::middleware('cors:api')->get('/getCartItems/{order_id}','TemporaryTableController@getCartItems');
 Route::middleware('cors:api')->get('/getAllPreparedItems','TemporaryTableController@getAllPreparedItems');
