@@ -230,6 +230,14 @@ class TemporaryTableController extends Controller
             "message"=> "Cancellation successful!"
         ]);
     }
+    public function abortCancelItem(){
+        OrderDetail::where('id',$id)
+        ->update(['status'=> 'waiting']);
+
+        return response()->json([
+            'message'=> 'Cancellation aborted!'
+        ]);
+    }
     public function isPreparing($id)
     {
         $preparing = false;

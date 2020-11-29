@@ -44,7 +44,7 @@ Route::middleware('cors:api')->get('/setServedTempOrders/{tempId}','TemporaryTab
 Route::middleware('cors:api')->post('/cancelOrderItem/{orderId}','TemporaryTableController@requestCancelOrderItem');
 Route::middleware('cors:api')->get('/orderstocancel','TemporaryTableController@getItemForCancel');
 Route::middleware('cors:api')->post('/order/cancelitem/{id}','TemporaryTableController@cancelItem');
-
+Route::middleware('cors:api')->post('/order/abortcancel/{id}','TemporaryTableController@abortCancelItem');
 
 Route::middleware('cors:api')->get('/getCartItems/{order_id}','TemporaryTableController@getCartItems');
 Route::middleware('cors:api')->get('/getAllPreparedItems','TemporaryTableController@getAllPreparedItems');
