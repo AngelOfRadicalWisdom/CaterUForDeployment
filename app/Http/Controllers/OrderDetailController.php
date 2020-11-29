@@ -72,7 +72,7 @@ class OrderDetailController extends BaseController
         }
     }
     return response()->json([
-        'data' => $$bundleName
+        'data' => $bundles
     ]);
     }
     function getBarKitchenBundles($bundleid){
