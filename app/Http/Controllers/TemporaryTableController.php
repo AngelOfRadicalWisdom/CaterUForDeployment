@@ -195,9 +195,9 @@ class TemporaryTableController extends Controller
     // }
 
     public function cancelOrderItem($order_id,Request $request){
-        $orders = DB::table('order_details')
+        $orders = DB::table('temporary_orders')
         ->where('order_id',$order_id)
-        ->where('id',$request->id)
+        ->where('tempId',$request->tempId)
         ->update(['status'=>'pendingcancel']);
 
         return response()->json(
