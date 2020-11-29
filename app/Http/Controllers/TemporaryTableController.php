@@ -213,7 +213,7 @@ class TemporaryTableController extends Controller
         ->where('temporary_orders.status','pendingcancel')->get();
 
         return response()->json([
-            'tableno'=>$orders->tableno,
+           $orders,
             'reason'=>'Order item cancellation'
         ]);
     }
