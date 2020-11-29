@@ -50,8 +50,6 @@ class OrderDetailController extends BaseController
                 'order_id'=>$o->order_id,
                 'status'=> $o->status
             )); 
-            
-       
 
         }else{
             array_push($bundles,array(
