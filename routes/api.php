@@ -40,6 +40,7 @@ Route::middleware('cors:api')->post('/status/isReady/{id}','TemporaryTableContro
 Route::middleware('cors:api')->post('/status/isServed/{id}','TemporaryTableController@isServed');
 Route::middleware('cors:api')->post('/servemenu','TemporaryTableController@changeOrderStatusToServed');
 Route::middleware('cors:api')->get('/checkForReadyOrders', 'TemporaryTableController@checkForReadyOrders');
+Route::middleware('cors:api')->get('/setServedTempOrders/{tempId}','TemporaryTableController@setServedTempOrders');
 
 Route::middleware('cors:api')->get('/getCartItems/{order_id}','TemporaryTableController@getCartItems');
 Route::middleware('cors:api')->get('/getAllPreparedItems','TemporaryTableController@getAllPreparedItems');

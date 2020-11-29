@@ -5,6 +5,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Http\Request;
 use App\Cart;
 use App\Kitchen;
+use App\TemporaryOrders;
 use DB;
 
 class TemporaryTableController extends Controller
@@ -146,26 +147,50 @@ class TemporaryTableController extends Controller
 
     public function isReady($id)
     {
+        $message = '';
         $status = Kitchen::find($id);
-        $status->status = 'ready';
-        $status->save();
+        if($status){
+            $status->status = 'ready';
+            $status->save();
 
-        $tempStatus = DB::table('temporary_orders')
-        ->where('id',$id)
-        ->update(['status' => 'ready']);
+            $tempStatus = DB::table('temporary_orders')
+            ->where('id',$id)
+            ->update(['status' => 'ready']);
+            $message = "Status udpated";
+        }else $message ="Could not find item";
 
         return response()->json([
-            'message' => 'Status updated to for serving'
+            'message' => $message
         ]);
     }
     public function prepare($id)
     {
+        $message = '';
         $status = Kitchen::find($id);
-        $status->status = 'preparing';
-        $status->save();
+        if($status){
+            $status->status = 'preparing';
+            $status->save();
+
+            $tempOrders = DB::table('temporary_orders')
+            ->where('id',$id)
+            ->update(['status'=>'preparing']);
+
+            $message = 'Status updated!';
+        }else $message = "Could not find item";
 
         return response()->json([
-            'message' => 'status updated'
+            'message' => $message
+        ]);
+    }
+    public function setServedTempOrders($tempId){
+        $message = '';
+        $tempOrders = DB::table('temporary_orders')
+        ->join('orders','orders.order_id','=','temporary_orders.order_id')
+        ->join('order_details','order_details.order_id','=','orders.order_id')
+        ->where('tempId',$tempId)
+
+        return response()->json([
+            'message'=> $tempOrders
         ]);
     }
     public function isPreparing($id)
