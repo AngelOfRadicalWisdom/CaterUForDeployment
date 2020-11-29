@@ -194,11 +194,17 @@ class TemporaryTableController extends Controller
     //     ]);
     // }
 
-    public function cancelOrderItem(){
-        //MENUID
-        //ORDERID
-        //TABLENO
-        //CANCEL ORDER
+    public function cancelOrderItem($order_id,Request $request){
+        $orders = DB::table('order_details')
+        ->where('order_id',$order_id)
+        ->where('id',$request->id)
+        ->update(['status'=>'pendingcancel']);
+
+        return response()->json(
+            [
+                'message'=> 'Order item cancellation is being processed!'
+            ]
+        );
     }
     public function isPreparing($id)
     {
