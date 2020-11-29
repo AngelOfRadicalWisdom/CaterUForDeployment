@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Cart;
 use App\Kitchen;
 use App\TemporaryOrders;
+use App\OrderDetail;
 use DB;
 
 class TemporaryTableController extends Controller
