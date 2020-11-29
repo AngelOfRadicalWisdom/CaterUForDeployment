@@ -120,6 +120,13 @@ class TemporaryTableController extends Controller
             'message' => 'status updated'
         ]);
     }
+    // public function temporaryTableServed($tempId,Request $){
+    //     $status = TemporaryOrders::find($tempId)->get();
+    //     return response()->json([
+    //         'message' => 'status updated'
+    //     ]);
+    // }
+
     public function isForServing($id)
     {
         $status = Kitchen::find($id);
@@ -277,6 +284,7 @@ class TemporaryTableController extends Controller
             'orders' => $arr
         ]);
     }
+
     public function servingStatusByTableNo($tableno)
     {
 

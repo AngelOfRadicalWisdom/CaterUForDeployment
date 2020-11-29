@@ -183,10 +183,11 @@ class OrderDetailController extends BaseController
 
 
 
-    public function isServed($id)
+    public function isServed($id,Request $request)
     {
         $status = '';
         $servedQty = OrderDetail::whereId($id)->pluck('qtyServed')->first();
+
       
 
         if ($servedQty === 0) {
@@ -194,10 +195,16 @@ class OrderDetailController extends BaseController
             $detail->status = 'served';
             $detail->save();
 
+            $detail = TemporaryOrders::find($id);
+            $detail->status = 'served';
+            $detail->save();
+
+
             $status = 'Order is served.';
         } else {
             $status = 'Orders is being prepared.';
         }
+       
         return response()->json([
             'status' => $status
         ]);

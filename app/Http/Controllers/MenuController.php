@@ -279,7 +279,7 @@ class MenuController extends BaseController
             $menu->save();
             $client = new \GuzzleHttp\Client();
             $body['topic'] = "changeStatus";
-            $body['data']="Testing";
+            $body['content']="Testing";
             $url = "https://cateruws.zenithdevgroup.me/event/send";
             $response = $client->request("POST", $url, ['form_params'=>$body]);
             $response = $client->send($response);
