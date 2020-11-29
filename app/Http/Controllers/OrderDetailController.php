@@ -28,7 +28,8 @@ class OrderDetailController extends BaseController
         'temporary_orders.bundleid',
         'temporary_orders.qtyServed',
         'temporary_orders.order_id',
-        'temporary_orders.status'
+        'temporary_orders.status',
+        'temporary_orders.order_details_id'
         )
     ->join('menus','menus.menuID','=','temporary_orders.menuID')
     ->where('temporary_orders.order_id',$order_id)
@@ -48,7 +49,8 @@ class OrderDetailController extends BaseController
                 'bundleName'=> $bundleName,
                 'qtyServed'=> $o->qtyServed,
                 'order_id'=>$o->order_id,
-                'status'=> $o->status
+                'status'=> $o->status,
+                'orderdetailsid'=>$o->order_details_id
             )); 
 
         }else{
@@ -61,7 +63,8 @@ class OrderDetailController extends BaseController
                  'bundleName'=> null,
                  'qtyServed'=> $o->qtyServed,
                  'order_id'=>$o->order_id,
-                 'status'=>$o->status
+                 'status'=>$o->status,
+                 'orderdetailsid'=>$o->order_details_id
              )); 
         }
     }
