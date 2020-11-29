@@ -207,7 +207,7 @@ class TemporaryTableController extends Controller
         );
     }
     public function getItemForCancel(){
-        $orders = TemporaryOrders::get();
+        $orders = DB::table('temporary_orders')->where('status','pendingcancel')->get();
 
         return response()->json($orders);
     }
