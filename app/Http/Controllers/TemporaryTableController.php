@@ -193,6 +193,13 @@ class TemporaryTableController extends Controller
     //         'message'=> $tempOrders
     //     ]);
     // }
+
+    public function cancelOrderItem(){
+        //MENUID
+        //ORDERID
+        //TABLENO
+        //CANCEL ORDER
+    }
     public function isPreparing($id)
     {
         $preparing = false;

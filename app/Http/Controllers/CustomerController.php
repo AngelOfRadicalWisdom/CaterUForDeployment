@@ -164,21 +164,32 @@ class CustomerController extends Controller
         $data = $request->all();
         $finalArray = array();
 
-           foreach($data as $value){
-            foreach($value as $key){
-            array_push($finalArray,array(
-                'order_id' =>$key['order_id'],
-                'orderQty' => $key['orderQty'],
-                'qtyServed' =>$key['orderQty'],
-                'menuID' =>  $key['menuID'],
-                'bundleid' => $key['bundleid'],
-                'status' => 'waiting',
-                'subtotal' => $key['subtotal'] 
-            ));
-        }
-            }
+        //    foreach($data as $value){
+        //     foreach($value as $key){
+        //     array_push($finalArray,array(
+        //         'order_id' =>$key['order_id'],
+        //         'orderQty' => $key['orderQty'],
+        //         'qtyServed' =>$key['orderQty'],
+        //         'menuID' =>  $key['menuID'],
+        //         'bundleid' => $key['bundleid'],
+        //         'status' => 'waiting',
+        //         'subtotal' => $key['subtotal'] 
+        //     ));
+        // }
+        //     }
             foreach($data as $val){
         foreach($val as $value){
+
+            $details = new OrderDetail();
+                   $details->qtyServed = $value['orderQty'];
+                   $details->orderQty = $value['orderQty'];
+                   $details->menuID = $value['menuID'];
+                   $details->bundleid = $value['bundleid'];
+                   $details->order_id = $order_id;
+                   $details->subtotal = $value['subtotal'];
+                   $details->status = 'waiting';
+                   $details->save();
+
             if($value['bundleid']!=null){
                 $items = $this->getBarKitchenBundles($value['bundleid']);
                foreach($items as $item){
@@ -197,6 +208,7 @@ class CustomerController extends Controller
                    $tempOrders->menuID = $item->menuID;
                    $tempOrders->bundleid = $item->bundleid;
                    $tempOrders->order_id = $order_id;
+                   $tempOrders->order_details_id = $details->id;
                    $tempOrders->status = 'waiting';
                    $tempOrders->save();
                    
@@ -217,6 +229,7 @@ class CustomerController extends Controller
                 $tempOrders->menuID =$value['menuID'];
                 $tempOrders->bundleid = null;
                 $tempOrders->order_id = $order_id;
+                $tempOrders->order_details_id = $details->id;
                 $tempOrders->status = 'waiting';
                 $tempOrders->save();
              
@@ -225,7 +238,7 @@ class CustomerController extends Controller
             }
 
        
-        OrderDetail::insert($finalArray);
+        // OrderDetail::insert($finalArray);
        
         DB::table('carts')->where('order_id',$order_id)->delete();
 
