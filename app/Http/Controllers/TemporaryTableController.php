@@ -230,8 +230,8 @@ class TemporaryTableController extends Controller
             "message"=> "Cancellation successful!"
         ]);
     }
-    public function abortCancelItem(){
-        OrderDetail::where('id',$id)
+    public function abortCancelItem($tempId){
+        TemporaryOrders::where('tempId',$tempId)
         ->update(['status'=> 'waiting']);
 
         return response()->json([
