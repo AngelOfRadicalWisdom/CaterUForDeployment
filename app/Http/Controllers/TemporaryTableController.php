@@ -221,11 +221,11 @@ class TemporaryTableController extends Controller
 
     public function cancelItem($id,Request $request){
         $temporaryId = $request->tempId;
-        TemporaryOrders::where("tempId",$temporaryId)->delete();
-        Kitchen::where("id",$temporaryId)->delete();
+        
         OrderDetail::where('id',$id)
         ->update(['status'=>$request->reason,"subtotal"=>0.0]);
-
+        TemporaryOrders::where("tempId",$temporaryId)->delete();
+        Kitchen::where("id",$temporaryId)->delete();
         return response()->json([
             "message"=>  'Cancel order successful!'
         ]);
