@@ -225,10 +225,10 @@ class TemporaryTableController extends Controller
         // TemporaryOrders::where("tempId",$temporaryId)->delete();
         // Kitchen::where("id",$temporaryId)->delete();
         OrderDetail::where('id',$id)
-        ->update(['status'=>$reason,"subtotal"=>0.0]);
+        ->update(['status'=>$request->reason,"subtotal"=>0.0]);
 
         return response()->json([
-            "message"=>  $request->reason
+            "message"=>  $id
         ]);
     }
     public function abortCancelItem($tempId){
