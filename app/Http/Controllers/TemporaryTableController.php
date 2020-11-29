@@ -207,9 +207,15 @@ class TemporaryTableController extends Controller
         );
     }
     public function getItemForCancel(){
-        $orders = DB::table('temporary_orders')->where('status','pendingcancel')->get();
+        $orders = DB::table('temporary_orders')
+        ->select('order.tableno')
+        ->join('orders','orders.order_id','=','temporary_orders.order_id')
+        ->where('status','pendingcancel')->get();
 
-        return response()->json($orders);
+        return response()->json([
+            'tableo'=>$orders,
+            'reason'=>'Order item cancellation'
+        ]);
     }
     public function isPreparing($id)
     {
