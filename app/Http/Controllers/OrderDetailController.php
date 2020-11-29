@@ -39,6 +39,7 @@ class OrderDetailController extends BaseController
     foreach($orders as $o){
         if($o->bundleid !=null){
             $bundleName = $this->getBarKitchenBundles($o->bundleid);
+            $bundleQty = $this->getBundleQty($o->bundleid);
             
                     array_push($bundles,array(
                'name'=> $o->name,
@@ -47,6 +48,7 @@ class OrderDetailController extends BaseController
                 'tempId'=> $o->tempId,
                 'bundleid'=> $o->bundleid,
                 'bundleName'=> $bundleName,
+                'bundleQty'=> $bundleQty,
                 'qtyServed'=> $o->qtyServed,
                 'order_id'=>$o->order_id,
                 'status'=> $o->status,
@@ -64,12 +66,13 @@ class OrderDetailController extends BaseController
                  'qtyServed'=> $o->qtyServed,
                  'order_id'=>$o->order_id,
                  'status'=>$o->status,
+                 'bundleQty'=> null,
                  'orderdetailsid'=>$o->order_details_id
              )); 
         }
     }
     return response()->json([
-        'data' => $bundles
+        'data' => $$bundleName
     ]);
     }
     function getBarKitchenBundles($bundleid){
@@ -81,8 +84,21 @@ class OrderDetailController extends BaseController
                    ->join('categories','categories.categoryid','=','sub_categories.categoryid')
                    ->where('bundles.bundleid',$bundleid)
                    ->get();
-        return $kitchen[0]->bundleName;
+        return  $kitchen[0]->bundleName;
     }
+    function getBundleQty($bundleid){
+        $kitchen = DB::table('bundles') 
+        ->select('bundles.name AS bundleName','menus.name AS itemName','menus.menuID','bundle_details.qty','bundles.bundleid as bundleid')
+                   ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+                   ->join('menus',"menus.menuID",'=','bundle_details.menuID')
+                   ->join('sub_categories','menus.subcatid','=','sub_categories.subcatid')
+                   ->join('categories','categories.categoryid','=','sub_categories.categoryid')
+                   ->where('bundles.bundleid',$bundleid)
+                   ->get();
+        return  $kitchen[0]->bundleName; 
+    }
+    
+
     function getBundles(){
         return DB::table('bundles')
         ->select('name as bundleName')
