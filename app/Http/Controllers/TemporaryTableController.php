@@ -228,7 +228,9 @@ class TemporaryTableController extends Controller
         ->update(['status'=>$reason,"subtotal"=>0.0]);
 
         return response()->json([
-            "message"=> "Cancellation successful!"
+            "message"=> $reason,
+            "tempid"=>$temporaryId,
+            'id'=> $id
         ]);
     }
     public function abortCancelItem($tempId){
