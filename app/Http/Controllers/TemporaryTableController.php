@@ -208,7 +208,7 @@ class TemporaryTableController extends Controller
     }
     public function getItemForCancel(){
         $orders = DB::table('temporary_orders')
-        ->select('order.tableno')
+        ->select('orders.tableno')
         ->join('orders','orders.order_id','=','temporary_orders.order_id')
         ->where('status','pendingcancel')->get();
 
