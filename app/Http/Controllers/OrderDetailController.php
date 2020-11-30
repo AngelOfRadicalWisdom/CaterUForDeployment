@@ -10,6 +10,7 @@ use App\SubCategory;
 use App\Menu;
 use App\Order;
 use App\Kitchen;
+use App\TemporaryOrders;
 use DB;
 
 class OrderDetailController extends BaseController
