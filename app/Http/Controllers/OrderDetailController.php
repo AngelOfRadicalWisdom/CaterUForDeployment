@@ -206,7 +206,7 @@ class OrderDetailController extends BaseController
                 $recordsB = OrderDetail::find($temp->order_details_id);
                 $recordsB->qtyServed = 0;
                 $recordsB->status = "served";
-                $records->save(); 
+                $recordsB->save(); 
             }
         }
 
