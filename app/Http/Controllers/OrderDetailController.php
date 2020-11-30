@@ -179,22 +179,24 @@ class OrderDetailController extends BaseController
         $temp->qtyServed-=$request->noItemToServe;
         $temp->save();
 
-      
-        $records = OrderDetail::find($request->id);
-        $records->qtyServed -= $request->noItemToServe;
-        $records->save();
+        if($temp->bundleId!=null){
+            $records = OrderDetail::find($request->id);
+            $records->qtyServed -= $request->noItemToServe;
+            $records->save();
 
-        if($records->qtyServed == 0 && $records->bundleid == null){
-            $records = OrderDetail::find($request->id);
-            $records->status = "served";
-            $records->save();
-        }else if($records->qtyServed == 0 ){
-            $records = OrderDetail::find($request->id);
-            $records->status = "served";
-            $records->save();
-            $temp = TemporaryOrders::find($request->tempId);
-            $temp->status ="served";
-            $temp->save();
+            if($records->qtyServed == 0){
+                $records = OrderDetail::find($request->id);
+                $records->status = "served";
+                $records->save();
+            }
+        }else{
+
+            if($temp->qtyServed == 0){
+                $records = OrderDetail::find($request->id);
+                $records->status = "served";
+                $records->save();
+            }
+          
         }
 
         return response()->json([
