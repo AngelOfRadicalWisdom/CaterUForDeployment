@@ -215,25 +215,7 @@ class OrderDetailController extends BaseController
         ]);
     }
     
-    public function setServeQtyBundleItem(Request $request)
-    {
-        //BUNDLE ORDERS ONLY
-
-        $temp = TemporaryOrders::find($request->tempId);
-        $temp->qtyServed-=$request->noItemToServe;
-        $temp->save();
-
-        $item = $this.getBundleQty($request->tempId);
-        if(!$item){
-            $records = OrderDetail::find($request->id);
-            $records->qtyServed -= $request->noItemToServe;
-            $records->status = 'served';
-            $records->save(); 
-        }
-        return response()->json([
-            'message' => $request->noItemToServe
-        ]);
-    }
+    
     function getBundleItems($id){
 
             $items = DB::table('temporary_orders')
@@ -250,6 +232,38 @@ class OrderDetailController extends BaseController
             );
             
         }
+    //SINGLE ITEMS
+    public function cancelChanges($tempId,Request $request){
+        $item =TemporaryOrders::find($tempId)->get();
+       if($item->bundleid==null){
+        $item =TemporaryOrders::find($tempId);
+        $item->status = 'waiting';
+        $item->qtyServed = $request->noItemToServe;
+        $item->save();
+
+        $details = OrderDetail::find($item->order_details_id);
+        $details->status = 'waiting';
+        $details->qtyServed =  $request->noItemToServe;
+        $details->save();
+
+       }else{
+        $item =TemporaryOrders::find($tempId);
+        $item->status = 'waiting';
+        $item->qtyServed = $item->orderQty;
+        $item->save();
+
+        $details = OrderDetail::find($item->order_details_id);
+        $details->status = 'waiting';
+        $details->qtyServed = $item->orderQty;
+        $details->save();
+       }
+
+        return response()->json(
+            [
+                'message' => 'Order updated!'
+            ]
+        );
+    }
 
     public function serveBundle(){
 
