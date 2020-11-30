@@ -234,7 +234,7 @@ class OrderDetailController extends BaseController
         }
     //SINGLE ITEMS
     public function cancelChanges($tempId,Request $request){
-        $items =TemporaryOrders::find($tempId)->get();
+        $items =TemporaryOrders::where('tempId',$tempId)->get();
        if($items[0]['bundleid']==null){
         $item =TemporaryOrders::find($tempId);
         $item->status = 'waiting';
