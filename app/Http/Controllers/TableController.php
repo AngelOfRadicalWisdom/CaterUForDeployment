@@ -32,8 +32,9 @@ class TableController extends BaseController
         ->get();
 
         foreach($allTables as $table){
-            foreach($orderTables as $o){
-                if($table->tableno == $o->tableno){
+            if(COUNT($orderTables)>0){
+                   foreach($orderTables as $o){
+                    if($table->tableno == $o->tableno){
                     array_push($tables, array(
                         "status"=> $o->status,
                         "tableno"=>$table->tableno,
@@ -47,6 +48,14 @@ class TableController extends BaseController
                     ));
                 }
             }
+            }else{
+                array_push($tables, array(
+                    "status"=> $table->status,
+                    "tableno"=>$table->tableno,
+                    "capacity"=>$table->capacity
+                ));
+            }
+         
         }
 
         return response()->json(['allTables' => $tables]);
