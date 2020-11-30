@@ -28,6 +28,7 @@ class TableController extends BaseController
         $orderTables = DB::table('tables')
         ->select('orders.tableno','orders.status')
         ->join('orders','orders.tableno','=','tables.tableno')
+        ->where('orders.status','billout')
         ->get();
 
         foreach($allTables as $table){
