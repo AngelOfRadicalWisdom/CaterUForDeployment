@@ -172,8 +172,68 @@ class OrderDetailController extends BaseController
 
     public function setServeQty(Request $request)
     {
+        //SINGLE ORDERS ONLY
+
+        $temp = TemporaryOrders::find($request->tempId);
+        $temp->qtyServed-=$request->noItemToServe;
+        $temp->save();
+
+      
         $records = OrderDetail::find($request->id);
         $records->qtyServed -= $request->noItemToServe;
+        $records->save();
+
+        if($records->qtyServed == 0){
+            $records = OrderDetail::find($request->id);
+            $records->status = "served";
+            $records->save();
+        }
+
+        return response()->json([
+            'message' => $request->noItemToServe
+        ]);
+    }
+    
+    public function setServeQtyBundleItem(Request $request)
+    {
+        //BUNDLE ORDERS ONLY
+
+        $temp = TemporaryOrders::find($request->tempId);
+        $temp->qtyServed-=$request->noItemToServe;
+        $temp->save();
+
+        $item = $this.getBundleQty($request->tempId);
+        if(!$item){
+            $records = OrderDetail::find($request->id);
+            $records->qtyServed -= $request->noItemToServe;
+            $records->status = 'served';
+            $records->save(); 
+        }
+        return response()->json([
+            'message' => $request->noItemToServe
+        ]);
+    }
+    function getBundleItems($id){
+
+            $items = DB::table('temporary_orders')
+            ->where('status','ready')
+            ->where('order_details_id',$id)
+            ->get();
+
+            if($items){
+                $hasItem = true;
+            }else $hasItem = false;
+
+            return response()->json(
+                $hasItem
+            );
+            
+        }
+
+    public function serveBundle(){
+
+        $records = OrderDetail::find($request->id);
+        $records->status = 'served';
         $records->save();
 
         return response()->json([
@@ -181,14 +241,12 @@ class OrderDetailController extends BaseController
         ]);
     }
 
-
-
+    
     public function isServed($id,Request $request)
     {
         $status = '';
         $servedQty = OrderDetail::whereId($id)->pluck('qtyServed')->first();
-
-      
+        $servedQtyTemp = TemporaryOrders::whereId('tempId',$request->tempId)->get();
 
         if ($servedQty === 0) {
             $detail = OrderDetail::find($id);
@@ -198,8 +256,6 @@ class OrderDetailController extends BaseController
             $detail = TemporaryOrders::find($id);
             $detail->status = 'served';
             $detail->save();
-
-
             $status = 'Order is served.';
         } else {
             $status = 'Orders is being prepared.';
