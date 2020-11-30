@@ -247,15 +247,15 @@ class OrderDetailController extends BaseController
         $details->save();
 
        }else{
-        $item =TemporaryOrders::find($tempId);
-        $item->status = 'waiting';
-        $item->qtyServed = $item->orderQty;
-        $item->save();
+        $itemB =TemporaryOrders::find($tempId);
+        $itemB->status = 'waiting';
+        $itemB->qtyServed = $item->orderQty;
+        $itemB->save();
 
-        $details = OrderDetail::find($items[0]["order_details_id"]);
-        $details->status = 'waiting';
-        $details->qtyServed = $details->orderQty;
-        $details->save();
+        $detailsB = OrderDetail::find($items[0]["order_details_id"]);
+        $detailsB->status = 'waiting';
+        $detailsB->qtyServed = $details->orderQty;
+        $detailsB->save();
        }
 
         return response()->json(
