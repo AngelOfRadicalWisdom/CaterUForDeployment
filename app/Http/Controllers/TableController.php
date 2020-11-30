@@ -23,13 +23,32 @@ class TableController extends BaseController
     // mobile get table list
     public function tableList()
     {
-        // $allTables = RestaurantTable::all();
-        $allTables = DB::table('tables')
+        $tables=[];
+        $allTables = RestaurantTable::all();
+        $orderTables = DB::table('tables')
+        ->select('orders.tableno','orders.status')
         ->join('orders','orders.tableno','=','tables.tableno')
         ->get();
 
+        foreach($allTables as $table){
+            foreach($orderTables as $o){
+                if($table->tableno == $o->tableno){
+                    array_push($tables, array(
+                        "status"=> $o->status.
+                        "tableno"=>$table->tableno,
+                        "capacity"=>$table->capacity
+                    ));
+                }else{
+                    array_push($tables, array(
+                        "status"=> $table->status.
+                        "tableno"=>$table->tableno,
+                        "capacity"=>$table->capacity
+                    ));
+                }
+            }
+        }
 
-        return response()->json(['allTables' => $allTables]);
+        return response()->json(['allTables' => $tables]);
     }
     //admin table list
     public function webTableList()
