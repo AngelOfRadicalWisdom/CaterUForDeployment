@@ -188,6 +188,10 @@ class OrderDetailController extends BaseController
                 $statusDetail = OrderDetail::find($temp->order_details_id);
                 $statusDetail->status = "served";
                 $statusDetail->save();
+
+                $tempO = TemporaryOrders::find($request->tempId);
+                $tempO->status = "served";
+                $tempO->save();
             }
         }
         // }else{
