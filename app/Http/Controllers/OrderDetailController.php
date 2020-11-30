@@ -184,7 +184,7 @@ class OrderDetailController extends BaseController
             $records->qtyServed -= $request->noItemToServe;
             $records->save();
 
-            if($records->qtyServed == 0){
+            if($records->qtyServed == 0 && $temp->bundleid == null){
                 $statusDetail = OrderDetail::find($temp->order_details_id);
                 $statusDetail->status = "served";
                 $statusDetail->save();
