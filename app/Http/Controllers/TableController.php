@@ -34,13 +34,13 @@ class TableController extends BaseController
             foreach($orderTables as $o){
                 if($table->tableno == $o->tableno){
                     array_push($tables, array(
-                        "status"=> $o->status.
+                        "status"=> $o->status,
                         "tableno"=>$table->tableno,
                         "capacity"=>$table->capacity
                     ));
                 }else{
                     array_push($tables, array(
-                        "status"=> $table->status.
+                        "status"=> $table->status,
                         "tableno"=>$table->tableno,
                         "capacity"=>$table->capacity
                     ));
