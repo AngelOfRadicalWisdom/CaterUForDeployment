@@ -201,7 +201,7 @@ class OrderDetailController extends BaseController
             ->where('status','waiting')
             ->get();
 
-            if(COUNT($bundles) == 0){
+            if(COUNT($bundle) == 0){
                 $recordsB = OrderDetail::find($temp->order_details_id);
                 $recordsB->qtyServed = 0;
                 $recordsB->status = "served";
