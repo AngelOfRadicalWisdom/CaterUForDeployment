@@ -195,7 +195,7 @@ class OrderDetailController extends BaseController
         // }
 
         return response()->json([
-            'message' => $request->body()
+            'message' => $request->noItemToServe
         ]);
     }
     
