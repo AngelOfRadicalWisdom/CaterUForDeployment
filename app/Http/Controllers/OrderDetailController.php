@@ -179,7 +179,7 @@ class OrderDetailController extends BaseController
         $temp->qtyServed-=$request->noItemToServe;
         $temp->save();
 
-        if($temp->qrtServed == 0){
+        if($temp->qtyServed == 0){
             $tempO = TemporaryOrders::find($request->tempId);
             $tempO->status = "served";
             $tempO->save();
