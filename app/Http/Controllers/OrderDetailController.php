@@ -254,7 +254,7 @@ class OrderDetailController extends BaseController
 
         $detailsB = OrderDetail::find($items[0]["order_details_id"]);
         $detailsB->status = 'waiting';
-        $detailsB->qtyServed = $details->orderQty;
+        $detailsB->qtyServed = $detailsB->orderQty;
         $detailsB->save();
        }
 
