@@ -249,7 +249,7 @@ class OrderDetailController extends BaseController
        }else{
         $itemB =TemporaryOrders::find($tempId);
         $itemB->status = 'waiting';
-        $itemB->qtyServed = $item->orderQty;
+        $itemB->qtyServed = $itemB->orderQty;
         $itemB->save();
 
         $detailsB = OrderDetail::find($items[0]["order_details_id"]);
