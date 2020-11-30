@@ -23,7 +23,12 @@ class TableController extends BaseController
     // mobile get table list
     public function tableList()
     {
-        $allTables = RestaurantTable::all();
+        // $allTables = RestaurantTable::all();
+        $allTables = DB::table('tables')
+        ->join('orders','orders.tableno','=','tables.tableno')
+        ->get();
+
+
         return response()->json(['allTables' => $allTables]);
     }
     //admin table list
