@@ -190,12 +190,13 @@ class OrderDetailController extends BaseController
             $records->qtyServed -= $request->noItemToServe;
             $records->save();
 
-            if($records->qtyServed == 0 || $temp->qtyServed ==0){
+            if($records->qtyServed == 0 ){
                 $statusDetail = OrderDetail::find($temp->order_details_id);
                 $statusDetail->status = "served";
                 $statusDetail->save();
             }
         }else{
+            
             $bundle = DB::table('temporary_orders')
             ->where('order_details_id',$temp->order_details_id)
             ->where('status','waiting')
