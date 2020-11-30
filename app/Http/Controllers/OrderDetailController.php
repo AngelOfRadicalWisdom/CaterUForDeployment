@@ -235,13 +235,13 @@ class OrderDetailController extends BaseController
     //SINGLE ITEMS
     public function cancelChanges($tempId,Request $request){
         $item =TemporaryOrders::find($tempId)->get();
-       if($item->bundleid==null){
+       if($item[0]['bundleid']==null){
         $item =TemporaryOrders::find($tempId);
         $item->status = 'waiting';
         $item->qtyServed = $request->noItemToServe;
         $item->save();
 
-        $details = OrderDetail::find($item->order_details_id);
+        $details = OrderDetail::find($item[0]["order_details_id"]);
         $details->status = 'waiting';
         $details->qtyServed =  $request->noItemToServe;
         $details->save();
@@ -249,12 +249,12 @@ class OrderDetailController extends BaseController
        }else{
         $item =TemporaryOrders::find($tempId);
         $item->status = 'waiting';
-        $item->qtyServed = $item->orderQty;
+        $item->qtyServed = $item[0]["orderQty"];
         $item->save();
 
-        $details = OrderDetail::find($item->order_details_id);
+        $details = OrderDetail::find($item[0]["order_details_id"]);
         $details->status = 'waiting';
-        $details->qtyServed = $item->orderQty;
+        $details->qtyServed = $item[0]["orderQty"];
         $details->save();
        }
 
