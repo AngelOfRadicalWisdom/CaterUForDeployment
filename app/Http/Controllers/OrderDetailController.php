@@ -260,7 +260,7 @@ class OrderDetailController extends BaseController
 
         return response()->json(
             [
-                'message' => 'Order updated!'
+                'message' => $items[0]["order_details_id"]
             ]
         );
     }
