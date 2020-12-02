@@ -4,6 +4,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
+                <h3>Ratings</h3>
               </div>
               </div>
             </div>
@@ -15,13 +16,12 @@
                 <strong>{{ session('error') }}</strong> 
               </div>
       @endif
-          
-      <div class="row">
-      <div class="clearfix"></div>
-      <div class="col-sm-12">
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-6 col-sm-6">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Ratings</h2>
+                    <h2>OverAll Ratings </h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -37,13 +37,36 @@
                     </ul>
                     <div class="clearfix"></div>
                   </div>
-                  <div class="x_content col-sm-9">
-                  <h4>Overall Ratings: {{$AverageStr}} out of {{$maxRating}}</h4>
-                    <canvas id="ratings"></canvas>
+                  <div class="x_content">
+                  @for($i=0;$i<$AverageStr;$i++)
+    <span class="fa-stack" style="width:5em">
+        <i class="fa fa-star fa-stack-1x"></i>
+        @if($AverageStr > 0)
+            @if($AverageStr > 0.5)
+                <i class="fa fa-star fa-stack-1x"></i>
+            @else
+                <i class="fa fa-star-half fa-stack-1x"></i>
+            @endif
+        @endif
+        
+    </span>
+@endfor
+@for($i=0;$i< round($maxRating-$AverageStr) ;$i++)
+<span class="fa-stack" style="width:5em">
+<i class="fa fa-star-o fa-stack-1x"></i>
+</span>
+@endfor
+<h7>{{$AverageStr}} out of {{$maxRating}}</h7>
+<br>
+<h3 style="text-align:center">Ratings Breakdown</h3>
+<br>
+<div class="x_content">
+                  <canvas id="ratings"></canvas>
+                  </div>
                   </div>
                 </div>
               </div>
-   
+             
 
             <!--FOOTER-->
             </div>
@@ -70,9 +93,8 @@
     <script src="{{asset('/vendors/jquery-knob/dist/jquery.knob.min.js')}}"></script>
     <!-- Cropper -->
     <script src="{{asset('/vendors/cropper/dist/cropper.min.js')}}"></script>
-
-	
-    <script type="text/javascript">
+</script>
+<script type="text/javascript">
 $( document ).ready(function() {
     var ratings = document.getElementById("ratings");
 			  var RatingsChart= new Chart(ratings, {
@@ -100,5 +122,4 @@ $( document ).ready(function() {
            });
            
 </script>
-	
 @endsection

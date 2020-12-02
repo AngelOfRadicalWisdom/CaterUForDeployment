@@ -41,21 +41,6 @@
           @endif
           <div class="x_content">
             <br />
-            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" action="{{ url('/generateQRCode')}}" method="get" name="add_category" id="add_category">
-              <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="support">First Name<span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 ">
-                  <input class="form-control" type="text" name="firstname" id="firstname" placeholder="Firstname" required="required" />
-                </div>
-              </div>
-              <div class="item form-group">
-                <label class="col-form-label col-md-3 col-sm-3 label-align" for="confidence">Last Name<span class="required">*</span>
-                </label>
-                <div class="col-md-6 col-sm-6 ">
-                  <input class="form-control" type="text" name="lastname" id="lastname" placeholder="Lastname" required="required" />
-                </div>
-              </div>
               @foreach($emp_info as $emp)
               <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="confidence">Name<span class="required">*</span>
@@ -74,9 +59,7 @@
               <div class="ln_solid"></div>
               <div class="item form-group">
                 <div class="col-md-6 col-sm-6 offset-md-4">
-                  <button type="submit" class="btn btn-success">Submit</button>
-                  <button class="btn btn-primary" type="reset">Reset</button>
-                  <a class="btn btn-danger" href="{{url('/dashboard')}}">Cancel</a>
+                  <a class="btn btn-primary" href="{{url('/employee/employeelist')}}">Back To Employee List</a>
                 </div>
               </div>
             </form>

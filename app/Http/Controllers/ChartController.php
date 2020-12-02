@@ -24,6 +24,10 @@ class ChartController extends Controller
         $userImage = $user->image;
         $monthly = $this->getMonthlyRevenue();
         $yearly = $this->getYearlyRevenue();
+        $MonthlySalesStr="";
+        $monthNameStr="";
+        $yearlySalesStr="";
+        $yearNameStr="";
         foreach ($monthly as $row) {
             $monthlySales[] = $row->total;
             $monthName[] = $row->month;
@@ -102,4 +106,53 @@ catch (\PDOException $e) {
     return back()->withError("Sorry Something Went Wrong ")->withInput();
 }
 }
+public function getSalesPerMenu(){
+    $user = Auth::user();
+    $userFname = $user->empfirstname;
+    $userLname = $user->emplastname;
+    $userImage = $user->image;
+    $allMenus = Menu::all();
+    foreach($allMenus as $menus){
+    $salesperMenu[]=DB::table('order_details')
+    ->join('orders','order_details.order_id','orders.order_id')
+    ->selectRaw("sum(subtotal) as total")
+    ->selectRaw("order_details.menuID")
+    ->where('order_details.menuID',$menus->menuID)
+    ->where('orders.status','paid')
+    ->groupBy('order_details.menuID')
+    ->get();
+    }
+      return view('admin.report.salespermenu')->with(compact('userFname', 'userLname','userImage','salesperMenu','allMenus'));
+
+    } 
+
+    public function getSalesPerMenuUserDefined(Request $request){
+        $user = Auth::user();
+        $userFname = $user->empfirstname;
+        $userLname = $user->emplastname;
+        $userImage = $user->image;
+        $from = date($request->from);
+        $to = date($request->to);
+        $allMenus = Menu::all();
+        foreach($allMenus as $menus){
+        $salesperMenu[] =DB::table('order_details')
+        ->join('orders','order_details.order_id','orders.order_id')
+        ->selectRaw("sum(subtotal) as total")
+        ->selectRaw("order_details.menuID")
+        ->where('menuID',$menus->menuID)
+        ->whereDate('order_details.date_ordered', '>=', $from)
+        ->whereDate('order_details.date_ordered', '<=', $to)
+        ->where('orders.status','paid')
+        ->groupBy('order_details.menuID')
+        ->get();
+        }
+        return view('admin.report.salespermenu')->with(compact('userFname', 'userLname','userImage','salesperMenu','allMenus'));
+
+
+    }
+    public function salesSort(){
+    
+
+    }
+
 }

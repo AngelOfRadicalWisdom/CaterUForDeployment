@@ -89,51 +89,33 @@ class AdminController extends Controller
         $userFname = $user->empfirstname;
         $userLname = $user->emplastname;
         $userImage = $user->image;
-        $date = Carbon::now();
-        //monthly entries of the charts
-        $monthly = Order::select(DB::raw('MONTHNAME(date_ordered) as month, sum(total) as total'))
-            ->whereYear('date_ordered', $date->year)
-            ->where('status', 'paid')
-            ->groupBy(DB::raw('MONTHNAME(date_ordered)'))
-            ->get();
-        //yearly entries of the charts
-        $yearly = Order::select(DB::raw('YEAR(date_ordered) as year, sum(total) as total'))
-            ->where('status', 'paid')
-            ->groupBy(DB::raw('YEAR(date_ordered)'))
-            ->get();
-        //employee count
-        $countemp = Employee::selectRaw('COUNT(empid) as count')
-            ->get();
-        //manages the date entries so that it can be used for the chart
-        foreach ($countemp as $row) {
-            $countEmployee = $row->count;
-        }
-        foreach ($monthly as $row) {
-            $monthlySales[] = $row->total;
-            $monthName[] = $row->month;
-            $MonthlySalesStr = implode(",", $monthlySales);
-            $monthNameStr = "'" . implode("','", $monthName) . "'";
-        }
-        foreach ($yearly as $row) {
-            $yearlySales[] = $row->total;
-            $yearName[] = $row->year;
-            $yearlySalesStr = implode(",", $yearlySales);
-            $yearNameStr = "'" . implode("','", $yearName) . "'";
-        }
-        //ratings area of the dashboard
-        $maxRating = 5;
-        $ratings = Rating::selectRaw("Count(star) as totalstar,star")->groupBy('star')->get();
-        $Average = Rating::selectRaw("CAST(AVG (star) AS DECIMAL (10,1)) as avg")->get();
-        //Manages the data for ratings so that it can be used for the charts
-        foreach ($Average as $row) {
-            $avg[] = $row->avg;
-            $AverageStr = implode(",", $avg);
-        }
-        foreach ($ratings as $row) {
-            $rates[] = $row->totalstar;
-            $ratesStr = implode(",", $rates);
-        }
-        return view('admin.dashboard', compact('maxRating', 'AverageStr', 'ratesStr', 'userImage', 'userFname', 'userLname', 'countEmployee', 'MonthlySalesStr', 'monthNameStr', 'yearlySalesStr', 'yearNameStr'));
+       // $allOrders = Order::all();       
+        $orderDetailsName = DB::table('orders')
+          ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+          ->join('menus','order_details.menuID','=','menus.menuID')
+          ->selectRaw('group_concat(menus.name) as menuname')
+          ->selectRaw('orders.order_id')
+          ->selectRaw('orders.total')
+          ->selectRaw('orders.date_ordered')
+          ->groupBy('orders.order_id')
+          ->get();
+          $result = [];
+          $orderid=[];
+          $total=[];
+          $dateOrdered=[];
+          foreach ($orderDetailsName as $row) {
+            $result[] = explode(',', $row->menuname);
+            $orderid[]= explode(',',$row->order_id);
+            $total[]= explode(',',$row->total);
+            $dateOrdered[]= explode(',',$row->date_ordered);
+
+          }
+          $menudetails = array_values($result);
+          $Oids=array_values($orderid);
+          $bill=array_values($total);
+          $orderDate= array_values($dateOrdered);
+        // dd($orderDetailsName);
+    return view('admin.dashboard', compact('userImage', 'userFname', 'userLname','menudetails','Oids','bill','orderDate'));
         }
         catch (\PDOException $e) {
             return back()->withError("Sorry Something Went Wrong")->withInput();

@@ -5,13 +5,17 @@
 <!-- page content -->
 <div class="right_col" role="main">
   <div class="">
-    
+    <div class="page-title">
+      <div class="title_left">
+        <h3>Recommended Menus</h3>
+      </div>
+    </div>
     <div class="clearfix"></div>
     <div class="row">
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Order List</h2>
+            <h2>Recommended  List</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -39,45 +43,35 @@
                       <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
-                            <th style="text-align:center">Order Id</th>
-                            <th style="text-align:center">Orders</th>
-                            <th style="text-align:center">Date Ordered</th>
-                            <th style="text-align:center">Total</th>
-                          
+                            <th style="text-align:center">Menu Id</th>
+                            <th style="text-align:center">Menu Name</th>
+                            <th style="text-align:center">Best Paired Menus</th>
                           </tr>
                         </thead>
 
                         <tbody>
-                        @for($i=0;$i< count($menudetails);$i++)
+                            @for($i=0;$i< count($allMenus);$i++)
                           <tr>
                             <td style="text-align:center">
-                            @foreach($Oids[$i] as $ids )
-                            {{$ids}}
+                            @foreach($menuID[$i] as $id )
+                            {{$id}}
                             @endforeach
-                          </td>
-                            <td style="text-align:center"> 
-                            @foreach($menudetails[$i] as $menus )
+                            </td>
+                            <td style="text-align:center">
+                            @foreach($menuName[$i] as $name )
+                            {{$name}}
+                            @endforeach
+                           </td>
+                           <td style="text-align:center"> 
+                            @foreach($transactions[$i] as $pairs )
                              <div class="form-group row">
                             <div class="checkbox">
-                              <li id="iMenus" name="iMenus"> {{$menus}}</li>
+                              <li id="iMenus" name="iMenus"> {{$pairs->name}}</li>
                             </div>
                           </div>
                             @endforeach
-                          
-                            </td>
-                            <td  style="text-align:center">
-                            @foreach($orderDate[$i] as $date)
-                            {{$date}}
-                            @endforeach
-                            </td>
-                            <td  style="text-align:center">
-                            @foreach($bill[$i] as $total )
-                            Php {{$total}}.00
-                            @endforeach
-                            </td>
-                          </tr>
-                          @endfor
-                      
+                        </tr>
+                        @endfor
                         </tbody>
                       </table>
                     </div>
@@ -108,71 +102,4 @@
 <script src="{{asset('/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
 <script src="{{asset('/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-<script>
-  function deleteEmployee(empid) {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: 'btn btn-success',
-        cancelButton: 'btn btn-danger'
-      },
-      buttonsStyling: false
-    })
-
-    swalWithBootstrapButtons.fire({
-      title: 'Are you sure?',
-      text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Yes, deactivate employee!',
-      cancelButtonText: 'No, cancel!',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.value) {
-        $.ajax({
-          url: '/employee/delete_employee/' + empid,
-          processData: false,
-          contentType: false,
-          dataType: 'JSON',
-          cache: false,
-          type: 'GET',
-          success: function(data) {
-            swalWithBootstrapButtons.fire({
-              title: 'Deactivated!',
-              text: 'Employee has been deactivated.',
-              icon: 'success',
-              confirmButtonText: 'ok',
-            }).then((result) => {
-              if (result.value) {
-                location.href = "/employee/employeelist";
-              }
-            })
-
-          },
-          error: function(thrownError) {
-            console.log(thrownError);
-            swalWithBootstrapButtons.fire(
-              'OPPSSS!',
-              'There has been a problem deleting emplyoee.',
-              'error'
-            )
-          }
-        }).promise().then(function(data) {
-          console.log(data);
-        });
-
-        // Stop the forms default action method
-      } else if (
-        /* Read more about handling dismissals below */
-        result.dismiss === Swal.DismissReason.cancel
-      ) {
-        swalWithBootstrapButtons.fire(
-          'Cancelled',
-          'Employee Deactivation Cancelled',
-          'error'
-        )
-      }
-    })
-
-  }
-</script>
 @endsection

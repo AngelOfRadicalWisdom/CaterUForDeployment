@@ -14,7 +14,7 @@
 //use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
 //landingpage
-//Route::get('analyze','AprioriC2COntroller@analyzation');
+Route::get('analyze','AprioriC2COntroller@analyzation');
 Route::get('','LoginController@landingpage');
 Auth::routes(['register'=> false]);
 Auth::routes(['login'=>false]);
@@ -39,6 +39,8 @@ Route::middleware(['auth'])->group( function (){
 
     Route::get('/menu/{menuID}/mark', 'MenuController@markMenu');
     Route::get('/menu/{menuID}/delete', 'MenuController@removeMenu');
+    Route::get('/menu/{menuID}/editMenuStatus','MenuController@editStatus');
+    Route::post('/menu/{menuID}/editStatus','MenuController@changeMenuStatus');
 
     Route::get('/employee/list','EmployeeController@employeeList');
 
@@ -56,7 +58,7 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/admin/delete_subcategory/{subcategoryid}','CategoryController@deleteSubCategory');
     Route::get('/apriori/apriorisettings','AdminController@setApriori');
     Route::post('/apriori/save','AdminController@saveAprioriSettings');
-    Route::get('/saveReco','AprioriC2Controller@saveData');
+    Route::get('/recommendedMenus','AprioriC2Controller@showRecommendation');
     Route::get('/admin/profile','AdminController@profile');
     Route::post('/admin/profile/{employeeID}','AdminController@SaveUpdateProfile');
     //TABLE
@@ -109,6 +111,10 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/sales','ChartController@salesChart');
     Route::post('/sales','ChartController@salesChart');
     Route::post('/salesUserDefined','ChartController@getSalesUserDefined');
+    Route::get('/salespermenu','ChartController@getSalesPerMenu');
+    Route::post('/salesPerMenuDate','ChartController@getSalesPerMenuUserDefined');
+    Route::post('/salesSort','ChartController@salesSort');
+    
     //COMPANY
     Route::get('/company/addcompany','CompanyProfileController@newCompany'); 
     Route::post('/company/addcompany','CompanyProfileController@addNewCompany');
@@ -141,8 +147,8 @@ Route::middleware(['auth'])->group( function (){
 
 Route::get('/createaccount', 'RegistrationController@create');
 Route::post('/createaccount', 'RegistrationController@store');//
-Route::get('/generateQRCode','QRController@generateQR');
-Route::post('/generateQRCode','QRController@generateQR');
+Route::get('/generateQRCode/{id}','QRController@generateQR');
+Route::post('/generateQRCode/{id}','QRController@generateQR');
 
 
 

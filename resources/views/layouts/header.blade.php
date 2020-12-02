@@ -37,9 +37,8 @@
   <!-- Switchery -->
   <link href="{{asset('/vendors/switchery/dist/switchery.min.css')}}" rel="stylesheet">
   <!-- starrr -->
-  <link href="{{asset('/vendors/starrr/dist/starrr.css')}}" rel="stylesheet">
+  <link href="{{asset('/vendors/starrr/dist/starrr.css')}}" rel="stylesheet"> 
   <!-- Datatables -->
-
   <link href="{{asset('/vendors/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('/vendors/datatables.net-buttons-bs/css/buttons.bootstrap.min.css')}}" rel="stylesheet">
   <link href="{{asset('/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css')}}" rel="stylesheet">
@@ -50,5 +49,6 @@
 
   <!-- Custom Theme Style -->
   <link href="{{asset('/build/css/custom.min.css')}}" rel="stylesheet">
+  <link href="{{asset('/ratingcss/css/style.css')}}" rel="stylesheet">
 
 </head>
