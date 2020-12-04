@@ -19,7 +19,7 @@ class QRController extends Controller
     {
         $this->customExceptions = $customExceptions;
     }
-    public function generateQR(Request $request)
+    public function generateQR($id)
     {
         $qrID=" ";
         $user = Auth::user();
@@ -28,8 +28,7 @@ class QRController extends Controller
         $userImage = $user->image;
         $emp_info =  DB::table('employees')
             ->select('empid', 'emplastname', 'empfirstname')
-            ->where('emplastname', $request->lastname)
-            ->where('empfirstname', $request->firstname)
+            ->where('empid', $id)
             ->get();
         foreach($emp_info as $emp){
         $qrID=$emp->empid;

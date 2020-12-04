@@ -72,6 +72,8 @@ class MenuController extends BaseController
             $newMenu->servingsize = $request->servingsize;
             $newMenu->image = $filename;
             $newMenu->subcatid  = $request->subcategory;
+            $newMenu->status  = $request->status;
+
 
             $newMenu->save();
         } else {
@@ -270,6 +272,19 @@ class MenuController extends BaseController
             'result' => $result
         ]);
     }
+    public function editStatus($menuID){
+        try{
+            $user = Auth::user();
+            $userFname = $user->empfirstname;
+            $userLname = $user->emplastname;
+            $userImage = $user->image;
+            return view('pages.editmenustatus', compact('userFname', 'userLname', 'userImage','menuID'));
+            }
+            catch (\PDOException $e) {
+                return back()->withError("Sorry Something Went Wrong ")->withInput();
+            }
+
+    }
 
     public function changeMenuStatus($menuID,Request $request){
         $menu = Menu::find($menuID);
@@ -281,13 +296,15 @@ class MenuController extends BaseController
             $body['topic'] = "changeStatus";
             $body['content']="Testing";
             $url = "https://cateruws.zenithdevgroup.me/event/send";
+           // $response = new Response();
             $response = $client->request("POST", $url, ['form_params'=>$body]);
-            $response = $client->send($response);
+           //$response = $client->send($response);
         }
 
-        return  $response->json([
-            'message'=> 'Status updated!'
-        ]);
+        // return  $response->json([
+        //     'message'=> 'Status updated!'
+        // ]);
+        return redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
     }
     public function getMenuDetail($id)
     {

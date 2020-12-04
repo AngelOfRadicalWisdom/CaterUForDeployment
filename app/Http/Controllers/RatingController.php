@@ -29,6 +29,7 @@ class RatingController extends Controller
         $userLname = $user->emplastname;
         $userImage = $user->image;
         $maxRating = 5;
+        $ratesStr="";
         $ratings = Rating::selectRaw("Count(star) as totalstar,star")->groupBy('star')->get();
         $Average = Rating::selectRaw("CAST(AVG (star) AS DECIMAL (10,1)) as avg")->get();
         foreach ($Average as $row) {
