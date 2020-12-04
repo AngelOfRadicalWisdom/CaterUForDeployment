@@ -297,4 +297,16 @@ class CustomerController extends Controller
         ]);
     }
 
+    public function updateInfo($id,Request $request){
+        $info = Customer::find($id);
+        $info->name = $request->name;
+        $info->phonenumber = $request->phonenumber;
+        $info->partysize = $request->partysize;
+        $info->save();
+
+        return response()->json([
+            'message'=> 'Updated successfully!'
+        ]);
+    }
+
 }

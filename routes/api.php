@@ -61,6 +61,7 @@ Route::middleware('cors:api')->post('/reserveNewCustomer','CustomerController@re
 Route::middleware('cors:api')->post('/assignTable/{custid}','CustomerController@assignTable');
 Route::middleware('cors:api')->post('/customer/notified/remove/{custId}', 'CustomerController@deleteNotifiedCustomer');
 Route::middleware('cors:api')->post('/customer/notified/confirm/{custId}', 'CustomerController@setConfirm');
+Route::middleware('cors:api')->post('/customer/editinfo/{custid}','CustomerController@updateInfo');
 //----------------- CUSTOMER O R D E R R O U T E S -------------------//
 Route::middleware('cors:api')->get('/menu/list', 'MenuController@ionListMenus');
 Route::middleware('cors:api')->post('/menu/changestatus/{menudID}','MenuController@changeMenuStatus');
