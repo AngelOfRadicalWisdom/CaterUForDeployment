@@ -553,6 +553,7 @@ try{
         $row->bundleid=explode(",",$row->bundleid)[0];
         $row->bundlename=explode(",",$row->bundlename)[0];
         $row->menuID = explode(",",$row->menuID);
+        $row->menuStatus = explode(",",$row->menuStatus);
         $row->price=explode(",",$row->price)[0];
         $row->servingsize=explode(",",$row->servingsize)[0];
         $row->name=explode(",",$row->name);
