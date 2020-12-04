@@ -539,6 +539,7 @@ try{
     $promotionDetails=DB::table('bundle_details')
       ->selectRaw('group_concat(menus.menuID) as menuID')
       ->selectRaw('group_concat(menus.name) as name')
+      ->selectRaw('group_concat(menus.status) as menuStatus')
       ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
       ->selectRaw('group_concat(bundles.name )as bundlename')  
       ->selectRaw('group_concat(bundles.price) as price') 
@@ -560,6 +561,7 @@ try{
           'name' => $row->name,
           'bundlename' => $row->bundlename,
           'menuID' => $row->menuID,
+          'menuStatus'=> $row->menuStatus,
           'price' => $row->price,
           'servingsize' => $row->servingsize
         ));
