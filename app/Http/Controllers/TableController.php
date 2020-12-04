@@ -223,13 +223,15 @@ class TableController extends BaseController
         $table->status = 'Available';
         $table->save();
 
-        $kitchen = DB::table('kitchenrecords')
-        ->where('order_id',$request->orderId)
-        ->delete();
-        
         $temp = DB::table('temporary_orders')
         ->where('order_id',$request->orderId)
         ->delete();
+        
+        $kitchen = DB::table('kitchenrecords')
+        ->where('order_id',$request->orderId)
+        ->delete();
+
+       
 
 
         return response()->json([
