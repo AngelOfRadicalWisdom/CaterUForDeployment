@@ -286,26 +286,54 @@ class MenuController extends BaseController
 
     }
 
-    public function changeMenuStatus($menuID,Request $request){
+    public function changeMenuStatus($menuID,$bundleid,Request $request){
         $menu = Menu::find($menuID);
-       
+        $bundle = Bundle::find($bundleid);
+        $returnRedirect = " ";
+
         if($menu){
             $menu->status = $request->status;
             $menu->save();
+
+            $this.getBundle($menu->menuID);
             $client = new \GuzzleHttp\Client();
             $body['topic'] = "changeStatus";
             $body['content']="Testing";
             $url = "https://cateruws.zenithdevgroup.me/event/send";
-           // $response = new Response();
             $response = $client->request("POST", $url, ['form_params'=>$body]);
-           //$response = $client->send($response);
+            $redirect = redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
+           
+        }else if($bundle){
+            $this.setBundleStatus($bundleid);
+            $client = new \GuzzleHttp\Client();
+            $body['topic'] = "changeStatus";
+            $body['content']="Testing";
+            $url = "https://cateruws.zenithdevgroup.me/event/send";
+            $response = $client->request("POST", $url, ['form_params'=>$body]);
+            $redirect = redirect()->to(url('/promo/promolist'));
         }
 
         // return  $response->json([
         //     'message'=> 'Status updated!'
         // ]);
-        return redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
+        // return redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
+
+        return $redirect;
     }
+
+    function getBundle($menuID){
+      DB::table('bundle')
+        ->join('bundle_details','bundle_details.bundleid','=','bundle.bundleid')
+        ->join('menus','menus.menuID','=','bundle_details.menuID')
+        ->where('bundle_details.menuID',$menuID)
+        ->update(['bundle.status'=> 'Not Available']);
+    }
+    function setBundleStatus($bundleid){
+        $bundle = Bundle::find($bundleid);
+        $bundle->status = 'Not Available';
+        $bundle->save();
+    }
+
     public function getMenuDetail($id)
     {
         $menus = array();
