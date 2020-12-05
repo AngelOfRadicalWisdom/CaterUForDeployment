@@ -296,7 +296,7 @@ class MenuController extends BaseController
             $menu->status = $request->status;
             $menu->save();
 
-            $this.getBundle($menu->menuID,$request->status);
+            $this->getBundle($menu->menuID,$request->status);
             $client = new \GuzzleHttp\Client();
             $body['topic'] = "changeStatus";
             $body['content']="Testing";
