@@ -231,9 +231,6 @@ class TableController extends BaseController
         ->where('order_id',$request->orderId)
         ->delete();
 
-       
-
-
         return response()->json([
             'message' => 'available'
         ]);
