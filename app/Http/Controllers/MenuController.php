@@ -288,7 +288,7 @@ class MenuController extends BaseController
 
     public function changeMenuStatus($menuID,$bundleid,Request $request){
         $menu = Menu::find($menuID);
-        $bundle = Bundle::find($bundleid);
+        $bundle = BundleMenu::find($bundleid);
         $returnRedirect = " ";
 
         if($menu){
