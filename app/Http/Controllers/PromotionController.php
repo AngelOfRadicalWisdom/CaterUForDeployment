@@ -608,6 +608,14 @@ try{
           'menus' => $send
         ]);
   }
+
+  public function getBundleStatus($bundleId){
+    $status = BundleMenu::find($bundleId)->get();
+
+    return response()->json([
+      'status'=> $status[0]['status']
+    ]);
+  }
   
     public function getBundleDetails($bundleId){
       $data = DB::table('bundle_details')
