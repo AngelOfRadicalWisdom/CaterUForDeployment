@@ -574,7 +574,7 @@ try{
       ->get();
       foreach($promotionDetails as $row){
         $row->bundleid=explode(",",$row->bundleid)[0];
-        $row->status = explode(",",$row->bundleStatus)[0];
+        $row->status = explode(",",$row->bundleStatus);
         $row->bundlename=explode(",",$row->bundlename)[0];
         $row->menuID = explode(",",$row->menuID);
         $row->menuStatus = explode(",",$row->menuStatus);
