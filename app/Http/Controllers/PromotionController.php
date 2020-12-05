@@ -562,6 +562,7 @@ try{
       ->selectRaw('group_concat(menus.menuID) as menuID')
       ->selectRaw('group_concat(menus.name) as name')
       ->selectRaw('group_concat(menus.status) as menuStatus')
+      ->selectRaw('group_concat(bundles.status) as bundleStatus')
       ->selectRaw('group_concat(bundle_details.bundleid) as bundleid')
       ->selectRaw('group_concat(bundles.name )as bundlename')  
       ->selectRaw('group_concat(bundles.price) as price') 
@@ -573,6 +574,7 @@ try{
       ->get();
       foreach($promotionDetails as $row){
         $row->bundleid=explode(",",$row->bundleid)[0];
+        $row->status = explode(",",$row->bundleStatus)[0];
         $row->bundlename=explode(",",$row->bundlename)[0];
         $row->menuID = explode(",",$row->menuID);
         $row->menuStatus = explode(",",$row->menuStatus);
@@ -585,6 +587,7 @@ try{
           'bundlename' => $row->bundlename,
           'menuID' => $row->menuID,
           'menuStatus'=> $row->menuStatus,
+          'bundleStatus'=> $row->bundleStatus,
           'price' => $row->price,
           'servingsize' => $row->servingsize
         ));
