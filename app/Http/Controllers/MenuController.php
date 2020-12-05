@@ -12,6 +12,7 @@ use App\Menu;
 use Validator;
 use App\Category;
 use App\SubCategory;
+use App\BundleMenu;
 use App\Exceptions\CustomExceptions;
 use DB;
 
