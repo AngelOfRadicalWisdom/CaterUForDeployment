@@ -305,8 +305,7 @@ class MenuController extends BaseController
             $redirect = redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
            
         }else if($bundle){
-            // $this.setBundleStatus($bundleid,$request->status);
-            // $bundle = BundleMenu::find($bundleid);
+            
             $bundle->status = $request->status;
             $bundle->save();
             $client = new \GuzzleHttp\Client();
@@ -316,28 +315,17 @@ class MenuController extends BaseController
             $response = $client->request("POST", $url, ['form_params'=>$body]);
             $redirect = redirect()->to(url('/promo/promolist'));
         }
-
-        // return  $response->json([
-        //     'message'=> 'Status updated!'
-        // ]);
-        // return redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
-
         return $redirect;
     }
 
     function getBundle($menuID,$status){
-      DB::table('bundle')
-        ->join('bundle_details','bundle_details.bundleid','=','bundle.bundleid')
+      DB::table('bundles')
+        ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
         ->join('menus','menus.menuID','=','bundle_details.menuID')
         ->where('bundle_details.menuID',$menuID)
-        ->update(['bundle.status'=> $status]);
+        ->update(['bundles.status'=> $status]);
     }
-    function setBundleStatus($bundleid,$status){
-        $bundle = BundleMenu::find($bundleid);
-        $bundle->status = $status;
-        $bundle->save();
-    }
-
+   
     public function getMenuDetail($id)
     {
         $menus = array();
