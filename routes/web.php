@@ -30,6 +30,7 @@ Route::post('/login/authenticate','LoginController@authenticate');
 Route::get('/logout','LoginController@logout');
 Route::middleware(['auth'])->group( function (){
     Route::get('/dashboard','AdminController@dashboard');
+    Route::post('/orderList','AdminController@OrderListByDate');
     Route::get('/menu/list', 'MenuController@listMenus');
     Route::get('/menu/addmenu','MenuController@newMenu');
     Route::get('/menu/category','MenuController@fetch');
@@ -107,6 +108,8 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/promo/delete_menu_promodetails/{bundle_details_id}','PromotionController@deletePromoMenu');
     Route::get('/promo/edit_quantity/{bundledetailsid}','PromotionController@editQuantity');
     Route::post('/promo/edit_quantity/{bundledetailsid}','PromotionController@saveEditQuantity');
+    Route::get('/promo/{bundleid}/editPromoStatus','PromotionController@editPromoStatus');
+
     ///SALES
     Route::get('/sales','ChartController@salesChart');
     Route::post('/sales','ChartController@salesChart');

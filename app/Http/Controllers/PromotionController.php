@@ -29,6 +29,8 @@ class PromotionController extends Controller
     $userFname = $user->empfirstname;
     $userLname = $user->emplastname;
     $userImage = $user->image;
+    $currentPromo="";
+    $cpromo="";
     $ItemSets = DB::table('apriori')
       ->selectRaw('COUNT(menuID) as count')
       ->groupBy('groupNumber')
@@ -41,7 +43,12 @@ class PromotionController extends Controller
       ->groupBy('apriori.groupNumber')
       ->get();
       $currentPromo= BundleMenu::orderBy('bundleid', 'DESC')->first();
-      $cpromo=$currentPromo->bundleid;
+      if($currentPromo==NULL){
+         $cpromo=0;
+      }
+      else{      
+        $cpromo=$currentPromo->bundleid;
+      }
     $bestsellers = DB::table('apriori')->select('menuID')->distinct()->get();
     $bseller=[];
     foreach ($bestsellers as $row){
@@ -119,6 +126,7 @@ class PromotionController extends Controller
       $bundledmenu->servingsize = $request->servingsize;
       $bundledmenu->details = $request->details;
       $bundledmenu->image = $filename;
+      $bundledmenu->status=$request->status;
       $bundledmenu->save();
 
       for ($i = 0; $i < count($allMenus); $i++) {
@@ -143,6 +151,7 @@ class PromotionController extends Controller
       $bundledmenu->servingsize = $request->servingsize;
       $bundledmenu->details = $request->details;
       $bundledmenu->image = $filename;
+      $bundledmenu->status=$request->status;
       $bundledmenu->save();
 
       for ($i = 0; $i < count($allMenus); $i++) {
@@ -531,6 +540,18 @@ try{
   catch (\PDOException $e) {
     return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
 }
+  }
+  public function editPromoStatus($promoid){
+    try{
+      $user = Auth::user();
+      $userFname = $user->empfirstname;
+      $userLname = $user->emplastname;
+      $userImage = $user->image;
+      return view('pages.editpromostatus', compact('userFname', 'userLname', 'userImage','promoid'));
+      }
+      catch (\PDOException $e) {
+          return back()->withError("Sorry Something Went Wrong ")->withInput();
+      }
   }
   public function getAllBundleMenus(){
     $send = [];

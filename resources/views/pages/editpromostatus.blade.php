@@ -43,7 +43,7 @@
       @endif
           <div class="x_content">
             <br />
-            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/menu/'.$menuID.'/editStatus')}}">
+            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/menu/'.$promoid.'/editStatus')}}">
             <div class="item form-group">
                         <label class="col-form-label col-md-3 col-sm-3 label-align ">Select Status  <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 ">
