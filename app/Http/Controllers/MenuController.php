@@ -361,7 +361,6 @@ class MenuController extends BaseController
 
         foreach ($menus as $menu) {
             foreach ($allsubcategories as $sub) {
-
                 if ($menu->subcatid == $sub->subcatid) {
                     array_push($result, array(
                         'image' => asset('/menu/menu_images/' . $menu->image),
@@ -377,9 +376,6 @@ class MenuController extends BaseController
                 }
             }
         }
-
-
-
         return response()->json([
             'allitems' => $result,
 

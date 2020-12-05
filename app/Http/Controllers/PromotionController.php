@@ -640,7 +640,7 @@ try{
   
     public function getBundleDetails($bundleId){
       $data = DB::table('bundle_details')
-      ->select('menus.name', 'bundle_details.qty')
+      ->select('menus.name', 'bundle_details.qty','bundle_details.bundleid')
       ->join('bundles','bundle_details.bundleid','=','bundles.bundleid')
       ->join('menus','bundle_details.menuID','=','menus.menuID')
       ->where('bundle_details.bundleid',$bundleId)
