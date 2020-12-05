@@ -122,6 +122,51 @@ class AdminController extends Controller
         }
     
     }
+    // Order List Per Date
+public function OrderListByDate(Request $request){
+    try{
+        $user = Auth::user();
+        $userFname = $user->empfirstname;
+        $userLname = $user->emplastname;
+        $userImage = $user->image;
+       // $allOrders = Order::all();
+       $from = date($request->from);
+        $to = date($request->to);       
+        $orderDetailsName = DB::table('orders')
+          ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+          ->join('menus','order_details.menuID','=','menus.menuID')
+          ->selectRaw('group_concat(menus.name) as menuname')
+          ->selectRaw('orders.order_id')
+          ->selectRaw('orders.total')
+          ->selectRaw('orders.date_ordered')
+          ->whereDate('orders.date_ordered', '>=', $from)
+          ->whereDate('orders.date_ordered', '<=', $to)
+          ->groupBy('orders.order_id')
+          ->get();
+          $result = [];
+          $orderid=[];
+          $total=[];
+          $dateOrdered=[];
+          foreach ($orderDetailsName as $row) {
+            $result[] = explode(',', $row->menuname);
+            $orderid[]= explode(',',$row->order_id);
+            $total[]= explode(',',$row->total);
+            $dateOrdered[]= explode(',',$row->date_ordered);
+
+          }
+          $menudetails = array_values($result);
+          $Oids=array_values($orderid);
+          $bill=array_values($total);
+          $orderDate= array_values($dateOrdered);
+        // dd($orderDetailsName);
+    return view('admin.dashboard', compact('userImage', 'userFname', 'userLname','menudetails','Oids','bill','orderDate'));
+        }
+        catch (\PDOException $e) {
+            return back()->withError("Sorry Something Went Wrong")->withInput();
+        }
+    
+    }
+
     //mobile side show menulist by date
     public function showMenuListByDate(Request $request)
     {

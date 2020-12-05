@@ -50,6 +50,7 @@
                             <th style="text-align:center">Details</th>
                             <th style="text-align:center">Inclusive Menus</th>
                             <th style="text-align:center">Images</th>
+                            <th style="text-align:center">Status</th>
                             <th style="text-align:center">Action</th>
                           </tr>
                         </thead>
@@ -76,9 +77,11 @@
                               @endforeach
                             </td>
                             <td style="text-align:center"><img src="{{asset('/promotions/promotions_images/'.$promotionList->image)}}" style="width:40px;height:40px;"></td>
+                            <td style="text-align:center">{{$promotionList->status}}</td>
                             <td style="text-align:center">
                               <div class="form-group row">
                                 <a data-toggle="tooltip" data-placement="top" title="Edit Promotions" href="{{ url('/promo/edit_promo/'.$promotionList->bundleid)}}"><img src="{{ asset('/assets/svg/pencil.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
+                                <a data-toggle="tooltip" data-placement="top" title="Edit Menu Status" href="{{ url('/promo/'.$promotionList->bundleid.'/editPromoStatus') }}"><img src="{{ asset('/assets/svg/layers.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
                                 <a data-toggle="tooltip" data-placement="top" title="Delete Promotions" onclick="deletePromotions()"><img src="{{ asset('/assets/svg/trash.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
                               </div>
                             </td>

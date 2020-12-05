@@ -78,6 +78,17 @@
                 </div>
               </div>
               <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Select Status  <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 ">
+                        <select name="status" id="status" class="form-control" required="required">
+                        <option value=" ">Select...</option>
+                            <option value="AVAILABLE">Available</option>
+                            <option value="SOLDOUT">Sold Out</option>
+
+                        </select>
+                        </div>
+                      </div>
+              <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Upload Menu Image
                 </label>
                 <div class="col-md-6 col-sm-6 ">
