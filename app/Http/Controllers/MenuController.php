@@ -329,7 +329,7 @@ class MenuController extends BaseController
         ->update(['bundle.status'=> $status]);
     }
     function setBundleStatus($bundleid){
-        $bundle = Bundle::find($bundleid);
+        $bundle = BundleMenu::find($bundleid);
         $bundle->status = 'Not Available';
         $bundle->save();
     }
