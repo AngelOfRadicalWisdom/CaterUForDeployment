@@ -211,7 +211,7 @@ class OrderDetailController extends BaseController
         // }
 
         return response()->json([
-            'message' => $request
+            'message' => $request->tempId
         ]);
     }
     
