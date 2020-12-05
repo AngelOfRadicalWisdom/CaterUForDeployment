@@ -295,7 +295,7 @@ class MenuController extends BaseController
             $menu->status = $request->status;
             $menu->save();
 
-            $this.getBundle($menu->menuID);
+            $this.getBundle($menu->menuID,$request->status);
             $client = new \GuzzleHttp\Client();
             $body['topic'] = "changeStatus";
             $body['content']="Testing";
@@ -321,12 +321,12 @@ class MenuController extends BaseController
         return $redirect;
     }
 
-    function getBundle($menuID){
+    function getBundle($menuID,$status){
       DB::table('bundle')
         ->join('bundle_details','bundle_details.bundleid','=','bundle.bundleid')
         ->join('menus','menus.menuID','=','bundle_details.menuID')
         ->where('bundle_details.menuID',$menuID)
-        ->update(['bundle.status'=> 'Not Available']);
+        ->update(['bundle.status'=> $status]);
     }
     function setBundleStatus($bundleid){
         $bundle = Bundle::find($bundleid);
