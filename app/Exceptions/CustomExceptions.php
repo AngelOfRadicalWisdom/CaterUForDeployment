@@ -201,9 +201,9 @@ class CustomExceptions
             }
         }
         //if promotion menu is empty
-        if ($promo->suggestedmenus == NULL) {
-            throw new \PDOException('Promotion Menu is Empty');
-        }
+        // if ($promo->suggestedmenus == NULL) {
+        //     throw new \PDOException('Promotion Menu is Empty');
+        // }
         //if both bundled and addtional menus is empty
         if ($promo->suggestedmenus == NULL && $promo->additionalmenus == NULL) {
             throw new \PDOException('Promotion Menu is Empty');

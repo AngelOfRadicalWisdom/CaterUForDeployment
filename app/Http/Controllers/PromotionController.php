@@ -541,13 +541,14 @@ try{
     return back()->withError("Sorry Something Went Wrong Please check your inputs")->withInput();
 }
   }
-  public function editPromoStatus($promoid){
+  public function editPromoStatus($bundleid){
     try{
       $user = Auth::user();
       $userFname = $user->empfirstname;
       $userLname = $user->emplastname;
       $userImage = $user->image;
-      return view('pages.editpromostatus', compact('userFname', 'userLname', 'userImage','promoid'));
+      $menuID=" ";
+      return view('pages.editpromostatus', compact('userFname', 'userLname', 'userImage','bundleid','menuID'));
       }
       catch (\PDOException $e) {
           return back()->withError("Sorry Something Went Wrong ")->withInput();

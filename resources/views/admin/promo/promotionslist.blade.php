@@ -80,8 +80,8 @@
                             <td style="text-align:center">{{$promotionList->status}}</td>
                             <td style="text-align:center">
                               <div class="form-group row">
-                                <a data-toggle="tooltip" data-placement="top" title="Edit Promotions" href="{{ url('/promo/edit_promo/'.$promotionList->bundleid)}}"><img src="{{ asset('/assets/svg/pencil.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
-                                <a data-toggle="tooltip" data-placement="top" title="Edit Menu Status" href="{{ url('/promo/'.$promotionList->bundleid.'/editPromoStatus') }}"><img src="{{ asset('/assets/svg/layers.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
+                                <a data-toggle="tooltip" data-placement="top" title="Edit Promotions" href="{{ url('/promo/'.$promotionList->bundleid.'/edit_promo') }}"><img src="{{ asset('/assets/svg/pencil.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
+                                <a data-toggle="tooltip" data-placement="top" title="Edit Menu Status" href="{{ url('/promo/'.$promotionList->bundleid.'/editPromoStatus') }}"><img src="{{ asset('/assets/svg/layers.svg') }}" alt="" width="10px" height="10px"></a>&emsp;
                                 <a data-toggle="tooltip" data-placement="top" title="Delete Promotions" onclick="deletePromotions()"><img src="{{ asset('/assets/svg/trash.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
                               </div>
                             </td>

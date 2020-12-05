@@ -41,7 +41,7 @@
           @endif
           <div class="x_content">
             <br />
-            <form name="bundleform" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="{{ url('/promo/edit_promo/'.$promotion->bundleid)}}">
+            <form name="bundleform" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data" action="{{ url('/promo/'.$promotion->bundleid.'/edit_promo')}}">
               <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="promoid">Promotion Code <span class="required">*</span>
                 </label>
@@ -254,7 +254,7 @@
                   //location.href="/promo/promolist" ;
                 }).then((result) => {
                   if (result.value) {
-                    location.href = "/promo/edit_promo/" + bundleid;
+                    location.href = '/promo/'+ bundleid+'/edit_promo';
                   }
                 })
               } else {
