@@ -279,7 +279,8 @@ class MenuController extends BaseController
             $userFname = $user->empfirstname;
             $userLname = $user->emplastname;
             $userImage = $user->image;
-            return view('pages.editmenustatus', compact('userFname', 'userLname', 'userImage','menuID'));
+            $bundleid="";
+            return view('pages.editmenustatus', compact('userFname', 'userLname', 'userImage','menuID','bundleid'));
             }
             catch (\PDOException $e) {
                 return back()->withError("Sorry Something Went Wrong ")->withInput();
@@ -287,10 +288,10 @@ class MenuController extends BaseController
 
     }
 
-    public function changeMenuStatus($menuID,Request $request){
+    public function changeMenuStatus($menuID,$bundleid,Request $request){
         $menu = Menu::find($menuID);
-        $bundle = BundleMenu::find($request->bundleid);
-        $returnRedirect = " ";
+        $bundle = BundleMenu::find($bundleid);
+        $redirect = " ";
 
         if($menu){
             $menu->status = $request->status;
@@ -313,7 +314,7 @@ class MenuController extends BaseController
             $body['content']="Testing";
             $url = "https://cateruws.zenithdevgroup.me/event/send";
             $response = $client->request("POST", $url, ['form_params'=>$body]);
-            $redirect = redirect()->to(url('/promo/promolist'));
+            $redirect = redirect()->to(url('/promo/promolist'))->with('success', 'Menu Availability Successfully Edited');
         }
         return $redirect;
     }

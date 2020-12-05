@@ -41,7 +41,7 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/menu/{menuID}/mark', 'MenuController@markMenu');
     Route::get('/menu/{menuID}/delete', 'MenuController@removeMenu');
     Route::get('/menu/{menuID}/editMenuStatus','MenuController@editStatus');
-    Route::post('/menu/{menuID}/editStatus','MenuController@changeMenuStatus');
+    Route::post('/menu/{menuID}/{bundleid}/editStatus','MenuController@changeMenuStatus');
 
     Route::get('/employee/list','EmployeeController@employeeList');
 
@@ -95,8 +95,8 @@ Route::middleware(['auth'])->group( function (){
     Route::post('/promo/addpromo','PromotionController@savePromo');
     Route::post('/savepromo', 'PromotionController@savePromo');
     Route::get('/promo/promolist','PromotionController@promotionsList');
-    Route::get('/promo/edit_promo/{id}','PromotionController@editPromo');
-    Route::post('/promo/edit_promo/{id}','PromotionController@saveEditPromo');
+    Route::get('/promo/{id}/edit_promo','PromotionController@editPromo');
+    Route::post('/promo/{id}/edit_promo','PromotionController@saveEditPromo');
     Route::get('/promo/delete_promo/{bundleid}','PromotionController@deletePromo');
     Route::get('/promo/add_promodetails/{bundleid}','PromotionController@addPromoDetails');
     Route::post('/promo/add_promodetails/{bundleid}','PromotionController@addPromoDetails');
