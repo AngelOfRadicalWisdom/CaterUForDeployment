@@ -305,7 +305,10 @@ class MenuController extends BaseController
             $redirect = redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
            
         }else if($bundle){
-            $this.setBundleStatus($bundleid,$request->status);
+            // $this.setBundleStatus($bundleid,$request->status);
+            // $bundle = BundleMenu::find($bundleid);
+            $bundle->status = $request->status;
+            $bundle->save();
             $client = new \GuzzleHttp\Client();
             $body['topic'] = "changeStatus";
             $body['content']="Testing";
