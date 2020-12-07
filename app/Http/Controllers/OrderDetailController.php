@@ -55,7 +55,7 @@ class OrderDetailController extends BaseController
                 'qtyServed'=> $o->qtyServed,
                 'order_id'=>$o->order_id,
                 'status'=> $o->status,
-                'detailsStatus'=> $o->detailsStatus
+                'detailsStatus'=> $o->detailsStatus,
                 'orderdetailsid'=>$o->order_details_id
             )); 
 
@@ -70,7 +70,7 @@ class OrderDetailController extends BaseController
                  'qtyServed'=> $o->qtyServed,
                  'order_id'=>$o->order_id,
                  'status'=>$o->status,
-                 'detailsStatus'=> $o->detailsStatus
+                 'detailsStatus'=> $o->detailsStatus,
                  'bundleQty'=> null,
                  'orderdetailsid'=>$o->order_details_id
              )); 
