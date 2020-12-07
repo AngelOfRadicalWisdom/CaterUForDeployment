@@ -236,13 +236,17 @@ class TemporaryTableController extends Controller
 
         return response()->json(
             [
-                'message'=> 'Order item cancellation is being processed!'
+                'message'=> 'Order item cancelled!'
             ]
         );
     }
     public function abortCancelItem($tempId){
-        TemporaryOrders::where('tempId',$tempId)
-        ->update(['status'=> 'waiting']);
+        $orders = DB::table('order_details')
+        ->where('id',$id)
+        ->update(['status'=>'waiting']);
+
+        $tempData = DB::table('temporary_orders')->where('order_details_id',$id)->update(['status'=>'waiting']);
+
 
         return response()->json([
             'message'=> 'Cancellation aborted!'
