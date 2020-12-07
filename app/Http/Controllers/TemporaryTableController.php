@@ -202,10 +202,9 @@ class TemporaryTableController extends Controller
     //     ]);
     // }
 
-    public function requestCancelOrderItem($order_id,Request $request){ 
-        $orders = DB::table('temporary_orders')
-        ->where('order_id',$order_id)
-        ->where('tempId',$request->tempId)
+    public function requestCancelOrderItem($id,Request $request){ 
+        $orders = DB::table('order_details')
+        ->where('id',$id)
         ->update(['status'=>'pendingcancel']);
 
         return response()->json(
@@ -226,15 +225,17 @@ class TemporaryTableController extends Controller
         ]);
     }
 
-    public function cancelItem($id,Request $request){
-        $temporaryId = $request->tempId;
+    public function cancelItem($id){
+
+        $data = OrderDetail::find($id);
+        // $temporaryId = $request->tempId;
         
-        OrderDetail::where('id',$id)
-        ->update(['status'=>$request->reason,"subtotal"=>0.0]);
-        TemporaryOrders::where("tempId",$temporaryId)->where('order_details_id',$id)->delete();
-        Kitchen::where("id",$temporaryId)->delete();
+        // OrderDetail::where('id',$id)
+        // ->update(['status'=>$request->reason,"subtotal"=>0.0]);
+        // TemporaryOrders::where('order_details_id',$id)->delete();
+        // Kitchen::where("id",$temporaryId)->delete();
         return response()->json([
-            "message"=>  'Cancel order successful!'
+            "message"=>  $data
         ]);
     }
     public function abortCancelItem($tempId){
