@@ -30,8 +30,10 @@ class OrderDetailController extends BaseController
         'temporary_orders.qtyServed',
         'temporary_orders.order_id',
         'temporary_orders.status',
-        'temporary_orders.order_details_id'
+        'temporary_orders.order_details_id',
+        'order_details.status as detailsStatus'
         )
+    ->join('order_details','order_details.id','=','temporary_orders.orderdetailsid')
     ->join('menus','menus.menuID','=','temporary_orders.menuID')
     ->where('temporary_orders.order_id',$order_id)
     ->orderBy('temporary_orders.bundleid','ASC')
@@ -53,6 +55,7 @@ class OrderDetailController extends BaseController
                 'qtyServed'=> $o->qtyServed,
                 'order_id'=>$o->order_id,
                 'status'=> $o->status,
+                'detailsStatus'=> $o->detailsStatus
                 'orderdetailsid'=>$o->order_details_id
             )); 
 
@@ -67,6 +70,7 @@ class OrderDetailController extends BaseController
                  'qtyServed'=> $o->qtyServed,
                  'order_id'=>$o->order_id,
                  'status'=>$o->status,
+                 'detailsStatus'=> $o->detailsStatus
                  'bundleQty'=> null,
                  'orderdetailsid'=>$o->order_details_id
              )); 
