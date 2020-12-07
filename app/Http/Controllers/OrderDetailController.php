@@ -77,7 +77,7 @@ class OrderDetailController extends BaseController
         }
     }
     return response()->json([
-        'data' => $bundles
+        'data' => $orders
     ]);
     }
     function getBarKitchenBundles($bundleid){
@@ -181,7 +181,7 @@ class OrderDetailController extends BaseController
 
         $temp = TemporaryOrders::find($request->tempId);
         if($temp){
-            if($tep->qtyServed > 0){
+            if($temp->qtyServed > 0){
                 $temp->qtyServed-=$request->noItemToServe;
                 $temp->save();
             }
