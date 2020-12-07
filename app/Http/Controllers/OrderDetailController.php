@@ -33,7 +33,7 @@ class OrderDetailController extends BaseController
         'temporary_orders.order_details_id',
         'order_details.status as detailsStatus'
         )
-    ->join('order_details','order_details.id','=','temporary_orders.orderdetailsid')
+    ->join('order_details','order_details.id','=','temporary_orders.order_details_id')
     ->join('menus','menus.menuID','=','temporary_orders.menuID')
     ->where('temporary_orders.order_id',$order_id)
     ->orderBy('temporary_orders.bundleid','ASC')
