@@ -31,7 +31,7 @@ class OrderDetailController extends BaseController
         'temporary_orders.order_id',
         'temporary_orders.status',
         'temporary_orders.order_details_id',
-        'order_details.status as detailsStatus',
+        'order_details.status as detailsStatus'
 
         )
     ->join('order_details','order_details.id','=','temporary_orders.order_details_id')
