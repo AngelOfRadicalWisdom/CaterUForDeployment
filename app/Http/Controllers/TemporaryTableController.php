@@ -202,7 +202,7 @@ class TemporaryTableController extends Controller
     //     ]);
     // }
 
-    public function requestCancelOrderItem($id,Request $request){ 
+    public function requestCancelOrderItem($id){ 
         $orders = DB::table('order_details')
         ->where('id',$id)
         ->update(['status'=>'pendingcancel']);
@@ -225,19 +225,7 @@ class TemporaryTableController extends Controller
         ]);
     }
 
-    public function cancelItem($id){
-
-        $data = OrderDetail::find($id);
-        // $temporaryId = $request->tempId;
-        
-        // OrderDetail::where('id',$id)
-        // ->update(['status'=>$request->reason,"subtotal"=>0.0]);
-        // TemporaryOrders::where('order_details_id',$id)->delete();
-        // Kitchen::where("id",$temporaryId)->delete();
-        return response()->json([
-            "message"=>  $data
-        ]);
-    }
+   
     public function abortCancelItem($tempId){
         TemporaryOrders::where('tempId',$tempId)
         ->update(['status'=> 'waiting']);
