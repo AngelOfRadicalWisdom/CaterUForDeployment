@@ -181,6 +181,7 @@ class OrderDetailController extends BaseController
         //SINGLE ORDERS ONLY
 
         $temp = TemporaryOrders::find($request->tempId);
+        
         if($temp && $temp->qtyServed > 0){
                 $temp->qtyServed-=$request->noItemToServe;
                 $temp->save();

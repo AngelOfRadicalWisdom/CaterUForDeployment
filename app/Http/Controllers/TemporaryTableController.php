@@ -240,7 +240,7 @@ class TemporaryTableController extends Controller
             ]
         );
     }
-    public function abortCancelItem($tempId){
+    public function abortCancelItem($id){
         $orders = DB::table('order_details')
         ->where('id',$id)
         ->update(['status'=>'waiting']);
