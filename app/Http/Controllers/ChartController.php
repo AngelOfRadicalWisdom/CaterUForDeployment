@@ -9,6 +9,8 @@ use App\RestaurantTable;
 use App\Customer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\BundleMenu;
+use App\BundleDetails;
 use DB;
 use Illuminate\Http\Request;
 
@@ -106,24 +108,28 @@ catch (\PDOException $e) {
     return back()->withError("Sorry Something Went Wrong ")->withInput();
 }
 }
-public function getSalesPerMenu(){
-    $user = Auth::user();
-    $userFname = $user->empfirstname;
-    $userLname = $user->emplastname;
-    $userImage = $user->image;
-    $allMenus = Menu::all();
-    foreach($allMenus as $menus){
-    $salesperMenu[]=DB::table('order_details')
-    ->join('orders','order_details.order_id','orders.order_id')
-    ->selectRaw("sum(subtotal) as total")
-    ->selectRaw("order_details.menuID")
-    ->where('order_details.menuID',$menus->menuID)
-    ->where('orders.status','paid')
-    ->groupBy('order_details.menuID')
-    ->get();
-    }
-      return view('admin.report.salespermenu')->with(compact('userFname', 'userLname','userImage','salesperMenu','allMenus'));
-
+    public function getSalesPerMenu(){
+        $user = Auth::user();
+        $userFname = $user->empfirstname;
+        $userLname = $user->emplastname;
+        $userImage = $user->image;
+        $salesperMenu=[];
+        $allMenus = Menu::all();
+        foreach($allMenus as $menus){
+        $sales=DB::table('order_details')
+        ->join('orders','order_details.order_id','orders.order_id')
+        ->selectRaw("sum(subtotal) as total")
+        ->selectRaw('order_details.menuID')
+        ->where('order_details.menuID',$menus->menuID)
+        ->where('orders.status','paid')
+        ->groupBy('order_details.menuID')
+        ->get();
+        array_push($salesperMenu,$sales);
+        }
+        // foreach($salesperMenu as $sales)
+          return view('admin.report.salespermenu')->with(compact('userFname', 'userLname','userImage','salesperMenu','allMenus'));
+    //   dd($salesPerMenu);
+    
     } 
 
     public function getSalesPerMenuUserDefined(Request $request){
@@ -150,8 +156,62 @@ public function getSalesPerMenu(){
 
 
     }
-    public function salesSort(){
-    
+    public function getSalesPerBundle(){
+        try{
+            $user = Auth::user();
+            $userFname = $user->empfirstname;
+            $userLname = $user->emplastname;
+            $userImage = $user->image;
+            $promotion = BundleMenu::all();
+            $promotionDetails = BundleDetails::all();
+            $allMenus = Menu::all();
+            foreach($promotion as $promoid){
+                $salesperBundle[]=DB::table('order_details')
+                ->join('orders','order_details.order_id','orders.order_id')
+                ->selectRaw("sum(subtotal) as total")
+                ->selectRaw('order_details.bundleid')
+                ->where('order_details.bundleid',$promoid->bundleid)
+                ->where('orders.status','paid')
+                ->groupBy('order_details.bundleid')
+                ->get();
+            }
+           // print_r($salesperBundle);
+            return view('admin.report.salesperbundle', compact('userImage', 'userFname', 'userLname', 'promotion', 'allMenus', 'promotionDetails','salesperBundle'));
+            }
+            catch (\PDOException $e) {
+              return back()->withError("Sorry Something Went Wrong")->withInput();
+          }
+
+    }
+    public function getSalesPerBundleUserDefined(Request $request){
+        try{
+            $user = Auth::user();
+            $userFname = $user->empfirstname;
+            $userLname = $user->emplastname;
+            $userImage = $user->image;
+            $from = date($request->from);
+             $to = date($request->to);
+            $promotion = BundleMenu::all();
+            $promotionDetails = BundleDetails::all();
+            $allMenus = Menu::all();
+            foreach($promotion as $promoid){
+                $salesperBundle[]=DB::table('order_details')
+                ->join('orders','order_details.order_id','orders.order_id')
+                ->selectRaw("sum(subtotal) as total")
+                ->selectRaw('order_details.bundleid')
+                ->where('order_details.bundleid',$promoid->bundleid)
+                ->where('orders.status','paid')
+                ->whereDate('order_details.date_ordered', '>=', $from)
+                ->whereDate('order_details.date_ordered', '<=', $to)
+                ->groupBy('order_details.bundleid')
+                ->get();
+            }
+           // print_r($salesperBundle);
+            return view('admin.report.salesperbundle', compact('userImage', 'userFname', 'userLname', 'promotion', 'allMenus', 'promotionDetails','salesperBundle'));
+            }
+            catch (\PDOException $e) {
+              return back()->withError("Sorry Something Went Wrong")->withInput();
+          }
 
     }
 

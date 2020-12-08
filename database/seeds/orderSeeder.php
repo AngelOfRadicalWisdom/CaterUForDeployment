@@ -37,9 +37,9 @@ class orderSeeder extends Seeder
              'custid'=>1,
              'empid'=>3,
              'tableno'=>4,
-             'total'=>3679,
-             'cashTender'=>3700,
-             'change'=>21,
+             'total'=>2867,
+             'cashTender'=>3000,
+             'change'=>133,
              'status'=>'paid'
           ],
           [
@@ -47,9 +47,9 @@ class orderSeeder extends Seeder
              'custid'=>1,
              'empid'=>1,
              'tableno'=>5,
-             'total'=>410,
-             'cashTender'=>500,
-             'change'=>90,
+             'total'=>3352,
+             'cashTender'=>3360,
+             'change'=>8,
              'status'=>'paid'
           ],
           [
@@ -57,9 +57,9 @@ class orderSeeder extends Seeder
              'custid'=>2,
              'empid'=>3,
              'tableno'=>6,
-             'total'=>3352,
-             'cashTender'=>3400,
-             'change'=>48,
+             'total'=>3859,
+             'cashTender'=>3900,
+             'change'=>41,
              'status'=>'paid'
           ],
              [
@@ -77,9 +77,9 @@ class orderSeeder extends Seeder
              'custid'=>1,
              'empid'=>6,
              'tableno'=>5 ,
-             'total'=>3600,
+             'total'=>3550,
              'cashTender'=>3600,
-             'change'=>0,
+             'change'=>50,
              'status'=>'paid'
           ],
           [
@@ -87,9 +87,9 @@ class orderSeeder extends Seeder
              'custid'=>2,
              'empid'=>5,
              'tableno'=>1,
-             'total'=>2638,
+             'total'=>2659,
              'cashTender'=>3000,
-             'change'=>362,
+             'change'=>391,
              'status'=>'paid'
           ],
           [
@@ -97,9 +97,9 @@ class orderSeeder extends Seeder
              'custid'=>3,
              'empid'=>2,
              'tableno'=>3,
-             'total'=>525,
-             'cashTender'=>550,
-             'change'=>25,
+             'total'=>2516,
+             'cashTender'=>2520,
+             'change'=>4,
              'status'=>'paid'
           ],
           [
@@ -107,9 +107,9 @@ class orderSeeder extends Seeder
              'custid'=>1,
              'empid'=>3,
              'tableno'=>4,
-             'total'=>2513,
-             'cashTender'=>2520,
-             'change'=>7,
+             'total'=>3772,
+             'cashTender'=>4000,
+             'change'=>228,
              'status'=>'paid'
           ],
           [
@@ -127,9 +127,9 @@ class orderSeeder extends Seeder
              'custid'=>3,
              'empid'=>4,
              'tableno'=>5,
-             'total'=>3238,
+             'total'=>3236,
              'cashTender'=>3240,
-             'change'=>2,
+             'change'=>4,  
              'status'=>'paid'
           ],
           [
@@ -167,9 +167,9 @@ class orderSeeder extends Seeder
             'custid'=>1,
             'empid'=>2,
             'tableno'=>6,
-            'total'=>3866,
-            'cashTender'=>3900,
-            'change'=>34,
+            'total'=>4163,
+            'cashTender'=>4200,
+            'change'=>37,
             'status'=>'paid'
          ],
          [
@@ -177,9 +177,9 @@ class orderSeeder extends Seeder
              'custid'=>2,
              'empid'=>3,
              'tableno'=>1,
-             'total'=>3736,
-             'cashTender'=>3740,
-             'change'=>4,
+             'total'=>3481,
+             'cashTender'=>3500,
+             'change'=>19,
              'status'=>'paid'
           ],
           [
@@ -207,9 +207,9 @@ class orderSeeder extends Seeder
              'custid'=>2,
              'empid'=>3,
              'tableno'=>4,
-             'total'=>485,
-             'cashTender'=>490,
-             'change'=>5,
+             'total'=>3455,
+             'cashTender'=>3500,
+             'change'=>45,
              'status'=>'paid'
           ],
           [
@@ -217,9 +217,9 @@ class orderSeeder extends Seeder
             'custid'=>1,
             'empid'=>1,
             'tableno'=>2 ,
-            'total'=>3632,
-            'cashTender'=>3640,
-            'change'=>8,
+            'total'=>3558,
+            'cashTender'=>3660,
+            'change'=>2,
             'status'=>'paid'
          ],
          [
@@ -227,8 +227,8 @@ class orderSeeder extends Seeder
              'custid'=>2,
              'empid'=>2,
              'tableno'=>1 ,
-             'total'=>3991,
-             'cashTender'=>4000,
+             'total'=>2991,
+             'cashTender'=>3000,
              'change'=>9,
              'status'=>'paid'
           ],
@@ -237,9 +237,9 @@ class orderSeeder extends Seeder
              'custid'=>3,
              'empid'=>3,
              'tableno'=>4,
-             'total'=>2876,
-             'cashTender'=>2900,
-             'change'=>24,
+             'total'=>2861,
+             'cashTender'=>2870,
+             'change'=>9,
              'status'=>'paid'
           ],
           [
@@ -257,8 +257,8 @@ class orderSeeder extends Seeder
              'custid'=>2,
              'empid'=>3,
              'tableno'=>6,
-             'total'=>3628,
-             'cashTender'=>3630,
+             'total'=>3678,
+             'cashTender'=>3680,
              'change'=>2,
              'status'=>'paid'
           ],
@@ -267,9 +267,9 @@ class orderSeeder extends Seeder
             'custid'=>3,
             'empid'=>2,
             'tableno'=>6 ,
-            'total'=>3414,
+            'total'=>3402,
             'cashTender'=>3420,
-            'change'=>6,
+            'change'=>18,
             'status'=>'paid'
          ],
          [
@@ -297,9 +297,9 @@ class orderSeeder extends Seeder
              'custid'=>3,
              'empid'=>2,
              'tableno'=>3,
-             'total'=>3433,
-             'cashTender'=>3440,
-             'change'=>7,
+             'total'=>3418,
+             'cashTender'=>3420,
+             'change'=>2,
              'status'=>'paid'
           ],
           [
@@ -307,9 +307,9 @@ class orderSeeder extends Seeder
              'custid'=>1,
              'empid'=>3,
              'tableno'=>4,
-             'total'=>3080,
-             'cashTender'=>3100,
-             'change'=>20,
+             'total'=>3798,
+             'cashTender'=>3800,
+             'change'=>2,
              'status'=>'paid'
           ],
         ];

@@ -15,7 +15,7 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Sales per Menu</h2>
+            <h2>Sales per Promotions</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -32,7 +32,7 @@
               </li>
             </ul>
             <div class="clearfix"></div>
-            <form name="datatable-fixed-header" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/salesPerMenuDate')}}" >
+            <form name="datatable-fixed-header" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/salesPerBundleDate')}}" >
             <div class='col-sm-4'>
                     From
                     <div class="form-group">
@@ -80,35 +80,44 @@
                           <label class="col-form-label">Show: </label>
                           <div class="col-md-3 col-sm-3 ">
                             <select name="itemfilter" id="itemfilter" class="form-control">
-                              <option value="">All Sales Per Menu</option>
-                              <option value="desc">Best Selling Menus</option>
-                              <option value="asc">Least Selling Menus</option>
+                              <option value="">All Sales Per Promotions</option>
+                              <option value="desc">Best Selling Promotions</option>
+                              <option value="asc">Least Selling Promotions</option>
                             </select>
                           </div>
-                          <a href="{{url('/salespermenu')}}" class="btn btn-success">Back to Sales Per Menu</a>
+                          <a href="{{url('/salesperbundle')}}" class="btn btn-success">Back to Sales Per Bundles</a>
                         </div>
                       <table id="menu" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
-                            <th style="text-align:center">Menu ID</th>
-                            <th style="text-align:center">Menu Name</th>
+                            <th style="text-align:center">Bundle ID</th>
+                            <th style="text-align:center">Bundle Name</th>
+                            <th style="text-align:center">Inclusive Menus</th>
                             <th style="text-align:center">Total Sales</th>
                           </tr>
                         </thead>
                          <tbody>
-                           @foreach($allMenus as $menu)
+                         @foreach($promotion as $promotionList)
                           <tr>
-                          <td style="text-align:center">
-                            {{$menu->menuID}}
-                          
+                          <td style="text-align:center" id="bundleid">{{ $promotionList->bundleid}}</td>
+                          <td style="text-align:center">{{ $promotionList->name}}</td>
+                          <td>
+                              @foreach($promotionDetails as $promo)
+                              @foreach($allMenus as $menus)
+                              @if($promo->menuID==$menus->menuID)
+                              @if($promotionList->bundleid==$promo->bundleid)
+                              <div class="form-group row">
+                                <li>{{$menus->name}}</li>
+                              </div>
+                              @endif
+                              @endif
+                              @endforeach
+                              @endforeach
                             </td>
                             <td style="text-align:center">
-                            {{$menu->name}}
-                            </td>
-                            <td style="text-align:center">
-                            @for($i=0;$i< count($allMenus);$i++)
-                            @foreach($salesperMenu[$i] as $total )
-                            @if($menu->menuID==$total->menuID)
+                            @for($i=0;$i< count($promotion);$i++)
+                            @foreach($salesperBundle[$i] as $total )
+                            @if($promotionList->bundleid==$total->bundleid)
                             {{$total->total}}
                             @endif
                             @endforeach
@@ -177,7 +186,7 @@
         }]
       });
       $('#itemfilter').change(function() {
-        sTable.order([2,this.value]).draw();
+        sTable.order([3,this.value]).draw();
       });
     });
 	</script>

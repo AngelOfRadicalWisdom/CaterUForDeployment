@@ -115,8 +115,10 @@ Route::middleware(['auth'])->group( function (){
     Route::post('/sales','ChartController@salesChart');
     Route::post('/salesUserDefined','ChartController@getSalesUserDefined');
     Route::get('/salespermenu','ChartController@getSalesPerMenu');
+    Route::get('/salesperbundle','ChartController@getSalesPerBundle');
     Route::post('/salesPerMenuDate','ChartController@getSalesPerMenuUserDefined');
-    Route::post('/salesSort','ChartController@salesSort');
+    Route::post('/salesPerBundleDate','ChartController@getSalesPerBundleUserDefined');
+   // Route::post('/salesSort','ChartController@salesSort');
     
     //COMPANY
     Route::get('/company/addcompany','CompanyProfileController@newCompany'); 
