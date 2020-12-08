@@ -218,7 +218,9 @@ class TemporaryTableController extends Controller
         $orders = DB::table('temporary_orders')
         ->select('orders.tableno')
         ->join('orders','orders.order_id','=','temporary_orders.order_id')
-        ->where('temporary_orders.status','pendingcancel')->get();
+        ->where('temporary_orders.status','pendingcancel')->unique();
+
+
 
         return response()->json([
             'tablenos'=>$orders,
