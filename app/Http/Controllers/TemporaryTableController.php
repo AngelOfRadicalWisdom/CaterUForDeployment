@@ -220,12 +220,12 @@ class TemporaryTableController extends Controller
         ->join('orders','orders.order_id','=','temporary_orders.order_id')
         ->where('temporary_orders.status','pendingcancel')->get();
 
-        $collection = $orders->unique();
+        $collection = $orders->unique('tableno');
 
 
 
         return response()->json([
-            'tablenos'=>$orders,
+            'tablenos'=>$collection,
             'reason'=>'Order item cancellation'
         ]);
     }
