@@ -215,6 +215,7 @@ class TemporaryTableController extends Controller
         );
     }
     public function getItemForCancel(){
+        $array = [];
         $orders = DB::table('temporary_orders')
         ->select('orders.tableno')
         ->join('orders','orders.order_id','=','temporary_orders.order_id')
@@ -222,10 +223,16 @@ class TemporaryTableController extends Controller
 
         $collection = $orders->unique();
 
+        foreach($collection as $c){
+            array_push($array,array(
+                'tableno'=> $c->tableno
+            ));
+        }
+
 
 
         return response()->json([
-            'tablenos'=>$collection,
+            'tablenos'=>$array,
             'reason'=>'Order item cancellation'
         ]);
     }
