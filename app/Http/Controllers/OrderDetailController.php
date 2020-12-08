@@ -182,27 +182,27 @@ class OrderDetailController extends BaseController
 
         $temp = TemporaryOrders::find($request->tempId);
 
-        // if($temp && $temp->qtyServed > 0){
-        //         $temp->qtyServed-=$request->noItemToServe;
-        //         $temp->save();
-        // }
-        // if($temp->qtyServed == 0){
-        //     $tempO = TemporaryOrders::find($request->tempId);
-        //     $tempO->status = "served";
-        //     $tempO->save(); 
-        // }
+        if($temp && $temp->qtyServed > 0){
+                $temp->qtyServed-=$request->noItemToServe;
+                $temp->save();
+        }
+        if($temp->qtyServed == 0){
+            $tempO = TemporaryOrders::find($request->tempId);
+            $tempO->status = "served";
+            $tempO->save(); 
+        }
         
-        // if($temp->bundleid==null){
-        //     $records = OrderDetail::find($temp->order_details_id);
-        //     $records->qtyServed -= $request['noItemToServe'];
-        //     $records->save();
+        if($temp->bundleid==null){
+            $records = OrderDetail::find($temp->order_details_id);
+            $records->qtyServed -= $request['noItemToServe'];
+            $records->save();
 
-        //     if($records->qtyServed == 0 ){
-        //         $statusDetail = OrderDetail::find($temp->order_details_id);
-        //         $statusDetail->status = "served";
-        //         $statusDetail->save();
-        //     }
-        // }else{
+            if($records->qtyServed == 0 ){
+                $statusDetail = OrderDetail::find($temp->order_details_id);
+                $statusDetail->status = "served";
+                $statusDetail->save();
+            }
+        }else{
             
             $bundle = DB::table('temporary_orders')
             ->where('order_details_id',$temp->order_details_id)
@@ -210,13 +210,13 @@ class OrderDetailController extends BaseController
             ->orWhere('status','ready')
             ->get();
 
-            // if(COUNT($bundle) == 0){
-            //     $recordsB = OrderDetail::find($temp->order_details_id);
-            //     $recordsB->qtyServed = 0;
-            //     $recordsB->status = "served";
-            //     $recordsB->save(); 
-            // }
-        // }
+            if(COUNT($bundle) == 0){
+                $recordsB = OrderDetail::find($temp->order_details_id);
+                $recordsB->qtyServed = 0;
+                $recordsB->status = "served";
+                $recordsB->save(); 
+            }
+        }
 
         return response()->json([
             'message' => $bundle
