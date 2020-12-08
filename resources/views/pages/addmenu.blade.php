@@ -107,8 +107,8 @@
                         <div class="col-md-6 col-sm-6 ">
                         <select name="status" id="status" class="form-control" required="required">
                         <option value=" ">Select...</option>
-                            <option value="AVAILABLE">Available</option>
-                            <option value="SOLDOUT">Sold Out</option>
+                            <option value="Available">Available</option>
+                            <option value="Not available">Sold Out</option>
 
                         </select>
                         </div>

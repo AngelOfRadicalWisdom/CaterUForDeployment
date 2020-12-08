@@ -91,8 +91,8 @@ class AdminController extends Controller
         $userImage = $user->image;
        // $allOrders = Order::all();       
         $orderDetailsName = DB::table('orders')
-          ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
-          ->join('menus','order_details.menuID','=','menus.menuID')
+          ->join('order_details', 'orders.order_id', 'order_details.order_id')
+          ->join('menus','order_details.menuID','menus.menuID')
           ->selectRaw('group_concat(menus.name) as menuname')
           ->selectRaw('orders.order_id')
           ->selectRaw('orders.total')
@@ -114,8 +114,8 @@ class AdminController extends Controller
           $Oids=array_values($orderid);
           $bill=array_values($total);
           $orderDate= array_values($dateOrdered);
-        // dd($orderDetailsName);
-    return view('admin.dashboard', compact('userImage', 'userFname', 'userLname','menudetails','Oids','bill','orderDate'));
+      //   dd($orderDetailsName);
+   return view('admin.dashboard', compact('userImage', 'userFname', 'userLname','menudetails','Oids','bill','orderDate'));
         }
         catch (\PDOException $e) {
             return back()->withError("Sorry Something Went Wrong")->withInput();

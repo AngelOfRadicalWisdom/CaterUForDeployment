@@ -33,6 +33,8 @@
         <ul class="nav child_menu">
           <li><a href="{{url('/sales')}}">Sales Report</a></li>
           <li><a href="{{url('/salespermenu')}}">Sales Report per Menu</a></li>
+          <li><a href="{{url('/salesperbundle')}}">Promotions/Bundle Sales Report</a></li>
+
         </ul>
       </li>
       <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
