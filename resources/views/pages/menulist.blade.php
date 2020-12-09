@@ -62,7 +62,7 @@
                             <td style="text-align:center">
                               <a data-toggle="tooltip" data-placement="top" title="Edit Menu" href="{{ url('/menu/'.$menu->menuID.'/edit') }}"><img src="{{ asset('/assets/svg/pencil.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
                               <a data-toggle="tooltip" data-placement="top" title="Edit Menu Status" href="{{ url('/menu/'.$menu->menuID.'/editMenuStatus') }}"><img src="{{ asset('/assets/svg/layers.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
-                              <a data-toggle="tooltip" data-placement="top" title="Delete Menu" onclick="deleteMenu({{$menu->menuID}})"><img src="{{ asset('/assets/svg/trash.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
+                              <a data-toggle="tooltip" data-placement="top" title="Remove Menu from List" onclick="deleteMenu({{$menu->menuID}})"><img src="{{ asset('/assets/svg/trash.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
                             </td>
                           </tr>
                           @endforeach

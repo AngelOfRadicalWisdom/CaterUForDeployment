@@ -56,8 +56,10 @@ class EmployeeController extends Controller
         $userFname = $user->empfirstname;
         $userLname = $user->emplastname;
         $userImage = $user->image;
-
-        return view('employees.addemployee', compact('userImage', 'userFname', 'userLname'));
+        $cemployeeno=999;
+        $currentEmployee= Employee::orderBy('empid', 'DESC')->first();
+        $cemployeeno=$currentEmployee->empid;
+        return view('employees.addemployee', compact('userImage', 'userFname', 'userLname','cemployeeno'));
         }
         catch (\PDOException $e) {
             return back()->withError("Sorry Something Went Wrong")->withInput();
@@ -81,6 +83,7 @@ class EmployeeController extends Controller
 try{
         if ($request->file('image') == NULL) {
             $filename = 'CaterU.png';
+            $user->empid= $request->empid;
             $user->empfirstname = $request->empfirstname;
             $user->emplastname  = $request->emplastname;
             $user->username = $request->username;

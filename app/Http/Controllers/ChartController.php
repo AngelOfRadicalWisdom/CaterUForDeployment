@@ -165,6 +165,7 @@ catch (\PDOException $e) {
             $promotion = BundleMenu::all();
             $promotionDetails = BundleDetails::all();
             $allMenus = Menu::all();
+            $salesperBundle=[];
             foreach($promotion as $promoid){
                 $salesperBundle[]=DB::table('order_details')
                 ->join('orders','order_details.order_id','orders.order_id')
@@ -191,6 +192,7 @@ catch (\PDOException $e) {
             $userImage = $user->image;
             $from = date($request->from);
              $to = date($request->to);
+             $salesperBundle=[];
             $promotion = BundleMenu::all();
             $promotionDetails = BundleDetails::all();
             $allMenus = Menu::all();

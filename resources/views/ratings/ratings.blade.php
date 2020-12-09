@@ -104,7 +104,7 @@ $( document ).ready(function() {
 				  datasets: [{
 					label: 'Ratings',
 					backgroundColor: "#8d7062",
-					data: [{{$ratesStr}}]
+					data: [{{$rate5}},{{$rate4}},{{$rate3}},{{$rate2}},{{$rate1}}]
 				  }
                   ]},
 

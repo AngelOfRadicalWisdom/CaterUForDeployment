@@ -13,7 +13,7 @@ class employeeSeeder extends Seeder
     {
         $employees= [
             [
-                'empid'=>1,
+                'empid'=>1000,
                 'empfirstname' =>  'Myra',
                 'emplastname'  =>  'Pelostratos',
                 'username'  =>  'amyra',
@@ -21,7 +21,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'admin'
             ],
             [
-                'empid'=>2,
+                'empid'=>1001,
                 'empfirstname' =>  'Jose',
                 'emplastname'  =>  'Dela Cruz',
                 'username'  =>  'cjose',
@@ -29,7 +29,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'cashier'
             ],
             [
-                'empid'=>3,
+                'empid'=>1002,
                 'empfirstname' =>  'Cardo',
                 'emplastname'  =>  'Dalisay',
                 'username'  =>  'wcardo',
@@ -37,7 +37,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'waiter'
             ],
             [
-                'empid'=>4,
+                'empid'=>1003,
                 'empfirstname' =>  'Elaine',
                 'emplastname'  =>  'Perez',
                 'username'  =>  'kelaine',
@@ -45,7 +45,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'kitchenStaff'
             ],
             [
-                'empid'=>5,
+                'empid'=>1004,
                 'empfirstname' =>  'Richard',
                 'emplastname'  =>  'Gomez',
                 'username'  =>  'rrichard',
@@ -53,7 +53,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'receptionist'
             ],
             [
-                'empid'=>6,
+                'empid'=>1005,
                 'empfirstname' =>  'Mi Soo',
                 'emplastname'  =>  'Kim',
                 'username'  =>  'akim',
@@ -61,7 +61,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'admin'
             ],
             [
-                'empid'=>7,
+                'empid'=>1006,
                 'empfirstname' =>  'Angelo',
                 'emplastname'  =>  'De la Cruz',
                 'username'  =>  'dangelo',
@@ -69,7 +69,7 @@ class employeeSeeder extends Seeder
                 'position'  => 'dispatcher'
             ],
             [
-                'empid'=>8,
+                'empid'=>1007,
                 'empfirstname' =>  'Tanya',
                 'emplastname'  =>  'Guerrero',
                 'username'  =>  'mtanya',
