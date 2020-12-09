@@ -15,7 +15,7 @@ class orderSeeder extends Seeder
          [
             'order_id'=>1,
             'custid'=>2,
-            'empid'=>1,
+            'empid'=>1000,
             'tableno'=>2 ,
             'total'=>2509,
             'cashTender'=>2510,
@@ -25,7 +25,7 @@ class orderSeeder extends Seeder
          [
              'order_id'=>2,
              'custid'=>1,
-             'empid'=>2,
+             'empid'=>1002,
              'tableno'=>1 ,
              'total'=>3748,
              'cashTender'=>4000,
@@ -35,7 +35,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>3,
              'custid'=>1,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>4,
              'total'=>2867,
              'cashTender'=>3000,
@@ -45,7 +45,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>4,
              'custid'=>1,
-             'empid'=>1,
+             'empid'=>1001,
              'tableno'=>5,
              'total'=>3352,
              'cashTender'=>3360,
@@ -55,7 +55,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>5,
              'custid'=>2,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>6,
              'total'=>3859,
              'cashTender'=>3900,
@@ -65,7 +65,7 @@ class orderSeeder extends Seeder
              [
             'order_id'=>6,
             'custid'=>3,
-            'empid'=>2,
+            'empid'=>1002,
             'tableno'=>6 ,
             'total'=>3130,
             'cashTender'=>3200,
@@ -75,7 +75,7 @@ class orderSeeder extends Seeder
          [
              'order_id'=>7,
              'custid'=>1,
-             'empid'=>6,
+             'empid'=>1006,
              'tableno'=>5 ,
              'total'=>3550,
              'cashTender'=>3600,
@@ -85,7 +85,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>8,
              'custid'=>2,
-             'empid'=>5,
+             'empid'=>1005,
              'tableno'=>1,
              'total'=>2659,
              'cashTender'=>3000,
@@ -95,7 +95,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>9,
              'custid'=>3,
-             'empid'=>2,
+             'empid'=>1002,
              'tableno'=>3,
              'total'=>2516,
              'cashTender'=>2520,
@@ -105,7 +105,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>10,
              'custid'=>1,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>4,
              'total'=>3772,
              'cashTender'=>4000,
@@ -115,7 +115,7 @@ class orderSeeder extends Seeder
           [
             'order_id'=>11,
             'custid'=>2,
-            'empid'=>1,
+            'empid'=>1001,
             'tableno'=>1,
             'total'=>3438,
             'cashTender'=>3500,
@@ -125,7 +125,7 @@ class orderSeeder extends Seeder
          [
              'order_id'=>12,
              'custid'=>3,
-             'empid'=>4,
+             'empid'=>1004,
              'tableno'=>5,
              'total'=>3236,
              'cashTender'=>3240,
@@ -135,7 +135,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>13,
              'custid'=>1,
-             'empid'=>6,
+             'empid'=>1006,
              'tableno'=>6,
              'total'=>3970,
              'cashTender'=>4000,
@@ -145,7 +145,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>14,
              'custid'=>2,
-             'empid'=>1,
+             'empid'=>1001,
              'tableno'=>3,
              'total'=>3455,
              'cashTender'=>3460,
@@ -155,7 +155,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>15,
              'custid'=>3,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>4,
              'total'=>3688,
              'cashTender'=>3700,
@@ -165,7 +165,7 @@ class orderSeeder extends Seeder
             [
             'order_id'=>16,
             'custid'=>1,
-            'empid'=>2,
+            'empid'=>1002,
             'tableno'=>6,
             'total'=>4163,
             'cashTender'=>4200,
@@ -175,7 +175,7 @@ class orderSeeder extends Seeder
          [
              'order_id'=>17,
              'custid'=>2,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>1,
              'total'=>3481,
              'cashTender'=>3500,
@@ -185,7 +185,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>18,
              'custid'=>3,
-             'empid'=>5,
+             'empid'=>1005,
              'tableno'=>2,
              'total'=>3751,
              'cashTender'=>3800,
@@ -195,7 +195,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>19,
              'custid'=>1,
-             'empid'=>2,
+             'empid'=>1002,
              'tableno'=>3,
              'total'=>3309,
              'cashTender'=>3310,
@@ -205,7 +205,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>20,
              'custid'=>2,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>4,
              'total'=>3455,
              'cashTender'=>3500,
@@ -215,7 +215,7 @@ class orderSeeder extends Seeder
           [
             'order_id'=>21,
             'custid'=>1,
-            'empid'=>1,
+            'empid'=>1001,
             'tableno'=>2 ,
             'total'=>3558,
             'cashTender'=>3660,
@@ -225,7 +225,7 @@ class orderSeeder extends Seeder
          [
              'order_id'=>22,
              'custid'=>2,
-             'empid'=>2,
+             'empid'=>1002,
              'tableno'=>1 ,
              'total'=>2991,
              'cashTender'=>3000,
@@ -235,7 +235,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>23,
              'custid'=>3,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>4,
              'total'=>2861,
              'cashTender'=>2870,
@@ -245,7 +245,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>24,
              'custid'=>1,
-             'empid'=>1,
+             'empid'=>1001,
              'tableno'=>5,
              'total'=>2845,
              'cashTender'=>2850,
@@ -255,7 +255,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>25,
              'custid'=>2,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>6,
              'total'=>3678,
              'cashTender'=>3680,
@@ -265,7 +265,7 @@ class orderSeeder extends Seeder
              [
             'order_id'=>26,
             'custid'=>3,
-            'empid'=>2,
+            'empid'=>1002,
             'tableno'=>6 ,
             'total'=>3402,
             'cashTender'=>3420,
@@ -275,7 +275,7 @@ class orderSeeder extends Seeder
          [
              'order_id'=>27,
              'custid'=>1,
-             'empid'=>6,
+             'empid'=>1006,
              'tableno'=>5 ,
              'total'=>2580,
              'cashTender'=>2600,
@@ -285,7 +285,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>28,
              'custid'=>2,
-             'empid'=>5,
+             'empid'=>1005,
              'tableno'=>1,
              'total'=>2427,
              'cashTender'=>2430,
@@ -295,7 +295,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>29,
              'custid'=>3,
-             'empid'=>2,
+             'empid'=>1002,
              'tableno'=>3,
              'total'=>3418,
              'cashTender'=>3420,
@@ -305,7 +305,7 @@ class orderSeeder extends Seeder
           [
              'order_id'=>30,
              'custid'=>1,
-             'empid'=>3,
+             'empid'=>1003,
              'tableno'=>4,
              'total'=>3798,
              'cashTender'=>3800,
