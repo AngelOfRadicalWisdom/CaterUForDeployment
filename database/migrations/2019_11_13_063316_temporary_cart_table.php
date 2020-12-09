@@ -19,7 +19,6 @@ class TemporaryCartTable extends Migration
             $table->integer('menuID')->unsigned()->nullable();
             $table->integer('bundleid')->unsigned()->nullable();
             $table->integer('qty');
-
             $table->foreign('order_id')->references('order_id')->on('orders')->onUpdate('cascade');
             $table->foreign('menuID')->references('menuID')->on('menus')->onUpdate('cascade');
             $table->foreign('bundleid')->references('bundleid')->on('bundles')->onUpdate('cascade');

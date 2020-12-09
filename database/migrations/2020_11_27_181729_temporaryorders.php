@@ -21,6 +21,8 @@ class TemporaryOrders extends Migration
             $table->integer('bundleid')->nullable();
             $table->integer('orderQty');
             $table->string('status');
+            $table->integer('order_details_id');
+            $table->integer('qtyServed');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->foreign('id')->references('id')->on('kitchenrecords');
