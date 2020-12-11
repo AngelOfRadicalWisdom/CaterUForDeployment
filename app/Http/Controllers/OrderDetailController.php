@@ -206,8 +206,7 @@ class OrderDetailController extends BaseController
             
             $bundle = DB::table('temporary_orders')
             ->where('order_details_id',$temp->order_details_id)
-            ->where('status','waiting')
-            ->orWhere('status','ready')
+            ->where('status','!=','served')
             ->get();
 
             if(COUNT($bundle) == 0){
