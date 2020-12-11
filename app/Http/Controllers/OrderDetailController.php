@@ -219,7 +219,8 @@ class OrderDetailController extends BaseController
         }
 
         return response()->json([
-            'message' => $bundle
+            
+            'count'=> COUNT($bundle)
         ]);
     }
     
