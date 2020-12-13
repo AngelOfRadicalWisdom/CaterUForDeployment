@@ -74,6 +74,7 @@ Route::middleware('cors:api')->post('/status/servedBundle/{id}','OrderDetailCont
 Route::middleware('cors:api')->get('/getTotal/{order_id}','OrderDetailController@getTotal');
 
 Route::middleware('cors:api')->post('/order/billout/{order_id}','CustomerController@requestBillOut');
+Route::middleware('cors:api')->get('/order/checkpendingorders/{order_id}','Customercontroller@checkPendingOrders');
 //---------------W A I T E R------------------//
 Route::middleware('cors:api')->get('/order/drinklist','TemporaryTableController@getDrinkWaitingOrders');
 Route::middleware('cors:api')->get('/table/occupied','TableController@getOccupiedTable');

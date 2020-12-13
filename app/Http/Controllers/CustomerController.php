@@ -151,6 +151,17 @@ class CustomerController extends Controller
         ]);
      }
     public function requestBillOut(Request $request, $order_id){
+        
+            $detail= Order::find($order_id);
+            $detail->total = $request->total;
+            $detail->status = 'billout';
+            $detail->save();  
+            
+        return response()->json($hasWaiting);
+    }
+
+
+    public function checkPendingOrders($order_id){
         $hasWaiting = false; 
 
         $order = DB::table('orders')
@@ -162,16 +173,10 @@ class CustomerController extends Controller
 
         if(COUNT($order)>0){
             $hasWaiting = true;
-        }else{
-            $detail= Order::find($order_id);
-            $detail->total = $request->total;
-            $detail->status = 'billout';
-            $detail->save();  
-        }
+        }else $hasWaiting =false;
+
         return response()->json($hasWaiting);
     }
-
-
     public function placeorder(Request $request,$order_id){
         $data = $request->all();
         $finalArray = array();
