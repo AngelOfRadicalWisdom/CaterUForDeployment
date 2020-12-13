@@ -87,7 +87,7 @@ class TableController extends BaseController
     //mobile get occupied table
     public function getOccupiedTable()
     {
-        $occupiedTables = DB::table('tables')->where('status', 'Occupied')->get();
+        $occupiedTables = DB::table('tables')->where('status','!=','Available')->get();
 
         return response()->json([
             'OccupiedTables' => $occupiedTables
