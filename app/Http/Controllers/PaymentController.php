@@ -61,6 +61,7 @@ class PaymentController extends Controller
         $orders = Order::find($order_id);
         $orders->cashTender = $request->cashTender;
         $orders->change = $request->change;
+        $orders->discount = $request->discount;
         $orders->status = 'paid';
         $orders->save();
 
