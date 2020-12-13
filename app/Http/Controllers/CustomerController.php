@@ -161,6 +161,7 @@ class CustomerController extends Controller
         ->select('orders.order_id','order_details.status')
         ->join('order_details','order_details.order_id','=','orders.order_id')
         ->where('orders.order_id',$order_id)
+        ->where('order_details.status','waiting')
         ->get();
         return response()->json([
             'message' => $order
