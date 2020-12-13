@@ -158,8 +158,8 @@ class CustomerController extends Controller
         // $detail->save();
 
         $order = DB::table('orders')
+        ->select('orders.order_id','order_details.status')
         ->join('order_details','order_details.order_id','=','orders.order_id')
-        ->join('temporary_orders','temporary_orders.order_id','=','orders.order_id')
         ->get();
         return response()->json([
             'message' => $order
