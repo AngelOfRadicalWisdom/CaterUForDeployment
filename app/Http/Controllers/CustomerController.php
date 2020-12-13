@@ -152,14 +152,21 @@ class CustomerController extends Controller
      }
     public function requestBillOut(Request $request, $order_id){
 
-        $detail= Order::find($order_id);
-        $detail->total = $request->total;
-        $detail->status = 'billout';
-        $detail->save();
+        // $detail= Order::find($order_id);
+        // $detail->total = $request->total;
+        // $detail->status = 'billout';
+        // $detail->save();
+
+        $order = DB::table('orders')
+        ->join('order_details','order_details.order_id','=','orders.order_id')
+        ->join('temporary_orders','temporary_orders.order_id','=','orders.order_id')
+        ->get();
         return response()->json([
-            'message' => 'Billout success'
+            'message' => $order
             ]);
     }
+
+
     public function placeorder(Request $request,$order_id){
         $data = $request->all();
         $finalArray = array();
