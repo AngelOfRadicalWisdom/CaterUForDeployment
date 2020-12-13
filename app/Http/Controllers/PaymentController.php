@@ -62,6 +62,7 @@ class PaymentController extends Controller
         $orders->cashTender = $request->cashTender;
         $orders->change = $request->change;
         $orders->discount = $request->discount;
+        $orders->discountedTotal = $request->discountedTotal;
         $orders->status = 'paid';
         $orders->save();
 
