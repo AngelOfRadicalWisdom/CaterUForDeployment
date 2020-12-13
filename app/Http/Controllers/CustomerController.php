@@ -156,8 +156,10 @@ class CustomerController extends Controller
             $detail->total = $request->total;
             $detail->status = 'billout';
             $detail->save();  
-            
-        return response()->json($hasWaiting);
+
+        return response()->json([
+            'message' => 'Billout success!'
+        ]);
     }
 
 
