@@ -576,6 +576,7 @@ try{
         $row->bundleid=explode(",",$row->bundleid)[0];
         $row->bundleStatus = explode(",",$row->bundleStatus)[0];
         $row->bundlename=explode(",",$row->bundlename)[0];
+        $row->image = explode(",",$row->image)[0];
         $row->menuID = explode(",",$row->menuID);
         $row->menuStatus = explode(",",$row->menuStatus);
         $row->price=explode(",",$row->price)[0];
@@ -585,6 +586,7 @@ try{
           'bundleid' => $row->bundleid,
           'name' => $row->name,
           'bundlename' => $row->bundlename,
+          'image'=> $row->image,
           'menuID' => $row->menuID,
           'menuStatus'=> $row->menuStatus,
           'bundleStatus'=> $row->bundleStatus,
