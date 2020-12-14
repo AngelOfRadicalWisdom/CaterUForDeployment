@@ -360,8 +360,7 @@ class TableController extends BaseController
             $orders =DB::table('orders')
                 ->select('status','order_id')
                 ->where('tableno',$tableNo)
-                ->pluck('status')->last()
-                ->get();
+                ->pluck('status')->last();
             return response()->json([
                 $orders
             ]);
