@@ -356,60 +356,61 @@ class TableController extends BaseController
 
         $status = RestaurantTable::whereTableno($tableNo)->pluck('status')->first();
 
-        if ($status == 'Occupied') {
-            $orders = Order::whereTableno($tableNo)
-                ->select('status','order_id')
-                ->where('status', 'ordering')
-                ->orWhere('status','billout')
-                ->get();
+        // if ($status == 'Occupied') {
+        //     $orders = Order::whereTableno($tableNo)
+        //         ->select('status','order_id')
+        //         ->where('status', 'ordering')
+        //         ->orWhere('status','billout')
+        //         ->get();
+        //     return response()->json([
+        //         'order_id' => $orders[0]['order_id'],
+        //         'status' => $orders[0]['status']
+        //     ]);
+        // } 
+        // else if($status == 'Confirmed'){
+        //     $customer = DB::table('customers')
+        // ->select('customers.custid')
+        // ->where('tableno',$tableNo)
+        // ->where('status','confirmed')
+        // ->get();
+
+        // foreach($customer as $c){
+        //     $id = $c->custid;
+        // }
+        //     $table = RestaurantTable::find($tableNo);
+        //     $table->status = 'Occupied';
+        //     $table->save();
+
+        //     $newOrder = new Order;
+        //     $newOrder->custid = $id;
+        //     $newOrder->empid = $request->empid;
+        //     $newOrder->tableno = $tableNo;
+        //     $newOrder->status = 'ordering';
+        //     $newOrder->total = 0;
+        //     $newOrder->save();
+
+        //     return response()->json([
+        //         'order_id' =>  $newOrder->order_id
+        //     ]);
+        // }
+        // else {
+        //     $table = RestaurantTable::find($tableNo);
+        //     $table->status = 'Occupied';
+        //     $table->save();
+
+        //     $newCustomer = Customer::create(['name' => 'cash']);
+        //     $newOrder = new Order;
+        //     $newOrder->custid = $newCustomer->custid;
+        //     $newOrder->empid = $request->empid;
+        //     $newOrder->tableno = $tableNo;
+        //     $newOrder->status = 'ordering';
+        //     $newOrder->total = 0;
+        //     $newOrder->save();
+
             return response()->json([
-                'order_id' => $orders[0]['order_id'],
-                'status' => $orders[0]['status']
+                // 'order_id' =>  $newOrder->order_id
+                $status
             ]);
-        } 
-        else if($status == 'Confirmed'){
-            $customer = DB::table('customers')
-        ->select('customers.custid')
-        ->where('tableno',$tableNo)
-        ->where('status','confirmed')
-        ->get();
-
-        foreach($customer as $c){
-            $id = $c->custid;
-        }
-            $table = RestaurantTable::find($tableNo);
-            $table->status = 'Occupied';
-            $table->save();
-
-            $newOrder = new Order;
-            $newOrder->custid = $id;
-            $newOrder->empid = $request->empid;
-            $newOrder->tableno = $tableNo;
-            $newOrder->status = 'ordering';
-            $newOrder->total = 0;
-            $newOrder->save();
-
-            return response()->json([
-                'order_id' =>  $newOrder->order_id
-            ]);
-        }
-        else {
-            $table = RestaurantTable::find($tableNo);
-            $table->status = 'Occupied';
-            $table->save();
-
-            $newCustomer = Customer::create(['name' => 'cash']);
-            $newOrder = new Order;
-            $newOrder->custid = $newCustomer->custid;
-            $newOrder->empid = $request->empid;
-            $newOrder->tableno = $tableNo;
-            $newOrder->status = 'ordering';
-            $newOrder->total = 0;
-            $newOrder->save();
-
-            return response()->json([
-                'order_id' =>  $newOrder->order_id
-            ]);
-        }
+        // }
     }
 }
