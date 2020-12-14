@@ -361,7 +361,7 @@ class TableController extends BaseController
                 ->where('tableno',$tableNo)
                 ->pluck('order_id')->last();
             return response()->json([
-                $orders
+               'order_id'=> $orders
             ]);
         } 
         // else if($status == 'Confirmed'){
