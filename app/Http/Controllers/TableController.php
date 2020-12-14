@@ -358,9 +358,8 @@ class TableController extends BaseController
 
         if ($status == 'Occupied') {
             $orders =DB::table('orders')
-                ->select('status','order_id')
                 ->where('tableno',$tableNo)
-                ->pluck('status','order_id')->last();
+                ->pluck('status')->last();
             return response()->json([
                 $orders
             ]);
