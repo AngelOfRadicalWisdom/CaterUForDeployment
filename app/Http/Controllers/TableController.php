@@ -357,8 +357,9 @@ class TableController extends BaseController
         $status = RestaurantTable::whereTableno($tableNo)->pluck('status')->first();
 
         if ($status == 'Occupied') {
-            $orders = Order::whereTableno($tableNo)
+            $orders =DB::table('orders')
                 ->select('status','order_id')
+                ->where('tableno',$tableNo)
                 ->where('status', 'ordering')
                 ->orWhere('status','billout')
                 ->get();
