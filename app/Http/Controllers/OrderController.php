@@ -56,6 +56,13 @@ class OrderController extends BaseController
 
     }
 
+    public function getCustomerStatus($orderId){
+
+        $status = Order::find($orderId)->where('status'.'billout')->get();
+
+        return response()->json($status);
+    }
+
     
 
 }
