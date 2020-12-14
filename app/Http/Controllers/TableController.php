@@ -23,42 +23,42 @@ class TableController extends BaseController
     // mobile get table list
     public function tableList()
     {
-        $tables=[];
+        // $tables=[];
         $allTables = RestaurantTable::all();
-        $orderTables = DB::table('tables')
-        ->select('orders.tableno','orders.status')
-        ->join('orders','orders.tableno','=','tables.tableno')
-        ->where('orders.status','billout')
-        ->get();
+        // $orderTables = DB::table('tables')
+        // ->select('orders.tableno','orders.status')
+        // ->join('orders','orders.tableno','=','tables.tableno')
+        // ->where('orders.status','billout')
+        // ->get();
 
-        foreach($allTables as $table){
-            if(COUNT($orderTables)>0){
-                   foreach($orderTables as $o){
-                    if($table->tableno == $o->tableno){
-                    array_push($tables, array(
-                        "status"=> $o->status,
-                        "tableno"=>$table->tableno,
-                        "capacity"=>$table->capacity
-                    ));
-                }else{
-                    array_push($tables, array(
-                        "status"=> $table->status,
-                        "tableno"=>$table->tableno,
-                        "capacity"=>$table->capacity
-                    ));
-                }
-            }
-            }else{
-                array_push($tables, array(
-                    "status"=> $table->status,
-                    "tableno"=>$table->tableno,
-                    "capacity"=>$table->capacity
-                ));
-            }
+        // foreach($allTables as $table){
+        //     if(COUNT($orderTables)>0){
+        //            foreach($orderTables as $o){
+        //             if($table->tableno == $o->tableno){
+        //             array_push($tables, array(
+        //                 "status"=> $o->status,
+        //                 "tableno"=>$table->tableno,
+        //                 "capacity"=>$table->capacity
+        //             ));
+        //         }else{
+        //             array_push($tables, array(
+        //                 "status"=> $table->status,
+        //                 "tableno"=>$table->tableno,
+        //                 "capacity"=>$table->capacity
+        //             ));
+        //         }
+        //     }
+        //     }else{
+        //         array_push($tables, array(
+        //             "status"=> $table->status,
+        //             "tableno"=>$table->tableno,
+        //             "capacity"=>$table->capacity
+        //         ));
+        //     }
          
-        }
+        // }
 
-        return response()->json(['allTables' => $tables]);
+        return response()->json(['allTables' => $allTables]);
     }
     //admin table list
     public function webTableList()
