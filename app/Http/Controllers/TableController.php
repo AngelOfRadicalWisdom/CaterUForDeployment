@@ -359,6 +359,7 @@ class TableController extends BaseController
         if ($status == 'Occupied') {
             $order_id = Order::whereTableno($tableNo)
                 ->where('status', 'ordering')
+                ->orWhere('status','billout')
                 ->pluck('order_id')->first();
             return response()->json([
                 'order_id' => $order_id,
