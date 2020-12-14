@@ -363,7 +363,7 @@ class TableController extends BaseController
                 ->orWhere('status','billout')
                 ->get();
             return response()->json([
-                'order_id' => $orders[0]['order-id'],
+                'order_id' => $orders[0]['order_id'],
                 'status' => $orders[0]['status']
             ]);
         } 
