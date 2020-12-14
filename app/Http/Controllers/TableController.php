@@ -360,7 +360,7 @@ class TableController extends BaseController
             $order_id = Order::whereTableno($tableNo)
                 ->where('status', 'ordering')
                 ->orWhere('status','billout')
-                ->pluck('order_id')->first();
+                ->get();
             return response()->json([
                 'order_id' => $order_id,
                 'status' => $status
