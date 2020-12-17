@@ -33,7 +33,7 @@ class AprioriC2Controller extends Controller
         }
         $apriori = new AprioriNew($samples, $support, $confidence);
      //  $pairs=$apriori->apriori();
-       // $pairs=$apriori->getRules();
+       $pairs=$apriori->getRules();
      //    $pairs=$apriori->do_predict([2]);
     //      $menu = [];
     //    $groupedData = [];
@@ -97,15 +97,16 @@ class AprioriC2Controller extends Controller
     
     // }
     // dd($transactions);
-    $allMenus = Menu::all();
-    foreach($allMenus as $menus){
-    $salesperMenu[]=DB::table('order_details')
-    ->selectRaw("sum(subtotal) as total")
-    ->where('menuID',$menus->menuID)
-    ->get();
-    }
+    // $allMenus = Menu::all();
+    // foreach($allMenus as $menus){
+    // $salesperMenu[]=DB::table('order_details')
+    // ->selectRaw("sum(subtotal) as total")
+    // ->where('menuID',$menus->menuID)
+    // ->get();
+    // }
 
-    dd($salesperMenu);
+    // dd($salesperMenu);
+    $this->parr($pairs);
     
 }
     private function parr($arr) {
@@ -252,6 +253,9 @@ class AprioriC2Controller extends Controller
             $userFname = $user->empfirstname;
             $userLname = $user->emplastname;
             $userImage = $user->image;
+            $transactions=[];
+            $menuID="";
+            $menuName="";
         $samples = $this->getTransactions();
         $sc = $this->getSupportandConfidence();
         if (count($sc) == 0) {

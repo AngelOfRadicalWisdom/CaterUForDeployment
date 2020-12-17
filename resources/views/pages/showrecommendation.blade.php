@@ -33,6 +33,13 @@
             </ul>
             <div class="clearfix"></div>
           </div>
+       <div class="item form-group">
+       <input type="text" class="form-control" id="menuname" placeholder="Search Menu Name" value="{{ old('menuName')}}" required="required">
+                <div class="col-md-6 col-sm-6 ">
+                <button type="submit" class="btn btn-success" id="menusearch">Submit</button>
+                <a class="btn btn-danger" href="{{url('/recommendedMenus')}}">Clear Search</a>
+                </div>
+              </div>
           <div class="x_content">
             <br />
             <div class="col-md-12 col-sm-12 ">
@@ -40,7 +47,7 @@
                 <div class="row">
                   <div class="col-sm-12">
                     <div class="card-box table-responsive">
-                      <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
+                      <table id="recommendedMenus" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
                             <th style="text-align:center">Menu Id</th>
@@ -102,4 +109,16 @@
 <script src="{{asset('/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js')}}"></script>
 <script src="{{asset('/vendors/datatables.net-scroller/js/dataTables.scroller.min.js')}}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script>
+$(document).ready( function () {
+  var table = $('#recommendedMenus').DataTable();
+  
+  $('#menusearch').on('keyup click', function () {
+    table.column(1).search($('#menuname').val()).draw();
+  } );
+} );
+
+
+
+</script>
 @endsection

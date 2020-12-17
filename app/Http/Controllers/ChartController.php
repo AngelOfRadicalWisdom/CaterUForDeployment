@@ -55,11 +55,11 @@ class ChartController extends Controller
         $sum = 0;
         $from = date($request->from);
         $to = date($request->to);
-        $totalOrder = Order::selectRaw("sum(total) as total,date_ordered,DATE_FORMAT(date_ordered,'%M %d %Y') as yearMonth,TIME(date_ordered) as time")
+        $totalOrder = Order::select(DB::raw('MONTHNAME(date_ordered) as yearMonth, sum(total) as total'))
             ->whereDate('date_ordered', '>=', $from)
             ->whereDate('date_ordered', '<=', $to)
             ->where('status', 'paid')
-            ->groupBy('date_ordered')
+            ->groupBy(DB::raw('MONTHNAME(date_ordered)'))
             ->get();
 
         foreach ($totalOrder as $revenue) {
