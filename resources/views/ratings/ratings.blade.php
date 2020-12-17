@@ -38,7 +38,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                  @for($i=0;$i<$AverageStr;$i++)
+                  <!-- @for($i=0;$i<$AverageStr;$i++)
     <span class="fa-stack" style="width:5em">
         <i class="fa fa-star fa-stack-1x"></i>
         @if($AverageStr > 0)
@@ -50,7 +50,7 @@
         @endif
         
     </span>
-@endfor
+@endfor -->
 @for($i=0;$i< round($maxRating-$AverageStr) ;$i++)
 <span class="fa-stack" style="width:5em">
 <i class="fa fa-star-o fa-stack-1x"></i>
