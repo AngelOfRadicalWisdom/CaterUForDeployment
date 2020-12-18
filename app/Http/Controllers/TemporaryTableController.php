@@ -190,6 +190,15 @@ class TemporaryTableController extends Controller
             'message' => $message
         ]);
     }
+
+    public function removeKitchenOrder($id){
+        $order = Kitchen::find($id)->delete();
+
+        return response()->json(
+            'Successfully deleted!'
+        );
+    }
+
     // public function setServedTempOrders($tempId){
     //     $message = '';
     //     $tempOrders = DB::table('temporary_orders')
