@@ -195,7 +195,7 @@ class TemporaryTableController extends Controller
         $order = Kitchen::find($id)->delete();
 
         return response()->json(
-            'Successfully deleted!'
+            $order
         );
     }
 
