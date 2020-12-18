@@ -21,7 +21,7 @@ class AprioriNew
     {
         return $this->frequency($sample) / count($this->samples);
     }
-    private function confidence(array $set, array $subset): float
+    public function confidence(array $set, array $subset): float
     {
         return $this->support($set) / $this->support($subset);
     }

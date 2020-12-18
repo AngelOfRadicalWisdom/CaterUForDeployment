@@ -14,7 +14,7 @@
 //use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
 //landingpage
-Route::get('analyze','AprioriC2COntroller@analyzation');
+Route::get('analyze','AprioriC2Controller@analyzation');
 Route::get('','LoginController@landingpage');
 Auth::routes(['register'=> false]);
 Auth::routes(['login'=>false]);
