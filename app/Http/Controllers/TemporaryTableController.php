@@ -204,7 +204,7 @@ class TemporaryTableController extends Controller
         $isRemoved = false;
         $order = DB::table('temporary_orders')->where('id',$id)->get();
 
-        if($order){
+        if($order!=null){
             $isRemoved = false;
         }else $isRemoved = true;
 
