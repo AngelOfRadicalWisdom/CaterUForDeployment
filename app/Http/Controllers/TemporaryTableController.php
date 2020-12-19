@@ -209,7 +209,7 @@ class TemporaryTableController extends Controller
         }else $isRemoved = true;
 
         return response()->json(
-            $isRemoved
+            $order
         );
     }
 
