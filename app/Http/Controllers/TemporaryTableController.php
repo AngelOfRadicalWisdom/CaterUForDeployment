@@ -199,17 +199,20 @@ class TemporaryTableController extends Controller
         );
     }
 
-    // public function setServedTempOrders($tempId){
-    //     $message = '';
-    //     $tempOrders = DB::table('temporary_orders')
-    //     ->join('orders','orders.order_id','=','temporary_orders.order_id')
-    //     ->join('order_details','order_details.order_id','=','orders.order_id')
-    //     ->where('tempId',$tempId)
+    public function findOrder($id){
 
-    //     return response()->json([
-    //         'message'=> $tempOrders
-    //     ]);
-    // }
+        $isRemoved = false;
+        $order = DB::table('temporary_orders')->where('id',$id)->get();
+
+        if($order){
+            $isRemoved = false;
+        }else $isRemoved = true;
+
+        return response(){
+            $isRemoved
+        }
+    }
+
     public function requestCancelOrderItem($id){ 
         
         $orders = DB::table('order_details')
