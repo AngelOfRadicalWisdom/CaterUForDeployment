@@ -208,9 +208,9 @@ class TemporaryTableController extends Controller
             $isRemoved = false;
         }else $isRemoved = true;
 
-        return response(){
+        return response()->json(
             $isRemoved
-        }
+        );
     }
 
     public function requestCancelOrderItem($id){ 
