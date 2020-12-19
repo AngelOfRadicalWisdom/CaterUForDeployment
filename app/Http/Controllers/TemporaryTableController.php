@@ -204,12 +204,12 @@ class TemporaryTableController extends Controller
         $isRemoved = false;
         $order = DB::table('temporary_orders')->where('id',$id)->get();
 
-        if($order!=null){
+        if(COUNT($order)>0){
             $isRemoved = false;
         }else $isRemoved = true;
 
         return response()->json(
-            $order
+            $isRemoved
         );
     }
 
