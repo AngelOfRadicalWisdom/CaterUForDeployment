@@ -431,22 +431,21 @@ class AprioriC2Controller extends Controller
         $data = DB::table('menus')->where('menuID', $row)->get();
         array_push($groupedData, $row);
     }
-    // $data = [];
-    // for ($i = 0; $i < count($groupedData); $i++) {
-    //     $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
-
-    //     foreach ($t as $a) {
-    //         array_push($data, array(
-    //             'name' => $a->name,
-    //             'menuID' => $a->menuID,
-    //             'image' => asset('/menu/menu_images/'.$a->image),
-    //             'details' => $a->details,
-    //             'price'=> $a->price,
-    //             'servingsize' => $a->servingsize,
-    //             'subcatid'=> $a->subcatid
-    //         ));
-    //     }
-    // }
+    $data = [];
+    for ($i = 0; $i < count($groupedData); $i++) {
+        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+    }
+    foreach ($t as $a) {
+        array_push($data, array(
+            'name' => $a->name,
+            'menuID' => $a->menuID,
+            'image' => asset('/menu/menu_images/'.$a->image),
+            'details' => $a->details,
+            'price'=> $a->price,
+            'servingsize' => $a->servingsize,
+            'subcatid'=> $a->subcatid
+        ));
+    }
 
     return response()->json(['menu' => $groupedData]);
 
