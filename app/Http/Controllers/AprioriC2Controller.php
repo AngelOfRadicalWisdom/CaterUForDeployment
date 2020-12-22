@@ -303,7 +303,7 @@ class AprioriC2Controller extends Controller
         
 
    //sending the recommendations to the mobile side
-   public function sendApriori( $menuId)
+   public function sendApriori(Request $request)
    {
     $samples = $this->getTransactions();
     $sc = $this->getSupportandConfidence();
@@ -323,7 +323,7 @@ class AprioriC2Controller extends Controller
     $apriori = new AprioriNew($samples, $support, $confidence);
   //  $pairs=$apriori->apriori();
     // $pairs=$apriori->getRules();
-     $pairs=$apriori->do_predict([$menuId]);
+     $pairs=$apriori->do_predict([$request]);
      $menu = [];
    $groupedData = [];
 
