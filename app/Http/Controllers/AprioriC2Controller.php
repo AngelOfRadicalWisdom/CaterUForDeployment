@@ -375,6 +375,22 @@ class AprioriC2Controller extends Controller
 
    public function sendApriori2(Request $request)
    {
+    $samples = $this->getTransactions();
+    $sc = $this->getSupportandConfidence();
+    if (count($sc) == 0) {
+        $support = '';
+        $confidence = '';
+        $support = 75 / 100;
+        $confidence = 75 / 100;
+    } else {
+        $support = '';
+        $confidence = '';
+        foreach ($sc as $row) {
+            $support = $row->support / 100;
+            $confidence = $row->confidence / 100;
+        }
+    }
+    $apriori = new AprioriNew($samples, $support, $confidence);
     $pairs=$apriori->do_predict([$request->menu]);
        return response()->json(['menu' => $pairs]);
 
