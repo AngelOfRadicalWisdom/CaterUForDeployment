@@ -410,7 +410,7 @@ class AprioriC2Controller extends Controller
     }
     foreach ($transactions as $row) {
         foreach($row as $r){
-              $menu[]=explode(",", $r->menuID);
+              array_push($menu,explode(",", $r->menuID));
         }
      
     }
