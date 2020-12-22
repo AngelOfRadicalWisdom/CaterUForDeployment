@@ -480,53 +480,53 @@ $apriori = new AprioriNew($samples, $support, $confidence);
 //  $pairs=$apriori->apriori();
 // $pairs=$apriori->getRules();
  $pairs=$apriori->do_predict([$request->menu]);
- $menu = [];
-$groupedData = [];
+//  $menu = [];
+// $groupedData = [];
 
-$transactions = DB::table('menus')
-->selectRaw('group_concat(menus.name) as name')
-->selectRaw('group_concat(menus.menuID) as menuID')
-->selectRaw('group_concat(menus.image) as image')
-->selectRaw('group_concat(menus.details) as details')
-->selectRaw('group_concat(menus.servingsize) as servingsize')
-->selectRaw('group_concat(menus.price) as price')
-->selectRaw('group_concat(menus.subcatid) as subcatid')
-->whereIn('menuID', $pairs)
-->get();
-   foreach ($transactions as $row) {
-    $menu[] = explode(",", $row->menuID);
-}
-for ($index = 0; $index < count($menu); $index++) {
-    foreach ($menu[$index] as $Smenus) {
-        if ($Smenus != $menuId) {
-            $groupedData[] = $Smenus;
-        }
-    }
-}
-$final = array_unique($groupedData);
-$groupedData = [];
-$data;
-foreach ($final as $row) {
-    $data = DB::table('menus')->where('menuID', $row)->get();
-    array_push($groupedData, $row);
-}
-$data = [];
-for ($i = 0; $i < count($groupedData); $i++) {
-    $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+// $transactions = DB::table('menus')
+// ->selectRaw('group_concat(menus.name) as name')
+// ->selectRaw('group_concat(menus.menuID) as menuID')
+// ->selectRaw('group_concat(menus.image) as image')
+// ->selectRaw('group_concat(menus.details) as details')
+// ->selectRaw('group_concat(menus.servingsize) as servingsize')
+// ->selectRaw('group_concat(menus.price) as price')
+// ->selectRaw('group_concat(menus.subcatid) as subcatid')
+// ->whereIn('menuID', $pairs)
+// ->get();
+//    foreach ($transactions as $row) {
+//     $menu[] = explode(",", $row->menuID);
+// }
+// for ($index = 0; $index < count($menu); $index++) {
+//     foreach ($menu[$index] as $Smenus) {
+//         if ($Smenus != $menuId) {
+//             $groupedData[] = $Smenus;
+//         }
+//     }
+// }
+// $final = array_unique($groupedData);
+// $groupedData = [];
+// $data;
+// foreach ($final as $row) {
+//     $data = DB::table('menus')->where('menuID', $row)->get();
+//     array_push($groupedData, $row);
+// }
+// $data = [];
+// for ($i = 0; $i < count($groupedData); $i++) {
+//     $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
 
-    foreach ($t as $a) {
-        array_push($data, array(
-            'name' => $a->name,
-            'menuID' => $a->menuID,
-            'image' => asset('/menu/menu_images/'.$a->image),
-            'details' => $a->details,
-            'price'=> $a->price,
-            'servingsize' => $a->servingsize,
-            'subcatid'=> $a->subcatid
-        ));
-    }
-}
-       return response()->json(['menu' => $groupedData]);
+//     foreach ($t as $a) {
+//         array_push($data, array(
+//             'name' => $a->name,
+//             'menuID' => $a->menuID,
+//             'image' => asset('/menu/menu_images/'.$a->image),
+//             'details' => $a->details,
+//             'price'=> $a->price,
+//             'servingsize' => $a->servingsize,
+//             'subcatid'=> $a->subcatid
+//         ));
+//     }
+// }
+       return response()->json(['menu' => $pairs]);
 
    }
 
