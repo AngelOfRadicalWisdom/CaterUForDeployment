@@ -94,7 +94,7 @@ Route::middleware('cors:api')->get('/menu/getmenubycategory/{categoryid}','MenuC
 Route::middleware('cors:api')->get('/menu/getBundleMenus','PromotionController@getAllBundleMenus');
 Route::middleware('cors:api')->get('/menu/bundle/getbundledetails/{bundleId}','PromotionController@getBundleDetails');
 //APRIORI
-Route::middleware('cors:api')->get('/apriori/getpairs','AprioriC2Controller@sendApriori');
+Route::middleware('cors:api')->get('/apriori/getpairs/{menuId}','AprioriC2Controller@sendApriori');
 Route::middleware('cors:api')->get('/apriori/getpairs2','AprioriC2Controller@sendApriori2');
 
 //SMS
