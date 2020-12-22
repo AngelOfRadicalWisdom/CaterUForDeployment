@@ -433,9 +433,8 @@ class AprioriC2Controller extends Controller
     // }
     $data = [];
     for ($i = 0; $i < count($groupedData); $i++) {
-        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
-    }
-    foreach ($t as $a) {
+        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();   
+        foreach ($t as $a) {
         array_push($data, array(
             'name' => $a->name,
             'menuID' => $a->menuID,
@@ -446,6 +445,8 @@ class AprioriC2Controller extends Controller
             'subcatid'=> $a->subcatid
         ));
     }
+    }
+ 
 
     return response()->json(['menu' => $data]);
 
