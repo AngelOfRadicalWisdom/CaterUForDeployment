@@ -396,7 +396,7 @@ class AprioriC2Controller extends Controller
         array_push($pairs,$apriori->do_predict([$menu]));
     }
     
-       return response()->json(['menu' => $request->menu]);
+       return response()->json(['menu' => $pairs]);
 
    }
 
