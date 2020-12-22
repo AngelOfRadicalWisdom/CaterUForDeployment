@@ -408,44 +408,44 @@ class AprioriC2Controller extends Controller
         ->whereIn('menuID', $pair)
         ->get());
     }
-    foreach ($transactions as $row) {
-        $menu[] = explode(",", $row->menuID);
-    }
-    for ($index = 0; $index < count($menu); $index++) {
-        foreach ($menu[$index] as $Smenus) {
-            foreach($pairs as $pair){
-                 if ($Smenus != $pair) {
-                $groupedData[] = $Smenus;
-            }
-            }
+    // foreach ($transactions as $row) {
+    //     $menu[] = explode(",", $row->menuID);
+    // }
+    // for ($index = 0; $index < count($menu); $index++) {
+    //     foreach ($menu[$index] as $Smenus) {
+    //         foreach($pairs as $pair){
+    //              if ($Smenus != $pair) {
+    //             $groupedData[] = $Smenus;
+    //         }
+    //         }
            
-        }
-    }
-    $final = array_unique($groupedData);
-    $groupedData = [];
-    $data;
-    foreach ($final as $row) {
-        $data = DB::table('menus')->where('menuID', $row)->get();
-        array_push($groupedData, $row);
-    }
-    $data = [];
-    for ($i = 0; $i < count($groupedData); $i++) {
-        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+    //     }
+    // }
+    // $final = array_unique($groupedData);
+    // $groupedData = [];
+    // $data;
+    // foreach ($final as $row) {
+    //     $data = DB::table('menus')->where('menuID', $row)->get();
+    //     array_push($groupedData, $row);
+    // }
+    // $data = [];
+    // for ($i = 0; $i < count($groupedData); $i++) {
+    //     $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
 
-        foreach ($t as $a) {
-            array_push($data, array(
-                'name' => $a->name,
-                'menuID' => $a->menuID,
-                'image' => asset('/menu/menu_images/'.$a->image),
-                'details' => $a->details,
-                'price'=> $a->price,
-                'servingsize' => $a->servingsize,
-                'subcatid'=> $a->subcatid
-            ));
-        }
-    }
+    //     foreach ($t as $a) {
+    //         array_push($data, array(
+    //             'name' => $a->name,
+    //             'menuID' => $a->menuID,
+    //             'image' => asset('/menu/menu_images/'.$a->image),
+    //             'details' => $a->details,
+    //             'price'=> $a->price,
+    //             'servingsize' => $a->servingsize,
+    //             'subcatid'=> $a->subcatid
+    //         ));
+    //     }
+    // }
 
-    return response()->json(['menu' => $pairs]);
+    return response()->json(['menu' => $transactions]);
 
    }
 
