@@ -409,7 +409,7 @@ class AprioriC2Controller extends Controller
         ->get());
     }
     foreach ($transactions as $row) {
-        $menu[] = explode(",", $row->menuID);
+        array_push($menu,explode(",", $row->menuID));
     }
     // for ($index = 0; $index < count($menu); $index++) {
     //     foreach ($menu[$index] as $Smenus) {
