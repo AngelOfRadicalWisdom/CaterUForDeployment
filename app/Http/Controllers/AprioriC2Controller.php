@@ -422,7 +422,6 @@ class AprioriC2Controller extends Controller
                 $groupedData[] = $m;
             }
             }
-  
     }
     $final = array_unique($groupedData);
     $groupedData = [];
@@ -447,7 +446,7 @@ class AprioriC2Controller extends Controller
         ));
     }
 
-    return response()->json(['menu' => $transactions]);
+    return response()->json(['menu' => $pairs]);
 
    }
 
