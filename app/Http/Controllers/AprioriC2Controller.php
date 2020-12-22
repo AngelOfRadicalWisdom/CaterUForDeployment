@@ -370,7 +370,7 @@ class AprioriC2Controller extends Controller
             ));
         }
     }
-       return response()->json(['menu' => $transactions]);
+       return response()->json(['menu' => $data]);
    }
 
    public function sendApriori2(Request $request)
@@ -413,8 +413,8 @@ class AprioriC2Controller extends Controller
     }
     for ($index = 0; $index < count($menu); $index++) {
         foreach ($menu[$index] as $Smenus) {
-            foreach($pairs as $pair){
-                 if ($Smenus != $pair) {
+            foreach($request->menu as $menu){
+                 if ($Smenus != $menu) {
                 $groupedData[] = $Smenus;
             }
             }
