@@ -408,21 +408,21 @@ class AprioriC2Controller extends Controller
         ->whereIn('menuID', $pair)
         ->get());
     }
-    foreach ($transactions as $row) {
-        $menu[] = explode(",", $row->menuID);
-    }
-    for ($index = 0; $index < count($menu); $index++) {
-        foreach ($menu[$index] as $Smenus) {
-            foreach($request->menu as $menu){
-                 if ($Smenus != $menu) {
-                $groupedData[] = $Smenus;
-            }
-            }
+    // foreach ($transactions as $row) {
+    //     $menu[] = explode(",", $row->menuID);
+    // }
+    // for ($index = 0; $index < count($menu); $index++) {
+    //     foreach ($menu[$index] as $Smenus) {
+    //         foreach($request->menu as $menu){
+    //              if ($Smenus != $menu) {
+    //             $groupedData[] = $Smenus;
+    //         }
+    //         }
            
-        }
-    }
-    $final = array_unique($groupedData);
-    $groupedData = [];
+    //     }
+    // }
+    // $final = array_unique($groupedData);
+    // $groupedData = [];
     // $data;
     // foreach ($final as $row) {
     //     $data = DB::table('menus')->where('menuID', $row)->get();
@@ -445,7 +445,7 @@ class AprioriC2Controller extends Controller
     //     }
     // }
 
-    return response()->json(['menu' => $transactions]);
+    return response()->json(['menu' => $menu]);
 
    }
 
