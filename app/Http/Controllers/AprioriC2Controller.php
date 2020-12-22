@@ -391,11 +391,11 @@ class AprioriC2Controller extends Controller
         }
     }
     $apriori = new AprioriNew($samples, $support, $confidence);
-    foreach($request->menu as $menu){
-        array_push($pairs,$apriori->do_predict([$menu]));
-    }
+    // foreach($request->menu as $menu){
+    //     array_push($pairs,$apriori->do_predict([$menu]));
+    // }
     
-       return response()->json(['menu' => $pairs]);
+       return response()->json(['menu' => $request->menu]);
 
    }
 
