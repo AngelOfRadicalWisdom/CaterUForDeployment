@@ -398,14 +398,14 @@ class AprioriC2Controller extends Controller
     // $pairs=$apriori->getRules();
 
     foreach($request->menus as $menu){
-        $pairs.add($apriori->do_predict([$menu->$menuId]));
+        array_push($pairs,$apriori->do_predict([$menu->$menuId]));
     }    
      
     $menu = [];
     $groupedData = [];
 
     foreach($pairs as $pair){
-        $transactions.add(DB::table('menus')
+        array_push($transactions,DB::table('menus')
         ->selectRaw('group_concat(menus.name) as name')
         ->selectRaw('group_concat(menus.menuID) as menuID')
         ->selectRaw('group_concat(menus.image) as image')
