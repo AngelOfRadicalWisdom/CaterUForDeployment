@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\AprioriProcessEvent;
 use App\Helper\AprioriNew;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Menu;
 use Illuminate\Support\Facades\DB;
