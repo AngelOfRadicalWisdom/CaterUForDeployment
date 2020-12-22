@@ -415,38 +415,38 @@ class AprioriC2Controller extends Controller
         }
      
     }
-    // for ($index = 0; $index < count($menu); $index++) {
-    //     foreach ($menu[$index] as $Smenus) {
-    //         foreach($request->menu as $m){
-    //              if ($Smenus != $m) {
-    //             $groupedData[] = $Smenus;
-    //         }
-    //         }
-    //     }
-    // }
-    // $final = array_unique($groupedData);
-    // $groupedData = [];
-    // $data;
-    // foreach ($final as $row) {
-    //     $data = DB::table('menus')->where('menuID', $row)->get();
-    //     array_push($groupedData, $row);
-    // }
-    // $data = [];
-    // for ($i = 0; $i < count($groupedData); $i++) {
-    //     $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+   
+        foreach ($menu as $m) {
+            foreach($request->menu as $rM){
+                 if ($m != $rM) {
+                $groupedData[] = $m;
+            }
+            }
+  
+    }
+    $final = array_unique($groupedData);
+    $groupedData = [];
+    $data;
+    foreach ($final as $row) {
+        $data = DB::table('menus')->where('menuID', $row)->get();
+        array_push($groupedData, $row);
+    }
+    $data = [];
+    for ($i = 0; $i < count($groupedData); $i++) {
+        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
 
-    //     foreach ($t as $a) {
-    //         array_push($data, array(
-    //             'name' => $a->name,
-    //             'menuID' => $a->menuID,
-    //             'image' => asset('/menu/menu_images/'.$a->image),
-    //             'details' => $a->details,
-    //             'price'=> $a->price,
-    //             'servingsize' => $a->servingsize,
-    //             'subcatid'=> $a->subcatid
-    //         ));
-    //     }
-    // }
+        foreach ($t as $a) {
+            array_push($data, array(
+                'name' => $a->name,
+                'menuID' => $a->menuID,
+                'image' => asset('/menu/menu_images/'.$a->image),
+                'details' => $a->details,
+                'price'=> $a->price,
+                'servingsize' => $a->servingsize,
+                'subcatid'=> $a->subcatid
+            ));
+        }
+    }
 
     return response()->json(['menu' => $menu]);
 
