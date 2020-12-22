@@ -375,7 +375,8 @@ class AprioriC2Controller extends Controller
 
    public function sendApriori2(Request $request)
    {
-       $pairs = [];
+    $pairs = [];
+    $transactions = []
     $samples = $this->getTransactions();
     $sc = $this->getSupportandConfidence();
     if (count($sc) == 0) {
@@ -395,8 +396,56 @@ class AprioriC2Controller extends Controller
     foreach($request->menu as $menu){
         array_push($pairs,$apriori->do_predict([$menu]));
     }
-    
-       return response()->json(['menu' => $pairs]);
+    foreach($pairs as $pair){
+        array_push($transactions, DB::table('menus')
+        ->selectRaw('group_concat(menus.name) as name')
+        ->selectRaw('group_concat(menus.menuID) as menuID')
+        ->selectRaw('group_concat(menus.image) as image')
+        ->selectRaw('group_concat(menus.details) as details')
+        ->selectRaw('group_concat(menus.servingsize) as servingsize')
+        ->selectRaw('group_concat(menus.price) as price')
+        ->selectRaw('group_concat(menus.subcatid) as subcatid')
+        ->whereIn('menuID', $pair)
+        ->get());
+    }
+    foreach ($transactions as $row) {
+        $menu[] = explode(",", $row->menuID);
+    }
+    for ($index = 0; $index < count($menu); $index++) {
+        foreach ($menu[$index] as $Smenus) {
+            foreach($pairs as $pair){
+                 if ($Smenus != $pair) {
+                $groupedData[] = $Smenus;
+            }
+            }
+           
+        }
+    }
+    $final = array_unique($groupedData);
+    $groupedData = [];
+    $data;
+    foreach ($final as $row) {
+        $data = DB::table('menus')->where('menuID', $row)->get();
+        array_push($groupedData, $row);
+    }
+    $data = [];
+    for ($i = 0; $i < count($groupedData); $i++) {
+        $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();
+
+        foreach ($t as $a) {
+            array_push($data, array(
+                'name' => $a->name,
+                'menuID' => $a->menuID,
+                'image' => asset('/menu/menu_images/'.$a->image),
+                'details' => $a->details,
+                'price'=> $a->price,
+                'servingsize' => $a->servingsize,
+                'subcatid'=> $a->subcatid
+            ));
+        }
+    }
+
+    return response()->json(['menu' => $pairs]);
 
    }
 
