@@ -398,7 +398,7 @@ class AprioriC2Controller extends Controller
     // $pairs=$apriori->getRules();
 
     foreach($request->menus as $menu){
-        array_push($pairs,$apriori->do_predict([$menu->$menuId]));
+        array_push($pairs,$apriori->do_predict([$menu]));
     }    
      
     $menu = [];
