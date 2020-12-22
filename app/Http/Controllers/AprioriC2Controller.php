@@ -429,9 +429,12 @@ class AprioriC2Controller extends Controller
     }
     for ($index = 0; $index < count($menu); $index++) {
         foreach ($menu[$index] as $Smenus) {
-            if ($Smenus != $request->menuID) {
+            foreach($pairs as $pair){
+                if ($Smenus != $pair) {
                 $groupedData[] = $Smenus;
             }
+            }
+            
         }
     }
     $final = array_unique($groupedData);
