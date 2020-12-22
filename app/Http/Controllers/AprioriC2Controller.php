@@ -457,7 +457,7 @@ class AprioriC2Controller extends Controller
             ));
         }
     }
-       return response()->json(['menu' => $request->menu]);
+       return response()->json(['menu' => $data]);
 
    }
 
