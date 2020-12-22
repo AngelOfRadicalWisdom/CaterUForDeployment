@@ -376,7 +376,7 @@ class AprioriC2Controller extends Controller
    public function sendApriori2(Request $request)
    {
     $pairs = [];
-    $transactions = []
+    $transactions = [];
     $samples = $this->getTransactions();
     $sc = $this->getSupportandConfidence();
     if (count($sc) == 0) {
