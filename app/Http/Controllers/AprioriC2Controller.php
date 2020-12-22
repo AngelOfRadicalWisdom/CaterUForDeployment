@@ -34,7 +34,7 @@ class AprioriC2Controller extends Controller
         }
         $apriori = new AprioriNew($samples, $support, $confidence);
      //  $pairs=$apriori->apriori();
-       $pairs=$apriori->do_predict([10,8]);
+       $pairs=$apriori->do_predict([8,10]);
       // $confidence=$apriori->confidence([3,5,2,20]);
      //    $pairs=$apriori->do_predict([2]);
     //      $menu = [];
