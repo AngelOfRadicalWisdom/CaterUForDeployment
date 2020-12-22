@@ -408,9 +408,9 @@ class AprioriC2Controller extends Controller
         ->whereIn('menuID', $pair)
         ->get());
     }
-    // foreach ($transactions as $row) {
-    //     $menu[] = explode(",", $row->menuID);
-    // }
+    foreach ($transactions as $row) {
+        $menu[] = explode(",", $row->menuID);
+    }
     // for ($index = 0; $index < count($menu); $index++) {
     //     foreach ($menu[$index] as $Smenus) {
     //         foreach($request->menu as $menu){
