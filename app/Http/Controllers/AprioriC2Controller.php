@@ -424,13 +424,13 @@ class AprioriC2Controller extends Controller
             }
             }
     }
-    // $final = array_unique($groupedData);
+    $final = array_unique($groupedData);
     $groupedData = [];
     $data;
-    // foreach ($final as $row) {
-    //     $data = DB::table('menus')->where('menuID', $row)->get();
-    //     array_push($groupedData, $row);
-    // }
+    foreach ($final as $row) {
+        $data = DB::table('menus')->where('menuID', $row)->get();
+        array_push($groupedData, $row);
+    }
     $data = [];
     for ($i = 0; $i < count($groupedData); $i++) {
         $t = DB::table('menus')->where('menuID', $groupedData[$i])->get();   
