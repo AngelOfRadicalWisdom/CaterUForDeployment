@@ -404,18 +404,18 @@ class AprioriC2Controller extends Controller
 //     $menu = [];
 //     $groupedData = [];
 
-//     foreach($pairs as $pair){
-//         array_push($transactions,DB::table('menus')
-//         ->selectRaw('group_concat(menus.name) as name')
-//         ->selectRaw('group_concat(menus.menuID) as menuID')
-//         ->selectRaw('group_concat(menus.image) as image')
-//         ->selectRaw('group_concat(menus.details) as details')
-//         ->selectRaw('group_concat(menus.servingsize) as servingsize')
-//         ->selectRaw('group_concat(menus.price) as price')
-//         ->selectRaw('group_concat(menus.subcatid) as subcatid')
-//         ->whereIn('menuID', $pair)
-//         ->get());
-//     }
+    foreach($pairs as $pair){
+        array_push($transactions,DB::table('menus')
+        ->selectRaw('group_concat(menus.name) as name')
+        ->selectRaw('group_concat(menus.menuID) as menuID')
+        ->selectRaw('group_concat(menus.image) as image')
+        ->selectRaw('group_concat(menus.details) as details')
+        ->selectRaw('group_concat(menus.servingsize) as servingsize')
+        ->selectRaw('group_concat(menus.price) as price')
+        ->selectRaw('group_concat(menus.subcatid) as subcatid')
+        ->whereIn('menuID', $pair)
+        ->get());
+    }
 
 // //    $transactions = DB::table('menus')
 // //    ->selectRaw('group_concat(menus.name) as name')
@@ -460,7 +460,7 @@ class AprioriC2Controller extends Controller
 //             ));
 //         }
 //     }
-       return response()->json($pairs);
+       return response()->json($transactions);
 
    }
 
