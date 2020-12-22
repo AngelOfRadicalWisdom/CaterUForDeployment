@@ -394,9 +394,10 @@ class AprioriC2Controller extends Controller
         }
     }
     $apriori = new AprioriNew($samples, $support, $confidence);
-    foreach($request->menu as $menu){
-        array_push($pairs,$apriori->do_predict([$menu]));
-    }
+    // foreach($request->menu as $menu){
+    //     array_push($pairs,$apriori->do_predict([$menu]));
+    // }
+    array_push($pairs,$apriori->do_predict([$request->menu]));
     foreach($pairs as $pair){
         array_push($transactions, DB::table('menus')
         ->selectRaw('group_concat(menus.name) as name')
