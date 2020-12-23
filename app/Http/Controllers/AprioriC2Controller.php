@@ -22,8 +22,8 @@ class AprioriC2Controller extends Controller
         if (count($sc) == 0) {
             $support = '';
             $confidence = '';
-            $support = 75 / 100;
-            $confidence = 75 / 100;
+            $support = 40 / 100;
+            $confidence = 40 / 100;
         } else {
             $support = '';
             $confidence = '';
@@ -34,7 +34,7 @@ class AprioriC2Controller extends Controller
         }
         $apriori = new AprioriNew($samples, $support, $confidence);
      //  $pairs=$apriori->apriori();
-       $pairs=$apriori->do_predict([10]);
+       $pairs=$apriori->do_predict([10,2,8]);
       // $confidence=$apriori->confidence([3,5,2,20]);
      //    $pairs=$apriori->do_predict([2]);
     //      $menu = [];
@@ -162,8 +162,8 @@ class AprioriC2Controller extends Controller
         if (count($sc) == 0) {
             $support = '';
             $confidence = '';
-            $support = 75 / 100;
-            $confidence = 75 / 100;
+            $support = 40 / 100;
+            $confidence = 40 / 100;
         } else {
             $support = '';
             $confidence = '';
@@ -263,8 +263,8 @@ class AprioriC2Controller extends Controller
         if (count($sc) == 0) {
             $support = '';
             $confidence = '';
-            $support = 75 / 100;
-            $confidence = 75 / 100;
+            $support = 40 / 100;
+            $confidence = 40 / 100;
         } else {
             $support = '';
             $confidence = '';
@@ -310,8 +310,8 @@ class AprioriC2Controller extends Controller
     if (count($sc) == 0) {
         $support = '';
         $confidence = '';
-        $support = 75 / 100;
-        $confidence = 75 / 100;
+        $support = 40 / 100;
+        $confidence = 40 / 100;
     } else {
         $support = '';
         $confidence = '';
@@ -383,8 +383,8 @@ class AprioriC2Controller extends Controller
     if (count($sc) == 0) {
         $support = '';
         $confidence = '';
-        $support = 75 / 100;
-        $confidence = 75 / 100;
+        $support = 40 / 100;
+        $confidence = 40 / 100;
     } else {
         $support = '';
         $confidence = '';
