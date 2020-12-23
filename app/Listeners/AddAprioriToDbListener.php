@@ -65,8 +65,8 @@ class AddAprioriToDbListener implements ShouldQueue
          if (count($sc) == 0) {
              $support = '';
              $confidence = '';
-             $support = 10 / 100;
-             $confidence = 10 / 100;
+             $support = 50 / 100;
+             $confidence = 50 / 100;
              $apriori = new AprioriNew($samples, $support, $confidence);
              $pairs = $apriori->apriori();
          } else {
