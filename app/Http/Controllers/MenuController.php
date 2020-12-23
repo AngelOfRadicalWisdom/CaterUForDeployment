@@ -350,6 +350,15 @@ class MenuController extends BaseController
             'menudetail' => $menus
         ]);
     }
+
+
+    public function getMenuByID($menuID){
+        $result = DB::table('menus')
+        ->select('menuID','name','image','details','price','servingsize','subcatid')
+        ->where('menuID',$menuID)->get();
+
+        return response()->json(['data'=>$result]);
+    }
     public function getMenuByCategory($categoryid)
     {
         $menus = Menu::all();
