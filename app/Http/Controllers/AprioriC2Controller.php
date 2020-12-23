@@ -22,8 +22,8 @@ class AprioriC2Controller extends Controller
         if (count($sc) == 0) {
             $support = '';
             $confidence = '';
-            $support = 10 / 100;
-            $confidence = 10 / 100;
+            $support = 5 / 100;
+            $confidence = 5 / 100;
         } else {
             $support = '';
             $confidence = '';
