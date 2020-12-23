@@ -353,11 +353,28 @@ class MenuController extends BaseController
 
 
     public function getMenuByID($menuID){
-        $result = DB::table('menus')
-        ->select('menuID','name','image','details','price','servingsize','subcatid')
-        ->where('menuID',$menuID)->get();
+        // $result = DB::table('menus')
+        // ->select('menuID','name',asset('/menu/menu_images/''image','details','price','servingsize','subcatid')
+        // ->where('menuID',$menuID)->get();
 
-        return response()->json(['data'=>$result]);
+        $menus = array();
+        $menuDetail = DB::table('menus')->where('menuID', $id)->get();
+
+        if ($menuDetail != NULL) {
+            foreach ($menuDetail as $m) {
+                array_push($menus, array(
+                    'image' => asset('/menu/menu_images/' . $m->image),
+                    'menuID' => $m->menuID,
+                    'name' => $m->name,
+                    'details' => $m->details,
+                    'price' => $m->price,
+                    'servingsize' => $m->servingsize,
+                    'subcatid'=> $m->subcatid
+                   
+                ));
+            }
+        }
+        return response()->json(['data'=>$menus]);
     }
     public function getMenuByCategory($categoryid)
     {
