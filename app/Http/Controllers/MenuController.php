@@ -358,7 +358,7 @@ class MenuController extends BaseController
         // ->where('menuID',$menuID)->get();
 
         $menus = array();
-        $menuDetail = DB::table('menus')->where('menuID', $id)->get();
+        $menuDetail = DB::table('menus')->where('menuID', $menuID)->get();
 
         if ($menuDetail != NULL) {
             foreach ($menuDetail as $m) {
