@@ -4,7 +4,7 @@ the menus, promotions and etc. It also predicts the restaurants best sellers usi
 
 To run the project locally please follow the steps
 1. Clone or download the "merged" branch. Make sure to modify the .env.example to .env and make necessary changes to the database configuration.
-2. Run php artisan install command
+2. Run composer install command
 3. Run composer dumpautoload command
 4. Run php artisan migrate command 
 5. Run php artisan seed --class="classname"
