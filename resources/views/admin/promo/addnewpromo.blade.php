@@ -47,7 +47,7 @@
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="code">Promotion Code <span class="required">*</span>
                 </label>
                 <div class="col-md-6 col-sm-6 ">
-                  <input type="number" id="promoid" name="promoid" required="required" class="form-control " value="{{ old('promocode')}}" placeholder="Enter Promotion Code" min="1">
+                  <input type="number" id="promoid" name="promoid" required="required" class="form-control " value="{{$cpromo+1}}" placeholder="Enter Promotion Code" min="1">
                 </div>
               </div>
               <div class="item form-group">
@@ -77,6 +77,17 @@
                   <input type="number" class="form-control" id="servingsize" name="servingsize" value="{{old('servingsize')}}" min="1" placeholder="Enter Serving Size">
                 </div>
               </div>
+              <div class="item form-group">
+                        <label class="col-form-label col-md-3 col-sm-3 label-align ">Select Status  <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 ">
+                        <select name="status" id="status" class="form-control" required="required">
+                        <option value=" ">Select...</option>
+                            <option value="Available">Available</option>
+                            <option value="Not available">Not Available</option>
+
+                        </select>
+                        </div>
+                      </div>
               <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="image">Upload Menu Image
                 </label>

@@ -7,7 +7,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Order List</h3>
+        <h3>Sales Report</h3>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -15,7 +15,7 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>List of all the Order</h2>
+            <h2>Sales per Menu</h2>
             <ul class="nav navbar-right panel_toolbox">
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
               </li>
@@ -32,7 +32,7 @@
               </li>
             </ul>
             <div class="clearfix"></div>
-            <form name="datatable-fixed-header" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/orderList')}}" >
+            <form name="datatable-fixed-header" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/salesPerMenuDate')}}" >
             <div class='col-sm-4'>
                     From
                     <div class="form-group">
@@ -59,53 +59,63 @@
                       <div class="item form-group">
                         <div>
                           <button type="submit" class="btn btn-success" id="savepromo">Submit</button>
-                          <a href="{{url('/dashboard')}}" class="btn btn-primary">Back to Order List</a>
                         </div>
                       </div>
                 
             </form>
           </div>
+          <div class="x_content">
+            <br />
+            <div class="col-md-12 col-sm-12 ">
+              <div class="x_content">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                    <div class="x_content">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <div class="card-box table-responsive">
+                      <div class="col-md-12 col-sm-12 ">
+                        <div class="item form-group">
+                          <label class="col-form-label">Show: </label>
+                          <div class="col-md-3 col-sm-3 ">
+                            <select name="itemfilter" id="itemfilter" class="form-control">
+                              <option value="">All Sales Per Menu</option>
+                              <option value="desc">Best Selling Menus</option>
+                              <option value="asc">Least Selling Menus</option>
+                            </select>
+                          </div>
+                          <a href="{{url('/salespermenu')}}" class="btn btn-success">Back to Sales Per Menu</a>
+                        </div>
                       <table id="menu" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
-                          <th style="text-align:center">Order Id</th>
-                            <th style="text-align:center">Orders</th>
-                            <th style="text-align:center">Date Ordered</th>
-                            <th style="text-align:center">Total</th>
-                          
+                            <th style="text-align:center">Menu ID</th>
+                            <th style="text-align:center">Menu Name</th>
+                            <th style="text-align:center">Total Sales</th>
                           </tr>
                         </thead>
-                       <tbody>
-                        @for($i=0;$i< count($menudetails);$i++)
+                         <tbody>
+                           @foreach($allMenus as $menu)
                           <tr>
-                            <td style="text-align:center">
-                            @foreach($Oids[$i] as $ids )
-                            {{$ids}}
-                            @endforeach
-                          </td>
-                            <td style="text-align:center"> 
-                            @foreach($menudetails[$i] as $menus )
-                             <div class="form-group row">
-                            <div class="checkbox">
-                              <li id="iMenus" name="iMenus"> {{$menus}}</li>
-                            </div>
-                          </div>
-                            @endforeach
+                          <td style="text-align:center">
+                            {{$menu->menuID}}
                           
                             </td>
-                            <td  style="text-align:center">
-                            @foreach($orderDate[$i] as $date)
-                            {{$date}}
-                            @endforeach
+                            <td style="text-align:center">
+                            {{$menu->name}}
                             </td>
-                            <td  style="text-align:center">
-                            @foreach($bill[$i] as $total )
-                            Php {{$total}}.00
+                            <td style="text-align:center">
+                            @for($i=0;$i< count($allMenus);$i++)
+                            @foreach($salesperMenu[$i] as $total )
+                            @if($menu->menuID==$total->menuID)
+                            {{$total->total}}
+                            @endif
                             @endforeach
+                            @endfor
                             </td>
-                          </tr>
-                          @endfor
-                      
+                        </tr>
+                        @endforeach
                         </tbody>
                       </table>
                     </div>
@@ -168,7 +178,6 @@
       });
       $('#itemfilter').change(function() {
         sTable.order([2,this.value]).draw();
-
       });
     });
 	</script>
@@ -193,7 +202,6 @@
         ignoreReadonly: true,
         allowInputToggle: true
     });
-
     $('#datetimepicker6').datetimepicker();
     
     $('#datetimepicker7').datetimepicker({

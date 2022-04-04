@@ -20,7 +20,7 @@ class TableSeeder extends Seeder
             [
                 'tableno'=>2,
                 'capacity'=> 6,
-                'status'    => 'Occupied'
+                'status'    => 'Available'
             ],
             [
                 'tableno'=>3,
@@ -35,7 +35,7 @@ class TableSeeder extends Seeder
             [
                 'tableno'=>5,
                 'capacity'=> 6,
-                'status'    => 'Occupied'
+                'status'    => 'Available'
             ],
             [
                'tableno'=>6,

@@ -20,7 +20,7 @@
         <ul class="nav child_menu">
           <li><a href="{{url('/employee/employeelist')}}">Employee List</a></li>
           <li><a href="{{url('/employee/addemployee')}}">Add New Employee</a></li>
-          <li><a href="{{url('/generateQRCode')}}">Generate QR</a></li>
+          <!-- <li><a href="{{url('/generateQRCode')}}">Generate QR</a></li> -->
         </ul>
       </li>
       <!-- <li><a><i class="fa fa-desktop"></i> Manage Company<span class="fa fa-chevron-down"></span></a>
@@ -32,6 +32,9 @@
       <li><a><i class="fa fa-bar-chart"></i> Report<span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
           <li><a href="{{url('/sales')}}">Sales Report</a></li>
+          <li><a href="{{url('/salespermenu')}}">Sales Report per Menu</a></li>
+          <li><a href="{{url('/salesperbundle')}}">Promotions/Bundle Sales Report</a></li>
+
         </ul>
       </li>
       <li><a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
@@ -44,13 +47,13 @@
         <ul class="nav child_menu">
           <li><a href="{{ url('/apriori/apriorisettings')}}">Recommendation Settings</a></li>
           <li><a href="{{url('/generateapr')}}">Generate Recommendations</a></li>
+          <li><a href="{{url('/recommendedMenus')}}">Recommended Menus</a></li>
         </ul>
       </li>
-
-      <li><a><i class="fa fa-list-alt"></i>Promos<span class="fa fa-chevron-down"></span></a>
+      <li><a><i class="fa fa-list-alt"></i> Promotions <span class="fa fa-chevron-down"></span></a>
         <ul class="nav child_menu">
-          <li><a href="{{url('/promo/promolist')}}">Promo List</a></li>
-          <li><a href="{{url('/promo/addpromo')}}">Add New Promo</a></li>
+          <li><a href="{{ url('/promo/promolist')}}">Promotions List</a></li>
+          <li><a href="{{ url('/promo/addpromo')}}">Add New Promotions</a></li>
         </ul>
       </li>
       <li><a href="{{url('/ratings')}}"><i class="fa fa-star"></i> Ratings</a>

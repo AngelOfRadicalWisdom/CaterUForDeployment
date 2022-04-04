@@ -41,7 +41,13 @@
           <div class="x_content">
             <br />
             <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="{{ url('/employee/addemployee')}}" enctype="multipart/form-data">
-
+                <div class="item form-group">
+                <label class="col-form-label col-md-3 col-sm-3 label-align" for="empid">Employee ID <span class="required">*</span>
+                </label>
+                <div class="col-md-6 col-sm-6 ">
+                  <input type="text" class="form-control" name="empid" placeholder="Employee ID" value="{{$cemployeeno+1}}"required="required" readonly>
+                </div>
+              </div>
               <div class="item form-group">
                 <label class="col-form-label col-md-3 col-sm-3 label-align" for="empfirstname">First Name <span class="required">*</span>
                 </label>
@@ -61,10 +67,11 @@
                 <div class="col-md-6 col-sm-6 ">
                   <select name="position" class="form-control">
                     <option value="admin">Admin</option>
+                    <option value="dispatcher">Dispatcher</option>
                     <option value="manager">Manager</option>
                     <option value="cashier">Cashier</option>
                     <option value="receptionist">Receptionist</option>
-                    <option value="kitchen staff">Kitchen Staff</option>
+                    <option value="kitchenStaff">Kitchen Staff</option>
                     <option value="waiter">Waiter</option>
                   </select>
                 </div>

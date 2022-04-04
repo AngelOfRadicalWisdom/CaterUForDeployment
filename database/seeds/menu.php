@@ -34,6 +34,7 @@ class menu extends Seeder
                 'details'=> '3 pcs. of Aristocrat\'s, most popular dish, Chicken Barbecue w/ Java Rice and Java Sauce * A la carte (no rice) option also available ** P 10 for extra Java Sauce.',
                 'price' => 215.00,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> '3pcs_Chicken_Barbecue3.png',
                 'subcatid'=> 1
             ],
@@ -44,6 +45,7 @@ class menu extends Seeder
                 P 10 for extra Java Sauce.',
                 'price' => 195.00,
                 'servingsize' => 3,
+                'status'=>'Available',
                 'image'=> 'Boneless_Chicken_Barbecue3.png',
                 'subcatid'=> 1
             ],
@@ -53,6 +55,7 @@ class menu extends Seeder
                 'details'=> '2 sticks of Aristocrat\'s flavorful Pork Barbecue w/ Java RIce and Java Sauce * A la carte (no rice) option also available ** P 10 for extra Java Sauce.',
                 'price' => 180,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> 'Pork_Barbecue3.png',
                 'subcatid'=> 2
             ],
@@ -62,6 +65,7 @@ class menu extends Seeder
                 'details'=> 'Grilled lean and tender choice cut pork ribs',
                 'price' => 359,
                 'servingsize' => 2,
+                'status'=>'Available',
                 'image'=> 'Pork_Spareribs3.png',
                 'subcatid'=> 2
             ],
@@ -71,6 +75,7 @@ class menu extends Seeder
                 'details'=> 'Batter-coated and deep-fried squid served with tartar sauce',
                 'price' =>297,
                 'servingsize' =>2,
+                'status'=>'Available',
                 'image'=>'Calamares3.png',
                 'subcatid'=> 3
             ],
@@ -80,6 +85,7 @@ class menu extends Seeder
                 'details'=> 'Shrimp in a special blend of spices, sprinkled with roasted garlic.',
                 'price' => 323,
                 'servingsize' => 2,
+                'status'=>'Available',
                 'image'=> 'Sizzling_Gambas3.png',
                 'subcatid'=> 3
             ],
@@ -89,6 +95,7 @@ class menu extends Seeder
                 'details'=> 'Deep-fried battered shrimp served with sweet and sour sauce.',
                 'price' => 338,
                 'servingsize' => 2,
+                'status'=>'Available',
                 'image'=> 'Camaron_Rebosado3.png',
                 'subcatid'=> 3
             ],
@@ -98,6 +105,7 @@ class menu extends Seeder
                 'details'=> '3 pcs. of Aristocrat\'s, most popular dish, Chicken Barbecue w/ Java Rice and Java Sauce * A la carte (no rice) option also available ** P 10 for extra Java Sauce.',
                 'price' => 474.00,
                 'servingsize' => 4,
+                'status'=>'Available',
                 'image'=> 'Kare-Kare3.png',
                 'subcatid'=> 4
             ],
@@ -107,6 +115,7 @@ class menu extends Seeder
                 'details'=> 'Slowly cooked, rich, beef soup with bone marrow and vegetables.',
                 'price' => 479,
                 'servingsize' => 4,
+                'status'=>'Available',
                 'image'=> 'Bulalo3.png',
                 'subcatid'=> 4
             ],
@@ -116,6 +125,7 @@ class menu extends Seeder
                 'details'=> 'Deep fried leg of pork, with homemade atcahara',
                 'price' => 755,
                 'servingsize' => 4,
+                'status'=>'Available',
                 'image'=> 'Crispy_Pata3.jpg',
                 'subcatid'=> 5
             ],
@@ -125,6 +135,7 @@ class menu extends Seeder
                 'details'=> 'Pork spareribs with native vegetables in sour tamarind soup.',
                 'price' => 338,
                 'servingsize' => 4,
+                'status'=>'Available',
                 'image'=> 'SinigangnaBaboy3.jpg',
                 'subcatid'=> 5
             ],
@@ -134,6 +145,7 @@ class menu extends Seeder
                 'details'=> '',
                 'price' =>37,
                 'servingsize' =>3,
+                'status'=>'Available',
                 'image'=> 'Plain_Rice3.png',
                 'subcatid'=> 6
             ],
@@ -143,6 +155,7 @@ class menu extends Seeder
                 'details'=> 'Fried rice with pork, shrimp, ham, sausage, and egg.',
                 'price' => 219,
                 'servingsize' => 3,
+                'status'=>'Available',
                 'image'=> 'Shanghai_Rice3.png',
                 'subcatid'=> 7
             ],
@@ -152,6 +165,7 @@ class menu extends Seeder
                 'details'=> 'Signature fried rice of the restaurant pairs perfectly with any of the barbecue dishes.',
                 'price' => 47,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> 'Java_Rice3.png',
                 'subcatid'=> 7
             ],
@@ -161,6 +175,7 @@ class menu extends Seeder
                 'details'=> 'Scoop of Ube, Vanilla, Strawberry, or Chocolate.',
                 'price' => 58.00,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> 'ice-cream.jpg',
                 'subcatid'=> 8
             ],
@@ -170,6 +185,7 @@ class menu extends Seeder
                 'details'=> 'Three (3) scoops opf ice cream, with chocolate, caramel, and strawberry syrup whipped cream, and nuts.',
                 'price' => 265.00,
                 'servingsize' => 3,
+                'status'=>'Available',
                 'image'=> 'banana-split.png',
                 'subcatid'=> 8
             ],
@@ -179,6 +195,7 @@ class menu extends Seeder
                 'details'=> 'Also Available: Fruit per slice-Mango,Papaya, and Bananas.',
                 'price' => 193,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> 'Fruit_Salad3.png',
                 'subcatid'=> 9
             ],
@@ -188,6 +205,7 @@ class menu extends Seeder
                 'details'=> '',
                 'price' => 73,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> 'colddrinks2.png',
                 'subcatid'=> 10
             ],
@@ -197,6 +215,7 @@ class menu extends Seeder
                 'details'=> '',
                 'price' =>63,
                 'servingsize' =>1,
+                'status'=>'Available',
                 'image'=> 'colddrinks2.png',
                 'subcatid'=> 10
             ],
@@ -206,6 +225,7 @@ class menu extends Seeder
                 'details'=> '',
                 'price' => 99,
                 'servingsize' => 1,
+                'status'=>'Available',
                 'image'=> 'colddrinks2.png',
                 'subcatid'=> 11
             ],

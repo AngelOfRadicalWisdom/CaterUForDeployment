@@ -121,6 +121,9 @@ class CustomExceptions
         if (!is_numeric($promo->servingsize)) {
             throw new \PDOException('Please Enter a numeric value for serving size');
         }
+        if (count($allMenus) != count(array_unique($allMenus))) {
+            throw new \PDOException('Menu Already Selected');
+        }
     }
     //for editing promotion inclusive menus quantity used in Promotion Controller (editQuantity function)
     public function editPromoQuantityException($promo)
@@ -198,9 +201,9 @@ class CustomExceptions
             }
         }
         //if promotion menu is empty
-        if ($promo->suggestedmenus == NULL) {
-            throw new \PDOException('Promotion Menu is Empty');
-        }
+        // if ($promo->suggestedmenus == NULL) {
+        //     throw new \PDOException('Promotion Menu is Empty');
+        // }
         //if both bundled and addtional menus is empty
         if ($promo->suggestedmenus == NULL && $promo->additionalmenus == NULL) {
             throw new \PDOException('Promotion Menu is Empty');

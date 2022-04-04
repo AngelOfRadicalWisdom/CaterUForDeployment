@@ -199,7 +199,7 @@
                     <div class="col-md-6 col-sm-6 offset-md-4">
                       <button type="submit" class="btn btn-success" id="savepromo">Submit</button>
                       <button class="btn btn-primary" type="reset">Reset</button>
-                      <a class="btn btn-danger" href="{{url('/promo/edit_promo/'.$promotion->bundleid)}}">Cancel</a>
+                      <a class="btn btn-danger" href="{{url('/promo/'.$promotion->bundleid.'/edit_promo')}}">Cancel</a>
                     </div>
                   </div>
             </form>
@@ -373,7 +373,7 @@
                 confirmButtonText: 'ok',
               }).then((result) => {
                 if (result.value) {
-                  location.href = '/promo/edit_promo/' + promoid;
+                  location.href = '/promo/' + promoid+ '/edit_promo';
                 }
               })
 

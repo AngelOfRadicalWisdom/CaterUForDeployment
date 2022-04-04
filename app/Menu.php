@@ -19,6 +19,7 @@ class Menu extends Model
         'menuID' => ['required', 'unique:cater.menus,menuID'],
         'name' => ['required', 'regex: /[A-z\s-]+$/'],
         'details' => ['required', 'regex: /[A-z\s-]+$/'],
+        
         'price' => 'required',
         'servingsize' => ['required','regex:/^[-+]?\d*$/','min:1']
        

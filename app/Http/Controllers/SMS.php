@@ -9,7 +9,7 @@ use App\Customer;
 
 class SMS extends Controller
 {
-    // use SMSMethod;
+   
     public function sendSMS(Request $request, $custid)
     {
 
@@ -32,15 +32,10 @@ class SMS extends Controller
                 //	print("Please refer to API on Error : " . $fd);
                 $ok = "fail";
             }
-        } else {
-            // no contact with gateway                      
+        } else {            
             $ok = "failed";
         }
         return $ok;
-
-        // return response()->json([
-        //     'message' => $request->phonenumber
-        // ]);
     }
     public function test(Request $request)
     {

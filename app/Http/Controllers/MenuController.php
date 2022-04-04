@@ -12,6 +12,7 @@ use App\Menu;
 use Validator;
 use App\Category;
 use App\SubCategory;
+use App\BundleMenu;
 use App\Exceptions\CustomExceptions;
 use DB;
 
@@ -72,6 +73,8 @@ class MenuController extends BaseController
             $newMenu->servingsize = $request->servingsize;
             $newMenu->image = $filename;
             $newMenu->subcatid  = $request->subcategory;
+            $newMenu->status  = $request->status;
+
 
             $newMenu->save();
         } else {
@@ -258,6 +261,7 @@ class MenuController extends BaseController
                 'image' => asset('/menu/menu_images/' . $menu->image),
                 'menuID'    => $menu->menuID,
                 'name'  => $menu->name,
+                'status'=> $menu->status,
                 'details' => $menu->details,
                 'servingsize' => $menu->servingsize,
                 'price' => $menu->price,
@@ -269,6 +273,60 @@ class MenuController extends BaseController
             'result' => $result
         ]);
     }
+    public function editStatus($menuID){
+        try{
+            $user = Auth::user();
+            $userFname = $user->empfirstname;
+            $userLname = $user->emplastname;
+            $userImage = $user->image;
+            $bundleid="";
+            return view('pages.editmenustatus', compact('userFname', 'userLname', 'userImage','menuID','bundleid'));
+            }
+            catch (\PDOException $e) {
+                return back()->withError("Sorry Something Went Wrong ")->withInput();
+            }
+
+    }
+
+    public function changeMenuStatus($menuID,$bundleid,Request $request){
+        $menu = Menu::find($menuID);
+        $bundle = BundleMenu::find($bundleid);
+        $redirect = " ";
+
+        if($menu){
+            $menu->status = $request->status;
+            $menu->save();
+
+            $this->getBundle($menu->menuID,$request->status);
+            $client = new \GuzzleHttp\Client();
+            $body['topic'] = "changeStatus";
+            $body['content']="Testing";
+            $url = "https://cateruws.zenithdevgroup.me/event/send";
+            $response = $client->request("POST", $url, ['form_params'=>$body]);
+            $redirect = redirect()->to(url('/menu/list?mode=list'))->with('success', 'Menu Availability Successfully Edited');
+           
+        }else if($bundle){
+            
+            $bundle->status = $request->status;
+            $bundle->save();
+            $client = new \GuzzleHttp\Client();
+            $body['topic'] = "changeStatus";
+            $body['content']="Testing";
+            $url = "https://cateruws.zenithdevgroup.me/event/send";
+            $response = $client->request("POST", $url, ['form_params'=>$body]);
+            $redirect = redirect()->to(url('/promo/promolist'))->with('success', 'Menu Availability Successfully Edited');
+        }
+        return $redirect;
+    }
+
+    function getBundle($menuID,$status){
+      DB::table('bundles')
+        ->join('bundle_details','bundle_details.bundleid','=','bundles.bundleid')
+        ->join('menus','menus.menuID','=','bundle_details.menuID')
+        ->where('bundle_details.menuID',$menuID)
+        ->update(['bundles.status'=> $status]);
+    }
+   
     public function getMenuDetail($id)
     {
         $menus = array();
@@ -292,6 +350,32 @@ class MenuController extends BaseController
             'menudetail' => $menus
         ]);
     }
+
+
+    public function getMenuByID($menuID){
+        // $result = DB::table('menus')
+        // ->select('menuID','name',asset('/menu/menu_images/''image','details','price','servingsize','subcatid')
+        // ->where('menuID',$menuID)->get();
+
+        $menus = array();
+        $menuDetail = DB::table('menus')->where('menuID', $menuID)->get();
+
+        if ($menuDetail != NULL) {
+            foreach ($menuDetail as $m) {
+                array_push($menus, array(
+                    'image' => asset('/menu/menu_images/' . $m->image),
+                    'menuID' => $m->menuID,
+                    'name' => $m->name,
+                    'details' => $m->details,
+                    'price' => $m->price,
+                    'servingsize' => $m->servingsize,
+                    'subcatid'=> $m->subcatid
+                   
+                ));
+            }
+        }
+        return response()->json(['data'=>$menus]);
+    }
     public function getMenuByCategory($categoryid)
     {
         $menus = Menu::all();
@@ -304,12 +388,12 @@ class MenuController extends BaseController
 
         foreach ($menus as $menu) {
             foreach ($allsubcategories as $sub) {
-
                 if ($menu->subcatid == $sub->subcatid) {
                     array_push($result, array(
                         'image' => asset('/menu/menu_images/' . $menu->image),
                         'menuID'    => $menu->menuID,
                         'name'  => $menu->name,
+                        'status'=> $menu->status,
                         'details' => $menu->details,
                         'servingsize' => $menu->servingsize,
                         'price' => $menu->price,
@@ -319,9 +403,6 @@ class MenuController extends BaseController
                 }
             }
         }
-
-
-
         return response()->json([
             'allitems' => $result,
 

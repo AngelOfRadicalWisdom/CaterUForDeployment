@@ -14,6 +14,7 @@
 //use Illuminate\Support\Facades\URL;
 use RealRashid\SweetAlert\Facades\Alert;
 //landingpage
+Route::get('analyze','AprioriC2Controller@analyzation');
 Route::get('','LoginController@landingpage');
 Auth::routes(['register'=> false]);
 Auth::routes(['login'=>false]);
@@ -29,6 +30,7 @@ Route::post('/login/authenticate','LoginController@authenticate');
 Route::get('/logout','LoginController@logout');
 Route::middleware(['auth'])->group( function (){
     Route::get('/dashboard','AdminController@dashboard');
+    Route::post('/orderList','AdminController@OrderListByDate');
     Route::get('/menu/list', 'MenuController@listMenus');
     Route::get('/menu/addmenu','MenuController@newMenu');
     Route::get('/menu/category','MenuController@fetch');
@@ -38,6 +40,8 @@ Route::middleware(['auth'])->group( function (){
 
     Route::get('/menu/{menuID}/mark', 'MenuController@markMenu');
     Route::get('/menu/{menuID}/delete', 'MenuController@removeMenu');
+    Route::get('/menu/{menuID}/editMenuStatus','MenuController@editStatus');
+    Route::post('/menu/{menuID}/{bundleid}/editStatus','MenuController@changeMenuStatus');
 
     Route::get('/employee/list','EmployeeController@employeeList');
 
@@ -55,7 +59,7 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/admin/delete_subcategory/{subcategoryid}','CategoryController@deleteSubCategory');
     Route::get('/apriori/apriorisettings','AdminController@setApriori');
     Route::post('/apriori/save','AdminController@saveAprioriSettings');
-    Route::get('/saveReco','AprioriC2Controller@saveData');
+    Route::get('/recommendedMenus','AprioriC2Controller@showRecommendation');
     Route::get('/admin/profile','AdminController@profile');
     Route::post('/admin/profile/{employeeID}','AdminController@SaveUpdateProfile');
     //TABLE
@@ -91,8 +95,8 @@ Route::middleware(['auth'])->group( function (){
     Route::post('/promo/addpromo','PromotionController@savePromo');
     Route::post('/savepromo', 'PromotionController@savePromo');
     Route::get('/promo/promolist','PromotionController@promotionsList');
-    Route::get('/promo/edit_promo/{id}','PromotionController@editPromo');
-    Route::post('/promo/edit_promo/{id}','PromotionController@saveEditPromo');
+    Route::get('/promo/{id}/edit_promo','PromotionController@editPromo');
+    Route::post('/promo/{id}/edit_promo','PromotionController@saveEditPromo');
     Route::get('/promo/delete_promo/{bundleid}','PromotionController@deletePromo');
     Route::get('/promo/add_promodetails/{bundleid}','PromotionController@addPromoDetails');
     Route::post('/promo/add_promodetails/{bundleid}','PromotionController@addPromoDetails');
@@ -104,10 +108,18 @@ Route::middleware(['auth'])->group( function (){
     Route::get('/promo/delete_menu_promodetails/{bundle_details_id}','PromotionController@deletePromoMenu');
     Route::get('/promo/edit_quantity/{bundledetailsid}','PromotionController@editQuantity');
     Route::post('/promo/edit_quantity/{bundledetailsid}','PromotionController@saveEditQuantity');
+    Route::get('/promo/{bundleid}/editPromoStatus','PromotionController@editPromoStatus');
+
     ///SALES
     Route::get('/sales','ChartController@salesChart');
     Route::post('/sales','ChartController@salesChart');
     Route::post('/salesUserDefined','ChartController@getSalesUserDefined');
+    Route::get('/salespermenu','ChartController@getSalesPerMenu');
+    Route::get('/salesperbundle','ChartController@getSalesPerBundle');
+    Route::post('/salesPerMenuDate','ChartController@getSalesPerMenuUserDefined');
+    Route::post('/salesPerBundleDate','ChartController@getSalesPerBundleUserDefined');
+   // Route::post('/salesSort','ChartController@salesSort');
+    
     //COMPANY
     Route::get('/company/addcompany','CompanyProfileController@newCompany'); 
     Route::post('/company/addcompany','CompanyProfileController@addNewCompany');
@@ -140,7 +152,8 @@ Route::middleware(['auth'])->group( function (){
 
 Route::get('/createaccount', 'RegistrationController@create');
 Route::post('/createaccount', 'RegistrationController@store');//
-Route::get('/generateQRCode','QRController@generateQR');
+Route::get('/generateQRCode/{id}','QRController@generateQR');
+Route::post('/generateQRCode/{id}','QRController@generateQR');
 
 
 

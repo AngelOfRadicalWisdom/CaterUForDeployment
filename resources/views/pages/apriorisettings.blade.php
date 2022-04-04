@@ -7,7 +7,7 @@
   <div class="">
     <div class="page-title">
       <div class="title_left">
-        <h3>Category</h3>
+        <h3>Apriori Settings</h3>
       </div>
     </div>
     <div class="clearfix"></div>
@@ -57,6 +57,18 @@
                 <div class="col-md-6 col-sm-6 ">
                   <input type="number" min="50" name="confidence" class="form-control" placeholder="Enter Confidence" value="{{ old('confidence')}}">
                 </div>
+              </div>
+              <div class="item form-group">
+                <label class="col-form-label col-md-9 col-sm-9 label-align" for="Notes ">Note: SUPPORT-represents the popularity or frequency of that menu out of all the order transactions
+                </label>
+              </div>
+              <div class="item form-group">
+                <label class="col-form-label col-md-9 col-sm-9 label-align" for="Notes ">      CONFIDENCE- can be interpreted as the likelihood or probability of purchasing both the Menus A and B
+                </label>
+              </div>
+              <div class="item form-group">
+                <label class="col-form-label col-md-9 col-sm-9 label-align" for="Notes ">      IF THERE ARE NO RECOMMENDATIONS GENERATED PLEASE TRY TO LOWER THE SUPPORT AND CONFIDENCE
+                </label>
               </div>
               <div class="ln_solid"></div>
               <div class="item form-group">

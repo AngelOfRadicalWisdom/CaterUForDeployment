@@ -43,10 +43,12 @@
                       <table id="datatable-fixed-header" class="table table-striped table-bordered" style="width:100%">
                         <thead>
                           <tr>
-                            <th style="text-align:center">Images</th>
+                            <th style="text-align:center">Employee ID</th>
+                            <th style="text-align:center">EMployee Image</th>
                             <th style="text-align:center">Employee First Name</th>
                             <th style="text-align:center">Employee Last Name</th>
                             <th style="text-align:center">Position</th>
+                            <th style="text-align:center"> View QR</th>
                             <th style="text-align:center">Action</th>
                           </tr>
                         </thead>
@@ -54,15 +56,20 @@
                         <tbody>
                           @foreach($lists as $employeeList)
                           <tr>
+                             <td style="text-align:center">{{ $employeeList->empid}}</td>
                             <td style="text-align:center"><img src="{{asset('/employee/employee_images/'.$employeeList->image)}}" style="width:40px;height:40px;"></td>
                             <td style="text-align:center">{{ $employeeList->empfirstname}}</td>
                             <td style="text-align:center">{{ $employeeList->emplastname}}</td>
                             <td style="text-align:center">{{$employeeList->position}}</td>
                             <td style="text-align:center">
+                           <a data-toggle="tooltip" data-placement="top" title="Employee Qr" href="{{ url('/generateQRCode/'.$employeeList->empid)}}"><img src="{{ asset('/images/qrcode.png')}}" alt="" width="40px" height="40px"></a>
+                            </td>
+                            <td style="text-align:center">
                               <a data-toggle="tooltip" data-placement="top" title="Edit Employee" href="{{ url('/employee/edit_employee/'.$employeeList->empid)}}"><img src="{{ asset('/assets/svg/pencil.svg')}}" alt="" width="20px" height="20px"></a>&emsp;
-                              <a data-toggle="tooltip" data-placement="top" title="Delete Employee" onclick="deleteEmployee({{$employeeList->empid}})"><img src="{{ asset('/assets/svg/trash.svg')}}" alt="" width="20px" height="20px"></a>&emsp;
+                              <a data-toggle="tooltip" data-placement="top" title="Deactivate Employee" onclick="deleteEmployee({{$employeeList->empid}})"><img src="{{ asset('/assets/svg/trash.svg')}}" alt="" width="20px" height="20px"></a>&emsp;
                               <a data-toggle="tooltip" data-placement="top" title="Reset Employee Password" href="{{ url('/employee/resetpass_employee/'.$employeeList->empid)}}"><img src="{{ asset('/assets/svg/lock-locked.svg') }}" alt="" width="20px" height="20px"></a>&emsp;
                             </td>
+                            
                           </tr>
                           @endforeach
                         </tbody>
@@ -110,7 +117,7 @@
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, delete employee!',
+      confirmButtonText: 'Yes, deactivate employee!',
       cancelButtonText: 'No, cancel!',
       reverseButtons: true
     }).then((result) => {
@@ -124,8 +131,8 @@
           type: 'GET',
           success: function(data) {
             swalWithBootstrapButtons.fire({
-              title: 'Deleted!',
-              text: 'Employee has been deleted.',
+              title: 'Deactivated!',
+              text: 'Employee has been deactivated.',
               icon: 'success',
               confirmButtonText: 'ok',
             }).then((result) => {
@@ -154,7 +161,7 @@
       ) {
         swalWithBootstrapButtons.fire(
           'Cancelled',
-          'Employee Deletion Cancelled',
+          'Employee Deactivation Cancelled',
           'error'
         )
       }

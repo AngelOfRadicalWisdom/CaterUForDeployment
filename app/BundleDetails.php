@@ -14,5 +14,5 @@ class BundleDetails extends Model
     protected $primaryKey = 'bundle_details_id';
     public $incrementing=true;
     public $timestamps = false;
-    protected $fillable = array('bundle_details_id','menuID','name','description','price','servingsize','bundleid');
+    protected $fillable = array('bundle_details_id','menuID','bundleid','qty');
 }
